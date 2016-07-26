@@ -1,2 +1,3 @@
-# non-parametric-clustering
-Gui's repo
+# Nonparametric Clustering or Something Like That
+
+Still experimenting with everything ...
