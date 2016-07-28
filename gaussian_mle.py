@@ -8,6 +8,7 @@ from __future__ import division
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import multivariate_normal
+from matplotlib.patches import Ellipse
 
 
 def gaussian_mle_estimator(x):
@@ -22,34 +23,27 @@ def gaussian_mle_estimator(x):
     cov_mle = cov_mle/(len(x)-1)
     return mean_mle, cov_mle
 
-def histogram(x, mean_mle, sigma_mle):
+def scatter_ellipse(data, mu, cov):
+    """Plot confidence interval (95%) of the data as an ellipse representing
+    the gaussian together with the data points.
+    
+    """
     fig = plt.figure()
-    ax = fig.add_subplot(111)
-    colors = ['b', 'r', 'g']
+    ax = fig.add_subplot(111, aspect='auto')
 
+    # plot confidence interval as an ellipse
+    vals, vecs = np.linalg.eigh(cov)
+    idx = vals.argsort()[::-1]
+    vals = vals[idx]
+    vecs = vecs[:,idx]
+    alfa = np.degrees(np.arctan2(*vecs[:,0][::-1]))
+    a, b = 2*np.sqrt(5.991*vals)
+    ellipse = Ellipse(xy=mu, width=a, height=b, angle=alfa, 
+                      facecolor='yellow', alpha=.4, edgecolor='yellow',
+                      linestyle='-', linewidth=3, zorder=1)
+    ax.add_artist(ellipse)
     
+    ax.scatter(data[:,0], data[:,1], color='blue', alpha=.5, zorder=2)
+    #plt.savefig('gauss_ellipse.pdf')
 
-    for i in range(len(mean_mle)):
-        ax.hist(x[:,i], color=colors[i], bins=80, normed=True, alpha=.3)
-        xs = np.linspace(x[:,i].min(), x[:,i].max(), 200)
-        ys = [gaussian1D(u, mean_mle[i], sigma_mle[i,i]) for u in xs]
-        ax.plot(xs, ys, '-', color=colors[i], linewidth=2)
-    plt.savefig('hist.png')
-
-
-##############################################################################
-if __name__ == '__main__':
-    
-    mean = np.array([2, 4, 1])
-    sigma = np.array([
-                [1, 0, 0], 
-                [0, 2, 0], 
-                [0, 0, 5]
-            ])
-
-    data = np.random.multivariate_normal(mean, sigma, 5000)
-    mu, cov = gaussian_mle_estimator(data)
-    print "Mean:", mu
-    print "Covariance:", cov
-    #histogram(data, mu, cov)
 

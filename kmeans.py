@@ -1,18 +1,26 @@
-"""
-Kmeans++ clustering algorithm
-
-Using Euclidean Distance. Later we can replace by other distance.
+#!/usr/bin/env python
 
 """
+Clustering with K-Means and initialization with K-Means++.
+
+"""
+
 
 from __future__ import division
 
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 
+
+def forgy(k, X):
+    """Forgy's method, just pick k random elements of the data set."""
+    return X[np.random.choice(range(len(X)), size=k)]
 
 def shortest_distance(x, C):
-    """Shortest distance between vector x and all the vectors in C."""
+    """Compute the shortest squared distance between vector x and
+    all the vectors in C.
+    """
     return ((x - np.array(C))**2).sum(axis=1).min()
 
 def pdf(D):
@@ -27,7 +35,10 @@ def discrete_rv(p):
     return j
 
 def kplus(k, X):
-    """This is the k-means++ initialization"""
+    """This is the k-means++ initialization proposed by Arthur and
+    Vassilvitskii (2007). k is the number of clusters and X is
+    the data set.
+    """
     C = [X[np.random.randint(0, len(X))]] # centers
     D = np.zeros(len(X))                  # distances squared
     for n in range(1, k):
@@ -39,7 +50,12 @@ def kplus(k, X):
     return np.array(C)
     
 def kmeans(k, X, max_iter=50):
-    """K-means algorithm."""
+    """K-means Loyd's algorithm.
+    k is the number of clusters and X is the trainning set.
+    Returns the labels, centroid vectors and number of iterations.
+    
+    """
+    #centroids = forgy(k, X)
     centroids = kplus(k, X)
     labels = np.empty(len(X), dtype=np.int8)
     converged = False
@@ -62,6 +78,5 @@ def kmeans(k, X, max_iter=50):
         
         count += 1
     
-    return labels, centroids, count
-
+    return labels, centroids
 
