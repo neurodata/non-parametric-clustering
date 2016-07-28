@@ -89,7 +89,6 @@ class GMM:
 
             # compute log likelihood and check convergence
             new_loglh = self.log_likelihood()
-            print new_loglh
             if abs(new_loglh - old_loglh) <= self.tol:
                 converged = True
             else:
@@ -108,65 +107,3 @@ class GMM:
         return self.gamma
 
 
-##############################################################################
-if __name__ == '__main__':
-    
-    # generate artificial data
-    fig = plt.figure()
-    ax = fig.add_subplot(111, aspect='auto')
-    
-    mu = np.array([0,0])
-    #sigma = np.eye(2)
-    sigma = np.array([[4,0], [0, 1]])
-    x1 = np.random.multivariate_normal(mu, sigma, 200)
-    ax.scatter(x1[:,0], x1[:,1], c='b', alpha=.5, zorder=2)
-    
-    mu = np.array([3,5])
-    sigma = np.array([[1,.5], [.5, 3]])
-    x2 = np.random.multivariate_normal(mu, sigma, 200)
-    ax.scatter(x2[:,0], x2[:,1], c='r', alpha=.5, zorder=2)
-    
-    mu = np.array([-2,2])
-    sigma = np.array([[.5, 0], [0, .5]])
-    x3 = np.random.multivariate_normal(mu, sigma, 200)
-    ax.scatter(x3[:,0], x3[:,1], c='g', alpha=.5, zorder=2)
-
-    data = np.concatenate((x1, x2, x3))
-
-    # initialization
-    means = [
-        np.array([4, 4]),
-        np.array([8, 8]),
-        np.array([-4, -4])
-    ]
-    sigmas = [
-        2.*np.eye(2),
-        3.*np.eye(2),
-        1.5*np.eye(2)
-    ]
-    pi = [.5, .25, .25]
-
-    # fig GMM
-    gmm = GMM(data, means, sigmas, pi)
-    gmm.fit()
-    mus, sigmas, pis = gmm.mu, gmm.sigma, gmm.pi
-    
-    print mus
-    print sigmas
-    print pis
-
-    # plot confidence intervals
-    colors = ['k', 'k', 'k']
-    for mu, sigma, c in zip(mus, sigmas, colors):
-        vals, vecs = np.linalg.eigh(sigma)
-        idx = vals.argsort()[::-1]
-        vals = vals[idx]
-        vecs = vecs[:,idx]
-        alfa = np.degrees(np.arctan2(*vecs[:,0][::-1]))
-        a, b = 2*np.sqrt(5.991*vals)
-        ellipse = Ellipse(xy=mu, width=a, height=b, angle=alfa,
-                            color=c, alpha=.1, zorder=1)
-        ax.add_artist(ellipse)
-
-    plt.savefig('data_gmm.pdf')
-    
