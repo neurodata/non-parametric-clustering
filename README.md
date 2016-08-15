@@ -7,4 +7,4 @@ http://nbviewer.jupyter.org/github/neurodata/non-parametric-clustering/blob/mast
 
 http://nbviewer.jupyter.org/github/neurodata/non-parametric-clustering/blob/master/lddmm.ipynb
 
-http://nbviewer.jupyter.org/github/neurodata/non-parametric-clustering/blob/master/kmedoids.ipynb
+http://nbviewer.jupyter.org/github/neurodata/non-parametric-clustering/blob/master/k-medoids.ipynb
