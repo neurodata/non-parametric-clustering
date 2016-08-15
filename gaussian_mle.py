@@ -1,5 +1,10 @@
+#/usr/bin/env python
+
 """
 MLE estimator for a single gaussian.
+
+Guilherme S. Franca <guifranca@gmail.com>
+08/12/2016
 
 """
 

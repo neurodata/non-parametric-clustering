@@ -3,6 +3,9 @@
 """
 Clustering with K-Means and initialization with K-Means++.
 
+Guilherme S. Franca <guifranca@gmail.com>
+08/12/2016
+
 """
 
 
@@ -80,3 +83,36 @@ def kmeans(k, X, max_iter=50):
     
     return labels, centroids
 
+
+##############################################################################
+if __name__ == '__main__':
+    
+    np.random.seed(10)
+
+    mean = np.array([0, 0])
+    cov = np.array([[4, 0], [0, 1]])
+    data1 = np.random.multivariate_normal(mean, cov, 200)
+                                                                                
+    mean = np.array([3, 5])
+    cov = np.array([[1, 0.8], [0.8, 2]])
+    data2 = np.random.multivariate_normal(mean, cov, 200)
+
+    mean = np.array([-2, 3])
+    cov = np.array([[0.5, 0], [0, 0.5]])
+    data3 = np.random.multivariate_normal(mean, cov, 200)
+    
+    # data has contains data generated from 3 clusters
+    data = np.concatenate((data1, data2, data3))
+    
+    # applying kmedoids algorithm                                               
+    K = 3
+    J, C = kmeans(K, data)
+    
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    colors = getattr(cm, 'spectral')(np.linspace(0, 1, K))
+    for k in range(K):
+        xs = data[:,0][np.where(J==k)]
+        ys = data[:,1][np.where(J==k)]
+        ax.scatter(xs, ys, color=colors[k], alpha=.6)
+    plt.show()

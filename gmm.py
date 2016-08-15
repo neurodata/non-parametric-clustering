@@ -17,6 +17,10 @@ Mixture Models (GMM). The algorithm is described as follows:
 4. Evaluate log likelihood function and check for convergence. 
    Repeat from step 2 if not converged.
 
+
+Guilherme S. Franca <guifranca@gmail.com>
+08/12/2016
+
 """
 
 from __future__ import division
