@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from sklearn import datasets
 
+
 def pdf(D):
     """Make a probability vector based on D. Just normalize it."""
     return D/D.sum()
@@ -45,9 +46,8 @@ def euclidean(X):
     V = scipy.spatial.distance.pdist(X, 'sqeuclidean')
     return scipy.spatial.distance.squareform(V)
 
-def kmedoids(K, X, maxiter=50):
+def kmedoids(K, D, maxiter=50):
     """K-medoids algorithm."""
-    D = euclidean(X) # squared euclidean distance matrix
     # initialize centers in a k-means++ manner
     # M contain the indices of the data points (medoids)
     M = kplus(K, D)
@@ -79,10 +79,6 @@ def kmedoids(K, X, maxiter=50):
 
 ##############################################################################
 if __name__ == '__main__':
-    import sys
-
-    np.random.seed(18)
-    
     mean = np.array([0, 0])
     cov = np.array([[4, 0], [0, 1]])
     data1 = np.random.multivariate_normal(mean, cov, 200)
@@ -100,7 +96,8 @@ if __name__ == '__main__':
 
     # applying kmedoids algorithm
     K = 3
-    J, M = kmedoids(K, data)
+    dist_matrix = euclidean(data) 
+    J, M = kmedoids(K, dist_matrix)
 
     fig = plt.figure()
     ax = fig.add_subplot(111)

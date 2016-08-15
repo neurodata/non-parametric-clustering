@@ -25,8 +25,15 @@ def plot_sample(images):
 
 ###############################################################################
 if __name__ == '__main__':
+    import sys
+
     digits = datasets.load_digits()
     images = digits.images
+    print images.shape
+
+    #plot_sample(images)
+
+    #sys.exit()
 
     # getting samples from 3 different digits
     n = 15 
@@ -38,11 +45,6 @@ if __name__ == '__main__':
     A = A.reshape((n, 64))
     B = B.reshape((n, 64))
     C = C.reshape((n, 64))
-
-    data = np.concatenate((A, B, C))
-
-    K = 3
-    J, M = kmedoids(K, data)
 
     # visualizing
     xcoords = np.array([i for i in range(len(data))])

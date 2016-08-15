@@ -1,10 +1,10 @@
 # Non-parametric Clustering Experiments
 
-So far we implement standard $K$-Means and EM algorithm. 
-
-Check the Jupyter notebook under the following link:
+Check the Jupyter notebooks under the following links:
 
 http://nbviewer.jupyter.org/github/neurodata/non-parametric-clustering/blob/master/clustering.ipynb
 
 
 http://nbviewer.jupyter.org/github/neurodata/non-parametric-clustering/blob/master/lddmm.ipynb
+
+http://nbviewer.jupyter.org/github/neurodata/non-parametric-clustering/blob/master/kmedoids.ipynb

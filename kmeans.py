@@ -87,8 +87,6 @@ def kmeans(k, X, max_iter=50):
 ##############################################################################
 if __name__ == '__main__':
     
-    np.random.seed(10)
-
     mean = np.array([0, 0])
     cov = np.array([[4, 0], [0, 1]])
     data1 = np.random.multivariate_normal(mean, cov, 200)
