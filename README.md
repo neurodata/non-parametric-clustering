@@ -2,7 +2,7 @@
 
 Check the Jupyter notebooks under the following links:
 
-http://nbviewer.jupyter.org/github/neurodata/non-parametric-clustering/blob/master/clustering.ipynb
+http://nbviewer.jupyter.org/github/neurodata/non-parametric-clustering/blob/master/clustering_kmeans_em.ipynb
 
 
 http://nbviewer.jupyter.org/github/neurodata/non-parametric-clustering/blob/master/lddmm.ipynb
