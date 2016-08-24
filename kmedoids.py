@@ -10,13 +10,17 @@ Guilherme S. Franca <guifranca@gmail.com>
 
 
 from __future__ import division
+
 import numpy as np
 import scipy.spatial
+
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+
 from sklearn import datasets
 from sklearn import metrics
 from sklearn.cluster import KMeans
+
 import itertools
 
 from kmeans import kmeans
@@ -51,7 +55,7 @@ def euclidean(X):
     V = scipy.spatial.distance.pdist(X, 'sqeuclidean')
     return scipy.spatial.distance.squareform(V)
 
-def kmedoids(K, D, maxiter=100):
+def kmedoids_(K, D, maxiter=100):
     """K-medoids algorithm."""
     M = kplus(K, D)
     M.sort()
@@ -79,3 +83,38 @@ def kmedoids(K, D, maxiter=100):
 
     return J, M
 
+def kmedoids(K, D, maxiter=50, numtimes=10):
+    """Wrapper on kmedoids. We run several times an pick the best answer."""
+    J = []; M = []; f = np.inf;
+    for i in range(numtimes):
+        curr_J, curr_M = kmedoids_(K, D, maxiter)
+        curr_f = 0
+        for k in range(K):
+            ix = np.where(curr_J==k)[0]
+            curr_f += D[ix, curr_M[k]].sum()
+        if curr_f < f:
+            f = curr_f
+            J = curr_J
+            M = curr_M
+    return J, M
+
+if __name__ == '__main__':
+    mean = np.array([0, 0])
+    cov = np.array([[4, 0], [0, 1]])
+    data1 = np.random.multivariate_normal(mean, cov, 200)
+
+    mean = np.array([3, 5])
+    cov = np.array([[1, 0.8], [0.8, 2]])
+    data2 = np.random.multivariate_normal(mean, cov, 200)
+
+    mean = np.array([-2, 3])
+    cov = np.array([[0.5, 0], [0, 0.5]])
+    data3 = np.random.multivariate_normal(mean, cov, 200)
+
+    # data has contains data generated from 3 clusters
+    data = np.concatenate((data1, data2, data3))
+
+    K = 3
+    D = euclidean(data)
+    print kmedoids(K, D)
+ 

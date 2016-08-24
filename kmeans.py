@@ -12,6 +12,7 @@ Guilherme S. Franca <guifranca@gmail.com>
 from __future__ import division
 
 import numpy as np
+
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
@@ -52,7 +53,7 @@ def kplus(k, X):
         C.append(X[j])
     return np.array(C)
     
-def kmeans(k, X, max_iter=50):
+def kmeans_(k, X, max_iter=50):
     """K-means Loyd's algorithm.
     k is the number of clusters and X is the trainning set.
     Returns the labels, centroid vectors and number of iterations.
@@ -83,9 +84,35 @@ def kmeans(k, X, max_iter=50):
     
     return labels, centroids
 
+def kmeans(K, X, max_iter=50, numtimes=5):
+    """Wrapper around kmeans_single. We run the algorithm few times
+    and pick the best answer.
+    
+    """
+    func = np.inf
+    labels = []
+    centroids = []
+    for i in range(numtimes):
+        curr_labels, curr_centroids = kmeans_(K, X, max_iter)
+        
+        # compute sum of intracluster distances
+        curr_func = 0
+        for k in range(K):
+            curr_func += np.sum(
+                (X[np.where(curr_labels==k)] - curr_centroids[k])**2, 
+                axis=1).sum()
+        
+        if curr_func < func:
+            func = curr_func
+            labels = curr_labels
+            centroids = curr_centroids
+
+    return labels, centroids
+
 
 ##############################################################################
 if __name__ == '__main__':
+    import sys
     
     mean = np.array([0, 0])
     cov = np.array([[4, 0], [0, 1]])
@@ -102,9 +129,8 @@ if __name__ == '__main__':
     # data has contains data generated from 3 clusters
     data = np.concatenate((data1, data2, data3))
     
-    # applying kmedoids algorithm                                               
     K = 3
-    J, C = kmeans(K, data)
+    kmeans(K, data)
     
     fig = plt.figure()
     ax = fig.add_subplot(111)
