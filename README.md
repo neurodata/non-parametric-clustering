@@ -10,4 +10,4 @@ http://nbviewer.jupyter.org/github/neurodata/non-parametric-clustering/blob/mast
 
 http://nbviewer.jupyter.org/github/neurodata/non-parametric-clustering/blob/master/k-medoids.ipynb
 
-http://nbviewer.jupyter.org/github/neurodata/non-parametric-clustering/blob/master/procustes.ipynb
+http://nbviewer.jupyter.org/github/neurodata/non-parametric-clustering/blob/master/procrustes.ipynb
