@@ -24,6 +24,7 @@ from sklearn.cluster import KMeans
 import itertools
 
 from kmeans import kmeans
+from distance import procrustes
 
 
 def pdf(D):
@@ -99,22 +100,26 @@ def kmedoids(K, D, maxiter=50, numtimes=10):
     return J, M
 
 if __name__ == '__main__':
-    mean = np.array([0, 0])
-    cov = np.array([[4, 0], [0, 1]])
-    data1 = np.random.multivariate_normal(mean, cov, 200)
-
-    mean = np.array([3, 5])
-    cov = np.array([[1, 0.8], [0.8, 2]])
-    data2 = np.random.multivariate_normal(mean, cov, 200)
-
-    mean = np.array([-2, 3])
-    cov = np.array([[0.5, 0], [0, 0.5]])
-    data3 = np.random.multivariate_normal(mean, cov, 200)
-
-    # data has contains data generated from 3 clusters
-    data = np.concatenate((data1, data2, data3))
-
-    K = 3
-    D = euclidean(data)
-    print kmedoids(K, D)
- 
+#    mean = np.array([0, 0])
+#    cov = np.array([[4, 0], [0, 1]])
+#    data1 = np.random.multivariate_normal(mean, cov, 200)
+#
+#    mean = np.array([3, 5])
+#    cov = np.array([[1, 0.8], [0.8, 2]])
+#    data2 = np.random.multivariate_normal(mean, cov, 200)
+#
+#    mean = np.array([-2, 3])
+#    cov = np.array([[0.5, 0], [0, 0.5]])
+#    data3 = np.random.multivariate_normal(mean, cov, 200)
+#
+#    # data has contains data generated from 3 clusters
+#    data = np.concatenate((data1, data2, data3))
+#
+#    K = 3
+#    D = euclidean(data)
+#    print kmedoids(K, D)
+    
+    digits = datasets.load_digits()
+    images = digits.images
+    D = procrustes_distance(images[:100])
+    print D

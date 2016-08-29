@@ -20,6 +20,8 @@ import itertools
 
 from kmeans import kmeans
 from kmedoids import kmedoids
+from kmedoids import euclidean
+import distance
 
 
 def misclassification_error(true_labels, pred_labels):
@@ -86,6 +88,77 @@ def MNIST_eval(distance_func, metric_func,
         kmeans_sklearn_metric.append([np.mean(m3), np.min(m3), np.max(m3)])
     
     return kmedoids_metric, kmeans_metric, kmeans_sklearn_metric
+
+def MNIST_eval2(metric_func, numbers=[1,2,3], nrange=[10,100,10], num_avg=10):
+    digits = datasets.load_digits()
+    images = digits.images
+    kmedoids_euclidean_metric = []
+    kmedoids_procrustes_metric= []
+    kmeans_sklearn_metric = []
+    
+    for n in nrange:
+        # generate true labels
+        labels = np.concatenate([[m]*n for m in numbers])
+
+        data = np.concatenate([
+                (images[np.where(digits.target==i)][np.random.choice(
+                    range(173), n)]).reshape((n, 64)) 
+                for i in numbers
+        ])
+        data2 = np.concatenate([
+                images[np.where(digits.target==i)][
+                    np.random.choice(range(173), n)] 
+                for i in numbers
+        ])
+        D = euclidean(data)
+        D2 = distance.procrustes_distance(data2)
+
+        m1 = []; m2 = []; m3 = [];
+        for i in range(num_avg):
+            j1, _ = kmedoids(len(numbers), D)
+            j2, _ = kmedoids(len(numbers), D2)
+            
+            km = KMeans(len(numbers))
+            j3 = km.fit(data).labels_
+            a = metric_func(labels, j1)
+            b = metric_func(labels, j2)
+            c = metric_func(labels, j3)
+            m1.append(a)
+            m2.append(b)
+            m3.append(c)
+        
+        kmedoids_euclidean_metric.append([np.mean(m1), np.min(m1), np.max(m1)])
+        kmedoids_procrustes_metric.append([np.mean(m2), np.min(m2), np.max(m2)])
+        kmeans_sklearn_metric.append([np.mean(m3), np.min(m3), np.max(m3)])
+    
+    return kmedoids_euclidean_metric, kmedoids_procrustes_metric, \
+                kmeans_sklearn_metric
+
+def MNIST_procrustes(metric_func, numbers=[1,2,3], nrange=[10,100,10], 
+                        num_avg=10):
+    digits = datasets.load_digits()
+    images = digits.images
+    metric = []
+    
+    for n in nrange:
+        # generate true labels
+        labels = np.concatenate([[m]*n for m in numbers])
+
+        data = np.concatenate([
+                images[np.where(digits.target==i)][
+                    np.random.choice(range(173), n)] 
+                for i in numbers
+        ])
+        D = distance.procrustes_distance(data2)
+
+        m = []
+        for i in range(num_avg):
+            labels_hat, _ = kmedoids(len(numbers), D)
+            m.append(metric_func(labels, labels_hat))
+        
+        metric.append([np.mean(m), np.min(m), np.max(m)])
+    
+    return metric
 
 def gauss_eval(distance_func, metric_func, nrange=[10,100,10], num_avg=50):
     """Return metric evaluation on gaussian dataset against N.
