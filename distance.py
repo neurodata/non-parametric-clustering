@@ -1,11 +1,19 @@
 #!/usr/bin/env python
 
+"""This module contains different distance functions to be used on
+shapes.
+
+"""
+
+
 import numpy as np
+import scipy.spatial.distance
 
 def procrustes(X, Y, scaling=True, reflection='best'):
-    """
-        d, Z, [tform] = procrustes(X, Y)
+    """Computes procrustes distance between X and Y.
 
+    Input
+    -----
     X, Y    
         matrices of target and input coordinates. they must have equal
         numbers of  points (rows), but Y may have fewer dimensions
@@ -21,6 +29,8 @@ def procrustes(X, Y, scaling=True, reflection='best'):
         best. setting reflection to True or False forces a solution with
         reflection or no reflection respectively.
 
+    Output
+    ------
     d       
         the residual sum of squared errors, normalized according to a
         measure of the scale of X, ((X - X.mean(0))**2).sum()
@@ -100,24 +110,32 @@ def procrustes(X, Y, scaling=True, reflection='best'):
     #transformation values 
     tform = {'rotation':T, 'scale':b, 'translation':c}
 
-    return d, Z, tform
+    #return d, Z, tform
+    return d
 
-def procrustes_distance(X):
+def procrustes_matrix(X):
+    """Given data points X, computes the distance matrix using procrustes
+    distance.
+    
+    """
     n = X.shape[0]
     D = np.empty(shape=(n, n))
     for i in range(n):
-        for j in range(i, n):
-            dist, _, _ = procrustes(X[i], X[j])
+        for j in range(i+1, n):
+            dist = procrustes(X[i], X[j])
             D[i, j] = D[j, i] = dist
     return D
 
+def euclidean(X, Y):
+    """Computes squared euclidean distance between X and Y."""
+    return ((X-Y)**2).sum()
 
-if __name__ == '__main__':
-    from sklearn import datasets
+def euclidean_matrix(X):
+    """Compute squared Euclidean distance matrix of data points."""
+    V = scipy.spatial.distance.pdist(X, 'sqeuclidean')
+    return scipy.spatial.distance.squareform(V)
 
-    digits = datasets.load_digits()
-    images = digits.images
-
-    dist, Yt, form = procrustes(images[1], images[12])
-    print dist
+def norm(X, Y, o='fro'):
+    return np.linalg.norm(X-Y, ord=o)
+    
 

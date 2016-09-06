@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 
 """
-Clustering with K-Medoids and an analogous of K-Means++ initialization.
-
-Guilherme S. Franca <guifranca@gmail.com>
-08/18/2016
+Evaluation and comparison of K-Means++ and K-Medoids++ on different data sets.
 
 """
 
@@ -18,13 +15,12 @@ from sklearn.cluster import KMeans
 
 import itertools
 
-from kmeans import kmeans
-from kmedoids import kmedoids
-from kmedoids import euclidean
+import kmeans
+import kmedoids
 import distance
 
 
-def misclassification_error(true_labels, pred_labels):
+def class_error(true_labels, pred_labels):
     """Clustering misclassification error. Gives the percentage
     of wrongly clustered points.
     
@@ -42,20 +38,29 @@ def misclassification_error(true_labels, pred_labels):
             min_wrong = wrong
     return min_wrong/len(true_labels)
 
-def MNIST_eval(distance_func, metric_func, 
-               numbers=[1,2,3], nrange=[10,100,10], num_avg=10):
-    """Return metric evaluation on MNIST dataset.
+def MNIST_eval_euclidean(metric_func, numbers=[1,2,3], 
+                         nrange=range(10,100,10), num_avg=10):
+    """Return metric evaluation on MNIST dataset using Euclidean distance
+    on all the algorithms.
 
-    distance_func - to be used in k-medoids
+    Input
+    -----
     metric_func - metric being evaluated
     numbers - digits chosen in MNIST data set
     nrange - range of N's to be tested, number of data points
     num_avg - number of times we cluster the same points and take
               the average, min, and max 
     
+    Output
+    ------
+    kmedoids_metric - metric computed with K-medoids
+    kmeans_metric - metric computed with K-means
+    kmeans_sklearn_metric - metric with kmeans from sklearn
+    
     """
     digits = datasets.load_digits()
     images = digits.images
+    
     kmedoids_metric = []
     kmeans_metric = []
     kmeans_sklearn_metric = []
@@ -65,17 +70,22 @@ def MNIST_eval(distance_func, metric_func,
         labels = np.concatenate([[m]*n for m in numbers])
 
         data = np.concatenate([
-                (images[np.where(digits.target==i)][np.random.choice(
-                    range(173), n)]).reshape((n, 64)) 
-                for i in numbers
+          images[np.where(digits.target==i)][np.random.choice(range(173), n)] 
+          for i in numbers
         ])
+        data2 = data.reshape(len(data), 64)
 
         m1 = []; m2 = []; m3 = [];
         for i in range(num_avg):
-            j1, _ = kmedoids(len(numbers), distance_func(data))
-            j2, _ = kmeans(len(numbers), data)
+            # our algorithms
+            j1, _ = kmedoids.kmedoids(len(numbers),
+                                      distance.euclidean_matrix(data2))
+            j2, _ = kmeans.kmeans(len(numbers), data2, distance.euclidean)
+            
+            # sklearn k-means
             km = KMeans(len(numbers))
-            j3 = km.fit(data).labels_
+            j3 = km.fit(data2).labels_
+            
             a = metric_func(labels, j1)
             b = metric_func(labels, j2)
             c = metric_func(labels, j3)
@@ -89,83 +99,74 @@ def MNIST_eval(distance_func, metric_func,
     
     return kmedoids_metric, kmeans_metric, kmeans_sklearn_metric
 
-def MNIST_eval2(metric_func, numbers=[1,2,3], nrange=[10,100,10], num_avg=10):
+def MNIST_eval_procrustes(metric_func, numbers=[1,2,3],
+                          nrange=range(10,100,10), num_avg=5):
+    """Evaluate metric and compare with different algorithms. In our
+    implementation of K-medoids and K-means we use procrustes distance. We 
+    compare with kmeans/sklearn.
+
+    Input
+    -----
+    metric_func - metric being evaluated
+    numbers - digits chosen in MNIST data set
+    nrange - range of N's to be tested, number of data points
+    num_avg - number of times we cluster the same points and take
+              the average, min, and max 
+    
+    Output
+    ------
+    kmedoids_procrustes_metric - metric computed with K-medoids
+    kmeans_procrustes_metric - metric computed with K-means
+    kmeans_sklearn_metric - metric with kmeans from sklearn
+    
+    """
     digits = datasets.load_digits()
     images = digits.images
-    kmedoids_euclidean_metric = []
-    kmedoids_procrustes_metric= []
-    kmeans_sklearn_metric = []
     
+    m1 = []; m2 = []; m3 = [];
     for n in nrange:
         # generate true labels
         labels = np.concatenate([[m]*n for m in numbers])
-
+        
         data = np.concatenate([
-                (images[np.where(digits.target==i)][np.random.choice(
-                    range(173), n)]).reshape((n, 64)) 
-                for i in numbers
+            images[np.where(digits.target==i)][np.random.choice(range(173), n)] 
+            for i in numbers
         ])
-        data2 = np.concatenate([
-                images[np.where(digits.target==i)][
-                    np.random.choice(range(173), n)] 
-                for i in numbers
-        ])
-        D = euclidean(data)
-        D2 = distance.procrustes_distance(data2)
-
-        m1 = []; m2 = []; m3 = [];
-        for i in range(num_avg):
-            j1, _ = kmedoids(len(numbers), D)
-            j2, _ = kmedoids(len(numbers), D2)
+        data2 = data.reshape(len(data), 64)
+        
+        j1, _ = kmedoids.kmedoids(len(numbers),
+                                        distance.procrustes_matrix(data))
+        j2, _ = kmeans.kmeans(len(numbers), data, distance.procrustes)
             
-            km = KMeans(len(numbers))
-            j3 = km.fit(data).labels_
-            a = metric_func(labels, j1)
-            b = metric_func(labels, j2)
-            c = metric_func(labels, j3)
-            m1.append(a)
-            m2.append(b)
-            m3.append(c)
+        km = KMeans(len(numbers))
+        j3 = km.fit(data2).labels_
+            
+        m1.append(metric_func(labels, j1))
+        m2.append(metric_func(labels, j2))
+        m3.append(metric_func(labels, j3))
         
-        kmedoids_euclidean_metric.append([np.mean(m1), np.min(m1), np.max(m1)])
-        kmedoids_procrustes_metric.append([np.mean(m2), np.min(m2), np.max(m2)])
-        kmeans_sklearn_metric.append([np.mean(m3), np.min(m3), np.max(m3)])
-    
-    return kmedoids_euclidean_metric, kmedoids_procrustes_metric, \
-                kmeans_sklearn_metric
+    return m1, m2, m3
 
-def MNIST_procrustes(metric_func, numbers=[1,2,3], nrange=[10,100,10], 
-                        num_avg=10):
-    digits = datasets.load_digits()
-    images = digits.images
-    metric = []
-    
-    for n in nrange:
-        # generate true labels
-        labels = np.concatenate([[m]*n for m in numbers])
-
-        data = np.concatenate([
-                images[np.where(digits.target==i)][
-                    np.random.choice(range(173), n)] 
-                for i in numbers
-        ])
-        D = distance.procrustes_distance(data2)
-
-        m = []
-        for i in range(num_avg):
-            labels_hat, _ = kmedoids(len(numbers), D)
-            m.append(metric_func(labels, labels_hat))
-        
-        metric.append([np.mean(m), np.min(m), np.max(m)])
-    
-    return metric
-
-def gauss_eval(distance_func, metric_func, nrange=[10,100,10], num_avg=50):
+def gauss_eval(dist_matrix_kmedoids, dist_func_kmeans, metric_func, 
+               nrange=range(10,100,10), num_avg=5):
     """Return metric evaluation on gaussian dataset against N.
-
-    Uses the distance_func for K-medoids, and metric_func is the index
-    to be evaluated. This is a function that has two arguments, the true
-    labels and the clustered labels.
+    Compare K-medoids and K-means.
+    
+    Input
+    -----
+    dist_matrix_kmedoids - function to generate the distance matrix for
+                            kmedoids
+    dist_func_kmeans - distance function to be used in kmeans
+    metric_func - metric function being evaluated
+    nrange - range of N's to be tested, number of data points
+    num_avg - number of times we cluster the same points and take
+              the average, min, and max 
+    
+    Output
+    ------
+    kmedoids_metric - metric computed with K-medoids
+    kmeans_metric - metric computed with K-means
+    kmeans_sklearn_metric - metric with kmeans from sklearn
     
     """
     kmedoids_metric = []
@@ -173,7 +174,7 @@ def gauss_eval(distance_func, metric_func, nrange=[10,100,10], num_avg=50):
     kmeans_sklearn_metric = []
     
     # we generate data with n points in each cluster and evaluate 
-    # the algorithm
+    # the algorithms
     for n in nrange:
         data = np.concatenate((
             np.random.multivariate_normal([0, 0], [[4,0], [0,1]], n),
@@ -187,8 +188,8 @@ def gauss_eval(distance_func, metric_func, nrange=[10,100,10], num_avg=50):
         m3 = []
         k = 3
         for i in range(num_avg):
-            j1, _ = kmedoids(k, distance_func(data))
-            j2, _ = kmeans(k, data)
+            j1, _ = kmedoids.kmedoids(k, dist_matrix_kmedoids(data))
+            j2, _ = kmeans.kmeans(k, data, dist_func_kmeans)
             
             km = KMeans(k)
             r = km.fit(data)
@@ -208,12 +209,12 @@ def gauss_eval(distance_func, metric_func, nrange=[10,100,10], num_avg=50):
     return kmedoids_metric, kmeans_metric, kmeans_sklearn_metric
 
 
-###############################################################################
 if __name__ == '__main__':
-    pass
-    #numbers = [1, 2, 3]
-    #nrange = range(10,100,10)
-    #dfunc = euclidean
-    #mfunc = metrics.normalized_mutual_info_score
-    #m1, m2 = mnist_eval(dfunc, mfunc, numbers, nrange)
-    #m1, m2 = gauss_eval(dfunc, mfunc, nrange=[10, 30, 10], num_avg=20)
+    #a, b, c = MNIST_eval_euclidean(class_error, numbers=[3,4,5], 
+    #                     nrange=range(10,100,10), num_avg=5)
+    #print a, b, c
+    
+    a, b, c = MNIST_eval_procrustes(class_error, numbers=[3,4,5],
+                          nrange=range(10,50,10), num_avg=5)
+    print a, b, c
+    
