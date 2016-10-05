@@ -10,10 +10,6 @@ from __future__ import division
 import numpy as np
 import scipy.spatial.distance
 
-import matplotlib.pyplot as plt
-
-import ellipse
-
 
 def procrustes_matrix(X):
     """Given data points X, computes the distance matrix using procrustes
@@ -54,7 +50,7 @@ def align(P, Q):
     R = Vt.T.dot(U)
     det = np.linalg.det(R)
     if det < 0:
-        d = np.ones(k)
+        d = np.ones(U.shape[0])
         d[-1] = -1
         R = Vt.T.dot(np.diag(d)).dot(U)
     Qhat = R.dot(P)
@@ -78,7 +74,7 @@ def best_alignment(P, Q, tol=10**-15):
                 break
     return finalQhat, finaldist
 
-def procrustes(X, Y, transpose=True):
+def procrustes(X, Y, transpose=True, fullout=False):
     """Procrustes distance between X and Y.
     We assume that X and Y have the same dimension and in the form
 
@@ -93,13 +89,14 @@ def procrustes(X, Y, transpose=True):
     """
     assert X.shape == Y.shape
     
+    n, k = X.shape
+
     if transpose:
         P = X.T 
         Q = Y.T
     else:
         P = X
         Q = X
-    k, n = P.shape
     
     # eliminate translation
     pbar = P.mean(axis=1)
@@ -114,28 +111,45 @@ def procrustes(X, Y, transpose=True):
     # find rotation or reflection
     Qtildehat, dist = best_alignment(Ptilde, Qtilde)
     
-    #return Qtildehat, Qtilde, dist
-    return dist
+    if not fullout:
+        return dist
+    else:
+        return Qtildehat.T, Qtilde.T, dist
+
+def raw_dist(P, Q):
+    return np.linalg.norm(P - Q)
 
 
 ###############################################################################
 if __name__ == '__main__':
-    x1 = ellipse.parse_ellipse(30, 20, 2, 'data/cluster1.dat')
-    x2 = ellipse.parse_ellipse(30, 20, 2, 'data/cluster2.dat')
-    x3 = ellipse.parse_ellipse(30, 20, 2, 'data/cluster3.dat')
-    X = x1[1]
-    Y = x2[15]
-    
-    fig = plt.figure(figsize=(10,5))
-    ax1 = fig.add_subplot(121)
-    ellipse.plot_data([X.T, Y.T], ax1)
-    ax1.set_xlim([-20,20])
-    ax1.set_ylim([-20,20])
-    
+    import shapes
+    import matplotlib.pyplot as plt
+    import mnistshape as mshape
+
+    import cPickle, gzip, sys
+    import matplotlib.pyplot as plt
+
+    f = gzip.open('data/mnist.pkl.gz', 'rb')
+    train_set, valid_set, test_set = cPickle.load(f)
+    f.close()
+    images, labels = train_set
+    i1 = np.where(labels==8)
+    i2 = np.where(labels==8)
+    im1 = images[i1][np.random.randint(0, len(i1[0]))].reshape((28,28))
+    im2 = images[i2][np.random.randint(0, len(i2[0]))].reshape((28,28))
+    X = mshape.get_shape(im1, n=100, s=2.0)
+    Y = mshape.get_shape(im2, n=100, s=2.0)
+
+    #X = shapes.ellipse(2, 2, 0, 0, 45, 1, 20)
+    #Y = shapes.rectangle(2, 1.1, 0, 0, -20, 1, 20)
+
+    fig = plt.figure()
+    ax = fig.add_subplot(121)
+    shapes.plot_shape(X, ax)
+    shapes.plot_shape(Y, ax, raw_dist(X, Y))
+    ax = fig.add_subplot(122)
     Qh, Q, d = procrustes(X, Y)
-
-    ax2 = fig.add_subplot(122)
-    ellipse.plot_data([Qh, Q], ax2)
-
-    fig.savefig('ellipse.png')
+    shapes.plot_shape(Qh, ax)
+    shapes.plot_shape(Q, ax, d)
+    plt.show()
 

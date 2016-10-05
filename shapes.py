@@ -59,8 +59,9 @@ def cluster_shape(a, b, n, m, shape_func):
         data[i] = shape_func(a, b, t[i,0], t[i,1], alpha[i], s[i], m)
     return data
 
-def plot_shape(data, ax):
+def plot_shape(data, ax, title=''):
     ax.plot(data[:,0], data[:,1], '-o')
+    ax.set_title(title)
 
 def plot_cluster_shapes(data, ax):
     for d in data:
