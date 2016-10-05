@@ -94,24 +94,23 @@ def kmeans_(K, X, distance, max_iter=50):
             if not np.array_equal(new_mu, old_mu):
                 mus[k] = new_mu
                 converged = False
-
-        # compute objective
-        J = sum([0.5*distance(x, mus[k]) for k in range(K) 
-                                         for x in X[np.where(labels==k)]])
         
         count += 1
+
+        # compute objective
+    J = sum([0.5*distance(x, mus[k]) for k in range(K) 
+                                     for x in X[np.where(labels==k)]])
     
-    return labels, mus, J
+    return labels, mus, J, count
 
 def kmeans(K, X, distance, max_iter=50, numtimes=5):
     """Wrapper around kmeans_single. We run the algorithm few times
     and pick the best answer.
     
     """
-    J = np.inf
     for i in range(numtimes):
-        cZ, cM, cJ = kmeans_(K, X, distance, max_iter)
-        if cJ < J:
+        cZ, cM, cJ, cn = kmeans_(K, X, distance, max_iter)
+        if i==0 or cJ < J:
             J = cJ
             Z = cZ
             M = cM
