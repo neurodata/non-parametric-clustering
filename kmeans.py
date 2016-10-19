@@ -69,6 +69,8 @@ def kmeans_(K, X, distance, max_iter=50):
     ------
     labels: 1D array with labels for points in X, in order 
     centroids: array containing the centers of the clusters
+    objective: value of the objective function after last iteration
+    count: number of iterations
     
     """
     N = X.shape[0]
@@ -97,19 +99,22 @@ def kmeans_(K, X, distance, max_iter=50):
         
         count += 1
 
-        # compute objective
+    # compute objective
     J = sum([0.5*distance(x, mus[k]) for k in range(K) 
                                      for x in X[np.where(labels==k)]])
+
+    if count == max_iter:
+        print "Warning: K-means didn't converge after %i iterations." % count
     
     return labels, mus, J, count
 
-def kmeans(K, X, distance, max_iter=50, numtimes=5):
-    """Wrapper around kmeans_single. We run the algorithm few times
+def kmeans(K, X, distance, num_times=5, max_iter=50):
+    """Wrapper around kmeans_. We run the algorithm few times
     and pick the best answer.
     
     """
-    for i in range(numtimes):
-        cZ, cM, cJ, cn = kmeans_(K, X, distance, max_iter)
+    for i in range(num_times):
+        cZ, cM, cJ, cN = kmeans_(K, X, distance, max_iter)
         if i==0 or cJ < J:
             J = cJ
             Z = cZ
@@ -117,6 +122,7 @@ def kmeans(K, X, distance, max_iter=50, numtimes=5):
     return Z, M
 
 
+###############################################################################
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
     import matplotlib.cm as cm

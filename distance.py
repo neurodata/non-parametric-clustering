@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 
-"""This module contains different distance functions to be used on
-shapes.
-
-"""
+"""Different distance functions to be used on shapes."""
 
 from __future__ import division
 
@@ -57,12 +54,17 @@ def align(P, Q):
     dist = np.linalg.norm(Qhat - Q)
     return Qhat, dist
 
-def best_alignment(P, Q, tol=10**-15):
-    """Cycle the points in P and align to Q. Pick the smallest distance."""
+def best_alignment(P, Q, cycle=False, tol=1e-4):
+    """Cycle the points in P and align to Q. Pick the smallest distance
+    if cycle is True.
+    
+    """
     k, n = P.shape
     finalQhat, finaldist = align(P, Q)
-    if finaldist <= tol:
+    if finaldist <= tol or not cycle:
         return finalQhat, finaldist
+
+    # cycle the points and compute alignment each time
     for i in range(n):
         js = range(-1, n-1)
         P = P[:,js]
@@ -72,9 +74,10 @@ def best_alignment(P, Q, tol=10**-15):
             finalQhat = Qhat
             if finaldist <= tol:
                 break
+    
     return finalQhat, finaldist
 
-def procrustes(X, Y, transpose=True, fullout=False):
+def procrustes(X, Y, transpose=True, fullout=False, cycle=False):
     """Procrustes distance between X and Y.
     We assume that X and Y have the same dimension and in the form
 
@@ -85,6 +88,9 @@ def procrustes(X, Y, transpose=True, fullout=False):
 
     i.e. a (n,k) matrix where n is the number of points and k is the
     dimension of each point.
+
+    If fullout=True it will print the final \hat{Y} which is the transformed
+    X. If cycle=True it will 
 
     """
     assert X.shape == Y.shape
@@ -109,7 +115,7 @@ def procrustes(X, Y, transpose=True, fullout=False):
     Qtilde = Qtilde/np.linalg.norm(Qtilde)
     
     # find rotation or reflection
-    Qtildehat, dist = best_alignment(Ptilde, Qtilde)
+    Qtildehat, dist = best_alignment(Ptilde, Qtilde, cycle=cycle)
     
     if not fullout:
         return dist
