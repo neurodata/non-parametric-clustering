@@ -75,17 +75,102 @@ def kmeans_euclidean(k, data, true_labels):
     return error
 
 
-
 ###############################################################################
 if __name__ == '__main__':
 
     ###########################################################################
     # testing with MNIST digit dataset
+    ###########################################################################
     
-#    nrange = range(10, 300, 20) # range of n
-#    digits = [1, 3, 5, 7] # classes to cluster
+    nrange = range(10, 300, 20) # range of n
+    digits = [0, 6, 9] # classes to cluster
+    times_sample = 10 # number of times to sample for each n
+    k = len(digits)
+    
+    proc = []
+    eucl = []
+    for n in nrange:
+        
+        print "Doing %i of %i"%(n, nrange[-1])
+
+        ns = [n for d in digits]
+        
+        for m in range(times_sample):
+            data, shapes, true_labels = pick_data(ns, digits)
+            error_proc = kmeans_procrustes(k, shapes, true_labels)
+            error_eucl = kmeans_euclidean(k, data, true_labels)
+            proc.append([n, error_proc])
+            eucl.append([n, error_eucl])
+            
+            print '    ', error_proc, error_eucl 
+            
+    proc = np.array(proc)
+    eucl = np.array(eucl)
+
+    # ploting results
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    
+    ax.plot(proc[:,0], proc[:,1], 'o', color='b', alpha=.7, label='procrustes')
+    ax.plot(eucl[:,0], eucl[:,1], 's', color='r', alpha=.7, label='euclidean')
+   
+    # extracting average per n
+    proc_avg = []
+    eucl_avg = []
+    for n in nrange:
+        mu = proc[np.where(proc[:,0]==n)][:,1].mean()
+        proc_avg.append([n, mu])
+        mu = eucl[np.where(eucl[:,0]==n)][:,1].mean()
+        eucl_avg.append([n, mu])
+    proc_avg = np.array(proc_avg)
+    eucl_avg = np.array(eucl_avg)
+
+    ax.plot(proc_avg[:,0], proc_avg[:,1], '-', color='b')
+    ax.plot(eucl_avg[:,0], eucl_avg[:,1], '-', color='r')
+
+    ax.set_xlabel('cluster size')
+    ax.set_ylabel('error')
+    ax.set_xlim([nrange[0]-5, nrange[-1]+5])
+    leg = ax.legend(loc=0)
+    leg.get_frame().set_alpha(0.7)
+    ax.set_title('digits = %s'%str(digits))
+    fig.savefig('mnist_procrustes_euclidean_%s.pdf'%\
+                    (''.join(['%i'%d for d in digits])))
+
+
+    ###########################################################################
+    # testing with ellipses - add noise
+    ###########################################################################
+    
+#    params = [[1, 3], [2, 5], [4, 4]]
+#    K = 3
+#    
+#    # generate data first
+#    data = []
+#    labels = []
+#    N = 1000
+#    z = 0
+#    for a, b in params:
+#        for i in range(N):
+#            a = a + .007*np.random.uniform(-1,1)
+#            b = b + .007*np.random.uniform(-1,1)
+#            x0, y0 = 2*np.random.randn(2)
+#            alpha = np.random.uniform(0, np.pi/2.)
+#            s = 2*np.random.randn(1)
+#            m = 15
+#            data.append(shapes.ellipse(a, b, x0, y0, alpha, s, m))
+#            labels.append(z)
+#        z += 1
+#    data = np.array(data)
+#    labels = np.array(labels)
+#    idx = range(len(labels))
+#    np.random.shuffle(idx)
+#    data = data[idx]
+#    labels = labels[idx]
+#    
+#    # clustering
+#    nrange = range(10, 110, 10)
 #    times_sample = 10 # number of times to sample for each n
-#    k = len(digits)
 #    
 #    proc = []
 #    eucl = []
@@ -93,17 +178,34 @@ if __name__ == '__main__':
 #        
 #        print "Doing %i of %i"%(n, nrange[-1])
 #
-#        ns = [n for d in digits]
-#        
-#        for m in range(times_sample):
-#            data, shapes, true_labels = pick_data(ns, digits)
-#            error_proc = kmeans_procrustes(k, shapes, true_labels)
-#            error_eucl = kmeans_euclidean(k, data, true_labels)
+#        count = 0
+#        while count  < times_sample:
+#            # pick n elements at random from data for each class and cluster
+#            sample = []
+#            true_labels = []
+#            for k in range(len(params)):
+#                x = np.where(labels==k)[0]
+#                idx = np.random.choice(x, n, replace=False)
+#                sample.append(data[idx])
+#                true_labels.append([k for i in range(n)])
+#            sample = np.concatenate(sample)
+#            true_labels = np.concatenate(true_labels)
+#            idx = range(len(sample))
+#            np.random.shuffle(idx)
+#            sample = sample[idx]
+#            true_labels = true_labels[idx]
+#
+#            try:
+#                error_proc = kmeans_procrustes(K, sample, true_labels)
+#            except:
+#                count -= 1
+#                continue
+#            error_eucl = kmeans_euclidean(K, sample, true_labels)
 #            proc.append([n, error_proc])
 #            eucl.append([n, error_eucl])
-#            
-#            print '    ', error_proc, error_eucl 
-#            
+#            print '    ', error_proc, error_eucl
+#            count += 1
+#    
 #    proc = np.array(proc)
 #    eucl = np.array(eucl)
 #
@@ -131,61 +233,80 @@ if __name__ == '__main__':
 #    ax.set_xlabel('cluster size')
 #    ax.set_ylabel('error')
 #    ax.set_xlim([nrange[0]-5, nrange[-1]+5])
+#    ax.set_ylim([-0.1, eucl[:,1].max()+0.1])
 #    leg = ax.legend(loc=0)
 #    leg.get_frame().set_alpha(0.7)
-#    ax.set_title('digits = %s'%str(digits))
-#    fig.savefig('mnist_procrustes_euclidean_%s.pdf'%\
-#                    (''.join(['%i'%d for d in digits])))
+#    ax.set_title('ellipses = %s'%str(params))
+#    fig.savefig('ellipse_noise_procrustes_euclidean.pdf')
 
-
+"""
 
     ###########################################################################
-    # testing with ellipses
+    # Testing with random perturbation on the points of ellipse
+    ###########################################################################
     
-    params = [[1, 3], [8, 4], [2, 5], [7, 8], [1, 9]]
-    nrange = range(10, 100, 10)
-    numtimes = 1 # number of times to run kmeans on a fixed data set
-    k = len(params)
+    params = [[1, 3], [2, 5], [4, 4]]
+    K = 3
+    
+    # generate data first
+    data = []
+    labels = []
+    N = 1000
+    z = 0
+    for a, b in params:
+        for i in range(N):
+            x0, y0 = 2*np.random.randn(2)
+            alpha = np.random.uniform(0, np.pi/2.)
+            s = 2*np.random.randn(1)
+            m = 10
+            data.append(shapes.ellipse_random(a, b, x0, y0, alpha, s, m))
+            labels.append(z)
+        z += 1
+    data = np.array(data)
+    labels = np.array(labels)
+    idx = range(len(labels))
+    np.random.shuffle(idx)
+    data = data[idx]
+    labels = labels[idx]
+    
+    # clustering
+    nrange = range(10, 110, 10)
+    times_sample = 10 # number of times to sample for each n
     
     proc = []
     eucl = []
     for n in nrange:
-
-        print 'Doing %i of %i' % (n, nrange[-1])
         
-        # generate n data points in each cluster
-        data = []
-        labels = []
-        z = 0
-        for a, b in params:
-            for i in range(n):
-                
-                # add some noise
-                a = a + .05*np.random.randn()
-                b = b + .05*np.random.randn()
+        print "Doing %i of %i"%(n, nrange[-1])
 
-                x0, y0 = 5*np.random.randn(2)
-                alpha = np.random.uniform(-np.pi, np.pi)
-                s = 10*np.random.randn(1)
-                m = 10
-                data.append(shapes.ellipse(a, b, x0, y0, alpha, s, m))
-                labels.append(z)
-            z += 1
-        data = np.array(data)
-        labels = np.array(labels)
-        idx = range(len(labels))
-        np.random.shuffle(idx)
-        data = data[idx]
-        labels = labels[idx]
+        count = 0
+        while count  < times_sample:
+            # pick n elements at random from data for each class and cluster
+            sample = []
+            true_labels = []
+            for k in range(len(params)):
+                x = np.where(labels==k)[0]
+                idx = np.random.choice(x, n, replace=False)
+                sample.append(data[idx])
+                true_labels.append([k for i in range(n)])
+            sample = np.concatenate(sample)
+            true_labels = np.concatenate(true_labels)
+            idx = range(len(sample))
+            np.random.shuffle(idx)
+            sample = sample[idx]
+            true_labels = true_labels[idx]
 
-        # cluster this dataset few times and compute error
-        for i in range(numtimes):
-            e1 = kmeans_procrustes(k, data, labels)
-            e2 = kmeans_euclidean(k, data, labels)
-            print '    ', e1, e2
-            proc.append([n, e1])
-            eucl.append([n, e2])
-
+            try:
+                error_proc = kmeans_procrustes(K, sample, true_labels)
+            except:
+                count -= 1
+                continue
+            error_eucl = kmeans_euclidean(K, sample, true_labels)
+            proc.append([n, error_proc])
+            eucl.append([n, error_eucl])
+            print '    ', error_proc, error_eucl
+            count += 1
+    
     proc = np.array(proc)
     eucl = np.array(eucl)
 
@@ -217,8 +338,6 @@ if __name__ == '__main__':
     leg = ax.legend(loc=0)
     leg.get_frame().set_alpha(0.7)
     ax.set_title('ellipses = %s'%str(params))
-    fig.savefig('ellipse_noise_procrustes_euclidean.pdf')
+    fig.savefig('ellipse_random_procrustes_euclidean.pdf')
 
-
-
-
+"""

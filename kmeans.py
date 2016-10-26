@@ -54,7 +54,7 @@ def kpp(K, X, distance):
         C.append(X[j])
     return np.array(C)
     
-def kmeans_(K, X, distance, max_iter=50):
+def kmeans_(K, X, distance, max_iter=50, collapsed=0):
     """K-means, Loyd's algorithm. We use K-means++ for initialization.
 
     Input
@@ -88,6 +88,20 @@ def kmeans_(K, X, distance, max_iter=50):
             for k in range(K):
                 D = np.array([distance(X[n], mus[k]) for k in range(K)])
             labels[n] = np.argmin(D)
+
+        # sanity test to make sure we don't collapse clusters
+        # in very rare cases, probably due to poor initialization
+        # some clusters can collapse and disapear
+        if np.unique(labels).shape[0] != K:
+            collapsed += 1
+            if collapsed == 10:
+                print "    Warning: clusters collapsed 10 times. Aborting ..."
+                J = sum([0.5*distance(x, mus[k]) for k in np.unique(labels)
+                                    for x in X[np.where(labels==k)]])
+                return labels, mus, J, count
+            else: # recursion
+                print "    Warning: clusters collapsed. Starting again ..."
+                return kmeans_(K, X, distance, max_iter, collapsed)
         
         # update the centroids based on the vectors in the cluster
         for k in range(K):

@@ -8,38 +8,6 @@ import numpy as np
 import scipy.spatial.distance
 
 
-def procrustes_matrix(X):
-    """Given data points X, computes the distance matrix using procrustes
-    distance.
-    
-    """
-    n = X.shape[0]
-    D = np.empty(shape=(n, n))
-    for i in range(n):
-        for j in range(i+1, n):
-            dist = procrustes(X[i], X[j])
-            D[i, j] = D[j, i] = dist
-    return D
-
-def euclidean(X, Y):
-    """Computes squared euclidean distance between X and Y."""
-    return ((X-Y)**2).sum()
-
-def euclidean_matrix(X):
-    """Compute squared Euclidean distance matrix of data points."""
-    V = scipy.spatial.distance.pdist(X, 'sqeuclidean')
-    return scipy.spatial.distance.squareform(V)
-
-def norm(X, Y, o='fro'):
-    return np.linalg.norm(X-Y, ord=o)
-
-def sort_points2D(P):
-    """Sort the points in matrix P according to the angle in x-y plane."""
-    cp = np.array([np.complex(P[0,i], P[1,i]) for i in range(len(P[0]))])
-    thetas = np.angle(cp)
-    idx = np.argsort(thetas)
-    return P[:,idx]
-
 def align(P, Q):
     """Align P into Q by rotation. Use SVD."""
     Z = P.dot(Q.T)
@@ -52,7 +20,7 @@ def align(P, Q):
         R = Vt.T.dot(np.diag(d)).dot(U)
     Qhat = R.dot(P)
     dist = np.linalg.norm(Qhat - Q)
-    return Qhat, dist
+    return Qhat, dist, R
 
 def best_alignment(P, Q, cycle=False, tol=1e-3):
     """Cycle the points in P and align to Q. 
@@ -76,22 +44,11 @@ def best_alignment(P, Q, cycle=False, tol=1e-3):
                 break
     return finalQhat, finaldist
 
-def procrustes(X, Y, transpose=True, fullout=False, cycle=False):
-    """Procrustes distance between X and Y.
-    We assume that X and Y have the same dimension and in the form
+def procrustes(Xs, Ys, transpose=True, fullout=False, cycle=False):
+    
+    X = Xs[0]
+    Y = Ys[0]
 
-    [[x1, y1, z1, ...],
-     [x2, y2, z2, ...]
-        ...
-     [xn, yn, zn, ...]]
-
-    i.e. a (n,k) matrix where n is the number of points and k is the
-    dimension of each point.
-
-    If fullout=True it will print the final \hat{Y} which is the transformed
-    X. If cycle=True it will 
-
-    """
     assert X.shape == Y.shape
     
     n, k = X.shape
