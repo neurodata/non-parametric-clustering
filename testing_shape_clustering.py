@@ -82,9 +82,9 @@ if __name__ == '__main__':
     # testing with MNIST digit dataset
     ###########################################################################
     
-    nrange = range(10, 300, 20) # range of n
-    digits = [0, 6, 9] # classes to cluster
-    times_sample = 10 # number of times to sample for each n
+    nrange = range(10, 50, 10) # range of n
+    digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] # classes to cluster
+    times_sample = 2 # number of times to sample for each n
     k = len(digits)
     
     proc = []

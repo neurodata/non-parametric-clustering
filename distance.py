@@ -127,6 +127,7 @@ def raw_dist(P, Q):
 
 ###############################################################################
 if __name__ == '__main__':
+
     import shapes
     import matplotlib.pyplot as plt
     import mnistshape as mshape
@@ -139,6 +140,7 @@ if __name__ == '__main__':
     f.close()
     images, labels = train_set
     
+    """
     # ploting shapes and alignment for digits
     a, b, c = 3, 5, 7
     pairs = [[a,a], [b,b], [c,c], [a,b], [a,c], [b,c]]
@@ -181,4 +183,41 @@ if __name__ == '__main__':
         ax4.set_ylim([-.35,.35])
         
     fig.savefig('alignment_digits.pdf')
+    """
 
+    # ploting shapes and alignment for digits
+    a, b = 5, 7
+    fig, axes = plt.subplots(nrows=2, ncols=3, figsize=(3*4, 2*4))
+    
+    ax1, ax2, ax3 = axes[0]
+    i1 = np.where(labels==a)
+    i2 = np.where(labels==b)
+    im1 = images[i1][np.random.randint(0, len(i1[0]))].reshape((28,28))
+    im2 = images[i2][np.random.randint(0, len(i2[0]))].reshape((28,28))
+    ax1.imshow(im1, cmap=plt.cm.gray)
+    ax1.axis('off')
+    ax2.imshow(im2, cmap=plt.cm.gray)
+    ax2.axis('off')
+    ax3.axis('off')
+    
+    ax1, ax2, ax3 = axes[1]
+    X = mshape.get_shape(im1, n=30, s=5.0)
+    Y = mshape.get_shape(im2, n=30, s=5.0)
+
+    ax1.plot(X[:,0], X[:,1], 'o-k')
+    ax1.set_xlim([0, 28])
+    ax1.set_ylim([0, 28])
+    ax2.plot(Y[:,0], Y[:,1], 'o-k')
+    ax2.set_xlim([0, 28])
+    ax2.set_ylim([0, 28])
+    
+    Qh, Q, d = procrustes(X, Y, cycle=False, fullout=True)
+    ax3.plot(Qh[:,0], Qh[:,1], 'o-b', alpha=.7)
+    ax3.fill(Qh[:,0], Qh[:,1], 'b', alpha=.3)
+    ax3.plot(Q[:,0], Q[:,1], 'o-r', alpha=.7)
+    ax3.fill(Q[:,0], Q[:,1], 'r', alpha=.3)
+    ax3.set_title(r'$D(X,Y)=%f$'%d)
+    ax3.set_xlim([-.35,.35])
+    ax3.set_ylim([-.35,.35])
+    
+    fig.savefig('rep_shape_distance.png')

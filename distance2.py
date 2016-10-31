@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 
-"""Different distance functions to be used on shapes."""
+"""This module computes Procrustes distance using only the outside contour
+for alignment, however we use all contours which has a matching between
+two shapes to compute the final distance.
+
+"""
 
 from __future__ import division
 
@@ -9,7 +13,10 @@ import scipy.spatial.distance
 
 
 def align(P, Q):
-    """Align P into Q by rotation. Use SVD."""
+    """Align P into Q by rotation. Use SVD. Return the rotated P and 
+    the rotation matrix. Q is unchanged.
+    
+    """
     Z = P.dot(Q.T)
     U, sigma, Vt = np.linalg.svd(Z)
     R = Vt.T.dot(U)
@@ -19,67 +26,76 @@ def align(P, Q):
         d[-1] = -1
         R = Vt.T.dot(np.diag(d)).dot(U)
     Qhat = R.dot(P)
-    dist = np.linalg.norm(Qhat - Q)
-    return Qhat, dist, R
-
-def best_alignment(P, Q, cycle=False, tol=1e-3):
-    """Cycle the points in P and align to Q. 
-    Pick the smallest distance if cycle is True.
+    return Qhat, R
+    
+def procrustes(Xs, Ys, transpose=True, fullout=False):
+    """Xs and Ys is a list of shapes or contours, 
+    each contour is a Nx2 matrix. 
     
     """
-    k, n = P.shape
-    finalQhat, finaldist = align(P, Q)
-    if finaldist <= tol or not cycle:
-        return finalQhat, finaldist
 
-    # cycle the points and compute alignment each time
-    for i in range(n):
-        js = range(-1, n-1)
-        P = P[:,js]
-        Qhat, dist = align(P, Q)
-        if dist < finaldist:
-            finaldist = dist
-            finalQhat = Qhat
-            if finaldist <= tol:
-                break
-    return finalQhat, finaldist
-
-def procrustes(Xs, Ys, transpose=True, fullout=False, cycle=False):
-    
-    X = Xs[0]
-    Y = Ys[0]
-
+    # use only outside contour for alignment
+    X, Y = Xs[0], Ys[0] 
     assert X.shape == Y.shape
-    
     n, k = X.shape
-
     if transpose:
         P = X.T 
         Q = Y.T
+        newXs = [P]
+        newYs = [Q]
+        for i in range(1, len(Xs)):
+            newXs.append(Xs[i].T)
+        for i in range(1, len(Ys)):
+            newYs.append(Ys[i].T)
+        Xs = newXs
+        Ys = newYs
     else:
         P = X
         Q = Y
     
-    # eliminate translation
-    pbar = P.mean(axis=1)
-    qbar = Q.mean(axis=1)
-    Ptilde = P - pbar.reshape((k,1))
-    Qtilde = Q - qbar.reshape((k,1))
+    # translation
+    pbar = P.mean(axis=1).reshape((k,1))
+    qbar = Q.mean(axis=1).reshape((k,1))
+    Ptilde = P - pbar
+    Qtilde = Q - qbar
     
-    # rescale
-    Ptilde = Ptilde/np.linalg.norm(Ptilde)
-    Qtilde = Qtilde/np.linalg.norm(Qtilde)
+    # scaling
+    sp = np.linalg.norm(Ptilde)
+    sq = np.linalg.norm(Qtilde)
+    Ptilde = Ptilde/sp
+    Qtilde = Qtilde/sq
     
-    # find rotation or reflection
-    Qtildehat, dist = best_alignment(Ptilde, Qtilde, cycle=cycle)
-    
-    if not fullout:
-        return dist
-    else:
-        return Qtildehat.T, Qtilde.T, dist
+    # rotation/reflection
+    Qtildehat, R = align(Ptilde, Qtilde)
 
-def raw_dist(P, Q):
-    return np.linalg.norm(P - Q)
+    # apply transformation to all contours
+    Xtilde = [Qtildehat]
+    Ytilde = [Qtilde]
+    for i in range(1, len(Xs)):
+        xt = Xs[i] - pbar
+        xt = xt/sp
+        xt = R.dot(xt)
+        Xtilde.append(xt)
+    for i in range(1, len(Ys)):
+        yt = (Ys[i] - qbar)/sq
+        Ytilde.append(yt) 
+        
+    num_contours = min(len(Xtilde), len(Ytilde))
+    distance = 0
+    for i in range(num_contours):
+        distance += np.linalg.norm(Xtilde[i] - Ytilde[i])
+
+    if fullout:
+        if transpose:
+            finalXs = []
+            finalYs = []
+            for i in range(len(Xtilde)):
+                finalXs.append(Xtilde[i].T)
+            for i in range(len(Ytilde)):
+                finalYs.append(Ytilde[i].T)
+        return finalXs, finalYs, distance
+    else:
+        return distance
 
 
 ###############################################################################
@@ -97,45 +113,57 @@ if __name__ == '__main__':
     images, labels = train_set
     
     # ploting shapes and alignment for digits
-    a, b, c = 3, 5, 7
+    a, b, c = 1, 6, 8
     pairs = [[a,a], [b,b], [c,c], [a,b], [a,c], [b,c]]
-    fig, axes = plt.subplots(nrows=len(pairs), ncols=4,
-                                figsize=(15, 23))
+    fig, axes = plt.subplots(nrows=len(pairs), ncols=3,
+                                figsize=(3.2*3, 3.2*len(pairs)))
     for (a, b), row in zip(pairs, axes):
-        
-        ax1, ax2, ax3, ax4 = row
-
-        i1 = np.where(labels==a)
-        i2 = np.where(labels==b)
-        im1 = images[i1][np.random.randint(0, len(i1[0]))].reshape((28,28))
-        im2 = images[i2][np.random.randint(0, len(i2[0]))].reshape((28,28))
-        X = mshape.get_shape(im1, n=30, s=5.0)
-        Y = mshape.get_shape(im2, n=30, s=5.0)
-
-        ax1.plot(X[:,0], X[:,1], 'o-k')
-        ax1.set_xlim([0, 28])
-        ax1.set_ylim([0, 28])
-        ax2.plot(Y[:,0], Y[:,1], 'o-k')
-        ax2.set_xlim([0, 28])
-        ax2.set_ylim([0, 28])
+        ax1, ax2, ax3 = row
+        i1 = np.where(labels==a)[0]
+        i2 = np.where(labels==b)[0]
+        im1 = images[np.random.choice(i1)].reshape((28,28))
+        im2 = images[np.random.choice(i2)].reshape((28,28))
+        Xs = mshape.get_shape2(im1, n=30, s=5.0)
+        Ys = mshape.get_shape2(im2, n=30, s=5.0)
+        ax1.imshow(im1, cmap=plt.cm.gray)
+        R = np.array([[0,1], [-1,0]])
+        for X in Xs:
+            X = X.dot(R)
+            ax1.plot(X[:,1], X[:,0]+28, 'o-y')
+        #ax1.set_xlim([0, 28])
+        #ax1.set_ylim([0, 28])
+        ax1.axis('off')
+        ax2.imshow(im2, cmap=plt.cm.gray)
+        for Y in Ys:
+            Y = Y.dot(R)
+            ax2.plot(Y[:,1], Y[:,0]+28, 'o-y')
+        #ax2.set_xlim([0, 28])
+        #ax2.set_ylim([0, 28])
+        ax2.axis('off')
     
-        Qh, Q, d = procrustes(X, Y, cycle=False, fullout=True)
-        ax3.plot(Qh[:,0], Qh[:,1], 'o-b', alpha=.7)
-        ax3.fill(Qh[:,0], Qh[:,1], 'b', alpha=.3)
-        ax3.plot(Q[:,0], Q[:,1], 'o-r', alpha=.7)
-        ax3.fill(Q[:,0], Q[:,1], 'r', alpha=.3)
-        ax3.set_title(r'$D(X,Y)=%f$ (no cycle)'%d)
+        Qsh, Qs, d = procrustes(Xs, Ys, fullout=True)
+        for i, Qh in enumerate(Qsh):
+            ax3.plot(Qh[:,0], Qh[:,1], 'o-b', alpha=.7)
+        for i, Q in enumerate(Qs):
+            ax3.plot(Q[:,0], Q[:,1], 'o-r', alpha=.7)
+        ax3.set_title(r'$D(X,Y)=%f$'%d)
         ax3.set_xlim([-.35,.35])
         ax3.set_ylim([-.35,.35])
+
+        ax1.set_aspect('equal')
+        ax2.set_aspect('equal')
+        ax3.set_aspect('equal')
     
-        Qh, Q, d = procrustes(X, Y, cycle=True, fullout=True)
-        ax4.plot(Qh[:,0], Qh[:,1], 'o-b', alpha=.7)
-        ax4.fill(Qh[:,0], Qh[:,1], 'b', alpha=.3)
-        ax4.plot(Q[:,0], Q[:,1], 'o-r', alpha=.7)
-        ax4.fill(Q[:,0], Q[:,1], 'r', alpha=.3)
-        ax4.set_title(r'$D(X,Y)=%f$ (cycle)'%d)
-        ax4.set_xlim([-.35,.35])
-        ax4.set_ylim([-.35,.35])
-        
-    fig.savefig('alignment_digits.pdf')
+    fig.savefig('alignment_multi_contours.pdf')
+
+    
+    """
+    i1 = np.where(labels==6)[0]
+    i2 = np.where(labels==8)[0]
+    im1 = images[np.random.choice(i1)].reshape((28,28))
+    im2 = images[np.random.choice(i2)].reshape((28,28))
+    X = mshape.get_shape2(im1, n=30, s=5.0)
+    Y = mshape.get_shape2(im2, n=30, s=5.0)
+    A, B, d = procrustes(X, Y, fullout=True)
+    """
 
