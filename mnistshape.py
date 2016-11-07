@@ -310,6 +310,7 @@ if __name__ == '__main__':
     idx = np.where(labels==0)[0]
     im = images[np.random.choice(idx)].reshape((28,28))
     shapes = get_shape2(im, 200, s=5.0, ir=2)
+    """
     im2 = shape_to_image(shapes, scale=2)
 
     im3 = fill(im2, [10, 10], 1)
@@ -321,3 +322,4 @@ if __name__ == '__main__':
     ax2.imshow(im3, cmap=plt.cm.gray)
     
     plt.show()
+    """

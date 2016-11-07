@@ -49,7 +49,7 @@ def pick_data(ns, digits):
         imgs = images[idx]
         originals.append(imgs)
         shapes.append([mnistshape.get_shape(im.reshape((28,28)), n=30, s=5) 
-                        for im in imgs])
+                       for im in imgs])
         true_labels.append([i]*n)
         i += 1
     originals = np.concatenate(originals)
