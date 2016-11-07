@@ -338,21 +338,21 @@ def pick_orig_binary(ns, digits):
     images, labels = train_set
     
     originals = []; bin_imgs = []; true_labels = [];
+    i = 0
     for n, d in zip(ns, digits):
         x = np.where(labels==d)[0]
         js = np.random.choice(x, n, replace=False)
         for j in js:
-            im = images[j]
+            im = images[j].reshape((28,28))
             originals.append(im)
-            bin_imgs.append([shape.im_ones(img, img.mean()) for img in im])
+            bin_imgs.append(shape.im_ones(im, im.mean()))
             true_labels.append(i)
         i += 1
     originals = np.array(originals)
     bin_imgs = np.array(bin_imgs)
-
+    true_labels = np.array(true_labels)
     idx = range(len(originals))
     np.random.shuffle(idx)
-    
     return originals[idx], bin_imgs[idx], true_labels[idx]
    
 def clustering_orig_binary(nrange, digits, num_sample, outfile):
@@ -411,41 +411,66 @@ def clustering_orig_binary(nrange, digits, num_sample, outfile):
     ax.set_title(r'$\{%s\}$'%(','.join([str(d) for d in digits])))
     fig.savefig(outfile)
 
+def shape_to_image(d, outfile):
+    f = gzip.open('data/mnist.pkl.gz', 'rb')
+    train_set, valid_set, test_set = cPickle.load(f)
+    f.close()
+    images, labels = train_set
+    x = np.where(labels==d)[0]
+    im = images[np.random.choice(x)].reshape((28,28))
+    s = shape.get_all_contours(im, 300, 5, 150)
+    im2 = shape.shape_to_image(s, scale=10)
+
+    fig = plt.figure(figsize=(9,3))
+    ax = fig.add_subplot(141)
+    ax.imshow(im, cmap=plt.cm.gray)
+    ax.set_aspect('equal')
+    ax.axis('off')
+
+    ax = fig.add_subplot(142)
+    ax.plot(s[:,0], s[:,1], 'ob', alpha=.6)
+    ax.set_aspect('equal')
+    ax.axis('off')
+    
+    ax = fig.add_subplot(143)
+    ax.imshow(im2, cmap=plt.cm.gray)
+    ax.set_aspect('equal')
+    ax.axis('off')
+    
+    ax = fig.add_subplot(144)
+    shape.fill(im2, 0, 0)
+    ax.imshow(im2, cmap=plt.cm.gray)
+    ax.set_aspect('equal')
+    ax.axis('off')
+
+    fig.savefig(outfile)
+
 
 if __name__ == '__main__':
-    """
     # generating figures
-    procrustes_alignment_example(1, 2, 'figs/alignment_12.pdf')
-    procrustes_alignment_example(1, 7, 'figs/alignment_17.pdf')
-    procrustes_alignment_example(1, 3, 'figs/alignment_13.pdf')
-    procrustes_alignment_example(2, 3, 'figs/alignment_23.pdf')
-    procrustes_alignment_example(2, 4, 'figs/alignment_24.pdf')
-    procrustes_alignment_example(2, 8, 'figs/alignment_28.pdf')
-    procrustes_alignment_example(4, 8, 'figs/alignment_48.pdf')
-    procrustes_alignment_example(3, 5, 'figs/alignment_35.pdf')
+    #procrustes_alignment_example(1, 2, 'figs/alignment_12.pdf')
+    #procrustes_alignment_example(1, 7, 'figs/alignment_17.pdf')
+    #procrustes_alignment_example(1, 3, 'figs/alignment_13.pdf')
+    #procrustes_alignment_example(2, 3, 'figs/alignment_23.pdf')
+    #procrustes_alignment_example(2, 4, 'figs/alignment_24.pdf')
+    #procrustes_alignment_example(2, 8, 'figs/alignment_28.pdf')
+    #procrustes_alignment_example(4, 8, 'figs/alignment_48.pdf')
+    #procrustes_alignment_example(3, 5, 'figs/alignment_35.pdf')
 
-    """
-
-    """
-    ns = range(20,250,20)
-    ds = [1,3,5]
-    mnist_standard_vs_procrustes(ns, ds, 5, 'figs/clustering_135.pdf')
-    """
+    #ns = range(20,250,20)
+    #ds = [1,3,5]
+    #mnist_standard_vs_procrustes(ns, ds, 5, 'figs/clustering_135.pdf')
     
     #mnist_eucl_proc([2,4,8], 200, 6)
 
-    """
-    mnist_procrustes0([0,1,2,3,4,5,6,7,8,9], 200, 5)
-    mnist_procrustes([0,1,2,3,4,5,6,7,8,9], 200, 5)
-    print '===='
-    mnist_euclidean([0,1,2,3,4,5,6,7,8,9], 400, 5)
-    mnist_procrustes0([0,1,2,3,4,5,6,7,8,9], 400, 5)
-    mnist_procrustes([0,1,2,3,4,5,6,7,8,9], 400, 5)
-    print '===='
-    """
+    #mnist_euclidean([0,1,2,3,4,5,6,7,8,9], 400, 5)
+    #mnist_procrustes0([0,1,2,3,4,5,6,7,8,9], 400, 5)
+    #mnist_procrustes([0,1,2,3,4,5,6,7,8,9], 400, 5)
     
-    ns = range(20,100,20)
-    ds = [1,2]
-    clustering_orig_binary(ns, ds, 5, 'figs/clustering_binary_12.pdf')
+    #ns = range(20,250,20)
+    #ds = [0,1,2,3,4,5]
+    #clustering_orig_binary(ns, ds, 5, 'figs/clustering_binary_012345.pdf')
 
+    #shape_to_image(4, 'figs/shape_image_4.pdf')
+    #shape.test(1)
 

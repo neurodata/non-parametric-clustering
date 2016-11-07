@@ -67,11 +67,6 @@ def shape_to_image(X, scale=10):
     im = np.zeros((max_y + 1, max_x + 1))
     for i in range(X.shape[0]):
         im[max_y - y[i], x[i]] = 1
-    for shape in shapes[1:]:
-        x = np.round(scale*shape[:,0]).astype(int)
-        y = np.round(scale*shape[:,1]).astype(int)
-        for i in range(shape.shape[0]):
-            im[max_y - y[i], x[i]] = 1
     return im
 
 def im_ones(im, v):
@@ -80,3 +75,49 @@ def im_ones(im, v):
     bin_im[np.where(im > v)] = 1
     return bin_im
 
+
+def test(d):
+    import cv2
+    import gzip, cPickle
+    f = gzip.open('data/mnist.pkl.gz', 'rb')
+    train_set, valid_set, test_set = cPickle.load(f)
+    f.close()
+    images, labels = train_set
+    x = np.where(labels==d)[0]
+    #im_in = images[np.random.choice(x)].reshape((28,28))
+    im_in = images[np.random.choice(x)]
+    
+    #Read image
+    #im_in = cv2.imread("nickel.jpg", cv2.IMREAD_GRAYSCALE);
+    
+    # Threshold.
+    # Set values equal to or above 220 to 0.
+    # Set values below 220 to 255.
+    
+    #v = 220
+    v = im_in.mean()
+    th, im_th = cv2.threshold(im_in, v, 255, cv2.THRESH_BINARY_INV);
+    
+    # Copy the thresholded image.
+    im_floodfill = im_th.copy()
+         
+    # Mask used to flood filling.
+    # Notice the size needs to be 2 pixels than the image.
+    h, w = im_th.shape[:2]
+    mask = np.zeros((h+2, w+2), np.uint8)
+    
+    # Floodfill from point (0, 0)
+    cv2.floodFill(im_floodfill, mask, (0,0), 255);
+           
+    # Invert floodfilled image
+    im_floodfill_inv = cv2.bitwise_not(im_floodfill)
+            
+    # Combine the two images to get the foreground.
+    im_out = im_th | im_floodfill_inv
+             
+    # Display images.
+    cv2.imshow("Thresholded Image", im_th)
+    cv2.imshow("Floodfilled Image", im_floodfill)
+    cv2.imshow("Inverted Floodfilled Image", im_floodfill_inv)
+    cv2.imshow("Foreground", im_out)
+    cv2.waitKey(0)
