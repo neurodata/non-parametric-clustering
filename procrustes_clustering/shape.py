@@ -75,49 +75,20 @@ def im_ones(im, v):
     bin_im[np.where(im > v)] = 1
     return bin_im
 
+def test(fname):
+    img = cv2.imread(fname, 0)
+    cv2.bilateralFilter(img, 9, 90,16)
+    img = cv2.GaussianBlur(img,(5,5),0)
+    #binImg = np.zeros((img.shape[0], img.shape[1]), np.uint8)   
+    binImg = cv2.adaptiveThreshold(img, 1, cv2.ADAPTIVE_THRESH_MEAN_C, 
+                                   cv2.THRESH_BINARY, 55, -3)
+    #cv2.bilateralFilter(binImg, 9, 90,16)
+    #binImg = cv2.GaussianBlur(binImg, (3,3), 0)
+    #ret, binImg = cv2.threshold(img, 35000, 1, cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+    plt.imshow(binImg, cmap = 'gray', interpolation = 'bicubic')
+    plt.xticks([]), plt.yticks([])  # to hide tick values on X and Y axis
+    plt.show()
 
-def test(d):
-    import cv2
-    import gzip, cPickle
-    f = gzip.open('data/mnist.pkl.gz', 'rb')
-    train_set, valid_set, test_set = cPickle.load(f)
-    f.close()
-    images, labels = train_set
-    x = np.where(labels==d)[0]
-    #im_in = images[np.random.choice(x)].reshape((28,28))
-    im_in = images[np.random.choice(x)]
-    
-    #Read image
-    #im_in = cv2.imread("nickel.jpg", cv2.IMREAD_GRAYSCALE);
-    
-    # Threshold.
-    # Set values equal to or above 220 to 0.
-    # Set values below 220 to 255.
-    
-    #v = 220
-    v = im_in.mean()
-    th, im_th = cv2.threshold(im_in, v, 255, cv2.THRESH_BINARY_INV);
-    
-    # Copy the thresholded image.
-    im_floodfill = im_th.copy()
-         
-    # Mask used to flood filling.
-    # Notice the size needs to be 2 pixels than the image.
-    h, w = im_th.shape[:2]
-    mask = np.zeros((h+2, w+2), np.uint8)
-    
-    # Floodfill from point (0, 0)
-    cv2.floodFill(im_floodfill, mask, (0,0), 255);
-           
-    # Invert floodfilled image
-    im_floodfill_inv = cv2.bitwise_not(im_floodfill)
-            
-    # Combine the two images to get the foreground.
-    im_out = im_th | im_floodfill_inv
-             
-    # Display images.
-    cv2.imshow("Thresholded Image", im_th)
-    cv2.imshow("Floodfilled Image", im_floodfill)
-    cv2.imshow("Inverted Floodfilled Image", im_floodfill_inv)
-    cv2.imshow("Foreground", im_out)
-    cv2.waitKey(0)
+
+if __name__ == '__main__':
+    test('data/orig_img.png')

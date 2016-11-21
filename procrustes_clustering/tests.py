@@ -411,6 +411,62 @@ def clustering_orig_binary(nrange, digits, num_sample, outfile):
     ax.set_title(r'$\{%s\}$'%(','.join([str(d) for d in digits])))
     fig.savefig(outfile)
 
+def clustering_eucl(nrange, digits, num_sample, outfile):
+    """Cluster originals and binaries with K-means/Euclidean."""
+    
+    eucl_dist = lambda a, b: np.linalg.norm(a-b)
+    
+    k = len(digits)
+    a1, a2 = [], []
+    for n in nrange:
+        
+        print "Doing %i of %i"%(n, nrange[-1])
+        
+        ns = [n]*k
+        for m in range(num_sample):
+            
+            originals, shapes, ext_shapes, labels = pick_data(ns, digits)
+            
+            l1, _, _, _ = kmeans.kmeans_(k, originals, eucl_dist)
+            l2, _, _, _ = kmeans.kmeans_(k, shapes, eucl_dist)
+
+            ac1 = kmeans.accuracy(labels, l1)
+            ac2 = kmeans.accuracy(labels, l2)
+            
+            a1.append([n, ac1])
+            a2.append([n, ac2])
+            
+            print '    ', ac1, ac2
+
+    a1 = np.array(a1)
+    a2 = np.array(a2)
+
+    # plotting results
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.plot(a1[:,0], a1[:,1], 'o', color='b', alpha=.5, label=r'$d_E$')
+    ax.plot(a2[:,0], a2[:,1], 'o', color='r', alpha=.5, label=r'$d_{E_b}$')
+   
+    a1_avg, a2_avg = [], []
+    for n in nrange:
+        mu1 = a1[np.where(a1[:,0]==n)][:,1].mean()
+        mu2 = a2[np.where(a2[:,0]==n)][:,1].mean()
+
+        a1_avg.append([n, mu1])
+        a2_avg.append([n, mu2])
+    a1_avg = np.array(a1_avg)
+    a2_avg = np.array(a2_avg)
+
+    ax.plot(a1_avg[:,0], a1_avg[:,1], '-', color='b')
+    ax.plot(a2_avg[:,0], a2_avg[:,1], '-', color='r')
+    
+    ax.set_xlabel(r'$N_i$')
+    ax.set_ylabel(r'$A$')
+    leg = ax.legend(loc=0)
+    leg.get_frame().set_alpha(0.6)
+    ax.set_title(r'$\{%s\}$'%(','.join([str(d) for d in digits])))
+    fig.savefig(outfile)
+
 def shape_to_image(d, outfile):
     f = gzip.open('data/mnist.pkl.gz', 'rb')
     train_set, valid_set, test_set = cPickle.load(f)
@@ -467,9 +523,10 @@ if __name__ == '__main__':
     #mnist_procrustes0([0,1,2,3,4,5,6,7,8,9], 400, 5)
     #mnist_procrustes([0,1,2,3,4,5,6,7,8,9], 400, 5)
     
-    #ns = range(20,250,20)
-    #ds = [0,1,2,3,4,5]
+    ns = range(20,250,20)
+    ds = [1,7]
     #clustering_orig_binary(ns, ds, 5, 'figs/clustering_binary_012345.pdf')
+    clustering_eucl(ns, ds, 5, 'figs/clustering_eucl_17.pdf')
 
     #shape_to_image(4, 'figs/shape_image_4.pdf')
     #shape.test(1)
