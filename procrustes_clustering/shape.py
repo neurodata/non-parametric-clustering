@@ -27,6 +27,8 @@ def get_external_contour(im_array, numpoints=50, smooth=5,
     """Get numpoints from the outside most contour."""
     contours = get_contours(im_array, im_array.mean())
     outside = sorted(contours, key=len, reverse=True)[0]
+    first = outside[0]
+    outside[-1] = first
     outside = outside.dot(rotate) + translate 
     return interpolate(outside, numpoints=numpoints, smooth=smooth)
 
@@ -60,14 +62,20 @@ def get_all_contours(im_array, numpoints=50, smooth=5, numpoints_internal=20,
     shapes = np.array(shapes)
     return np.concatenate(shapes)
     
-def shape_to_image(X, scale=10):
-    x = np.round(scale*X[:,0]).astype(int)
-    y = np.round(scale*X[:,1]).astype(int)
+def shape_to_image(points, scale=10, N=None):
+    """Given a set of points, create a binary matrix image.
+    scale controls how large the final image should be compared to
+    the coordinate points, and N creates a larger matrix.
+
+    """
+    x = np.round(scale*points[:,0]).astype(int)
+    y = np.round(scale*points[:,1]).astype(int)
     max_x, max_y = x.max(), y.max()
-    im = np.zeros((max_y + 1, max_x + 1))
-    for i in range(X.shape[0]):
-        im[max_y - y[i], x[i]] = 1
-    return im
+    min_x, min_y = x.min(), y.min()
+    im = np.zeros((max_x-min_x+4, max_y-min_y+4))
+    for i in range(points.shape[0]):
+        im[x[i]-min_x+2, y[i]-min_y+2] = 1
+    return im.astype(int)
 
 def im_ones(im, v):
     n, k = im.shape

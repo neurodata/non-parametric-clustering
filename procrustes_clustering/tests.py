@@ -10,6 +10,8 @@ import cPickle, gzip, sys
 
 import procrustes
 import kmeans
+import fill
+
 
 def strip_zeros(X):
     """Return matrix X without the rows [0,0,0,...]."""
@@ -143,12 +145,12 @@ def pick_data(ns, digits):
         for j in js:
             im = images[j]
             originals.append(im)
-            s = shape.get_all_contours(im.reshape((28,28)),50,5,25)
+            s = shape.get_all_contours(im.reshape((28,28)),500,2,100)
             dim = s.shape[0]
             if dim > max_dim:
                 max_dim = dim
             shapes.append(s)
-            ext_s = shape.get_external_contour(im.reshape((28,28)),50,5)
+            ext_s = shape.get_external_contour(im.reshape((28,28)),500,2)
             ext_shapes.append(ext_s)
             true_labels.append(i)
         i += 1
@@ -467,39 +469,30 @@ def clustering_eucl(nrange, digits, num_sample, outfile):
     ax.set_title(r'$\{%s\}$'%(','.join([str(d) for d in digits])))
     fig.savefig(outfile)
 
-def shape_to_image(d, outfile):
-    f = gzip.open('data/mnist.pkl.gz', 'rb')
-    train_set, valid_set, test_set = cPickle.load(f)
-    f.close()
-    images, labels = train_set
-    x = np.where(labels==d)[0]
-    im = images[np.random.choice(x)].reshape((28,28))
-    s = shape.get_all_contours(im, 300, 5, 150)
-    im2 = shape.shape_to_image(s, scale=10)
-
-    fig = plt.figure(figsize=(9,3))
-    ax = fig.add_subplot(141)
-    ax.imshow(im, cmap=plt.cm.gray)
-    ax.set_aspect('equal')
-    ax.axis('off')
-
-    ax = fig.add_subplot(142)
-    ax.plot(s[:,0], s[:,1], 'ob', alpha=.6)
-    ax.set_aspect('equal')
-    ax.axis('off')
-    
-    ax = fig.add_subplot(143)
-    ax.imshow(im2, cmap=plt.cm.gray)
-    ax.set_aspect('equal')
-    ax.axis('off')
-    
-    ax = fig.add_subplot(144)
-    shape.fill(im2, 0, 0)
-    ax.imshow(im2, cmap=plt.cm.gray)
-    ax.set_aspect('equal')
-    ax.axis('off')
-
-    fig.savefig(outfile)
+def mnist_procrustes_filling(digits, num_points, num_avg):
+    eucl_dist = lambda a, b: np.linalg.norm(a-b)
+    proc_dist = lambda a, b: procrustes.procrustes(a, b)
+    proc_dist_filling = lambda a, b: fill.procrustes_filling(a, b, N=40,
+                                                        scale=200)
+    k = len(digits)
+    aa1 = []
+    aa2 = []
+    aa3 = []
+    for i in range(num_avg):
+        originals, shapes, ext_shapes, labels = pick_data([num_points]*k, 
+                                                            digits)
+        l1, _, _, _ = kmeans.kmeans_(k, originals, eucl_dist)
+        l2, _, _, _ = kmeans.kmeans_(k, ext_shapes, proc_dist)
+        l3, _, _, _ = kmeans.kmeans_(k, ext_shapes, proc_dist_filling)
+        a1 = kmeans.accuracy(labels, l1)
+        a2 = kmeans.accuracy(labels, l2)
+        a3 = kmeans.accuracy(labels, l3)
+        aa1.append(a1)
+        aa2.append(a2)
+        aa3.append(a3)
+    print "d_{E} = %f" % np.mean(aa1)
+    print "d_{P} = %f" % np.mean(aa2)
+    print "d_{F} = %f" % np.mean(aa3)
 
 
 if __name__ == '__main__':
@@ -523,11 +516,14 @@ if __name__ == '__main__':
     #mnist_procrustes0([0,1,2,3,4,5,6,7,8,9], 400, 5)
     #mnist_procrustes([0,1,2,3,4,5,6,7,8,9], 400, 5)
     
-    ns = range(20,250,20)
-    ds = [1,7]
+    #ns = range(20,250,20)
+    #ds = [1,7]
     #clustering_orig_binary(ns, ds, 5, 'figs/clustering_binary_012345.pdf')
-    clustering_eucl(ns, ds, 5, 'figs/clustering_eucl_17.pdf')
+    #clustering_eucl(ns, ds, 5, 'figs/clustering_eucl_17.pdf')
 
     #shape_to_image(4, 'figs/shape_image_4.pdf')
     #shape.test(1)
+
+    mnist_procrustes_filling([1,3,5], 40, 5)
+
 
