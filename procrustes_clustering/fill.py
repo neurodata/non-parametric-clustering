@@ -180,19 +180,93 @@ def procrustes_filling(s1, s2, N=50, scale=250):
     fill_dist = fill_dist/N
     return fill_dist
 
+def aligning_image(d1, d2):
+    im1 = pick_digit(d1)
+    im2 = pick_digit(d2)
+    p1 = shape.get_external_contour(im1, 10, smooth=5,
+                rotate=np.eye(2), translate=np.array([[0,0]]))
+    p2 = shape.get_external_contour(im2, 10, smooth=5,
+                rotate=np.eye(2), translate=np.array([[0,0]]))
+
+    im2_res, im2_hat, dist = procrustes.procrustes(p1, p2, fullout=True)
+
+def euclidean_alignment(im1, im2):
+    """Align two images and return the squared distance betwen them.
+    Use CV2 libraries.
+    
+    """
+    #im1_gray = cv2.cvtColor(im1, cv2.COLOR_BGR2GRAY)
+    #im2_gray = cv2.cvtColor(im2, cv2.COLOR_BGR2GRAY)
+    im1_gray = im1.reshape((28,28))
+    im2_gray = im2.reshape((28,28))
+    #im1_gray = im1
+    #im2_gray = im2
+
+    sz = im1_gray.shape
+
+    #warp_mode = cv2.MOTION_AFFINE
+    warp_mode = cv2.MOTION_EUCLIDEAN
+
+    warp_matrix = np.eye(2, 3, dtype=np.float32)
+
+    number_of_iterations = 5000;
+
+    # Specify the threshold of the increment
+    # in the correlation coefficient between two iterations
+    termination_eps = 1e-10;
+ 
+    # Define termination criteria
+    criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 
+                    number_of_iterations,  termination_eps)
+ 
+    # Run the ECC algorithm. The results are stored in warp_matrix.
+    (cc, warp_matrix) = cv2.findTransformECC(im1_gray, im2_gray,
+                                warp_matrix, warp_mode, criteria)
+ 
+    if warp_mode == cv2.MOTION_HOMOGRAPHY:
+        # Use warpPerspective for Homography 
+        im2_aligned = cv2.warpPerspective (im2_gray, warp_matrix, 
+           (sz[1],sz[0]), flags=cv2.INTER_LINEAR + cv2.WARP_INVERSE_MAP)
+    else :
+        # Use warpAffine for Translation, Euclidean and Affine
+        im2_aligned = cv2.warpAffine(im2, warp_matrix, (sz[1],sz[0]), 
+                            flags=cv2.INTER_LINEAR + cv2.WARP_INVERSE_MAP)
+    
+    return np.linalg.norm(im2_gray - im2_aligned)
+    #return np.linalg.norm(im2 - im2_aligned), im2_aligned
+
+def align(im1, im2):
+    from skimage import transform
+    from skimage import data
+
+    t = transform.estimate_transform('similarity', im1, im2)
+    print t
+ 
 
 ###############################################################################
 if __name__ == '__main__':
-    im1 = pick_digit(5)
-    im2 = pick_digit(5)
-    procrustes_filling_test(im1, im2, 
-                            'shape_to_fill_comparison_57.pdf',
-                            numpoints=800, N=50, scale=250)
+    #im1 = pick_digit(5)
+    #im2 = pick_digit(5)
+    #procrustes_filling_test(im1, im2, 
+    #                        'shape_to_fill_comparison_57.pdf',
+    #                        numpoints=800, N=50, scale=250)
     #for a, b in [(7,7), (5,5), (5,7)]:
     #    im1 = pick_digit(a)
     #    im2 = pick_digit(b)
     #    procrustes_filling_test(im1, im2, 
     #                        'shape_to_fill_comparison_%d%d.pdf'%(a,b),
     #                        numpoints=300, N=20, scale=80)
-
+    
+    fig = plt.figure()
+    ax = fig.add_subplot(131)
+    im1 = pick_digit(1)
+    im2 = pick_digit(3)
+    dist, im2_aligned = euclidean_alignment(im1, im2)
+    ax.imshow(im1, cmap=plt.cm.gray)
+    ax = fig.add_subplot(132)
+    ax.imshow(im2, cmap=plt.cm.gray)
+    ax = fig.add_subplot(133)
+    ax.imshow(im2_aligned, cmap=plt.cm.gray)
+    ax.set_title(r'$D=%s$'%dist)
+    plt.show()
 

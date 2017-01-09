@@ -155,3 +155,4 @@ def procrustes3(X, Y, numpoints, fullout=False, cycle=False):
     else:
         return d
 
+

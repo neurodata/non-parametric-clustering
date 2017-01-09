@@ -304,6 +304,25 @@ def mnist_euclidean(digits, num_points, num_avg):
     print
     print "d_E = %f" % np.mean(a)
 
+def mnist_alignment(digits, num_points, num_avg):
+    
+    def dist_func(im1, im2):
+        d = fill.euclidean_alignment(im1, im2)
+        return d
+
+    k = len(digits)
+    a = [] 
+    for i in range(num_avg):
+        originals, shapes, ext_shapes, labels = pick_data([num_points]*k, 
+                                                          digits)
+        l, _, _, _ = kmeans.kmeans_(k, originals, dist_func)
+        accu = kmeans.accuracy(labels, l)
+        a.append(accu)
+        print accu
+    print
+    print "d_A = %f" % np.mean(a)
+
+
 def mnist_procrustes0(digits, num_points, num_avg):
     proc_dist = lambda a, b: procrustes.procrustes(a, b)
     k = len(digits)
@@ -510,7 +529,9 @@ if __name__ == '__main__':
     #ds = [1,3,5]
     #mnist_standard_vs_procrustes(ns, ds, 5, 'figs/clustering_135.pdf')
     
-    #mnist_eucl_proc([2,4,8], 200, 6)
+    #mnist_eucl_proc([2,4,8], 50, 6)
+    #mnist_euclidean([1,7], 50, 6)
+    mnist_alignment([1,7], 10, 3)
 
     #mnist_euclidean([0,1,2,3,4,5,6,7,8,9], 400, 5)
     #mnist_procrustes0([0,1,2,3,4,5,6,7,8,9], 400, 5)
@@ -524,6 +545,6 @@ if __name__ == '__main__':
     #shape_to_image(4, 'figs/shape_image_4.pdf')
     #shape.test(1)
 
-    mnist_procrustes_filling([1,3,5], 40, 5)
+    #mnist_procrustes_filling([1,3,5], 40, 5)
 
 
