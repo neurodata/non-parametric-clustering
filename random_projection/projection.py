@@ -11,13 +11,12 @@ from evaluation import accuracy
 
 import sys
 
-
 def kmeans(X):
     kmeans = KMeans(n_clusters=2).fit(X)
-    mu = kmeans.cluster_centers_
     z = kmeans.labels_
-    J = -kmeans.score(X)
-    return z, J
+    #mu = kmeans.cluster_centers_
+    #J = -kmeans.score(X)
+    return z
 
 def kmeans_function(X, z):
     J = 0
@@ -30,10 +29,10 @@ def kmeans_function(X, z):
     d = muk.shape[0]
     return J
 
-def energy1D(A, B):
+def mean1D(A, B):
     """Assume A and B are a sorted list of elements. Compute the energy
     distance in 1D in O(N).
-    
+
     """
     nA = len(A)
     nB = len(B)
@@ -53,7 +52,7 @@ def energy1D(A, B):
         sumA += A[i:nA].sum()
     return sumA/nA + sumB/nB
 
-def energy(A, B):
+def mean(A, B):
     """Compute energy distance from standard formula."""
     sum = 0
     for x in A:
@@ -63,14 +62,14 @@ def energy(A, B):
 
 def two_gaussians(d):
     """"Generate data from two Gaussians."""
-    
+
     n1 = n2 = 1000
 
     m1 = np.zeros(d)
     s1 = np.eye(d)
     X1 = np.random.multivariate_normal(m1, s1, n1)
     z1 = [0]*n1
-    
+
     m2 = m1
     m2[0] = 2
     s2 = s1
@@ -96,16 +95,21 @@ def pca_projection(X):
     return pca.transform(X)
 
 def kmeans_multi_random(X, z, n=500):
-    besta= 0
+    besta = 0
+    bestJ = np.inf
     for i in range(n):
         Y = rand_projection(X)
-        zh, J = kmeans(Y)
+        zh = kmeans(Y)
+        J = kmeans_function(X, zh)
         a = accuracy(z, zh)
-        if a > besta:
+        print "J:", J, "a:", a
+        if J < bestJ:
             bestz = zh
             besta = a
-    return bestz, besta 
-    
+            bestJ = J
+    print "bestJ:", bestJ, "besta:", besta
+    return bestz, besta
+
 def plot_pca(X, z):
     pca = decomposition.PCA(n_components=2)
     pca.fit(X)
@@ -122,18 +126,17 @@ def plot_pca(X, z):
     ax.set_yticks([])
     plt.axes().set_aspect('equal', 'datalim')
     fig.savefig('30d_gauss.pdf')
-    
-
 
 ###############################################################################
 if __name__ == '__main__':
-    
+
+    """
     n = 100
     A = np.random.normal(0,1,n)
     zA = [0]*n
     B = np.random.normal(2,1,n)
     zB = [1]*n
-    
+
     X = np.concatenate((A,B))
     z = np.concatenate((zA,zB))
 
@@ -141,30 +144,24 @@ if __name__ == '__main__':
     X = X[idx]
     z = z[idx]
 
-
     A.sort()
     B.sort()
-    
+
     print energy1D(A, B)
 
     X.sort()
     print energy1D(X[:int(n/2)], X[int(n/2):])
+    """
 
-    sys.exit()
+    X, z = two_gaussians(100)
 
+#    zh, J = kmeans(X)
+#    a = accuracy(z, zh)
+#    print a
 
+#    Y = pca_projection(X)
+#    zh, J = kmeans(Y)
+#    a = accuracy(z, zh)
+#    print a
 
-    X, z = two_gaussians(5000)
-
-    zh, J = kmeans(X)
-    a = accuracy(z, zh)
-    print a
-    
-    Y = pca_projection(X)
-    zh, J = kmeans(Y)
-    a = accuracy(z, zh)
-    print a
-    
     zh, a = kmeans_multi_random(X, z)
-    print a
-    
