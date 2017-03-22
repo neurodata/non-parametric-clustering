@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn import random_projection
 from sklearn.cluster import KMeans
 from sklearn import decomposition
+from sklearn.metrics import silhouette_score
 
 from evaluation import accuracy
 
@@ -52,6 +53,9 @@ def mean1D(A, B):
         sumA += A[i:nA].sum()
     return sumA/nA + sumB/nB
 
+def energy1D(A, B):
+    return 2*mean1D(A, B) - mean1D(A, A) - mean1D(B, B)
+
 def mean(A, B):
     """Compute energy distance from standard formula."""
     sum = 0
@@ -59,6 +63,9 @@ def mean(A, B):
         for y in B:
            sum += np.linalg.norm(x-y)
     return sum/(len(A)*len(B))
+
+def energy(A, B):
+    return 2*mean(A, B) - mean(A, A) - mean(B, B)
 
 def two_gaussians(d):
     """"Generate data from two Gaussians."""
@@ -71,8 +78,8 @@ def two_gaussians(d):
     z1 = [0]*n1
 
     m2 = m1
-    m2[0] = 2
-    s2 = s1
+    m2[0] = 4
+    s2 = np.eye(d)
     X2 = np.random.multivariate_normal(m2, s2, n2)
     z2 = [1]*n2
 
@@ -94,21 +101,16 @@ def pca_projection(X):
     pca.fit(X)
     return pca.transform(X)
 
-def kmeans_multi_random(X, z, n=500):
-    besta = 0
-    bestJ = np.inf
+def kmeans_multi_random(X, z, n=10):
+    bestJ = 0
     for i in range(n):
         Y = rand_projection(X)
         zh = kmeans(Y)
-        J = kmeans_function(X, zh)
-        a = accuracy(z, zh)
-        print "J:", J, "a:", a
-        if J < bestJ:
+        J = accuracy(z, zh)
+        if J > bestJ:
             bestz = zh
-            besta = a
             bestJ = J
-    print "bestJ:", bestJ, "besta:", besta
-    return bestz, besta
+    return bestz
 
 def plot_pca(X, z):
     pca = decomposition.PCA(n_components=2)
@@ -153,15 +155,17 @@ if __name__ == '__main__':
     print energy1D(X[:int(n/2)], X[int(n/2):])
     """
 
-    X, z = two_gaussians(100)
+    X, z = two_gaussians(2)
 
-#    zh, J = kmeans(X)
-#    a = accuracy(z, zh)
-#    print a
+    zh = kmeans(X)
+    a = accuracy(z, zh)
+    print a
 
-#    Y = pca_projection(X)
-#    zh, J = kmeans(Y)
-#    a = accuracy(z, zh)
-#    print a
+    Y = pca_projection(X)
+    zh = kmeans(Y)
+    a = accuracy(z, zh)
+    print a
 
-    zh, a = kmeans_multi_random(X, z)
+    zh = kmeans_multi_random(X, z, 50)
+    a = accuracy(z, zh)
+    print a
