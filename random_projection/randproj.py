@@ -13,7 +13,6 @@ import energy
 
 import sys
 
-
 def kmeans(X):
     kmeans = KMeans(n_clusters=2).fit(X)
     z = kmeans.labels_
@@ -126,14 +125,13 @@ def plot(X, z):
 ###############################################################################
 if __name__ == '__main__':
 
-    """
     n = 1000
 
     m1 = np.array([0,0])
     #s1 = np.eye(2)
     #s1 = np.array([[.5,0],[0,15]])
     s1 = np.array([[2,1],[1,8]])
-    
+
     #m2 = np.array([4,0])
     m2 = np.array([2,0])
     #m2 = np.array([0,0])
@@ -149,7 +147,7 @@ if __name__ == '__main__':
     zh = kmeans(X)
     a = accuracy(z, zh)
     print a
-    
+
     Y = pca_projection(X)
     zh = kmeans(Y)
     a = accuracy(z, zh)
@@ -158,12 +156,12 @@ if __name__ == '__main__':
     zh = kmeans_multi_random(X, z, 100)
     a = accuracy(z, zh)
     print a
-    
+
     zh = energy_multi_random(X, z, 100)
     a = accuracy(z, zh)
     print a
-    """
 
+    """
     for d in [5,10,15,20,25,30,50,100,200,300,500,1000,2000,5000]:
         n = 1000
         m1 = np.zeros(d)
@@ -172,21 +170,20 @@ if __name__ == '__main__':
         m2[0]=3
         s2 = np.eye(d)
         X, z = two_gaussians(m1,s1,m2,s2,n)
-    
+
         zh = kmeans(X)
         a_kmeans = accuracy(z, zh)
-    
+
         Y = pca_projection(X)
         zh = kmeans(Y)
         a_pca = accuracy(z, zh)
 
         zh = kmeans_multi_random(X, z, 100)
         a_krandom = accuracy(z, zh)
-    
+
         zh = energy_multi_random(X, z, 100)
         a_erandom = accuracy(z, zh)
 
-        print "%i & %f & %f & %f & %f \\\\" % (d, a_kmeans, a_pca, 
+        print "%i & %f & %f & %f & %f \\\\" % (d, a_kmeans, a_pca,
                                                 a_krandom, a_erandom)
-
-
+    """
