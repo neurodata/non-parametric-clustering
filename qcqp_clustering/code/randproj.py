@@ -64,7 +64,7 @@ def pca_projection(X):
     pca.fit(X)
     return pca.transform(X)
 
-def kmeans_multi_random(X, z, n=10):
+def kmeans_multi_random(X, n=10):
     bestJ = np.inf
     for i in range(n):
         Y = rand_projection(X)
@@ -75,7 +75,7 @@ def kmeans_multi_random(X, z, n=10):
             bestJ = J
     return bestz
 
-def energy_multi_random(X, z, n=10):
+def energy_multi_random(X, n=10):
     bestT = 0
     for i in range(n):
         Y = rand_projection(X).flatten()

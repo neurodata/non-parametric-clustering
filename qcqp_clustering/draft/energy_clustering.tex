@@ -1,0 +1,242 @@
+\documentclass[aps,preprint,nofootinbib,floatfix]{revtex4-1}
+
+
+%\usepackage{cite}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,amscd,bm}
+\usepackage{bbm}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\graphicspath{{./figs}}
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}{Example}
+
+%% our definitions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\aff}{aff}
+\DeclareMathOperator{\st}{s.t.}
+\DeclareMathOperator{\LC}{LC}
+\DeclareMathOperator{\affnot}{aff_0}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\relint}{relint}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\image}{im}
+\DeclareMathOperator{\nullspace}{null}
+\DeclareMathOperator{\area}{area}
+\DeclareMathOperator{\vspan}{span}
+\DeclareMathOperator{\id}{Id}
+\DeclareMathOperator{\cond}{cond}
+\DeclareMathOperator{\prox}{prox}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\minimize}{minimize}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Tr}{Tr}
+
+\def\Energy{\mathcal{E}}
+\def\E{\mathbb{E}}
+
+
+
+\begin{document}
+
+\title{Nonparametric Clustering Based on Energy Distance}
+
+\author{Guilherme Fran\c ca}
+\email{guifranca@gmail.com}
+\affiliation{Johns Hopkins University, Center for Imaging Science}
+
+\author{Joshua Vogelstein}
+\email{jovo@jhu.edu}
+\affiliation{Johns Hopkins University, Center for Imaging Science}
+
+
+\begin{abstract}
+blabla
+\end{abstract}
+
+
+\maketitle
+
+\section{Introduction}
+
+Mention why energy is important, main results, where it was applied, etc.
+Motivate how this can be used for clustering. Mention most important
+papers on this \ldots Explain main results of this paper and give a brief
+outline.
+
+\section{Energy Statistics and RKHS}
+
+In this section we briefly review the main concepts from energy
+statistics and reproducing kernel Hilbert spaces (RKHS) used in this paper. 
+For more details we refer the reader
+to \cite{Szkely2013} (and references therein) and also \cite{Sejdinovic2013}.
+
+Consider random variables in $\mathbb{R}^D$ 
+such that $X,X' \stackrel{iid}{\sim} P$ and 
+$Y,Y' \stackrel{iid}{\sim} Q$, where $P$ and $Q$ are cumulative
+distribution functions with finite first moments. 
+The quantity \cite{Szkely2013}
+\begin{equation}\label{eq:energy}
+\Energy(P, Q) = 2 \E \| X - Y\| - \| X - X' \| - \| Y - Y' \|,
+\end{equation}
+called energy distance, 
+is rotational invariant and nonnegative, $\Energy(P,Q) \ge 0$, where
+equality
+to zero holds if and only if $P = Q$.
+Above, $\| \cdot \|$ denotes the
+Euclidean norm in $\mathbb{R}^D$. 
+Energy distance
+provides a characterization of equality of distributions, and
+$\Energy^{1/2}$ is
+a metric on the space of distributions.
+
+The energy distance can be generalized as 
+\begin{equation}\label{eq:energy2}
+\Energy_\alpha(P, Q) = 2 \E \| X - Y\|^{\alpha} - \| X - X' \|^{\alpha} - 
+\| Y - Y' \|^{\alpha}
+\end{equation}
+where $0<\alpha\le 2$. This quantity is also nonnegative,
+$\Energy_\alpha(P,Q) \ge 0$. Furthermore, for $0<\alpha<2$ we have that
+$\Energy_\alpha(P,Q) = 0$ if and only if $P=Q$, while for $\alpha=2$ 
+we have $\Energy_2(P,Q) = 2\| \E(X) - \E(Y) \|^2$, showing that
+equality to zero only requires
+equality of the means and thus it does not imply equality of distributions.
+It is important to 
+mention that \eqref{eq:energy2} can be further generalized by
+replacing
+$\| X - Y\| \to \rho(X,Y)$, where $\rho$ is a so-called semimetric
+of negative type \cite{Sejdinovic2013}. 
+In this case there is a Hilbert space $\mathcal{H}$ and
+a map $\varphi: \mathbb{R}^D \to
+\mathcal{H}$ such that
+$\rho(X, Y) = \| \varphi(X) - \varphi(Y) \|_{\mathcal{H}}^2$. 
+Even though the semimetric 
+$\rho$ may not satisfy the triangle inequality, its square
+root $\rho^{1/2}$ does, since it is an actual metric.
+
+There is an equivalence 
+between energy distance, commonly used in statistics,
+and distances between embeddings of distributions in reproducible
+kernel Hilbert spaces (RKHS),
+commonly used in machine learning. This equivalence was established
+in \cite{Sejdinovic2013}. We recall the definition of
+RKHS. Let $\mathcal{H}$ be a Hilbert space over real-valued functions
+over $\mathbb{R}^D$. A function $k : \mathbb{R}^D \times \mathbb{R}^D \to 
+\mathbb{R}$ is a reproducing kernel of $\mathcal{H}$ if it satisfies
+the following two conditions:
+\begin{enumerate}
+\item $K_x \equiv k(\cdot, x) \in \mathcal{H}$ for any $x \in \mathbb{R}^D$.
+\item $\langle K_x, f \rangle_{\mathcal{H}} = f(x)$ for
+any $x\in\mathbb{R}^D$ and $f\in \mathcal{H}$.
+\end{enumerate}
+In other words, for any $x \in \mathbb{R}^D$ there is a unique function
+$K_x \in \mathcal{H}$ that reproduces $f(x)$ through the inner product
+of $\mathcal{H}$.
+If such a kernel function $k$ exists, then $\mathcal{H}$ is called a RKHS.
+From this we have $\langle K_x, K_y \rangle = K_y(x) = k(x,y)$. This implies
+that $k(x,y)$ is symmetric and positive definite, $\sum_{i,j=1}^n c_i c_j
+k(x_i,x_j) \ge 0$ for $c_i,c_j \in \mathbb{R}$.
+
+The Moore-Aronszajn theorem establishes the converse. For every symmetric
+and positive definite function $k: \mathbb{R}^D\times \mathbb{R}^D \to
+\mathbb{R}$, there is an associated RKHS, $\mathcal{H}_k$, with reproducing
+kernel $k$. The map $\varphi: x \mapsto K_x \in \mathcal{H}_k$ is called
+the canonical feature map. Given a kernel $k$,
+this theorem enables us to define an embedding of a probability measure
+$P$ into the RKHS: $P \mapsto K_P \in
+\mathcal{H}_k$ such that 
+$\int f(x) d P(x) = \langle f, K_P \rangle$ for all $f \in \mathcal{H}_k$,
+or alternatively $K_P = \int k(\cdot, x)  d P(x)$. 
+We can now  introduce the 
+notion of distance between two probability measures using the inner product
+of $\mathcal{H}_k$. This is called the maximum mean discrepancy (MMD) and
+it is given by
+\begin{equation}\label{eq:mmd}
+\gamma_k(P,Q) = \| K_P - K_Q \|_{\mathcal{H}_k},
+\end{equation}
+which can also be written as \cite{Gretton2012}
+\begin{equation}\label{eq:mmd2}
+\gamma_k^2(P,Q) = \E k(X,X') + \E k(Y,Y') - 2 \E k(X, Y)
+\end{equation}
+where $X,X' \stackrel{iid}{\sim} P$ and $Y,Y'\stackrel{iid}{\sim} Q$.
+From the equality between \eqref{eq:mmd} and \eqref{eq:mmd2} we also
+have that
+\begin{equation}\label{eq:inner_data}
+\langle K_P, K_Q \rangle_{\mathcal{H}_k} = \E \, k(X, Y).
+\end{equation}
+Thus we can compute the inner product between the embedded distributions 
+by averaging the kernel function over sampled data.
+
+The following important result shows that semimetrics of negative
+type and symmetric positive definite kernels are closely related
+\cite{Berg1984}. Let $\rho: \mathbb{R}^D \times \mathbb{R}^D \to \mathbb{R}$
+be a semimetric, 
+and $x_0 \in \mathbb{R}^D$ an arbitrary but fixed point.
+Define
+\begin{equation}\label{eq:kernel_semimetric}
+k(x,y) = \tfrac{1}{2} \left\{  \rho(x,x_0) + \rho(y,x_0) - \rho(x,y)\right\}.
+\end{equation}
+Then $k$ is positive definite if and only if $\rho$ is of negative type.
+Thus we have a family of kernels, one for each choice of $x_0$. Conversely,
+if $\rho$ is a semimetric of negative type and $k$ is a kernel in this
+family, then 
+\begin{equation}\label{eq:gen_kernel}
+\rho(x,y) = k(x,x) + k(y,y) -2k(x,y) = \| K_x - K_y
+\|^2_{\mathcal{H}_k},
+\end{equation}
+and the canonical feature map 
+$\varphi: x \mapsto K_x$ is injective \cite{Sejdinovic2013}.
+We say that the kernel $k$ generates the semimetric $\rho$. 
+If two different kernels generate the same $\rho$, they are
+equivalent kernels.
+
+Now we can state the equivalence between energy distance $\Energy$ and
+inner products on RKHS, which is one of the main results of
+\cite{Sejdinovic2013}. If $\rho$ is a semimetric
+of negative type and $k$ a kernel that generates $\rho$, then
+\begin{align}
+\Energy(P, Q) &\equiv 2\E \rho(X,Y) - \E \rho(X,X') - \E \rho(Y,Y') 
+\label{eq:EphoDef}\\
+&= 2 \left[ \E \, k(X, X') + \E \, k(Y, Y') - 2\E \, k(X, Y)\right] \\
+&=2 \gamma_k^2(P,Q) 
+\end{align}
+This result follows simply by substituting \eqref{eq:gen_kernel} into
+\eqref{eq:EphoDef}, and using \eqref{eq:mmd2}.
+Since $\gamma_k^2(P, Q) = \| K_P - K_Q \|^2_{\mathcal{H}_k}$, we
+can compute the energy distance using the inner product in the RKHS. Moreover,
+this can be computed from the data according to \eqref{eq:inner_data}.
+
+
+\section{Clustering using Energy Distance}
+
+
+
+
+
+\section{Numerical Experiments}
+
+\section{Conclusion}
+
+
+\subsection*{Acknowledgements}
+We thank \ldots
+
+
+\bibliographystyle{unsrt}
+\bibliography{biblio.bib}
+
+
+
+\end{document}
