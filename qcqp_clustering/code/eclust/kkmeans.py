@@ -1,3 +1,10 @@
+"""Kernel k-means with different initializations."""
+
+# Guilherme Franca <guifranca@gmail.com>
+# Johns Hopkins University, Neurodata
+
+# code updated from Mathieu Blondel
+# License: BSD 3 clause
 
 import numpy as np
 
@@ -6,14 +13,15 @@ from sklearn.metrics.pairwise import pairwise_kernels
 from sklearn.utils import check_random_state
 from sklearn.cluster import KMeans
 
-from randproj import energy_multi_random
+import kmeanspp
 
 
 class KernelKMeans(BaseEstimator, ClusterMixin):
+    """Kernel k-means with Energy Statistics."""
 
     def __init__(self, n_clusters=3, max_iter=50, tol=1e-3, random_state=None,
                  kernel="linear", gamma=None, degree=3, coef0=1,
-                 kernel_params=None, verbose=0, init='kmeans', labels=None):
+                 kernel_params=None, verbose=0, init='kmeans++', labels=None):
         self.n_clusters = n_clusters
         self.max_iter = max_iter
         self.tol = tol
@@ -25,7 +33,7 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
         self.kernel_params = kernel_params
         self.verbose = verbose
         self.init = init
-        self.labels = labels
+        self.labels_ = labels
         
     @property
     def _pairwise(self):
@@ -38,24 +46,27 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
             params = {"gamma": self.gamma,
                       "degree": self.degree,
                       "coef0": self.coef0}
-        return pairwise_kernels(X, Y, metric=self.kernel,
+        n_samples = X.shape[0]
+        #return np.array([self.kernel(x, y) 
+        #        for x in X for y in X]).reshape((n_samples, n_samples))
+        K = pairwise_kernels(X, Y, metric=self.kernel,
                                 filter_params=True, **params)
+        self.kernel_matrix_ = K
+        return K
 
     def fit(self, X, y=None, sample_weight=None):
         n_samples = X.shape[0]
 
         K = self._get_kernel(X)
-
+        
         sw = sample_weight if sample_weight else np.ones(n_samples)
         self.sample_weight_ = sw
 
-        if self.init == 'kmeans':
-            km = KMeans(n_clusters=self.n_clusters)
-            self.labels_ = km.fit_predict(X)
-        elif self.init == 'randproj':
-            self.labels_ = energy_multi_random(X, 20)
-        elif self.labels:
-            self.labels_ = self.labels
+        # initialization
+        if self.labels_ is not None:
+            pass
+        elif self.init == 'kmeans++':
+            self.labels_ = kmeanspp.kpp(self.n_clusters, X)
         else:
             rs = check_random_state(self.random_state)
             self.labels_ = rs.randint(self.n_clusters, size=n_samples)
@@ -114,10 +125,27 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
                            update_within=False)
         return dist.argmin(axis=1)
 
-if __name__ == '__main__':
-    from sklearn.datasets import make_blobs
-    X, y = make_blobs(n_samples=1000, centers=5, random_state=0)
 
-    km = KernelKMeans(n_clusters=5, max_iter=100, random_state=0, verbose=1)
-    print km.fit_predict(X)[:10]
-    print km.predict(X[:10])
+###############################################################################
+if __name__ == '__main__':
+    import energy
+    import data
+    from metric import accuracy
+    from sklearn.cluster import KMeans
+
+    X, z = data.multivariate_normal(
+        [[0,0], [2,0]], 
+        [np.eye(2), np.eye(2)],
+        [100, 100]
+    )
+
+    kernel = energy.energy_kernel
+    km = KernelKMeans(n_clusters=2, max_iter=100, verbose=1, 
+                      kernel=kernel, kernel_params={'alpha':1, 'cutoff':0})
+    zh = km.fit_predict(X)
+    print accuracy(z, zh)
+    
+    km = KMeans(n_clusters=2)
+    zh = km.fit_predict(X)
+    print accuracy(z, zh)
+

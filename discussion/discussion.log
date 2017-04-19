@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.4.8)  5 APR 2017 12:03
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.4.8)  19 APR 2017 11:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -301,6 +301,21 @@ LaTeX Warning: Label `fig:weird1' multiply defined.
 
 LaTeX Warning: Label `fig:weird1' multiply defined.
 
+
+LaTeX Warning: Label `fig:1dgaus1' multiply defined.
+
+
+LaTeX Warning: Label `fig:1dloggaus1' multiply defined.
+
+
+LaTeX Warning: Label `fig:1dloggaus1' multiply defined.
+
+
+LaTeX Warning: Label `fig:1dloggaus1' multiply defined.
+
+
+LaTeX Warning: Label `fig:1dloggaus1' multiply defined.
+
 )
 \openout1 = `discussion.aux'.
 
@@ -446,25 +461,137 @@ Overfull \hbox (30.84702pt too wide) in paragraph at lines 417--418
  [][] 
  []
 
-No file discussion.bbl.
 [5 <./figs/30d_more_signal_guass.pdf>] [6 <./figs/two_gaussians_separated.pdf> 
 <./figs/two_gaussians_closer.pdf
 
 pdfTeX warning: pdflatex (file ./figs/two_gaussians_closer.pdf): PDF inclusion:
  multiple pdfs with page group included in a single page
->] [7 <./figs/blob_cigar.pdf>] (./discussion.aux)
+>] [7 <./figs/blob_cigar.pdf>]
+<figs/hist_gauss1.pdf, id=67, 578.16pt x 433.62pt>
+File: figs/hist_gauss1.pdf Graphic file (type pdf)
+ <use figs/hist_gauss1.pdf>
+Package pdftex.def Info: figs/hist_gauss1.pdf used on input line 469.
+(pdftex.def)             Requested size: 260.16959pt x 195.1272pt.
+
+Overfull \hbox (30.84702pt too wide) in paragraph at lines 469--470
+ [][] 
+ []
+
+<figs/hist_gauss2.pdf, id=68, 578.16pt x 433.62pt>
+File: figs/hist_gauss2.pdf Graphic file (type pdf)
+ <use figs/hist_gauss2.pdf>
+Package pdftex.def Info: figs/hist_gauss2.pdf used on input line 505.
+(pdftex.def)             Requested size: 260.16959pt x 195.1272pt.
+
+Overfull \hbox (30.84702pt too wide) in paragraph at lines 505--506
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figs/hist_loggauss1.pdf, id=69, 578.16pt x 433.62pt>
+File: figs/hist_loggauss1.pdf Graphic file (type pdf)
+
+<use figs/hist_loggauss1.pdf>
+Package pdftex.def Info: figs/hist_loggauss1.pdf used on input line 541.
+(pdftex.def)             Requested size: 260.16959pt x 195.1272pt.
+
+Overfull \hbox (30.84702pt too wide) in paragraph at lines 541--542
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figs/hist1d_gauss2.pdf, id=70, 578.16pt x 433.62pt>
+File: figs/hist1d_gauss2.pdf Graphic file (type pdf)
+
+<use figs/hist1d_gauss2.pdf>
+Package pdftex.def Info: figs/hist1d_gauss2.pdf used on input line 577.
+(pdftex.def)             Requested size: 260.16959pt x 195.1272pt.
+
+Overfull \hbox (30.84702pt too wide) in paragraph at lines 577--578
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[8 <./figs/hist_gauss1.pdf>] [9 <./figs/hist_gauss2.pdf> <./figs/hist_loggauss1
+.pdf
+
+pdfTeX warning: pdflatex (file ./figs/hist_loggauss1.pdf): PDF inclusion: multi
+ple pdfs with page group included in a single page
+>] [10 <./figs/hist1d_gauss2.pdf>]
+<figs/gauss_4d1.pdf, id=136, 578.16pt x 433.62pt>
+File: figs/gauss_4d1.pdf Graphic file (type pdf)
+ <use figs/gauss_4d1.pdf>
+Package pdftex.def Info: figs/gauss_4d1.pdf used on input line 625.
+(pdftex.def)             Requested size: 260.16959pt x 195.1272pt.
+
+Overfull \hbox (30.84702pt too wide) in paragraph at lines 625--626
+ [][] 
+ []
+
+<figs/loggauss1.pdf, id=137, 578.16pt x 433.62pt>
+File: figs/loggauss1.pdf Graphic file (type pdf)
+ <use figs/loggauss1.pdf>
+Package pdftex.def Info: figs/loggauss1.pdf used on input line 677.
+(pdftex.def)             Requested size: 260.16959pt x 195.1272pt.
+
+Overfull \hbox (30.84702pt too wide) in paragraph at lines 677--678
+ [][] 
+ []
+
+<figs/loggauss2.pdf, id=138, 578.16pt x 433.62pt>
+File: figs/loggauss2.pdf Graphic file (type pdf)
+ <use figs/loggauss2.pdf>
+Package pdftex.def Info: figs/loggauss2.pdf used on input line 718.
+(pdftex.def)             Requested size: 260.16959pt x 195.1272pt.
+
+Overfull \hbox (30.84702pt too wide) in paragraph at lines 718--719
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figs/circles.pdf, id=139, 578.16pt x 433.62pt>
+File: figs/circles.pdf Graphic file (type pdf)
+ <use figs/circles.pdf>
+Package pdftex.def Info: figs/circles.pdf used on input line 765.
+(pdftex.def)             Requested size: 260.16959pt x 195.1272pt.
+
+Overfull \hbox (30.84702pt too wide) in paragraph at lines 765--766
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+No file discussion.bbl.
+[11 <./figs/gauss_4d1.pdf> <./figs/loggauss1.pdf
+
+pdfTeX warning: pdflatex (file ./figs/loggauss1.pdf): PDF inclusion: multiple p
+dfs with page group included in a single page
+>] [12 <./figs/loggauss2.pdf> <./figs/circles.pdf
+
+pdfTeX warning: pdflatex (file ./figs/circles.pdf): PDF inclusion: multiple pdf
+s with page group included in a single page
+>] (./discussion.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4628 strings out of 493308
- 58838 string characters out of 6140093
- 142899 words of memory out of 5000000
- 8014 multiletter control sequences out of 15000+600000
+ 4671 strings out of 493308
+ 59767 string characters out of 6140093
+ 142947 words of memory out of 5000000
+ 8049 multiletter control sequences out of 15000+600000
  15002 words of font info for 57 fonts, out of 8000000 for 9000
  960 hyphenation exceptions out of 8191
- 27i,10n,26p,670b,318s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,10n,26p,786b,318s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/gui/.texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-d
@@ -478,9 +605,9 @@ cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on discussion.pdf (7 pages, 465430 bytes).
+Output written on discussion.pdf (12 pages, 530220 bytes).
 PDF statistics:
- 112 PDF objects out of 1000 (max. 8388607)
+ 201 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 

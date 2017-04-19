@@ -1,3 +1,8 @@
+"""Metric functions for clustering."""
+
+# Guilherme Franca <guifranca@gmail.com>
+# Johns Hopkins University, Neurodata
+
 from __future__ import division
 
 import numpy as np

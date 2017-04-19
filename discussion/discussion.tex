@@ -56,7 +56,7 @@
 
 \begin{abstract}
 In this document we collect notes about our experiments and theories
-so we can discuss together with the group in an organized way.
+for discussion.
 \end{abstract}
 
 \maketitle
@@ -64,7 +64,7 @@ so we can discuss together with the group in an organized way.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experiments using Energy Statistics and One-Dimensional 
-Random Projections (Gui 04-01-2017)}
+Random Projections}
 
 Given data $X=\{ x_i \}_{i=1}^{n}$, where $x_i \in \mathbb{R}^{D}$, 
 and the number of clusters $k$, we perform the following experiments:
@@ -328,7 +328,7 @@ provided by $k$-means++.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Energy Statistics Based Clustering (Gui 04-05-2017)}
+\section{Energy Statistics Based Clustering}
 
 
 We show some experiments regarding our method for clustering using energy
@@ -452,5 +452,348 @@ with 20 random projections as initialization.
 }
 \end{figure}
 
+
+\clearpage
+
+\section{1$D$ Energy Clustering}
+
+Now we do energy clustering in $1D$ ($\mathcal{E}1D$), 
+which in this case we can optimize
+the function exactly. We also compare with the Kernel approach 
+(Ker/$\mathcal{E}$)to energy
+statistics, and also the graph partitioning approach (EClust). One can see that
+these results agree between themselves.
+
+\begin{figure}[h]
+\begin{minipage}{.49\textwidth}
+\includegraphics[scale=.45]{hist_gauss1.pdf}
+\end{minipage}
+\begin{minipage}{.49\textwidth}
+\begin{tabular}{ l l l l l}
+\hline
+Ker/$\mathcal{E}$ & $\mathcal{E} 1D$ & EClust & GMM~~ & $k$-means \\
+\hline
+0.823 &
+0.823 &
+0.823 &
+0.798 &
+0.826 \\
+0.852 & 
+0.852 &
+0.852 &
+0.852 & 
+0.853 \\
+0.842 &
+0.841 &
+0.841 & 
+0.842 &
+0.839 \\
+\hline
+\end{tabular}
+\end{minipage}
+\caption{\label{fig:1dgaus1}
+We have $x \sim \tfrac{1}{2}\left( \mathcal{N}(\mu_1, \Sigma_1) +
+\mathcal{N}(\mu_2, \Sigma_2)\right)$ where $\mu_1 = 0$, $\mu_2=2$,
+$\Sigma_1 = \Sigma_2 = 1$,
+and $500$ points on each cluster. We run the experiment three times,
+using $k$-means++ as initialization in kernel.
+}
+\end{figure}
+
+\begin{figure}[h]
+\begin{minipage}{.49\textwidth}
+\includegraphics[scale=.45]{hist_gauss2.pdf}
+\end{minipage}
+\begin{minipage}{.49\textwidth}
+\begin{tabular}{ l l l l l}
+\hline
+Ker/$\mathcal{E}$ & $\mathcal{E} 1D$ & EClust & GMM~~ & $k$-means \\
+\hline
+0.704 &
+0.704 &
+0.704 &
+0.703 &
+0.704 \\
+0.693 &
+0.686 &
+0.686 &
+0.688 &
+0.686 \\
+0.687 &
+0.688 &
+0.688 &
+0.691 &
+0.691 \\
+\hline
+\end{tabular}
+\end{minipage}
+\caption{\label{fig:1dgaus1}
+We have $x \sim \tfrac{1}{2}\left( \mathcal{N}(\mu_1, \Sigma_1) +
+\mathcal{N}(\mu_2, \Sigma_2)\right)$ where $\mu_1 = 0$, $\mu_2=1$,
+$\Sigma_1 = \Sigma_2 = 1$,
+and $500$ points on each cluster. We run the experiment three times,
+using $k$-means++ as initialization in kernel.
+}
+\end{figure}
+
+\begin{figure}[h]
+\begin{minipage}{.49\textwidth}
+\includegraphics[scale=.45]{hist_loggauss1.pdf}
+\end{minipage}
+\begin{minipage}{.49\textwidth}
+\begin{tabular}{ l l l l l}
+\hline
+Ker/$\mathcal{E}$ & $\mathcal{E} 1D$ & EClust & GMM~~ & $k$-means \\
+\hline
+0.914 &
+0.921 &
+0.921 &
+0.978 &
+0.762 \\
+0.894 &
+0.894 &
+0.894 &
+0.979 &
+0.8 \\
+0.877 &
+0.877 &
+0.877 &
+0.972 &
+0.794 \\
+\hline
+\end{tabular}
+\end{minipage}
+\caption{\label{fig:1dloggaus1}
+We have $x \sim \tfrac{1}{2}\left( \log \mathcal{N}(\mu_1, \Sigma_1) +
+\log \mathcal{N}(\mu_2, \Sigma_2)\right)$ where $\mu_1 = 0$, $\mu_2=1.5$,
+$\Sigma_1 = 0.25$, $ \Sigma_2 = 0.5$,
+and $500$ points on each cluster. We run the experiment three times,
+using $k$-means++ as initialization in kernel.
+}
+\end{figure}
+
+\begin{figure}[h]
+\begin{minipage}{.49\textwidth}
+\includegraphics[scale=.45]{hist1d_gauss2.pdf}
+\end{minipage}
+\begin{minipage}{.49\textwidth}
+\begin{tabular}{ l l l l l}
+\hline
+Ker/$\mathcal{E}$ & $\mathcal{E} 1D$ & GMM~~ & $k$-means \\
+\hline
+0.663&
+0.653&
+0.606&
+0.606\\
+0.726&
+0.723&
+0.793&
+0.71 \\
+0.663&
+0.666&
+0.593&
+0.66 \\
+0.653&
+0.62 &
+0.653&
+0.603\\
+0.676&
+0.63 &
+0.72 & 
+0.62 \\
+\hline
+\end{tabular}
+\end{minipage}
+\caption{\label{fig:1dloggaus1}
+We have $x \sim \tfrac{1}{2}\left( \mathcal{N}(\mu_1, \Sigma_1) +
+\mathcal{N}(\mu_2, \Sigma_2)\right)$ where $\mu_1 = 0$, $\mu_2=2$,
+$\Sigma_1 = 1$, $ \Sigma_2 = 3$, $n_1 = 100$, $n_2=200$.
+For each experiment we run several times and pick the answer with
+optimal objective function.
+}
+\end{figure}
+
+
+\clearpage
+
+\section{Energy Clustering Higher $D$}
+
+Same as before but in higher dimensions.
+
+\begin{figure}[h]
+\begin{minipage}{.49\textwidth}
+\includegraphics[scale=.45]{gauss_4d1.pdf}
+\end{minipage}
+\begin{minipage}{.49\textwidth}
+\begin{tabular}{ l l l l}
+\hline
+Ker/$\mathcal{E}$ & Spectral/$\mathcal{E}$ & GMM~~ & $k$-means \\
+\hline
+0.7825 &
+0.7175 &
+0.6 &
+0.7675 \\
+0.815 &
+0.77 &
+0.665 &
+0.8175 \\
+0.8325 &
+0.7825 & 
+0.685 & 
+0.8175 \\
+0.835 &
+0.7675 &
+0.8 & 
+0.83 \\
+\hline
+\end{tabular}
+\end{minipage}
+\caption{\label{fig:1dloggaus1}
+We have $x \sim \tfrac{1}{2}\left( \mathcal{N}(\mu_1, \Sigma_1) +
+\mathcal{N}(\mu_2, \Sigma_2)\right)$ where $\mu_1 = (0,0,0,0)^T$, 
+$\mu_2=(1.5, 0,0,0)^T$,
+$\Sigma_1 = 
+\left( \begin{smallmatrix} 
+0.6 & 0.2 & 0.2 & 0.2 \\ 
+0.2 & 0.6 & 0.2 & 0.2 \\ 
+0.2 & 0.2 & 0.6 & 0.2 \\ 
+0.2 & 0.2 & 0.2 & 0.6 \\ 
+\end{smallmatrix} \right)$, 
+$\Sigma_2 = 
+\left( \begin{smallmatrix} 
+0.5 & 0 & 0 & 0 \\ 
+0 & 0.5 & 0 & 0 \\ 
+0 & 0 & 0.5 & 0 \\ 
+0 & 0 & 0 & 0.5 \\ 
+\end{smallmatrix} \right)$,
+$n_1=200$, $n_2=200$.
+We run the experiments few times and pick the answer with best
+objective function.
+}
+\end{figure}
+
+\begin{figure}[h]
+\begin{minipage}{.49\textwidth}
+\includegraphics[scale=.45]{loggauss1.pdf}
+\end{minipage}
+\begin{minipage}{.49\textwidth}
+\begin{tabular}{ l l l l}
+\hline
+Ker/$\mathcal{E}$ & EClust & GMM~~ & $k$-means \\
+\hline
+0.755 &
+0.755 &
+0.71 &
+0.585 \\
+0.74 &
+0.745 &
+0.81 &
+0.575 \\
+0.775 &
+0.775 &
+0.805 &
+0.635 \\
+\hline
+\end{tabular}
+\end{minipage}
+\caption{\label{fig:1dloggaus1}
+We have $x \sim \tfrac{1}{2}\left( \log \mathcal{N}(\mu_1, \Sigma_1) +
+\log \mathcal{N}(\mu_2, \Sigma_2)\right)$ where $\mu_1 = (0,0)^T$, 
+$\mu_2=(1.5, 0)^T$,
+$\Sigma_1 = 
+\left( \begin{smallmatrix} 
+0.25 & 0 \\ 0 & 0.25 
+\end{smallmatrix} \right)$, 
+$\Sigma_2 = 
+\left( \begin{smallmatrix} 
+0.5 & 0 \\ 0 & 0.5 
+\end{smallmatrix} \right)$, 
+and $100$ points on each cluster. We run the experiment three times,
+using $k$-means++ as initialization in kernel. EClust is extremelly slow.
+}
+\end{figure}
+
+\begin{figure}[h]
+\begin{minipage}{.49\textwidth}
+\includegraphics[scale=.45]{loggauss2.pdf}
+\end{minipage}
+\begin{minipage}{.49\textwidth}
+\begin{tabular}{ l l l l}
+\hline
+Ker/$\mathcal{E}$ & EClust & GMM~~ & $k$-means \\
+\hline
+0.895 &
+0.895 &
+0.95 &
+0.715 \\
+0.91 &
+0.91 &
+0.955 &
+0.8 \\
+0.815 &
+0.815 &
+0.93 &
+0.69 \\
+\hline
+\end{tabular}
+\end{minipage}
+\caption{\label{fig:1dloggaus1}
+We have $x \sim \tfrac{1}{2}\left( \log \mathcal{N}(\mu_1, \Sigma_1) +
+\log \mathcal{N}(\mu_2, \Sigma_2)\right)$ where $\mu_1 = (0,0,0,0)^T$, 
+$\mu_2=(1.5, 1.5,0,0)^T$,
+$\Sigma_1 = 
+\left( \begin{smallmatrix} 
+0.25 & 0 & 0 & 0 \\ 
+0 & 0.25 & 0 & 0 \\ 
+0 & 0 & 0.25 & 0 \\ 
+0 & 0 & 0 & 0.25 \\ 
+\end{smallmatrix} \right)$, 
+$\Sigma_2 = 
+\left( \begin{smallmatrix} 
+0.5 & 0 & 0 & 0 \\ 
+0 & 0.5 & 0 & 0 \\ 
+0 & 0 & 0.5 & 0 \\ 
+0 & 0 & 0 & 0.5 \\ 
+\end{smallmatrix} \right)$, 
+and $100$ points on each cluster. We run the experiment three times,
+using $k$-means++ as initialization in kernel. EClust is extremelly slow.
+}
+\end{figure}
+
+\begin{figure}[h]
+\begin{minipage}{.49\textwidth}
+\includegraphics[scale=.45]{circles.pdf}
+\end{minipage}
+\begin{minipage}{.49\textwidth}
+\begin{tabular}{ l l l l}
+\hline
+Ker/$\mathcal{E}$ & EClust & GMM~~ & $k$-means \\
+\hline
+0.74 &
+0.516 &
+0.516 &
+0.536 \\
+0.583 &
+0.513 &
+0.52 & 
+0.556 \\
+0.706 &
+0.503 &
+0.516 &
+0.503 \\
+0.633 &
+0.5 &
+0.553 &
+0.52 \\
+\hline
+\end{tabular}
+\end{minipage}
+\caption{\label{fig:circles}
+We generate two circles with random noise.
+First circle has radius $1$ and a gaussian noise of size $0.2$.
+Second circle has radius $.2$ and a gaussian noise of size $0.2$.
+We have 200 points on each class.
+}
+\end{figure}
 
 \end{document}
