@@ -2,19 +2,18 @@ This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: energy_clustering.aux
 The style file: unsrt.bst
-Database file #1: energy_clusteringNotes.bib
-Database file #2: biblio.bib.bib
+Database file #1: biblio.bib.bib
 You've used 4 entries,
             1791 wiz_defined-function locations,
-            478 strings with 4298 characters,
-and the built_in function-call counts, 1024 in all, are:
-= -- 94
-> -- 50
+            477 strings with 4280 characters,
+and the built_in function-call counts, 1006 in all, are:
+= -- 93
+> -- 46
 < -- 0
-+ -- 18
-- -- 14
-* -- 79
-:= -- 172
++ -- 17
+- -- 13
+* -- 77
+:= -- 169
 add.period$ -- 13
 call.type$ -- 4
 change.case$ -- 3
@@ -22,8 +21,8 @@ chr.to.int$ -- 0
 cite$ -- 4
 duplicate$ -- 37
 empty$ -- 94
-format.name$ -- 14
-if$ -- 219
+format.name$ -- 13
+if$ -- 215
 int.to.chr$ -- 0
 int.to.str$ -- 4
 missing$ -- 5
@@ -33,7 +32,7 @@ pop$ -- 7
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 12
+skip$ -- 11
 stack$ -- 0
 substring$ -- 87
 swap$ -- 4

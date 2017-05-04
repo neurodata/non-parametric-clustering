@@ -108,6 +108,24 @@ def circles(rs, eps, ns):
     idx = np.random.permutation(sum(ns))
     return X[idx], z[idx]
 
+def spirals(rs, ns, noise=0.2):
+    """Generate spirals with radiuses in rs=[...] and number of points
+    in ns=[...]
+    
+    """
+    X = []
+    z = []
+    for k, (r, n) in enumerate(zip(rs, ns)):
+        ts = np.linspace(0, 4*np.pi, n) 
+        x = np.array([[r*t*np.cos(t)+noise*np.random.normal(0,1),
+                       r*t*np.sin(t)+noise*np.random.normal(0,1)] for t in ts])
+        X.append(x)
+        z.append([k]*n)
+    X = np.concatenate(X)
+    z = np.concatenate(z)
+    idx = np.random.permutation(sum(ns))
+    return X[idx], z[idx]
+
 def plot(X, z, fname='plot.pdf'):
     """Plot data according to labels in z.
     If data is multidimensional, pick the first two principal components.
@@ -218,6 +236,7 @@ if __name__ == '__main__':
     print x, y, z
     """
 
+    """
     X, z = multivariate_gaussians(
         [[0,0,0], [10,0,0], [1,10,10]], 
         [np.eye(3), np.eye(3), np.eye(3)], 
@@ -225,4 +244,9 @@ if __name__ == '__main__':
     print X
     print z
     print from_label_to_sets(X, z)
+
+    """
+
+    X, z = spirals([1,-1], [200,200], noise=0.2)
+    plot(X, z)
 

@@ -18,10 +18,15 @@ from eclust.energy import energy_kernel
 from eclust.objectives import kernel_score
 
 
-def kernel_energy(k, X, alpha=1, cutoff=0, num_times=10):
+def kernel_energy(k, X, alpha=1, cutoff=0, num_times=10, truth=None):
     best_score = 0
     for i in range(num_times):
-        km = KernelKMeans(n_clusters=2, max_iter=300, kernel=energy_kernel,
+        if truth is not None:
+            km = KernelKMeans(n_clusters=2, max_iter=300, kernel=energy_kernel,
+                      kernel_params={'alpha':alpha, 'cutoff':cutoff},
+                      labels=truth)
+        else:
+            km = KernelKMeans(n_clusters=2, max_iter=300, kernel=energy_kernel,
                       kernel_params={'alpha':alpha, 'cutoff':cutoff})
         zh = km.fit_predict(X)
         score = kernel_score(km.kernel_matrix_, zh)
@@ -70,15 +75,19 @@ if __name__ == '__main__':
     
     k = 2
     
-    #X, z = data.multivariate_normal([m1, m2], [s1, s2], [n1, n2])
+    X, z = data.multivariate_normal([m1, m2], [s1, s2], [n1, n2])
     #X, z = data.multivariate_lognormal([m1, m2], [s1, s2], [n1, n2])
-    X, z = data.circles([1, .2], [0.1, 0.2], [200, 200])
+    #X, z = data.circles([1, .2], [0.1, 0.2], [200, 200])
     
-    data.plot(X, z, 'plot.pdf')
+    X, z = data.spirals([1, -1], [200, 200])
+    #data.plot(X, z, 'spirals.pdf')
     
     # clustering with different algorithms
     
-    zh = kernel_energy(k, X, alpha=.4, cutoff=0, num_times=10)
+    zh = kernel_energy(k, X, alpha=.5, cutoff=0, num_times=5, truth=z)
+    print "Kernel/EnergyT:", accuracy(z, zh)
+    
+    zh = kernel_energy(k, X, alpha=.5, cutoff=0, num_times=5)
     print "Kernel/Energy:", accuracy(z, zh)
 
     #ec = EClust(n_clusters=k, max_iter=100, labels=zh)
@@ -86,9 +95,9 @@ if __name__ == '__main__':
     #print "Within Graph Energy:", accuracy(z, zh)
     #print accuracy(z, zh)
     
-    zh = spectral_energy(k, X, alpha=.4, cutoff=0, num_times=10, 
-                            n_neighbors=10)
-    print "Spectral/Energy:", accuracy(z, zh)
+    #zh = spectral_energy(k, X, alpha=.5, cutoff=0, num_times=10, 
+    #                        n_neighbors=10)
+    #print "Spectral/Energy:", accuracy(z, zh)
     
     #G = spectral.gram_matrix(X, spectral.energy_kernel)
     #sc = SpectralClustering(n_clusters=2, affinity='precomputed')
