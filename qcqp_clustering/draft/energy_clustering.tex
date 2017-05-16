@@ -63,7 +63,8 @@
 \newcommand\Hk{{\mathcal{H}}_{\kk}}
 \newcommand\HH{\mathcal{H}}
 \newcommand\C{{\mathcal{C}}}
-\newcommand\Zt{\widetilde{Z}}
+%\newcommand\Zt{\widetilde{Z}}
+\newcommand\Zt{Y}
 
 
 
@@ -403,10 +404,10 @@ We thus have
 \begin{equation}
 \label{eq:qcqp2}
 \max_{\Zt} \Tr \left\{ \Zt^\top G \Zt \right\}  \qquad
-\mbox{s.t. $\Zt \ge 0$, $\Zt^\top Z = I$, 
+\mbox{s.t. $\Zt \ge 0$, $\Zt^\top \Zt = I$, 
 $\Zt \Zt^\top \bm{e} = \bm{e}$},
 \end{equation}
-where $\bm{e} = (1,1,\dots,1) \in \mathbb{R}^n$ is the all-ones vector,
+where $\bm{e} = (1,1,\dots,1)^\top \in \mathbb{R}^n$ is the all-ones vector,
 and $G$ is the pairwise kernel matrix \eqref{eq:kernel_matrix} obtained
 from \eqref{eq:kernel_semimetric}.
 Therefore, to cluster data $\{ x_i \}_{i=1}^n \in \mathcal{X}$ into 
@@ -444,7 +445,7 @@ into this broad picture, and \eqref{eq:qcqp2} should have
 interesting applications in
 graph partitioning problems and unsupervised learning in general. 
 Furthermore, and most importantly, our analysis is valid
-for any space $\mathcal{X}$ equiped with a semimetric of negative type.
+for any space $\mathcal{X}$ equiped with a semimetric of negative type $\rho$.
 This method is
 nonparametric since it does not assume any form of the 
 distribution of the data,
@@ -457,7 +458,7 @@ Also, there is no concept of cluster center involved in this approach.
 We can formulate an iterative algorithm to find
 an approximate solution to \eqref{eq:qcqp2} on the same lines
 as kernel $k$-means.
-Let $t$ be the iteration time. First, precompute the kernel
+Let $t$ be the iteration time. First precompute the kernel
 matrix $G$, fix the number of clusters $k$, then
 perform the following steps:
 \begin{enumerate}
@@ -514,8 +515,9 @@ g(\C_i, \C_j) =
 \end{equation}
 If we merge $\C_i$ and $\C_j$ and sort the data, this expression 
 can be computed in $O(n)$, where $n=n_i+n_j$.
-Now for a two-class problem, we have to loop through each point
-and compute \eqref{eq:within} to find the best split. Since sorting
+For a two-class problem, we have to loop through each point
+and compute \eqref{eq:within} to find the best split of the data. 
+Since sorting
 sorting usually takes $O(n \log n)$, the complexity of
 this procedure is $O(n(\log n + n)) = O(n^2)$.
 
