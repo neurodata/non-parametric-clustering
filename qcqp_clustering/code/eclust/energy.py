@@ -1,4 +1,4 @@
-"""Energy Statistics Functions"""
+"""Energy Statistics Functions."""
 
 # Guilherme Franca <guifranca@gmail.com>
 # Johns Hopkinks University, Neurodata
@@ -103,12 +103,14 @@ def total_dispersion(A):
     else:
         return len(X)/2*mean(X, X)
 
-def energy_kernel(x, y, alpha=1, cutoff=0):
+def energy_kernel(x, y, alpha=1):
     w = np.power(np.linalg.norm(x), alpha) + \
         np.power(np.linalg.norm(y), alpha) - \
         np.power(np.linalg.norm(x-y), alpha)
-    if w <= cutoff:
-        w = 0
+    return w
+
+def distance_kernel(x, y, alpha=1):
+    w = - np.power(np.linalg.norm(x-y), alpha)
     return w
 
 

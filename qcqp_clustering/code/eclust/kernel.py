@@ -1,10 +1,4 @@
-"""Kernel k-means with different initializations."""
-
-# Guilherme Franca <guifranca@gmail.com>
-# Johns Hopkins University, Neurodata
-
-# code updated from Mathieu Blondel
-# License: BSD 3 clause
+"""Kernel k-means for energy statistics."""
 
 import numpy as np
 
@@ -14,14 +8,16 @@ from sklearn.utils import check_random_state
 from sklearn.cluster import KMeans
 
 import kmeanspp
+from energy import energy_kernel
 
 
-class KernelKMeans(BaseEstimator, ClusterMixin):
+class KernelEnergy(BaseEstimator, ClusterMixin):
     """Kernel k-means with Energy Statistics."""
 
-    def __init__(self, n_clusters=3, max_iter=50, tol=1e-3, random_state=None,
-                 kernel="linear", gamma=None, degree=3, coef0=1,
-                 kernel_params=None, verbose=0, init='kmeans++', labels=None):
+    def __init__(self, n_clusters, max_iter=50, tol=1e-3, random_state=None,
+                 kernel=energy_kernel, gamma=None, degree=3, coef0=1,
+                 kernel_params={'alpha': 1}, verbose=0, 
+                 init='kmeans++', labels=None):
         self.n_clusters = n_clusters
         self.max_iter = max_iter
         self.tol = tol
@@ -47,10 +43,8 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
                       "degree": self.degree,
                       "coef0": self.coef0}
         n_samples = X.shape[0]
-        #return np.array([self.kernel(x, y) 
-        #        for x in X for y in X]).reshape((n_samples, n_samples))
         K = pairwise_kernels(X, Y, metric=self.kernel,
-                                filter_params=True, **params)
+                             filter_params=True, **params)
         self.kernel_matrix_ = K
         return K
 
@@ -126,6 +120,23 @@ class KernelKMeans(BaseEstimator, ClusterMixin):
         return dist.argmin(axis=1)
 
 
+def qcqp_tilde(k, X):
+    # compute G ....
+    z = kmeanspp.kpp(k, X)
+    n = X.shape[0]
+    
+    t = 0
+    converged = False
+    while not converged:
+    
+        for i in range(n):
+            
+            for j in range(k):
+                
+            z[i] = 
+    
+    
+
 ###############################################################################
 if __name__ == '__main__':
     import energy
@@ -140,8 +151,8 @@ if __name__ == '__main__':
     )
 
     kernel = energy.energy_kernel
-    km = KernelKMeans(n_clusters=2, max_iter=100, verbose=1, 
-                      kernel=kernel, kernel_params={'alpha':1, 'cutoff':0})
+    km = KernelEnergy(n_clusters=2, max_iter=100, verbose=1, 
+                      kernel_params={'alpha':.8})
     zh = km.fit_predict(X)
     print accuracy(z, zh)
     

@@ -2,25 +2,38 @@
 
 \bibitem{Szkely2013}
 {G. J. Sz{\'e}kely and M. L. Rizzo}.
-\newblock Energy statistics: A class of statistics based on distances.
+\newblock {Energy statistics: A class of statistics based on distances}.
 \newblock {\em Journal of Statistical Planning and Inference}, 143:1249--1272,
   2013.
 
 \bibitem{Sejdinovic2013}
 D.~Sejdinovic, B.~Sriperumbudur, A.~Gretton, and K.~Fukumizu.
-\newblock Equivalence of distance-based and rkhs-based statistic in hypothesis
-  testing.
+\newblock {Equivalence of Distance-Based and RKHS-Based Statistic in Hypothesis
+  Testing}.
 \newblock {\em The Annals of Statistics}, 41(5):2263--2291, 2013.
+
+\bibitem{Aronszajn}
+{N. Aronszajn}.
+\newblock {Theory of Reproducing Kernels}.
+\newblock {\em Transactions of the American Mathematical Society}, 68:337--404,
+  1950.
 
 \bibitem{Gretton2012}
 A.~Gretton, K.~M. Borgwardt, M.~J. Rasch, B.~Sch{\"olkopf}, and A.~Smola.
-\newblock A kernel two-sample test.
+\newblock {A Kernel Two-Sample Test}.
 \newblock {\em J. Mach. Learn. Res.}, 13:723--773, 2012.
 
 \bibitem{Berg1984}
 C.~Berg, J.~P.~R. Christensen, and P.~Ressel.
-\newblock {\em Harmonic Analysis on Semigroups: Theory of Positive Definite and
-  Related Functions}.
+\newblock {\em {Harmonic Analysis on Semigroups: Theory of Positive Definite
+  and Related Functions}}.
 \newblock Graduate Text in Mathematics 100. Springer, New York, 1984.
+
+\bibitem{Dhillon}
+I.~S. Dhillon, Y.~Guan, and B.~Kulis.
+\newblock {Kernel K-means: Spectral Clustering and Normalized Cuts}.
+\newblock In {\em Proceedings of the Tenth ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '04, pages 551--556, New York,
+  NY, USA, 2004. ACM.
 
 \end{thebibliography}

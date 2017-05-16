@@ -6,13 +6,10 @@
 import numpy as np
 
 
-def energy_kernel(x, y):
-    return np.linalg.norm(x) + np.linalg.norm(y) - np.linalg.norm(x-y)
-
 def euclidean_distance(x, y):
     return np.linalg.norm(x-y)**2
 
-def kpp(k, X):
+def kpp(k, X, ret='labels'):
     """This is the k-means++ initialization proposed by Arthur and
     Vassilvitskii (2007). We label the points according to closest
     distance to the centers.
@@ -31,12 +28,18 @@ def kpp(k, X):
         C.append(X[j])
     mus = np.array(C)
     
-    labels = np.empty(N, dtype=np.int8)
-    for n in range(N):
-        for k in range(K):
-            D = np.array([distance(X[n], mus[k]) for k in range(K)])
-        labels[n] = np.argmin(D)
-    return labels
+    if ret == 'labels' or ret == 'both':
+        labels = np.empty(N, dtype=np.int8)
+        for n in range(N):
+            for k in range(K):
+                D = np.array([distance(X[n], mus[k]) for k in range(K)])
+            labels[n] = np.argmin(D)
+        if ret == 'both':
+            return mus, labels
+        else:
+            return labels
+    else:
+        return mus
 
 def discrete_rv(p):
     """Return an integer according to probability function p."""

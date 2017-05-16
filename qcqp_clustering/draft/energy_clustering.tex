@@ -8,7 +8,7 @@
 
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
-\usepackage{amsmath,amssymb,amsfonts,amsthm,amscd,bm}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,amscd,bm,bbm}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage[inline]{enumitem}
@@ -56,13 +56,18 @@
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\Tr}{Tr}
 
-\def\Energy{\mathcal{E}}
-\def\E{\mathbb{E}}
+\newcommand\Energy{\mathcal{E}}
+\newcommand\E{\mathbb{E}}
+\newcommand\kk{K}
+\newcommand\kkk{h}
+\newcommand\Hk{{\mathcal{H}}_{\kk}}
+\newcommand\HH{\mathcal{H}}
+\newcommand\C{{\mathcal{C}}}
+\newcommand\Zt{\widetilde{Z}}
 
 
 
-
-\title{Nonparametric Clustering Based on Energy Distance}
+\title{Nonparametric Clustering Based on Energy Statistics}
 
 \author{
 Guilherme Fran\c ca \\
@@ -70,7 +75,7 @@ Johns Hopkins University\\
 \texttt{guifranca@gmail.com} \\
 %% examples of more authors
 \And
-Joshua Vogelstein \\
+Joshua T. Vogelstein \\
 Johns Hopkins University\\
 \texttt{jovo@jhu.edu}
 }
@@ -101,13 +106,16 @@ Motivate how this can be used for clustering. Mention most important
 papers on this \ldots Explain main results of this paper and give a brief
 outline.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Energy Statistics and RKHS}
+\label{sec:background}
 
 In this section we briefly review the main concepts from energy
-statistics and reproducing kernel Hilbert spaces (RKHS) used through paper. 
+statistics and its relation to reproducing kernel Hilbert spaces 
+(RKHS), which form the basis of our work.
 For more details we refer the reader
-to \cite{Szkely2013} 
-(and references therein) and also \cite{Sejdinovic2013}.
+to \cite{Szkely2013} (and references therein) and also \cite{Sejdinovic2013}.
 
 Consider random variables in $\mathbb{R}^D$ 
 such that $X,X' \stackrel{iid}{\sim} P$ and 
@@ -117,7 +125,7 @@ The quantity \cite{Szkely2013}
 \begin{equation}\label{eq:energy}
 \Energy(P, Q) = 2 \E \| X - Y\| - \| X - X' \| - \| Y - Y' \|,
 \end{equation}
-called energy distance, 
+called \emph{energy distance}, 
 is rotational invariant and nonnegative, $\Energy(P,Q) \ge 0$, where
 equality
 to zero holds if and only if $P = Q$.
@@ -128,226 +136,388 @@ provides a characterization of equality of distributions, and
 $\Energy^{1/2}$ is
 a metric on the space of distributions.
 
-The energy distance can be generalized as 
+The energy distance can be generalized as, for instance,
 \begin{equation}\label{eq:energy2}
 \Energy_\alpha(P, Q) = 2 \E \| X - Y\|^{\alpha} - \| X - X' \|^{\alpha} - 
-\| Y - Y' \|^{\alpha}
+\| Y - Y' \|^{\alpha},
 \end{equation}
 where $0<\alpha\le 2$. This quantity is also nonnegative,
 $\Energy_\alpha(P,Q) \ge 0$. Furthermore, for $0<\alpha<2$ we have that
 $\Energy_\alpha(P,Q) = 0$ if and only if $P=Q$, while for $\alpha=2$ 
 we have $\Energy_2(P,Q) = 2\| \E(X) - \E(Y) \|^2$, showing that
 equality to zero only requires
-equality of the means and thus it does not imply equality of distributions.
+equality of the means, and thus it does not imply equality of distributions.
+
 It is important to 
-mention that \eqref{eq:energy2} can be further generalized by
-replacing
+mention that \eqref{eq:energy2} can be even further generalized.
+Let $X, Y \in \mathcal{X}$ and replace the Euclidean norm by
+$\rho: \mathcal{X}\times\mathcal{X} \to \mathbb{R}^+$, i.e.
 $\| X - Y\| \to \rho(X,Y)$, where $\rho$ is a so-called semimetric
-of negative type \cite{Sejdinovic2013}. 
-In this case there is a Hilbert space $\mathcal{H}$ and
-a map $\varphi: \mathbb{R}^D \to
+of negative type \cite{Sejdinovic2013}, which satisfy
+\begin{equation}
+\label{eq:negative_type}
+\sum_{i,j=1}^n \alpha_i \alpha_j \rho(X_i, X_j) \le 0,
+\end{equation}
+where $X_i \in \mathcal{X}$, and $\alpha_i \in \mathbb{R}$ such that
+$\sum_{i=1}^n \alpha_i = 0$.
+In this case, there is a Hilbert space $\mathcal{H}$ and
+a map $\varphi: \mathcal{X} \to
 \mathcal{H}$ such that
 $\rho(X, Y) = \| \varphi(X) - \varphi(Y) \|_{\mathcal{H}}^2$. 
 Even though the semimetric 
-$\rho$ may not satisfy the triangle inequality, its square
-root $\rho^{1/2}$ does, since it is an actual metric.
+$\rho$ may not satisfy the triangle inequality, 
+$\rho^{1/2}$ does since it can be shown to be a legit metric. 
 
-There is an equivalence 
-between energy distance, commonly used in statistics,
-and distances between embeddings of distributions in reproducing
-kernel Hilbert spaces (RKHS),
-commonly used in machine learning. This equivalence was established
-in \cite{Sejdinovic2013}. We recall the definition of
-RKHS. Let $\mathcal{H}$ be a Hilbert space over real-valued functions
-over $\mathbb{R}^D$. A function $k : \mathbb{R}^D \times \mathbb{R}^D \to 
-\mathbb{R}$ is a reproducing kernel of $\mathcal{H}$ if it satisfies
+There is an equivalence between energy distance, 
+commonly used in statistics,
+and distances between embeddings of distributions in 
+RKHS, commonly used in machine learning. 
+This equivalence was established
+in \cite{Sejdinovic2013}. Let us first recall the definition of
+RKHS. Let $\HH$ be a Hilbert space of real-valued functions
+over $\mathcal{X}$. A function 
+$\kk : \mathcal{X} \times \mathcal{X} \to 
+\mathbb{R}$ is a reproducing kernel of $\HH$ if it satisfies
 the following two conditions:
 \begin{enumerate}
-\item $K_x \equiv k(\cdot, x) \in \mathcal{H}$ for any $x \in \mathbb{R}^D$.
-\item $\langle K_x, f \rangle_{\mathcal{H}} = f(x)$ for
-any $x\in\mathbb{R}^D$ and $f\in \mathcal{H}$.
+\item $\kkk_x \equiv \kk(\cdot, x) \in \HH$ 
+for any $x \in \mathcal{X}$.
+\item $\langle \kkk_x, f \rangle_{\HH} = f(x)$ for
+any $x\in\mathcal{X}$ and $f\in \HH$.
 \end{enumerate}
-In other words, for any $x \in \mathbb{R}^D$ there is a unique function
-$K_x \in \mathcal{H}$ that reproduces $f(x)$ through the inner product
-of $\mathcal{H}$.
-If such a kernel function $k$ exists, then $\mathcal{H}$ is called a RKHS.
-From this we have $\langle K_x, K_y \rangle = K_y(x) = k(x,y)$. This implies
-that $k(x,y)$ is symmetric and positive definite, $\sum_{i,j=1}^n c_i c_j
-k(x_i,x_j) \ge 0$ for $c_i,c_j \in \mathbb{R}$.
+In other words, for any $x \in \mathcal{X}$ there is a unique function
+$\kkk_x \in \HH$ that reproduces $f(x)$ through the inner product
+of $\HH$.
+If such a \emph{kernel} 
+function $\kk$ exists, then $\HH$ is called a RKHS.
+From this we have $\langle \kkk_x, \kkk_y \rangle = \kkk_y(x) = \kk(x,y)$. 
+This implies
+that $\kk(x,y)$ is symmetric and positive definite, 
+$\sum_{i,j=1}^n c_i c_j
+\kk(x_i,x_j) \ge 0$ for $c_i,c_j \in \mathbb{R}$.
 
-The Moore-Aronszajn theorem establishes the converse. For every symmetric
-and positive definite function $k: \mathbb{R}^D\times \mathbb{R}^D \to
-\mathbb{R}$, there is an associated RKHS, $\mathcal{H}_k$, with reproducing
-kernel $k$. The map $\varphi: x \mapsto K_x \in \mathcal{H}_k$ is called
-the canonical feature map. Given a kernel $k$,
+The Moore-Aronszajn theorem establishes the converse \cite{Aronszajn}.
+For every symmetric
+and positive definite function $\kk: \mathcal{X}\times \mathcal{X} \to
+\mathbb{R}$, there is an associated RKHS, $\Hk$, 
+with reproducing
+kernel $\kk$. The map $\varphi: x \mapsto \kkk_x \in \Hk$ is called
+the canonical feature map. Given a kernel $\kk$,
 this theorem enables us to define an embedding of a probability measure
-$P$ into the RKHS: $P \mapsto K_P \in
-\mathcal{H}_k$ such that 
-$\int f(x) d P(x) = \langle f, K_P \rangle$ for all $f \in \mathcal{H}_k$,
-or alternatively $K_P = \int k(\cdot, x)  d P(x)$. 
+$P$ into the RKHS: $P \mapsto \kkk_P \in
+\Hk$ such that 
+$\int f(x) d P(x) = \langle f, \kkk_P \rangle$ for all $f \in \Hk$,
+or alternatively $\kkk_P = \int \kk(\cdot, x)  d P(x)$. 
 We can now  introduce the 
 notion of distance between two probability measures using the inner product
-of $\mathcal{H}_k$. This is called the maximum mean discrepancy (MMD) and
-it is given by
+of $\Hk$. This is called the maximum mean discrepancy (MMD) and
+is given by
 \begin{equation}\label{eq:mmd}
-\gamma_k(P,Q) = \| K_P - K_Q \|_{\mathcal{H}_k},
+\gamma_\kk(P,Q) = \| \kkk_P - \kkk_Q \|_{\Hk},
 \end{equation}
 which can also be written as \cite{Gretton2012}
 \begin{equation}\label{eq:mmd2}
-\gamma_k^2(P,Q) = \E k(X,X') + \E k(Y,Y') - 2 \E k(X, Y)
+\gamma_\kk^2(P,Q) = \E \kk(X,X') + \E \kk(Y,Y') - 2 \E \kk(X, Y)
 \end{equation}
 where $X,X' \stackrel{iid}{\sim} P$ and $Y,Y'\stackrel{iid}{\sim} Q$.
 From the equality between \eqref{eq:mmd} and \eqref{eq:mmd2} we also
-have that
+have 
 \begin{equation}\label{eq:inner_data}
-\langle K_P, K_Q \rangle_{\mathcal{H}_k} = \E \, k(X, Y).
+\langle \kkk_P, \kkk_Q \rangle_{\Hk} = \E \, \kk(X, Y).
 \end{equation}
-Thus we can compute the inner product between the embedded distributions 
+Therefore, in practice, we can estimate the inner product between the 
+embedded distributions 
 by averaging the kernel function over sampled data.
 
 The following important result shows that semimetrics of negative
 type and symmetric positive definite kernels are closely related
-\cite{Berg1984}. Let $\rho: \mathbb{R}^D \times \mathbb{R}^D \to \mathbb{R}$
+\cite{Berg1984}. Let $\rho: \mathcal{X} \times \mathcal{X} \to \mathbb{R}$
 be a semimetric, 
-and $x_0 \in \mathbb{R}^D$ an arbitrary but fixed point.
+and $x_0 \in \mathcal{X}$ an arbitrary but fixed point.
 Define
-\begin{equation}\label{eq:kernel_semimetric}
-k(x,y) = \tfrac{1}{2} \left\{  \rho(x,x_0) + \rho(y,x_0) - \rho(x,y)\right\}.
+\begin{equation}
+\label{eq:kernel_semimetric}
+\kk(x,y) = \tfrac{1}{2} \left\{  \rho(x,x_0) + \rho(y,x_0) - \rho(x,y)\right\}.
 \end{equation}
-Then $k$ is positive definite if and only if $\rho$ is of negative type.
-Thus we have a family of kernels, one for each choice of $x_0$. Conversely,
-if $\rho$ is a semimetric of negative type and $k$ is a kernel in this
+Then, $\kk$ is positive definite if and only if $\rho$ is of negative type
+\eqref{eq:negative_type}.
+Here we have a family of kernels, one for each choice of $x_0$. Conversely,
+if $\rho$ is a semimetric of negative type and $\kk$ is a kernel in this
 family, then 
-\begin{equation}\label{eq:gen_kernel}
-\rho(x,y) = k(x,x) + k(y,y) -2k(x,y) = \| K_x - K_y
-\|^2_{\mathcal{H}_k},
+\begin{equation}
+\label{eq:gen_kernel}
+\rho(x,y) = \kk(x,x) + \kk(y,y) -2\kk(x,y) = \| \kkk_x - \kkk_y
+\|^2_{\Hk},
 \end{equation}
 and the canonical feature map 
-$\varphi: x \mapsto K_x$ is injective \cite{Sejdinovic2013}.
-We say that the kernel $k$ generates the semimetric $\rho$. 
+$\varphi: x \mapsto \kkk_x$ is injective \cite{Sejdinovic2013}.
+We say that the kernel $\kk$ generates the semimetric $\rho$. 
 If two different kernels generate the same $\rho$, they are
 equivalent kernels.
 
 Now we can state the equivalence between energy distance $\Energy$ and
 inner products on RKHS, which is one of the main results of
 \cite{Sejdinovic2013}. If $\rho$ is a semimetric
-of negative type and $k$ a kernel that generates $\rho$, then
+of negative type and $\kk$ a kernel that generates $\rho$, then
 \begin{align}
-\Energy(P, Q) &\equiv 2\E \rho(X,Y) - \E \rho(X,X') - \E \rho(Y,Y') 
+\Energy(P, Q) &\equiv 2\E \, \rho(X,Y) - \E \, \rho(X,X') - \E \, \rho(Y,Y') 
 \label{eq:EphoDef}\\
-&= 2 \left[ \E \, k(X, X') + \E \, k(Y, Y') - 2\E \, k(X, Y)\right] \\
-&=2 \gamma_k^2(P,Q) 
+&= 2 \left[ \E \, \kk(X, X') + \E \, \kk(Y, Y') - 2\E \, \kk(X, Y)\right] \\
+&=2 \gamma_\kk^2(P,Q) 
 \end{align}
 This result follows simply by substituting \eqref{eq:gen_kernel} into
 \eqref{eq:EphoDef}, and using \eqref{eq:mmd2}.
-Since $\gamma_k^2(P, Q) = \| K_P - K_Q \|^2_{\mathcal{H}_k}$, we
-can compute the energy distance using the inner product in the RKHS. Moreover,
+Since $\gamma_k^2(P, Q) = \| \kkk_P - \kkk_Q \|^2_{\Hk}$, we
+can compute the energy distance using the inner product of $\Hk$. Moreover,
 this can be computed from the data according to \eqref{eq:inner_data}.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Energy Distance based Clustering}
+\label{sec:clustering_theory}
 
 Now we formulate an optimization problem for clustering based on 
 energy statistics
-and RKHS.
-Assume we have data $\mathcal{X} = \{ x_1,x_2,\dotsc, x_N \}$,
-and a partition $\mathcal{X} = \cup_{k=1}^K \mathcal{A}_k$, where
-$\mathcal{A}_k \cap \mathcal{A}_{k'} = \emptyset$.
-Each expectation in \eqref{eq:energy2} can be computed 
+and RKHS, introduced in the previous section.
+Assume we have data $\mathbb{X} = \{ x_1,x_2,\dotsc, x_n \}$, where
+$x_i \in \mathcal{X}$ is in some space of 
+negative type \eqref{eq:negative_type},
+and a partition $\mathbb{X} = \cup_{j=1}^k \C_j$, where
+$\C_i \cap \C_j = \emptyset$.
+Each expectation in 
+\eqref{eq:EphoDef}
+can be computed 
 through the function
 \begin{equation}
 \label{eq:g_def}
-g_\alpha(\mathcal{A}_k, \mathcal{A}_{k'}) \equiv 
-\dfrac{1}{N_k N_{k'}}\sum_{x \in \mathcal{A}_k} 
-\sum_{y \in \mathcal{A}_{k'}} \| x - y\|^\alpha
+g (\C_i, \C_j) \equiv 
+\dfrac{1}{n_i n_j}
+\sum_{x \in \C_i} 
+\sum_{y \in \C_j} \rho(x, y)
 \end{equation}
-where $N_k = |\mathcal{A}_k|$ is the number of elements in partition
-$\mathcal{A}_k$. In energy statistics 
+where $n_i = |\C_i|$ is the number of elements in partition
+$\C_i$. In energy statistics 
 \cite{Szkely2013} we have the within energy dispersion
 \begin{equation}
-\mathcal{W}_\alpha = 
-\sum_{k=1}^{K} \dfrac{N_k}{2} g_\alpha(\mathcal{A}_k, \mathcal{A}_k),
+\label{eq:within}
+W = 
+\sum_{j=1}^{k} \dfrac{n_j}{2} g(\C_j, \C_j),
 \end{equation}
 and also the between-sample energy statistic
 \begin{equation}
-\mathcal{S}_\alpha = 
-\sum_{1 \le  k < k' \le K } \dfrac{N_k N_{k'}}{2 N} \left[
-2 g_{\alpha}(\mathcal{A}_k, \mathcal{A}_{k'}) - 
-g_{\alpha}(\mathcal{A}_k, \mathcal{A}_{k}) - 
-g_{\alpha}(\mathcal{A}_{k'}, \mathcal{A}_{k'})
-\right].
+S = 
+\sum_{1 \le  j < l \le k } \dfrac{n_j n_{l}}{2 n} \left[
+2 g(\C_j, \C_l) - 
+g(\C_j, \C_j) - 
+g(\C_l, \C_l)
+\right],
 \end{equation}
-This is a test statistic for equality of distributions, which is small
-if all datapoints comes from the same distribution, and diverges otherwise,
-in the limit $N \to \infty$. Therefore, our criteria for 
-clustering data is to 
-maximize $\mathcal{S}_\alpha$.
-It can be shown that the total dispersion of the data obeys \cite{Szkely2013}
+where $n=\sum_{j=1}^{k} n_j$. Given a set of distributions
+$\{ P_j\}_{j=1}^k$ where $x \in \C_j \sim P_j$, the quantity
+$S_\alpha$ provides
+a \emph{nonparametric} test statistic for equality of distributions.
+Under the null hypothesis $H_0: P_1=P_2=\dotsm=P_k$, $S_\alpha$ is small, 
+and under
+the alternative hypothesis $H_1: P_i \ne P_j$ for at least two $i\ne j$, 
+$S_\alpha \to \infty$ as the sample size is large, $n \to \infty$.
+This test is nonparametric in the sense that it does not make any assumptions
+about the distributions $P_j$.
+
+Based on this test statistic for equality of distributions, a possible
+criteria for clustering data is to 
+maximize $S$. However, 
+it can be shown that the total dispersion of the data obeys \cite{Szkely2013}
 \begin{equation}
-\mathcal{T}_\alpha(\mathcal{X}) 
-= \mathcal{W}_\alpha + \mathcal{S}_\alpha = \dfrac{N}{2}
-g_{\alpha}(\mathcal{X}, \mathcal{X}). 
+T(\mathbb{X}) 
+= W + S = \dfrac{n}{2}
+g(\mathbb{X}, \mathbb{X}). 
 \end{equation}
-Note that $\mathcal{T}$ only depends on the pooled data, so it 
-does not depend on how we partition $\mathcal{X}$. Therefore, maximizing
-$\mathcal{S}_\alpha$ is equivalent to minimizing $\mathcal{W}_\alpha$, which
+Note that $T$ only depends on the pooled data, so it 
+does not depend on how we partition $\mathbb{X}$. Therefore, maximizing
+$S$ is equivalent to minimizing $W$, which
 has a simpler form. Thus, our clustering problem corresponds to
-find the best partition of $\mathcal{X}$ such that
-\begin{equation}\label{eq:minimize}
-\min_{\{ \mathcal{A}_k \} } \mathcal{W}_\alpha(\{ 
-\mathcal{A}_1, \dotsc, \mathcal{A}_{K}
+find the best partition of $\mathbb{X}$ to solve the optimization problem
+\begin{equation}
+\label{eq:minimize}
+\min_{\{ \C_j \} } W(\{ 
+\C_1, \dotsc, \C_k
 \})
 \end{equation}
 where each datapoint belongs to one and only one partition (hard assignments).
 
-Based on the equivalence between semimetrics of negative type
-and kernel functions \eqref{eq:gen_kernel}, and choosing $x_0 = 0$ for
-simplicity (one might choose any other point in $\mathbb{R}^D$),
-in the case of \eqref{eq:g_def} we have the associated kernel
-\begin{equation}\label{eq:kernel}
-k_\alpha(x,y) = \tfrac{1}{2} \left( 
-\| x \|^\alpha + \| y \|^\alpha - \| x-y \|^\alpha 
-\right) .
-\end{equation}
-Now we can write
+Now fix an arbitrary point $x_0 \in \mathcal{X}$, and 
+suppose that the kernel $K$ generates $\rho$, such that 
+\eqref{eq:kernel_semimetric} and \eqref{eq:gen_kernel} hold.
+Then we can write \eqref{eq:within} as
 \begin{equation}\label{eq:W2}
-\mathcal{W}_\alpha(\{ \mathcal{A}_1,\dotsc,\mathcal{A}_K \})
-= - \sum_{k=1}^{K} \dfrac{N_k}{2} \, \mathbb{E} \, 
-k_\alpha(\mathcal{A}_k, \mathcal{A}_k) = 
-- \sum_{k=1}^{K} \dfrac{1}{2 N_k} \sum_{x, x' \in \mathcal{A}_k} 
-k_\alpha(x, x').
+W(\{ \C_j \} )
+= \dfrac{1}{2} \sum_{j=1}^k \dfrac{1}{n_j} \sum_{x,y \in \C_j} \rho(x,y)
+= \sum_{j=1}^k \sum_{x \in \C_j}  \bigg(
+\kk(x,x) - \dfrac{1}{n_j} \sum_{y \in \C_j} \kk(x,y) \bigg)
 \end{equation}
-
-Now let $Z \in \{ 0,1 \}^{N\times K}$ be a binary matrix such
-that 
+When minimizing $W$, the first term is just a constant and does
+not contribute,
+therefore the problem reduces to
 \begin{equation}
-Z_{nk} = \begin{cases}
-1 & \mbox{if $x_n \in \mathcal{A}_k$ } \\
+\label{eq:max_prob}
+\max_{ \{ \C_j \} } \sum_{j=1}^k \dfrac{1}{n_j} \sum_{x,y\in C_j} \kk(x,y) .
+\end{equation}
+Let us introduce the binary matrix $Z \in \{ 0,1 \}^{n\times k}$ 
+such that 
+\begin{equation}
+Z_{ij} = \begin{cases}
+1 & \mbox{if $x_i \in \C_j$ } \\
 0 & \mbox{otherwise.}
 \end{cases}
 \end{equation}
-Notice that $D = Z^T Z = \diag( N_1, N_2, \dotsc, N_K )$ contains the number
+Notice that $D = Z^T Z = \diag( n_1, n_2, \dotsc, n_k )$ contains the number
 of elements in each partition. Introducing the kernel matrix
-$K^{\alpha} \in \mathbb{R}^{N\times N}$ such that
+$G \in \mathbb{R}^{n\times n}$ such that
 \begin{equation}
-K^{\alpha}_{ij} = k_\alpha(x_i, x_j),
+\label{eq:kernel_matrix}
+G_{ij} = \kk(x_i, x_j),
 \end{equation}
-we can write \eqref{eq:W2} as
-$- \tfrac{1}{2} \Tr D^{-1} Z^\top K^\alpha Z $. Thus our optimization problem
-\eqref{eq:minimize} can be written as
+then \eqref{eq:max_prob} is equal to
+$\max \Tr \left\{ D^{-1} Z^\top G Z \right\}$. 
+Therefore, our clustering optimization problem based on energy statistics
+can be formulated as
 \begin{equation}\label{eq:qcqp}
 \begin{aligned}
-& \max_{Z} \Tr\left\{ \big( Z D^{-1/2}\big)^\top K^{\alpha} 
+& \max_{Z} \Tr\left\{ \big( Z D^{-1/2}\big)^\top G 
 \big( ZD^{-1/2} \big) 
 \right\} \\
-&\mbox{s.t. $Z_{ij} \in \{0,1\}$, $\sum_{k=1}^K Z_{nk} = 1$, 
-$\sum_{n=1}^N Z_{nk} = N_k$, and $D = Z^\top Z$}.
+&\mbox{s.t. $Z_{ij} \in \{0,1\}$, $\sum_{j=1}^k Z_{ij} = 1$, 
+$\sum_{i=1}^n Z_{ij} = n_j$, and $D = Z^\top Z$}.
 \end{aligned}
 \end{equation}
-This is a quadratic problem with integer constraints, which is usually
-NP-hard. This problem has the same formulation as Kernel $K$-means, but
-with our non-parametric kernel function given by \eqref{eq:kernel}.
+This is a quadratic problem with integer constraints, which is 
+NP-hard. Let us now write this in terms of 
+$\Zt \equiv Z D^{-1/2}$, which componentwise is 
+\begin{equation}
+\Zt_{ij} = \begin{cases}
+\tfrac{1}{\sqrt{n_j}} & \mbox{if $x_i \in \C_j$ } \\
+0 & \mbox{otherwise.}
+\end{cases}
+\end{equation}
+We thus have
+\begin{equation}
+\label{eq:qcqp2}
+\max_{\Zt} \Tr \left\{ \Zt^\top G \Zt \right\}  \qquad
+\mbox{s.t. $\Zt \ge 0$, $\Zt^\top Z = I$, 
+$\Zt \Zt^\top \bm{e} = \bm{e}$},
+\end{equation}
+where $\bm{e} = (1,1,\dots,1) \in \mathbb{R}^n$ is the all-ones vector,
+and $G$ is the pairwise kernel matrix \eqref{eq:kernel_matrix} obtained
+from \eqref{eq:kernel_semimetric}.
+Therefore, to cluster data $\{ x_i \}_{i=1}^n \in \mathcal{X}$ into 
+$k$ partitions,
+assuming that $k$ is given, we first compute $G$  --- 
+which is  defined by an arbitrary semimetric of negative 
+type on $\mathcal{X}$  --- and then 
+solve the optimization problem \eqref{eq:qcqp2} for $\Zt \in
+\mathbb{R}^{n\times k}$. The $i$th row
+of $\Zt$ will contain a single nonzero element in some $j$th column,
+indicating that $x_i \in \C_j$.
 
+In general, 
+problem \eqref{eq:qcqp2} is NP-hard since it is a quadratically
+constrained quadratic problem (QCQP). There are  
+few methods available to tackle this kind of problem directly,
+which is computational prohibitive even for relatively small datasets.
+However, one can find an approximate solution by relaxing some 
+of the constraints. For instance, an approximation can be given
+by 
+$\max_{Y} \Tr\left\{ Y^\top G \, Y \right\}$ subject to $Y^\top Y = I$,
+and requiring that the rows of $Y$ are normalized. 
+It is possible to find a global solution to this problem by
+choosing $Y$ as the top $k$ eigenvectors of $G$, which results
+in 
+$\max \Tr \left\{ Y^\top G \, Y \right\}  = \sum_{i=1}^k \lambda_i(G)$, 
+which is the
+sum of the top $k$ eigenvalues of $G$.
+
+It is important to note that \eqref{eq:qcqp2} has the same
+formulation as kernel $k$-means, spectral clustering, and the maximum
+cut problem on graphs \cite{Dhillon}. The 
+result \eqref{eq:qcqp2} brings energy statistics based clustering
+into this broad picture, and \eqref{eq:qcqp2} should have 
+interesting applications in
+graph partitioning problems and unsupervised learning in general. 
+Furthermore, and most importantly, our analysis is valid
+for any space $\mathcal{X}$ equiped with a semimetric of negative type.
+This method is
+nonparametric since it does not assume any form of the 
+distribution of the data,
+contrary to $k$-means and gaussian mixture models (GMM), for example.
+Also, there is no concept of cluster center involved in this approach.
+
+
+\subsection{A Simple Algorithm}
+
+We can formulate an iterative algorithm to find
+an approximate solution to \eqref{eq:qcqp2} on the same lines
+as kernel $k$-means.
+Let $t$ be the iteration time. First, precompute the kernel
+matrix $G$, fix the number of clusters $k$, then
+perform the following steps:
+\begin{enumerate}
+\item \label{initialize} 
+Initialize clusters $\{ \C_1^{(0)},\dotsc,\C_k^{(0)} \}$, which
+determines the label matrix $\Zt^{(0)}$.
+\item \label{assignment} For each datapoint $x_i$ compute
+its cluster assignment through
+\begin{equation}
+\label{eq:algo}
+\Zt^{(t+1)}_{ij} = 
+\begin{cases}
+\tfrac{1}{\sqrt{n_j}} & \mbox{if $j = \argmax_\ell \tfrac{1}{n_\ell} 
+\sum_{m=1}^n G_{i m} \Zt^{(t)}_{m\ell}$ } \\
+0 & \mbox{otherwise.}
+\end{cases}
+\end{equation}
+\item If converged return $\Zt^{(t+1)}$, otherwise
+set $t = t+1$ and repeat step~\ref{assignment}.
+\end{enumerate}
+If data is $D$-dimensional, computing $G$ has complexity
+$O(n^2 D)$. Step \ref{assignment} above has complexity $O(n)$ for
+each point, thus total complexity $O(n^2)$. Assuming we perform $T$ 
+iterations,
+the total complexity of the algorithm is $O(n^2(D + T))$.
+We can initialize the algorithm in step~\ref{initialize} with any method
+we want, a good alternative is the initialization from $k$-means++.
+
+\subsection{Two-Class Problem in One Dimension}
+
+If data is one-dimensional and we choose
+$\rho(x,y) = |x - y|$, we can actually compute 
+\eqref{eq:g_def} in $O(n \log n)$ instead of $O(n^2 D)$ and find
+a direct solution to \eqref{eq:minimize}. 
+This is done by noticing that
+\begin{equation}
+|x - y|  = \mathbbm{1}(x \ge y ) (x - y) -
+\mathbbm{1}(x < y) (x - y).
+\end{equation}
+Denote
+\begin{equation}
+n_j^{-} (x) = \sum_{y \in \C_j} \mathbbm{1}(y \le x), \quad  
+n_j^{+} (x) = \sum_{y \in C_j} \mathbbm{1}(y > x), \quad
+\mathcal{D}_j(x) = \dfrac{n_j^-(x) - n_j^+(x)}{n_j}
+\end{equation}
+where $n_j^+(x)$ is the number of elements in $\C_j$ which are larger
+than $x \in \C_i$, and so on.
+Now \eqref{eq:g_def} can be written as
+\begin{equation}
+\label{eq:g1d}
+g(\C_i, \C_j) = 
+\dfrac{1}{n_i} \sum_{x \in \C_i} \mathcal{D}_j(x) \, x - 
+\dfrac{1}{n_j} \sum_{y \in \C_j} \mathcal{D}_i(y) \, y.
+\end{equation}
+If we merge $\C_i$ and $\C_j$ and sort the data, this expression 
+can be computed in $O(n)$, where $n=n_i+n_j$.
+Now for a two-class problem, we have to loop through each point
+and compute \eqref{eq:within} to find the best split. Since sorting
+sorting usually takes $O(n \log n)$, the complexity of
+this procedure is $O(n(\log n + n)) = O(n^2)$.
 
 \section{Numerical Experiments}
 

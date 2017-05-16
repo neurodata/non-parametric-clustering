@@ -154,7 +154,7 @@ def plot(X, z, fname='plot.pdf'):
     plt.axes().set_aspect('equal', 'datalim')
     fig.savefig(fname)
 
-def hist(X, z, fname='plot.pdf'):
+def histogram(X, z, fname='plot.pdf'):
     """Plot histograms of 1-dimensional data."""
     z_unique = np.unique(z)
     fig = plt.figure()
