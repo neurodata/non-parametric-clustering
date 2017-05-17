@@ -65,6 +65,7 @@
 \newcommand\C{{\mathcal{C}}}
 %\newcommand\Zt{\widetilde{Z}}
 \newcommand\Zt{Y}
+\newcommand{\Ind}[1]{\delta_{#1}}
 
 
 
@@ -109,14 +110,16 @@ outline.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Energy Statistics and RKHS}
+\section{Background on Energy Statistics and RKHS}
 \label{sec:background}
 
 In this section we briefly review the main concepts from energy
 statistics and its relation to reproducing kernel Hilbert spaces 
 (RKHS), which form the basis of our work.
 For more details we refer the reader
-to \cite{Szkely2013} (and references therein) and also \cite{Sejdinovic2013}.
+to 
+\cite{Szkely2013} 
+(and references therein) and also \cite{Sejdinovic2013}.
 
 Consider random variables in $\mathbb{R}^D$ 
 such that $X,X' \stackrel{iid}{\sim} P$ and 
@@ -152,9 +155,10 @@ equality of the means, and thus it does not imply equality of distributions.
 It is important to 
 mention that \eqref{eq:energy2} can be even further generalized.
 Let $X, Y \in \mathcal{X}$ and replace the Euclidean norm by
-$\rho: \mathcal{X}\times\mathcal{X} \to \mathbb{R}^+$, i.e.
-$\| X - Y\| \to \rho(X,Y)$, where $\rho$ is a so-called semimetric
-of negative type \cite{Sejdinovic2013}, which satisfy
+$\rho: \mathcal{X}\times\mathcal{X} \to \mathbb{R}$, i.e.
+$\| X - Y\| \to \rho(X,Y)$, where $\rho$ is a so-called \emph{semimetric
+of negative type},
+which satisfy 
 \begin{equation}
 \label{eq:negative_type}
 \sum_{i,j=1}^n \alpha_i \alpha_j \rho(X_i, X_j) \le 0,
@@ -193,14 +197,14 @@ If such a \emph{kernel}
 function $\kk$ exists, then $\HH$ is called a RKHS.
 From this we have $\langle \kkk_x, \kkk_y \rangle = \kkk_y(x) = \kk(x,y)$. 
 This implies
-that $\kk(x,y)$ is symmetric and positive definite, 
+that $\kk(x,y)$ is symmetric and positive semi-definite, 
 $\sum_{i,j=1}^n c_i c_j
 \kk(x_i,x_j) \ge 0$ for $c_i,c_j \in \mathbb{R}$.
 
 The Moore-Aronszajn theorem establishes the converse \cite{Aronszajn}.
 For every symmetric
 and positive definite function $\kk: \mathcal{X}\times \mathcal{X} \to
-\mathbb{R}$, there is an associated RKHS, $\Hk$, 
+\mathbb{R}$, there is an associated RKHS $\Hk$ 
 with reproducing
 kernel $\kk$. The map $\varphi: x \mapsto \kkk_x \in \Hk$ is called
 the canonical feature map. Given a kernel $\kk$,
@@ -231,7 +235,7 @@ embedded distributions
 by averaging the kernel function over sampled data.
 
 The following important result shows that semimetrics of negative
-type and symmetric positive definite kernels are closely related
+type and symmetric positive semi-definite kernels are closely related
 \cite{Berg1984}. Let $\rho: \mathcal{X} \times \mathcal{X} \to \mathbb{R}$
 be a semimetric, 
 and $x_0 \in \mathcal{X}$ an arbitrary but fixed point.
@@ -240,7 +244,7 @@ Define
 \label{eq:kernel_semimetric}
 \kk(x,y) = \tfrac{1}{2} \left\{  \rho(x,x_0) + \rho(y,x_0) - \rho(x,y)\right\}.
 \end{equation}
-Then, $\kk$ is positive definite if and only if $\rho$ is of negative type
+Then, $\kk$ is positive semi-definite if and only if $\rho$ is of negative type
 \eqref{eq:negative_type}.
 Here we have a family of kernels, one for each choice of $x_0$. Conversely,
 if $\rho$ is a semimetric of negative type and $\kk$ is a kernel in this
@@ -264,26 +268,20 @@ of negative type and $\kk$ a kernel that generates $\rho$, then
 \Energy(P, Q) &\equiv 2\E \, \rho(X,Y) - \E \, \rho(X,X') - \E \, \rho(Y,Y') 
 \label{eq:EphoDef}\\
 &= 2 \left[ \E \, \kk(X, X') + \E \, \kk(Y, Y') - 2\E \, \kk(X, Y)\right] \\
-&=2 \gamma_\kk^2(P,Q) 
+&=2 \gamma_\kk^2(P,Q) .
 \end{align}
 This result follows simply by substituting \eqref{eq:gen_kernel} into
 \eqref{eq:EphoDef}, and using \eqref{eq:mmd2}.
-Since $\gamma_k^2(P, Q) = \| \kkk_P - \kkk_Q \|^2_{\Hk}$, we
+Since $\gamma_k^2(P, Q) = \| \kkk_P - \kkk_Q \|^2_{\Hk}$ we
 can compute the energy distance using the inner product of $\Hk$. Moreover,
 this can be computed from the data according to \eqref{eq:inner_data}.
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Energy Distance based Clustering}
-\label{sec:clustering_theory}
-
-Now we formulate an optimization problem for clustering based on 
-energy statistics
-and RKHS, introduced in the previous section.
+Finally, let us recall the main formulas for test statistics
+\cite{Szkely2013}. 
 Assume we have data $\mathbb{X} = \{ x_1,x_2,\dotsc, x_n \}$, where
 $x_i \in \mathcal{X}$ is in some space of 
 negative type \eqref{eq:negative_type},
-and a partition $\mathbb{X} = \cup_{j=1}^k \C_j$, where
+and a partition $\mathbb{X} = \cup_{j=1}^k \C_j$ where
 $\C_i \cap \C_j = \emptyset$.
 Each expectation in 
 \eqref{eq:EphoDef}
@@ -296,111 +294,119 @@ g (\C_i, \C_j) \equiv
 \sum_{x \in \C_i} 
 \sum_{y \in \C_j} \rho(x, y)
 \end{equation}
-where $n_i = |\C_i|$ is the number of elements in partition
-$\C_i$. In energy statistics 
-\cite{Szkely2013} we have the within energy dispersion
+where $n_i = |\C_i|$ is the number of elements in 
+$\C_i$. 
+The \emph{within energy dispersion} is defined by
 \begin{equation}
 \label{eq:within}
-W = 
+W \equiv
 \sum_{j=1}^{k} \dfrac{n_j}{2} g(\C_j, \C_j),
 \end{equation}
-and also the between-sample energy statistic
+and the \emph{between-sample energy statistic} is defined by
 \begin{equation}
-S = 
+\label{eq:between}
+S \equiv
 \sum_{1 \le  j < l \le k } \dfrac{n_j n_{l}}{2 n} \left[
 2 g(\C_j, \C_l) - 
 g(\C_j, \C_j) - 
 g(\C_l, \C_l)
-\right],
+\right].
 \end{equation}
-where $n=\sum_{j=1}^{k} n_j$. Given a set of distributions
+Given a set of distributions
 $\{ P_j\}_{j=1}^k$ where $x \in \C_j \sim P_j$, the quantity
-$S_\alpha$ provides
+$S$ provides
 a \emph{nonparametric} test statistic for equality of distributions.
-Under the null hypothesis $H_0: P_1=P_2=\dotsm=P_k$, $S_\alpha$ is small, 
+Under the null hypothesis $H_0: P_1=P_2=\dotsm=P_k$, $S$ is small, 
 and under
 the alternative hypothesis $H_1: P_i \ne P_j$ for at least two $i\ne j$, 
-$S_\alpha \to \infty$ as the sample size is large, $n \to \infty$.
+$S \to \infty$ as the sample size is large, $n \to \infty$.
 This test is nonparametric in the sense that it does not make any assumptions
 about the distributions $P_j$.
 
-Based on this test statistic for equality of distributions, a possible
-criteria for clustering data is to 
-maximize $S$. However, 
-it can be shown that the total dispersion of the data obeys \cite{Szkely2013}
-\begin{equation}
-T(\mathbb{X}) 
-= W + S = \dfrac{n}{2}
-g(\mathbb{X}, \mathbb{X}). 
-\end{equation}
-Note that $T$ only depends on the pooled data, so it 
-does not depend on how we partition $\mathbb{X}$. Therefore, maximizing
-$S$ is equivalent to minimizing $W$, which
-has a simpler form. Thus, our clustering problem corresponds to
-find the best partition of $\mathbb{X}$ to solve the optimization problem
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Clustering Based on Energy Statistics}
+\label{sec:clustering_theory}
+
+This section contains the main results of this paper, where 
+we propose an optimization problem for clustering data
+based on energy statistics and RKHS introduced in the previous section.
+
+Based on the test statistic \eqref{eq:between}, the obvious
+criterion for clustering data is to 
+maximize $S$, which intuitivelly makes the distribution of each
+cluster $\C_j$ as different
+as possible from the other ones. However, the following 
+simple result
+shows that this is equivalent to minimizing
+\eqref{eq:within}, which has a more convenient form.
+
+\begin{proposition}
+\label{th:minimize}
+Let $\mathbb{X} = \{x_i\}_{i=1}^{n}$ where 
+$x_i$ lives in a space $\mathcal{X}$ endowed with a semi-metric $\rho$ of
+negative type. For a fixed integer $k$,
+the partition
+$\mathbb{X} = \cup_{j=1}^k \C_j$, where $\C_i \cap C_j = \emptyset$ for
+all $i\ne j$, maximizes $S$ if and only if
 \begin{equation}
 \label{eq:minimize}
 \min_{\{ \C_j \} } W(\{ 
 \C_1, \dotsc, \C_k
-\})
+\}).
 \end{equation}
-where each datapoint belongs to one and only one partition (hard assignments).
+\end{proposition}
+\begin{proof}
+It can be shown that the total dispersion of the data obeys \cite{Szkely2013}
+\begin{equation}
+W + S = \dfrac{n}{2} g(\mathbb{X}, \mathbb{X}). 
+\end{equation}
+Note, however, that the right hand side of this equation 
+only depends on the pooled data, so it is a constant
+independent on the choice of partition. Therefore, maximizing
+$S$ is equivalent to minimizing~$W$.
+\end{proof}
 
-Now fix an arbitrary point $x_0 \in \mathcal{X}$, and 
-suppose that the kernel $K$ generates $\rho$, such that 
-\eqref{eq:kernel_semimetric} and \eqref{eq:gen_kernel} hold.
-Then we can write \eqref{eq:within} as
-\begin{equation}\label{eq:W2}
-W(\{ \C_j \} )
-= \dfrac{1}{2} \sum_{j=1}^k \dfrac{1}{n_j} \sum_{x,y \in \C_j} \rho(x,y)
-= \sum_{j=1}^k \sum_{x \in \C_j}  \bigg(
-\kk(x,x) - \dfrac{1}{n_j} \sum_{y \in \C_j} \kk(x,y) \bigg)
-\end{equation}
-When minimizing $W$, the first term is just a constant and does
-not contribute,
-therefore the problem reduces to
-\begin{equation}
-\label{eq:max_prob}
-\max_{ \{ \C_j \} } \sum_{j=1}^k \dfrac{1}{n_j} \sum_{x,y\in C_j} \kk(x,y) .
-\end{equation}
-Let us introduce the binary matrix $Z \in \{ 0,1 \}^{n\times k}$ 
-such that 
-\begin{equation}
-Z_{ij} = \begin{cases}
-1 & \mbox{if $x_i \in \C_j$ } \\
-0 & \mbox{otherwise.}
-\end{cases}
-\end{equation}
-Notice that $D = Z^T Z = \diag( n_1, n_2, \dotsc, n_k )$ contains the number
-of elements in each partition. Introducing the kernel matrix
+Thus, given $k$, our clustering problem ammounts to
+finding the best partition of the data through solving~\eqref{eq:minimize}.
+In this setting, each datapoint belongs to one and only one cluster
+(hard assignments).
+
+Based on 
+\eqref{eq:kernel_semimetric} and \eqref{eq:gen_kernel}, assume that 
+the kernel $\kk: \mathcal{X} \times \mathcal{X} \to \mathbb{R}$ 
+generates $\rho$. 
+Let us define  the kernel matrix
 $G \in \mathbb{R}^{n\times n}$ such that
 \begin{equation}
 \label{eq:kernel_matrix}
-G_{ij} = \kk(x_i, x_j),
+G_{ij} \equiv \kk(x_i, x_j).
 \end{equation}
-then \eqref{eq:max_prob} is equal to
-$\max \Tr \left\{ D^{-1} Z^\top G Z \right\}$. 
-Therefore, our clustering optimization problem based on energy statistics
-can be formulated as
-\begin{equation}\label{eq:qcqp}
-\begin{aligned}
-& \max_{Z} \Tr\left\{ \big( Z D^{-1/2}\big)^\top G 
-\big( ZD^{-1/2} \big) 
-\right\} \\
-&\mbox{s.t. $Z_{ij} \in \{0,1\}$, $\sum_{j=1}^k Z_{ij} = 1$, 
-$\sum_{i=1}^n Z_{ij} = n_j$, and $D = Z^\top Z$}.
-\end{aligned}
-\end{equation}
-This is a quadratic problem with integer constraints, which is 
-NP-hard. Let us now write this in terms of 
-$\Zt \equiv Z D^{-1/2}$, which componentwise is 
+Let $Z$ be the label matrix, $Z \in \{ 0,1 \}^{n\times k}$, 
+with only one nonvanishing entry per row indicating to which cluster (columns)
+each point (rows) belongs to. This matrix satisfy
+$Z^\top Z = D$ where $D = \diag( n_1,\dotsc, n_k )$  contains
+the number of points in each cluster. We also introduce the rescaled
+matrix  $Y \equiv Z D^{-1/2}$. In component form they are given by
 \begin{equation}
-\Zt_{ij} = \begin{cases}
+\label{eq:label_matrix}
+Z_{ij} \equiv \begin{cases}
+1 & \mbox{if $x_i \in \C_j$ } \\
+0 & \mbox{otherwise}
+\end{cases} \qquad
+\Zt_{ij} \equiv \begin{cases}
 \tfrac{1}{\sqrt{n_j}} & \mbox{if $x_i \in \C_j$ } \\
-0 & \mbox{otherwise.}
-\end{cases}
+0 & \mbox{otherwise}
+\end{cases} .
 \end{equation}
-We thus have
+
+Our next result reveals the optimization problem behind \eqref{eq:minimize},
+which is in general NP-hard since
+it is a quadratically constrained quadratic problem (QCQP).
+
+\begin{proposition} 
+\label{th:qcqp2}
+The problem \eqref{eq:minimize} is equivalent to
 \begin{equation}
 \label{eq:qcqp2}
 \max_{\Zt} \Tr \left\{ \Zt^\top G \Zt \right\}  \qquad
@@ -408,11 +414,69 @@ We thus have
 $\Zt \Zt^\top \bm{e} = \bm{e}$},
 \end{equation}
 where $\bm{e} = (1,1,\dots,1)^\top \in \mathbb{R}^n$ is the all-ones vector,
-and $G$ is the pairwise kernel matrix \eqref{eq:kernel_matrix} obtained
-from \eqref{eq:kernel_semimetric}.
+and $G$ is the pairwise kernel matrix \eqref{eq:kernel_matrix}, assumed
+to be given.
+\end{proposition}
+\begin{proof}
+Replacing \eqref{eq:gen_kernel}  into
+\eqref{eq:g_def},  
+we can write \eqref{eq:within} as
+\begin{equation}
+\label{eq:W2}
+W(\{ \C_j \} )
+= \dfrac{1}{2} \sum_{j=1}^k \dfrac{1}{n_j} \sum_{x,y \in \C_j} \rho(x,y)
+= \sum_{j=1}^k \sum_{x \in \C_j}  \bigg(
+\kk(x,x) - \dfrac{1}{n_j} \sum_{y \in \C_j} \kk(x,y) \bigg).
+\end{equation}
+The first term is a global constant 
+which does not contribute,
+so minimizing \eqref{eq:W2} is the same as
+\begin{equation}
+\label{eq:max_prob}
+\max_{ \{ \C_j \} } \sum_{j=1}^k \dfrac{1}{n_j} \sum_{x,y\in C_j} \kk(x,y) .
+\end{equation}
+But 
+\begin{equation}
+\sum_{x, y \in \C_j} \kk(x, y) =
+\sum_{l=1}^{n} \sum_{m=1}^{n} Z_{lj} Z_{mj} G_{lm} = 
+(Z^\top G Z)_{jj}
+\end{equation}
+where we used the definitions \eqref{eq:kernel_matrix} and
+\eqref{eq:label_matrix}. Thus \eqref{eq:max_prob} is equal to
+$\max \Tr \left\{ D^{-1} Z^\top G Z \right\}$. Now we can
+use the cyclic property
+of the trace, and by the own definition of the matrix $Z$
+in \eqref{eq:label_matrix} we obtain the following integer
+programing problem:
+\begin{equation}\label{eq:qcqp}
+\begin{aligned}
+& \max_{Z} \Tr\left\{ \big( Z D^{-1/2}\big)^\top G 
+\big( ZD^{-1/2} \big) 
+\right\} \\
+&\mbox{s.t. $Z_{ij} \in \{0,1\}$, $\sum_{j=1}^k Z_{ij} = 1$, 
+$\sum_{i=1}^n Z_{ij} = n_j$.}
+\end{aligned}
+\end{equation}
+Now we write this in terms of $Y = Z D^{-1/2}$, given by
+\eqref{eq:label_matrix}. The objective function immediately becomes
+$\Tr Y^\top G Y$. Notice that the above constraints
+immediatly imply that $Z^T Z = D$, which in turn gives
+$D^{-1/2} Y^T Y D^{-1/2} = D$, or $Y^\top Y = I$. 
+Also, every entry of $Y$ is positive by definition,
+$Y \ge 0$. Now it only remains to show the last 
+constraint in \eqref{eq:qcqp2}, which comes from the last
+constraint in \eqref{eq:qcqp}. In matrix form this reads
+$Z^T \bm{e} = D \bm{e}$. Replacing by $Z=YD^{1/2}$ we have
+$Y^\top \bm{e} = D^{1/2} \bm{e}$. Multiplying this last equation
+on the left by $Y$, and noticing
+that $Y D^{1/2} \bm{e} = Z \bm{e} = \bm{e}$, we finally obtain
+$Y Y^\top \bm{e} = \bm{e}$ as desired.
+\end{proof}
+
 Therefore, to cluster data $\{ x_i \}_{i=1}^n \in \mathcal{X}$ into 
 $k$ partitions,
-assuming that $k$ is given, we first compute $G$  --- 
+assuming that $k$ is given, we first compute the kernel matrix
+$G$  --- 
 which is  defined by an arbitrary semimetric of negative 
 type on $\mathcal{X}$  --- and then 
 solve the optimization problem \eqref{eq:qcqp2} for $\Zt \in
@@ -421,39 +485,53 @@ of $\Zt$ will contain a single nonzero element in some $j$th column,
 indicating that $x_i \in \C_j$.
 
 In general, 
-problem \eqref{eq:qcqp2} is NP-hard since it is a quadratically
-constrained quadratic problem (QCQP). There are  
-few methods available to tackle this kind of problem directly,
+problem \eqref{eq:qcqp2} is NP-hard and there
+are few methods
+available to tackle this kind of problem directly,
 which is computational prohibitive even for relatively small datasets.
 However, one can find an approximate solution by relaxing some 
-of the constraints. For instance, an approximation can be given
+of the constraints, or obtaining a relaxed SDP version of it. 
+For instance, a simple approximation can be given
 by 
-$\max_{Y} \Tr\left\{ Y^\top G \, Y \right\}$ subject to $Y^\top Y = I$,
+$\max_{Y} \Tr Y^\top G \, Y $ subject to $Y^\top Y = I$,
 and requiring that the rows of $Y$ are normalized. 
 It is possible to find a global solution to this problem by
 choosing $Y$ as the top $k$ eigenvectors of $G$, which results
 in 
 $\max \Tr \left\{ Y^\top G \, Y \right\}  = \sum_{i=1}^k \lambda_i(G)$, 
 which is the
-sum of the top $k$ eigenvalues of $G$.
+sum of the top $k$ eigenvalues of $G$. This is what is usually done
+in spectral clustering. However, we will propose a simple iterative
+algorithm in the next section.
 
-It is important to note that \eqref{eq:qcqp2} has the same
+An interesting point is that \eqref{eq:qcqp2} has the same
 formulation as kernel $k$-means, spectral clustering, and the maximum
-cut problem on graphs \cite{Dhillon}. The 
-result \eqref{eq:qcqp2} brings energy statistics based clustering
+cut problem on graphs \cite{Dhillon}. 
+Proposition~\ref{th:qcqp2} brings energy statistics based clustering
 into this broad picture, and \eqref{eq:qcqp2} should have 
 interesting applications in
-graph partitioning problems and unsupervised learning in general. 
+graph partitioning problems and unsupervised learning in general.
+Notice that it is straightforward to generalize \eqref{eq:qcqp2} to
+a weighted version, where weights $W = \diag(w(x_1), \dotsc, w(x_n))^\top $
+are associated to each data point $x_i$. One just replace the objective
+function in \eqref{eq:qcqp2} by 
+\begin{equation}
+\max_Y \Tr \left\{ Y^\top W^{1/2} G W^{1/2} Y \right\}.
+\end{equation}
 Furthermore, and most importantly, our analysis is valid
 for any space $\mathcal{X}$ equiped with a semimetric of negative type $\rho$.
 This method is
 nonparametric since it does not assume any form of the 
 distribution of the data,
 contrary to $k$-means and gaussian mixture models (GMM), for example.
-Also, there is no concept of cluster center involved in this approach.
+Moreover, this approach does not require the concept of the cluster mean, or
+median, which can be ill-defined in some types of data, such as images for
+instance.
 
 
-\subsection{A Simple Algorithm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A Simple Iterative Algorithm}
+\label{sec:iterative_algo}
 
 We can formulate an iterative algorithm to find
 an approximate solution to \eqref{eq:qcqp2} on the same lines
@@ -487,41 +565,76 @@ the total complexity of the algorithm is $O(n^2(D + T))$.
 We can initialize the algorithm in step~\ref{initialize} with any method
 we want, a good alternative is the initialization from $k$-means++.
 
-\subsection{Two-Class Problem in One Dimension}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Two-Class Problem in One Dimension}
+
+Here we consider an alternative approach in the simplest case possible, which
+is one-dimensional data and a two-class problem.
 If data is one-dimensional and we choose
 $\rho(x,y) = |x - y|$, we can actually compute 
 \eqref{eq:g_def} in $O(n \log n)$ instead of $O(n^2 D)$ and find
 a direct solution to \eqref{eq:minimize}. 
 This is done by noticing that
 \begin{equation}
-|x - y|  = \mathbbm{1}(x \ge y ) (x - y) -
-\mathbbm{1}(x < y) (x - y).
+\begin{aligned}
+|x - y|  &= \Ind{x \ge y} (x - y) -
+\Ind{x < y} (x - y) \\
+&= 
+\left( \Ind{x \ge y} - \Ind{x < y} \right) x + 
+\left( \Ind{y > x} - \Ind{y \le x} \right) y
+\end{aligned}
 \end{equation}
-Denote
+where $\Ind{}$ is the indicator function.
+Let $\C$ be a partition with
+$n$ elements. Using the above distance in \eqref{eq:g_def} we have
 \begin{equation}
-n_j^{-} (x) = \sum_{y \in \C_j} \mathbbm{1}(y \le x), \quad  
-n_j^{+} (x) = \sum_{y \in C_j} \mathbbm{1}(y > x), \quad
-\mathcal{D}_j(x) = \dfrac{n_j^-(x) - n_j^+(x)}{n_j}
+\label{eq:g_ind}
+g(\C,\C) = \dfrac{1}{n^2} \sum_{x \in \C} 
+\sum_{y \in \C} 
+\left(
+\Ind{x \ge y} + \Ind{y > x} - 
+\Ind{x \ge y}-\Ind{x < y} \right) x.
 \end{equation}
-where $n_j^+(x)$ is the number of elements in $\C_j$ which are larger
-than $x \in \C_i$, and so on.
-Now \eqref{eq:g_def} can be written as
+The sum over $y$ can be eliminated since the term in
+parenthesis is simply counting the number of elements in $\C$ that satisfy
+the conditions of the indicator functions. Therefore, assume
+that we order the data as 
+$\bar{\C} = [ x_j \in \C: x_1 \le x_2 \le \dotsm \le x_{n}]$. Thus, we
+can write \eqref{eq:g_ind} as
 \begin{equation}
 \label{eq:g1d}
-g(\C_i, \C_j) = 
-\dfrac{1}{n_i} \sum_{x \in \C_i} \mathcal{D}_j(x) \, x - 
-\dfrac{1}{n_j} \sum_{y \in \C_j} \mathcal{D}_i(y) \, y.
+g(\C, \C) = \dfrac{2}{n^2} \sum_{j=1}^n (2j - 1 - n) x_j .
 \end{equation}
-If we merge $\C_i$ and $\C_j$ and sort the data, this expression 
-can be computed in $O(n)$, where $n=n_i+n_j$.
-For a two-class problem, we have to loop through each point
-and compute \eqref{eq:within} to find the best split of the data. 
-Since sorting
-sorting usually takes $O(n \log n)$, the complexity of
-this procedure is $O(n(\log n + n)) = O(n^2)$.
+Note that the cost of computing this is $O(n)$, once the data
+is sorted which costs at the most $O(n\log n)$.
+Now suppose we order each partition, obtaining $\mathbb{X} = \cup_{j=1}^k
+\bar{\C}_j$. Then \eqref{eq:within} is given by
+\begin{equation}
+\label{eq:w1d}
+W(\{ \bar{\C}_i \}) = 2
+\sum_{j=1}^k \dfrac{1}{n_j} \sum_{\ell=1}^{n_j} (2\ell - 1 - n_j) x_\ell.
+\end{equation}
+For a two-class problem, we can cluster the data by computing \eqref{eq:w1d}
+for each split and pick the one with minimum value. This is done
+as follows:
+\begin{enumerate}
+\item Sort the pooled data, obtaining the sorted set $\bar{\mathbb{X}}$ with
+$n$ elements.
+\item For each $t=1,2,\dotsc,n$, make two partitions 
+$\bar{\C}_1^{(t)} = [x_i]_{i=1}^t$ and 
+$\bar{\C}_2^{(t)} = [x_i]_{i=t+1}^n$. 
+\item Compute $W^{(t)} = W(\{ \bar{\C}_1^{(t)},\bar{\C}_2^{(t)}  \})$ 
+from \eqref{eq:w1d}.
+\item The best split is $t^\star = \argmin_t W^{(t)}$, which
+determines the final clusters.
+\end{enumerate}
+Notice that this procedure does not require any initialization, however,
+it only works for one-dimensional data and for Euclidean distance.
+
 
 \section{Numerical Experiments}
+
 
 \section{Conclusion}
 
