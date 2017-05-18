@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.4.8)  17 MAY 2017 10:56
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.4.8)  18 MAY 2017 18:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -271,24 +271,27 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \c@theorem=\count114
 \c@example=\count115
 
-(./energy_clustering.aux)
+(./energy_clustering.aux
+
+LaTeX Warning: Label `fig:dimension' multiply defined.
+
+)
 \openout1 = `energy_clustering.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 94.
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 93.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 *geometry* driver: auto-detecting
@@ -357,7 +360,7 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \microtypecontext on input line 94.
+LaTeX Info: Redefining \microtypecontext on input line 93.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -385,12 +388,12 @@ File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 \everyMPtoPDFconversion=\toks34
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 96.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 95.
  (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 96.
+LaTeX Font Info:    Try loading font information for U+msa on input line 95.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -398,7 +401,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 96.
+LaTeX Font Info:    Try loading font information for U+msb on input line 95.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -407,44 +410,139 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 96.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 95.
 Package microtype Info: Loading generic settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 98.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 97.
  [1
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] (./energy_clus
-tering.bbl
-[5]) [6] (./energy_clustering.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]
+<./figs/gauss_means.pdf, id=28, 303.33333pt x 303.33333pt>
+File: ./figs/gauss_means.pdf Graphic file (type pdf)
+
+<use ./figs/gauss_means.pdf>
+Package pdftex.def Info: ./figs/gauss_means.pdf used on input line 642.
+(pdftex.def)             Requested size: 131.17076pt x 131.17134pt.
+
+<./figs/gauss_covs.pdf, id=29, 303.33333pt x 303.33333pt>
+File: ./figs/gauss_covs.pdf Graphic file (type pdf)
+
+<use ./figs/gauss_covs.pdf>
+Package pdftex.def Info: ./figs/gauss_covs.pdf used on input line 647.
+(pdftex.def)             Requested size: 131.17076pt x 131.17134pt.
+
+<./figs/gauss_pis.pdf, id=30, 303.33333pt x 303.33333pt>
+File: ./figs/gauss_pis.pdf Graphic file (type pdf)
+
+<use ./figs/gauss_pis.pdf>
+Package pdftex.def Info: ./figs/gauss_pis.pdf used on input line 652.
+(pdftex.def)             Requested size: 131.17076pt x 131.17134pt.
+
+<./figs/cigar_data.pdf, id=31, 303.33333pt x 303.33333pt>
+File: ./figs/cigar_data.pdf Graphic file (type pdf)
+
+<use ./figs/cigar_data.pdf>
+Package pdftex.def Info: ./figs/cigar_data.pdf used on input line 671.
+(pdftex.def)             Requested size: 107.56097pt x 107.56142pt.
+
+<./figs/circles_data.pdf, id=32, 303.33333pt x 303.33333pt>
+File: ./figs/circles_data.pdf Graphic file (type pdf)
+
+<use ./figs/circles_data.pdf>
+Package pdftex.def Info: ./figs/circles_data.pdf used on input line 674.
+(pdftex.def)             Requested size: 107.56097pt x 107.56142pt.
+
+<./figs/spirals_data.pdf, id=33, 303.33333pt x 303.33333pt>
+File: ./figs/spirals_data.pdf Graphic file (type pdf)
+
+<use ./figs/spirals_data.pdf>
+Package pdftex.def Info: ./figs/spirals_data.pdf used on input line 677.
+(pdftex.def)             Requested size: 107.56097pt x 107.56142pt.
+
+<./figs/cigars.pdf, id=34, 303.33333pt x 303.33333pt>
+File: ./figs/cigars.pdf Graphic file (type pdf)
+ <use ./figs/cigars.pdf>
+Package pdftex.def Info: ./figs/cigars.pdf used on input line 681.
+(pdftex.def)             Requested size: 131.17076pt x 131.17134pt.
+
+<./figs/circles.pdf, id=35, 303.33333pt x 303.33333pt>
+File: ./figs/circles.pdf Graphic file (type pdf)
+
+<use ./figs/circles.pdf>
+Package pdftex.def Info: ./figs/circles.pdf used on input line 686.
+(pdftex.def)             Requested size: 131.17076pt x 131.17134pt.
+
+<./figs/spirals.pdf, id=36, 303.33333pt x 303.33333pt>
+File: ./figs/spirals.pdf Graphic file (type pdf)
+
+<use ./figs/spirals.pdf>
+Package pdftex.def Info: ./figs/spirals.pdf used on input line 691.
+(pdftex.def)             Requested size: 131.17076pt x 131.17134pt.
+ (./energy_clustering.bbl [5]) [6 <./figs/gauss_means.pdf> <./figs/gauss_covs.p
+df
+
+pdfTeX warning: pdflatex (file ./figs/gauss_covs.pdf): PDF inclusion: multiple 
+pdfs with page group included in a single page
+> <./figs/gauss_pis.pdf
+
+pdfTeX warning: pdflatex (file ./figs/gauss_pis.pdf): PDF inclusion: multiple p
+dfs with page group included in a single page
+>] [7 <./figs/cigar_data.pdf> <./figs/circles_data.pdf
+
+pdfTeX warning: pdflatex (file ./figs/circles_data.pdf): PDF inclusion: multipl
+e pdfs with page group included in a single page
+> <./figs/spirals_data.pdf
+
+pdfTeX warning: pdflatex (file ./figs/spirals_data.pdf): PDF inclusion: multipl
+e pdfs with page group included in a single page
+> <./figs/cigars.pdf
+
+pdfTeX warning: pdflatex (file ./figs/cigars.pdf): PDF inclusion: multiple pdfs
+ with page group included in a single page
+> <./figs/circles.pdf
+
+pdfTeX warning: pdflatex (file ./figs/circles.pdf): PDF inclusion: multiple pdf
+s with page group included in a single page
+> <./figs/spirals.pdf
+
+pdfTeX warning: pdflatex (file ./figs/spirals.pdf): PDF inclusion: multiple pdf
+s with page group included in a single page
+>] (./energy_clustering.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 5544 strings out of 493308
- 78204 string characters out of 6140093
- 182743 words of memory out of 5000000
- 8789 multiletter control sequences out of 15000+600000
+ 5594 strings out of 493308
+ 79286 string characters out of 6140093
+ 184197 words of memory out of 5000000
+ 8829 multiletter control sequences out of 15000+600000
  24018 words of font info for 120 fonts, out of 8000000 for 9000
  960 hyphenation exceptions out of 8191
- 30i,12n,35p,253b,253s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dv
-ips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/tim
-es/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on energy_clustering.pdf (6 pages, 196267 bytes).
+ 30i,12n,35p,253b,284s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/t
+imes/utmri8a.pfb>
+Output written on energy_clustering.pdf (7 pages, 342027 bytes).
 PDF statistics:
- 78 PDF objects out of 1000 (max. 8388607)
+ 196 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 19969 words of extra memory for PDF output out of 20736 (max. 10000000)
+ 20014 words of extra memory for PDF output out of 20736 (max. 10000000)
 

@@ -24,10 +24,10 @@ def accuracy(z, zh):
     
     Q = np.zeros((n,k))
     for i in range(n):
-        Q[i, z[i]] = 1
+        Q[i, int(z[i])] = 1
     Qh = np.zeros((n,k))
     for i in range(m):
-        Qh[i, zh[i]] = 1
+        Qh[i, int(zh[i])] = 1
     
     cost_matrix = Qh.T.dot(Q)
     row_ind, col_ind = scipy.optimize.linear_sum_assignment(-cost_matrix)

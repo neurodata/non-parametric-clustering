@@ -12,15 +12,14 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage[inline]{enumitem}
-\usepackage[pdftex]{graphicx}
-\graphicspath{{./figs/}}
 
 %\usepackage{cite}
 \usepackage{bbm}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 
-\graphicspath{{./figs}}
+\usepackage[pdftex]{graphicx}
+\graphicspath{{./figs/}}
 
 \hyphenation{op-tical net-works semi-conduc-tor}
 
@@ -127,7 +126,7 @@ $Y,Y' \stackrel{iid}{\sim} Q$, where $P$ and $Q$ are cumulative
 distribution functions with finite first moments. 
 The quantity \cite{Szkely2013}
 \begin{equation}\label{eq:energy}
-\Energy(P, Q) = 2 \E \| X - Y\| - \| X - X' \| - \| Y - Y' \|,
+\Energy(P, Q) = 2 \E \| X - Y\| - \E \| X - X' \| - \E \| Y - Y' \|,
 \end{equation}
 called \emph{energy distance}, 
 is rotational invariant and nonnegative, $\Energy(P,Q) \ge 0$, where
@@ -142,8 +141,8 @@ a metric on the space of distributions.
 
 The energy distance can be generalized as, for instance,
 \begin{equation}\label{eq:energy2}
-\Energy_\alpha(P, Q) = 2 \E \| X - Y\|^{\alpha} - \| X - X' \|^{\alpha} - 
-\| Y - Y' \|^{\alpha},
+\Energy_\alpha(P, Q) = 2 \E \| X - Y\|^{\alpha} - \E \| X - X' \|^{\alpha} - 
+\E \| Y - Y' \|^{\alpha},
 \end{equation}
 where $0<\alpha\le 2$. This quantity is also nonnegative,
 $\Energy_\alpha(P,Q) \ge 0$. Furthermore, for $0<\alpha<2$ we have that
@@ -553,6 +552,7 @@ its cluster assignment through
 \sum_{m=1}^n G_{i m} \Zt^{(t)}_{m\ell}$ } \\
 0 & \mbox{otherwise.}
 \end{cases}
+\nonumber
 \end{equation}
 \item If converged return $\Zt^{(t+1)}$, otherwise
 set $t = t+1$ and repeat step~\ref{assignment}.
@@ -571,7 +571,7 @@ we want, a good alternative is the initialization from $k$-means++.
 
 Here we consider an alternative approach in the simplest case possible, which
 is one-dimensional data and a two-class problem.
-If data is one-dimensional and we choose
+If we choose
 $\rho(x,y) = |x - y|$, we can actually compute 
 \eqref{eq:g_def} in $O(n \log n)$ instead of $O(n^2 D)$ and find
 a direct solution to \eqref{eq:minimize}. 
@@ -601,10 +601,10 @@ parenthesis is simply counting the number of elements in $\C$ that satisfy
 the conditions of the indicator functions. Therefore, assume
 that we order the data as 
 $\bar{\C} = [ x_j \in \C: x_1 \le x_2 \le \dotsm \le x_{n}]$. Thus, we
-can write \eqref{eq:g_ind} as
+can write \eqref{eq:g_ind} in the following very simple form:
 \begin{equation}
 \label{eq:g1d}
-g(\C, \C) = \dfrac{2}{n^2} \sum_{j=1}^n (2j - 1 - n) x_j .
+g(\C, \C) = \dfrac{2}{n^2} \sum_{\ell=1}^n (2\ell - 1 - n) x_\ell .
 \end{equation}
 Note that the cost of computing this is $O(n)$, once the data
 is sorted which costs at the most $O(n\log n)$.
@@ -612,11 +612,11 @@ Now suppose we order each partition, obtaining $\mathbb{X} = \cup_{j=1}^k
 \bar{\C}_j$. Then \eqref{eq:within} is given by
 \begin{equation}
 \label{eq:w1d}
-W(\{ \bar{\C}_i \}) = 2
-\sum_{j=1}^k \dfrac{1}{n_j} \sum_{\ell=1}^{n_j} (2\ell - 1 - n_j) x_\ell.
+W(\{ \bar{\C}_i \}) = 
+\sum_{j=1}^k \sum_{\ell=1}^{n_j} \dfrac{2\ell - 1 - n_j}{n_j} \, x_\ell.
 \end{equation}
 For a two-class problem, we can cluster the data by computing \eqref{eq:w1d}
-for each split and pick the one with minimum value. This is done
+for each possible split, and pick the one with minimum value. This is done
 as follows:
 \begin{enumerate}
 \item Sort the pooled data, obtaining the sorted set $\bar{\mathbb{X}}$ with
@@ -634,6 +634,68 @@ it only works for one-dimensional data and for Euclidean distance.
 
 
 \section{Numerical Experiments}
+
+
+\begin{figure}
+\begin{minipage}{0.33\textwidth}
+\centering
+\includegraphics[width=\textwidth]{gauss_means.pdf}\\[-.8em]
+(a)
+\end{minipage}
+\begin{minipage}{0.33\textwidth}
+\centering
+\includegraphics[width=\textwidth]{gauss_covs.pdf}\\[-.8em]
+(b)
+\end{minipage}
+\begin{minipage}{0.33\textwidth}
+\centering
+\includegraphics[width=\textwidth]{gauss_pis.pdf}\\[-.8em]
+(c)
+\end{minipage}
+\caption{
+\label{fig:dimension}
+gadsga
+}
+\end{figure}
+
+\begin{figure}
+\centering
+\caption{
+\label{fig:unbalanced}
+gadsga
+}
+\end{figure}
+
+\begin{figure}
+\begin{minipage}{0.33\textwidth}
+\hspace{.7cm}\includegraphics[width=.82\textwidth]{cigar_data.pdf}
+\end{minipage}
+\begin{minipage}{0.33\textwidth}
+\hspace{.7cm}\includegraphics[width=.82\textwidth]{circles_data.pdf}
+\end{minipage}
+\begin{minipage}{0.33\textwidth}
+\hspace{.7cm}\includegraphics[width=.82\textwidth]{spirals_data.pdf}
+\end{minipage}
+\begin{minipage}{0.33\textwidth}
+\centering
+\includegraphics[width=\textwidth]{cigars.pdf}\\[-.8em]
+(a)
+\end{minipage}
+\begin{minipage}{0.33\textwidth}
+\centering
+\includegraphics[width=\textwidth]{circles.pdf}\\[-.8em]
+(b)
+\end{minipage}
+\begin{minipage}{0.33\textwidth}
+\centering
+\includegraphics[width=\textwidth]{spirals.pdf}\\[-.8em]
+(c)
+\end{minipage}
+\caption{
+\label{fig:dimension}
+gadsga
+}
+\end{figure}
 
 
 \section{Conclusion}

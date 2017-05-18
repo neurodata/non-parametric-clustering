@@ -12,15 +12,20 @@ import kmeanspp
 def euclidean(a, b):
     return np.linalg.norm(a-b)**2
 
-def kmeans(K, X, distance=euclidean, max_iter=50):
+def kmeans(K, X, distance=euclidean, max_iter=50, labels_=False, mus_=False):
     """K is the number of clusters. X is the dataset, which is a matrix
     with one data point per row. distance is a function
     which accepts two data points and returns a real number.
     
     """
     N = X.shape[0] # number of points
-    mus = kmeanspp.kpp(K, X, ret='centers')
-    labels = np.empty(N, dtype=np.int8)
+
+    if not (labels_.any() and  mus_.any()):
+        mus = kmeanspp.kpp(K, X, ret='centers')
+        labels = np.zeros(N)
+    else:
+        labels = labels_
+        mus = mus_
     
     converged = False
     count = 0

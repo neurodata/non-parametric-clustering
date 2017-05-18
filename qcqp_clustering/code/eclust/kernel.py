@@ -120,22 +120,6 @@ class KernelEnergy(BaseEstimator, ClusterMixin):
         return dist.argmin(axis=1)
 
 
-def qcqp_tilde(k, X):
-    # compute G ....
-    z = kmeanspp.kpp(k, X)
-    n = X.shape[0]
-    
-    t = 0
-    converged = False
-    while not converged:
-    
-        for i in range(n):
-            
-            for j in range(k):
-                
-            z[i] = 
-    
-    
 
 ###############################################################################
 if __name__ == '__main__':

@@ -9,8 +9,31 @@ from __future__ import division
 import numpy as np
 import matplotlib.pyplot as plt
 import numbers
+import pylab
 
 from sklearn.decomposition import PCA
+
+
+# pyplot customization
+pylab.rc('lines', linewidth=.5, antialiased=True, markeredgewidth=0.1)
+pylab.rc('font', family='computer modern roman', style='normal',
+         weight='normal', serif='computer modern sans serif', size=10)
+pylab.rc('text', usetex=True)
+pylab.rc('text.latex', preamble=[
+        '\usepackage{amsmath,amsfonts,amssymb,relsize,cancel}'])
+pylab.rc('axes', linewidth=0.5, labelsize=10)
+pylab.rc('xtick', labelsize=10)
+pylab.rc('ytick', labelsize=10)
+#pylab.rc('legend', numpoints=1, fontsize=10, handlelength=0.5)
+pylab.rc('legend', numpoints=1, fontsize=10)
+fig_width_pt = 455.0 / 1.5 # take this from LaTeX \textwidth in points
+inches_per_pt = 1.0/72.27
+golden_mean = (np.sqrt(5.0)-1.0)/2.0
+fig_width = fig_width_pt*inches_per_pt
+fig_height = fig_width_pt*inches_per_pt
+#fig_height = fig_width*golden_mean
+pylab.rc('figure', figsize=(fig_width, fig_height))
+
 
 
 def multivariate_normal(means, sigmas, ns):
@@ -126,7 +149,7 @@ def spirals(rs, ns, noise=0.2):
     idx = np.random.permutation(sum(ns))
     return X[idx], z[idx]
 
-def plot(X, z, fname='plot.pdf'):
+def plot(X, z, colors=['b', 'r', 'g'], fname='plot.pdf'):
     """Plot data according to labels in z.
     If data is multidimensional, pick the first two principal components.
     
@@ -142,16 +165,21 @@ def plot(X, z, fname='plot.pdf'):
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    colors = iter(plt.cm.rainbow(np.linspace(0,1,len(z_unique))))
+    #colors = iter(plt.cm.rainbow(np.linspace(0,1,len(z_unique))))
+    colors = iter(colors)
+    
     for k in z_unique:
         idx = np.where(z==k)
         x = X_new[idx][:,0]
         y = X_new[idx][:,1]
-        ax.plot(x, y, 'bo', alpha=.6, color=next(colors))
+        ax.plot(x, y, 'bo', alpha=.8, color=next(colors))
     
     ax.set_xticks([])
     ax.set_yticks([])
     plt.axes().set_aspect('equal', 'datalim')
+    #ax.set_xlabel(r'$x$')
+    #ax.set_ylabel(r'$y$')
+    fig.tight_layout()
     fig.savefig(fname)
 
 def histogram(X, z, fname='plot.pdf'):
@@ -217,15 +245,15 @@ def from_sets_to_labels(A):
 
 ###############################################################################
 if __name__ == '__main__':
-    """
-    X, z = multi_gaussians(
-        [[0,0,0], [10,0,0], [1,10,10]], 
-        [np.eye(3), np.eye(3), np.eye(3)], 
-        [100, 100, 100]
-    )
-    #X, z = circles([1, 3, 5], [0.1, 0.2, 0.3], [200, 200, 500])
-    plot(X, z)
-    """
+    
+    #X, z = multivariate_normal(
+    #    [[0,0], [8,0]], 
+    #    [[[4, 8], [8,20]], [[4,-8],[-8,20]]], 
+    #    [200, 200]
+    #)
+    
+    #X, z = circles([1, 3], [0.1, 0.1], [200, 200])
+    X, z = spirals([1,-1], [200,200], noise=0.2)
 
     """
     a = np.random.randint(0, 9, 10)
@@ -234,9 +262,7 @@ if __name__ == '__main__':
     print a, b, c
     x, y, z = mix_data([a, b, c], 1)
     print x, y, z
-    """
 
-    """
     X, z = multivariate_gaussians(
         [[0,0,0], [10,0,0], [1,10,10]], 
         [np.eye(3), np.eye(3), np.eye(3)], 
@@ -244,9 +270,9 @@ if __name__ == '__main__':
     print X
     print z
     print from_label_to_sets(X, z)
-
     """
 
-    X, z = spirals([1,-1], [200,200], noise=0.2)
-    plot(X, z)
+    #plot(X, z, fname='../data/cigar_data.pdf', colors=['#1F77B4', '#FF7F0E'])
+    #plot(X, z, fname='../data/circles_data.pdf', colors=['#1F77B4', '#FF7F0E'])
+    plot(X, z, fname='../data/spirals_data.pdf', colors=['#1F77B4', '#FF7F0E'])
 
