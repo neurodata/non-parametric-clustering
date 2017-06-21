@@ -13,28 +13,7 @@ import pylab
 
 from sklearn.decomposition import PCA
 
-
-# pyplot customization
-pylab.rc('lines', linewidth=.5, antialiased=True, markeredgewidth=0.1)
-pylab.rc('font', family='computer modern roman', style='normal',
-         weight='normal', serif='computer modern sans serif', size=10)
-pylab.rc('text', usetex=True)
-pylab.rc('text.latex', preamble=[
-        '\usepackage{amsmath,amsfonts,amssymb,relsize,cancel}'])
-pylab.rc('axes', linewidth=0.5, labelsize=10)
-pylab.rc('xtick', labelsize=10)
-pylab.rc('ytick', labelsize=10)
-#pylab.rc('legend', numpoints=1, fontsize=10, handlelength=0.5)
-pylab.rc('legend', numpoints=1, fontsize=10)
-fig_width_pt = 455.0 / 1.5 # take this from LaTeX \textwidth in points
-inches_per_pt = 1.0/72.27
-golden_mean = (np.sqrt(5.0)-1.0)/2.0
-fig_width = fig_width_pt*inches_per_pt
-fig_height = fig_width_pt*inches_per_pt
-#fig_height = fig_width*golden_mean
-pylab.rc('figure', figsize=(fig_width, fig_height))
-
-
+from pplotcust import *
 
 def multivariate_normal(means, sigmas, ns):
     """Generate several normal distributed data points.
@@ -182,17 +161,23 @@ def plot(X, z, colors=['b', 'r', 'g'], fname='plot.pdf'):
     fig.tight_layout()
     fig.savefig(fname)
 
-def histogram(X, z, fname='plot.pdf'):
+def histogram(X, z, colors=['b', 'r'], fname='plot.pdf'):
     """Plot histograms of 1-dimensional data."""
     z_unique = np.unique(z)
     fig = plt.figure()
-    bins=np.arange(min(X), max(X) + 0.2, 0.2)
+    #bins=np.arange(min(X), max(X) + 0.2, 0.2)
     ax = fig.add_subplot(111)
-    colors = iter(plt.cm.rainbow(np.linspace(0,1,len(z_unique))))
+    colors = iter(colors)
     for k in z_unique:
         idx = np.where(z==k)[0]
         x = X[idx]
-        ax.hist(x, bins=bins, facecolor=next(colors), alpha=.6, normed=1)
+        ax.hist(x, bins=200, facecolor=next(colors), 
+                histtype='stepfilled',
+                alpha=.7, normed=1, linewidth=0)
+    ax.set_xlabel(r'$x$')
+    ax.set_ylabel(r'$\phantom{accuracy}$')
+    ax.set_xlim([0, 10])
+    fig.tight_layout()
     fig.savefig(fname)
 
 def shuffle_data(X):
@@ -253,7 +238,7 @@ if __name__ == '__main__':
     #)
     
     #X, z = circles([1, 3], [0.1, 0.1], [200, 200])
-    X, z = spirals([1,-1], [200,200], noise=0.2)
+    #X, z = spirals([1,-1], [200,200], noise=0.2)
 
     """
     a = np.random.randint(0, 9, 10)
@@ -274,5 +259,13 @@ if __name__ == '__main__':
 
     #plot(X, z, fname='../data/cigar_data.pdf', colors=['#1F77B4', '#FF7F0E'])
     #plot(X, z, fname='../data/circles_data.pdf', colors=['#1F77B4', '#FF7F0E'])
-    plot(X, z, fname='../data/spirals_data.pdf', colors=['#1F77B4', '#FF7F0E'])
+    #plot(X, z, fname='../data/spirals_data.pdf', colors=['#1F77B4', '#FF7F0E'])
+    
+    X, z = univariate_normal([0, 5], [1, 2], [6000, 6000])
+    #X, z = univariate_lognormal([0, -1.5], [0.3, 1.5], [6000, 6000])
+    histogram(X, z, colors=['#FF7500', '#0072FF'], 
+              fname='two_normal_hist.pdf')
+    #histogram(X, z, colors=['#FF7500', '#0072FF'], 
+    #          fname='two_lognormal_hist.pdf')
+
 

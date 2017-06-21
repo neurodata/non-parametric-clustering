@@ -1,4 +1,4 @@
-"""Energy Statistics in 1D"""
+"""Energy Statistics Clustering in 1D"""
 
 # Guilherme Franca <guifranca@gmail.com>
 # Johns Hopkinks University, Neurodata
@@ -40,12 +40,13 @@ def within_sample(A):
     Output: between sample energy statistics (S)
 
     """
-    return sum([len(a)/2*mean1D(a,a)  for a in A])
+    #return sum([len(a)/2*mean1D(a,a)  for a in A])
+    return sum([len(a)/2*mean2(a)  for a in A])
 
 def mean2(A):
     """Another version of the above. Assume A is sorted."""
     n = len(A)
-    return (2./n**2)*sum([A[i]*(2.*i +1- n) for i in range(n)])
+    return (2./n**2)*sum([A[i]*(2.*i +1 - n) for i in range(n)])
 
 def two_clusters1D(X):
     """Optimize energy statistics for two clusters in 1D."""
@@ -76,21 +77,27 @@ if __name__ == "__main__":
     from sklearn.cluster import KMeans
     from sklearn.mixture import GMM
     import matplotlib.pyplot as plt
+    import sys
    
-    """
-    X1 = np.random.normal(0, 1, 2000)
+    #X1 = np.random.normal(0, 1, 100)
     #X1 = np.random.gamma(2, 2, 1000)
     #X1 = np.random.uniform(0, 1, 1000)
-    #X2 = np.random.uniform(0.5, 1.5, 1000)
-    X2 = np.random.normal(2, 1, 100)
+    
+    #X2 = np.random.uniform(0.5, 1.5, 100)
+    #X2 = np.random.normal(2, 1, 100)
     #X2 = np.random.gamma(2, 2, 2000)
-    X, z = data.shuffle_data([X1, X2])
     
-    plt.hist(X1, 80, facecolor='blue', alpha=0.6, normed=1)
-    plt.hist(X2, 80, facecolor='red', alpha=0.6, normed=1)
-    plt.show()
-    
-    zh = two_clusters1D(X)
+    #X, z = data.shuffle_data([X1, X2])
+
+    #X, z = data.univariate_lognormal([0, -1.5], [0.25, 1], [4000, 4000])
+    #X, z = data.univariate_normal([0, 5], [1, 2], [4000, 4000])
+    X, z = data.univariate_lognormal([0, -1.5], [0.3, 1.5], [1000, 1000])
+    #data.histogram(X, z, fname='plot.pdf')
+    #plt.hist(X[np.where(z==0)], 80, facecolor='blue', alpha=0.6, normed=1)
+    #plt.hist(X[np.where(z==1)], 80, facecolor='red', alpha=0.6, normed=1)
+    #plt.show()
+
+    zh, cost = two_clusters1D(X)
     print accuracy(z, zh)
 
     Y = np.array([[x] for x in X])
@@ -99,18 +106,7 @@ if __name__ == "__main__":
     print accuracy(z, zh)
 
     gmm = GMM(2)
-    gmm.fit(X)
-    zh = gmm.predict(X)
+    gmm.fit(Y)
+    zh = gmm.predict(Y)
     print accuracy(z, zh)
-    """
     
-    import energy
-    
-    X = np.random.normal(0, 1, 100)
-    
-    print energy.mean(X, X)
-    
-    Y = np.sort(X)
-    print  mean1D(Y, Y)
-    print mean2(Y)
-

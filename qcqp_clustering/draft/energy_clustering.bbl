@@ -36,4 +36,11 @@ I.~S. Dhillon, Y.~Guan, and B.~Kulis.
   on Knowledge Discovery and Data Mining}, KDD '04, pages 551--556, New York,
   NY, USA, 2004. ACM.
 
+\bibitem{Vassilvitskii}
+D.~Arthur and S.~Vassilvitskii.
+\newblock {$k$-means++: The Advantage of Careful Seeding}.
+\newblock In {\em Proceedings of the Eighteenth annual ACM-SIAM Symposium on
+  Discrete Algorithms}, pages 1027--1035, Philadelphia, PA, USA, 2007. Society
+  for Industrial and Applied Mathematics.
+
 \end{thebibliography}
