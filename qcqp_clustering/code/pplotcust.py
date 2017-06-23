@@ -10,9 +10,9 @@ pylab.rc('font', family='computer modern roman', style='normal',
 pylab.rc('text', usetex=True)
 pylab.rc('text.latex', preamble=[
         '\usepackage{amsmath,amsfonts,amssymb,relsize,cancel}'])
-pylab.rc('axes', linewidth=0.5, labelsize=10)
-pylab.rc('xtick', labelsize=8)
-pylab.rc('ytick', labelsize=8)
+pylab.rc('axes', linewidth=0.5, labelsize=14)
+pylab.rc('xtick', labelsize=9)
+pylab.rc('ytick', labelsize=9)
 #pylab.rc('legend', numpoints=1, fontsize=10, handlelength=0.5)
 pylab.rc('legend', numpoints=1, fontsize=10)
 fig_width_pt = 455.0 / 1.5 # take this from LaTeX \textwidth in points

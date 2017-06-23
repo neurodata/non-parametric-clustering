@@ -29,6 +29,12 @@ C.~Berg, J.~P.~R. Christensen, and P.~Ressel.
   and Related Functions}}.
 \newblock Graduate Text in Mathematics 100. Springer, New York, 1984.
 
+\bibitem{NgJordan}
+A.~Y. Ng, M.~I. Jordan, and Y.~Weiss.
+\newblock {On Spectral Clustering: Analysis and an Algorithm}.
+\newblock In {\em Advances in Neural Information Processing Systems},
+  volume~14, pages 849--856, Cambridge, MA, 2001. MIT Press.
+
 \bibitem{Dhillon}
 I.~S. Dhillon, Y.~Guan, and B.~Kulis.
 \newblock {Kernel K-means: Spectral Clustering and Normalized Cuts}.
