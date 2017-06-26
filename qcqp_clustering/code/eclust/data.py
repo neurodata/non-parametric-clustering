@@ -237,8 +237,8 @@ if __name__ == '__main__':
     #    [200, 200]
     #)
     
-    #X, z = circles([1, 3], [0.1, 0.1], [200, 200])
-    #X, z = spirals([1,-1], [200,200], noise=0.2)
+    X, z = circles([1, 3], [0.1, 0.1], [300, 300])
+    X, z = spirals([1,-1], [300,300], noise=0.2)
 
     """
     a = np.random.randint(0, 9, 10)
@@ -258,13 +258,14 @@ if __name__ == '__main__':
     """
 
     #plot(X, z, fname='../data/cigar_data.pdf', colors=['#1F77B4', '#FF7F0E'])
-    #plot(X, z, fname='../data/circles_data.pdf', colors=['#1F77B4', '#FF7F0E'])
+    #plot(X, z, fname='./circles_data1.pdf', colors=['b', 'r', 'g'])
+    plot(X, z, fname='./spirals_data1.pdf', colors=['b', 'r', 'g'])
     #plot(X, z, fname='../data/spirals_data.pdf', colors=['#1F77B4', '#FF7F0E'])
     
-    X, z = univariate_normal([0, 5], [1, 2], [6000, 6000])
+    #X, z = univariate_normal([0, 5], [1, 2], [6000, 6000])
     #X, z = univariate_lognormal([0, -1.5], [0.3, 1.5], [6000, 6000])
-    histogram(X, z, colors=['#FF7500', '#0072FF'], 
-              fname='two_normal_hist.pdf')
+    #histogram(X, z, colors=['#FF7500', '#0072FF'], 
+    #          fname='two_normal_hist.pdf')
     #histogram(X, z, colors=['#FF7500', '#0072FF'], 
     #          fname='two_lognormal_hist.pdf')
 

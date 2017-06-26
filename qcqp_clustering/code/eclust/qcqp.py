@@ -340,6 +340,7 @@ if __name__ == '__main__':
     from beautifultable import BeautifulTable
 
     # generate data
+    """
     X, z = data.multivariate_normal(
         [[0,0,0], [4,0,0]],
         [
@@ -348,48 +349,62 @@ if __name__ == '__main__':
         ],
         [200, 200]
     )
-
-    #X, z = data.circles([1, 3], [0.1,0.1], [300,300])
+    """
+    """
+    X, z = data.multivariate_lognormal(
+        [np.zeros(20), 0.5*np.concatenate([np.ones(5), np.zeros(15)])],
+        [0.5*np.eye(20), np.eye(20)],
+        [100, 100]
+    )
+    """
+    X, z = data.circles([1, 3, 5], [0.1, 0.1, 0.1], [200,200, 200])
+    #X, z = data.spirals([1,-1], [300,300], noise=0.2)
 
     # number of clusters
-    k = 2
+    k = 3
 
     # semimetric
     def rho(x,y):
+        norm = np.power(np.linalg.norm(x-y), 1)
+        return norm
+    
+    def rho_half(x,y):
         norm = np.power(np.linalg.norm(x-y), 0.5)
-        return np.log(norm+1.0)
+        return norm
 
     def rho_gauss(x,y):
-        norm = np.power(np.linalg.norm(x-y), 2)
-        return 2 - 2*np.exp(-norm/2)
-        
+        #norm = np.power(np.linalg.norm(x-y), 2)
+        #return 2 - 2*np.exp(-norm/2)
+        return 2-2*np.exp(-np.linalg.norm(x-y) - 0.5*np.linalg.norm(x-y)**2)
     
-    # semimetric standard
-    rho_standard = lambda x, y: np.linalg.norm(x-y)
+    def rho_per(x,y):
+        norm = np.power(np.linalg.norm(x-y), 1)
+        return np.power(norm, 2)*0.9*np.sin(norm/0.9)
     
+    def rho_poly(x,y):
+        p = 2
+        return np.power(-1+x.dot(x), p) \
+                +np.power(-1+y.dot(y), p) \
+                -2*np.power(-1+y.dot(x), p)
+
+
     # compute Gram matrix
     G = kernel_matrix(X, rho)
-    G_standard = kernel_matrix(X, rho_standard)
+    G1 = kernel_matrix(X, rho_half)
+    G2 = kernel_matrix(X, rho_gauss)
 
     # initialization
-    mu0, z0 = kmeanspp.kpp(2, X, ret='both')
+    mu0, z0 = kmeanspp.kpp(k, X, ret='both')
     Z0 = ztoZ(z0)
 
     t = BeautifulTable()
     t.column_headers = ["Method", "Accuracy", "Objective", "Exec Time"]
     
     start = timer()
-    zh = minw(k, G_standard, Z0, 100, tol=1e-5, verbose=False)
-    end = timer()
-    Zh = ztoZ(zh)
-    t.append_row(["Energy Standard", metric.accuracy(z, zh), 
-                  objective(Zh, G_standard), end-start])
-
-    start = timer()
     zh = minw(k, G, Z0, 100, tol=1e-5, verbose=False)
     end = timer()
     Zh = ztoZ(zh)
-    t.append_row(["Energy Metric", metric.accuracy(z, zh), 
+    t.append_row(["Energy Standard", metric.accuracy(z, zh), 
                   objective(Zh, G), end-start])
     
     start = timer()
@@ -397,28 +412,51 @@ if __name__ == '__main__':
     end = timer()
     Zh = ztoZ(zh)
     t.append_row(["Kernel k-means", metric.accuracy(z, zh), 
-                  objective(Zh, G_standard), end-start])
-    
+                  objective(Zh, G), end-start])
+
     start = timer()
-    km = KernelEnergy(k, G, z0, max_iter=100)
-    zh = km.fit_predict(X)
+    zh = minw(k, G1, Z0, 100, tol=1e-5, verbose=False)
     end = timer()
     Zh = ztoZ(zh)
-    t.append_row(["Kernel Energy", metric.accuracy(z, zh), 
-        objective(Zh, G), end-start])
-
+    t.append_row(["Energy Half", metric.accuracy(z, zh), 
+                  objective(Zh, G1), end-start])
+    
+    start = timer()
+    zh = kernel_kmeans(k, G1, Z0, 100, tol=1e-5, verbose=False)
+    end = timer()
+    Zh = ztoZ(zh)
+    t.append_row(["Kernel k-means half", metric.accuracy(z, zh), 
+                  objective(Zh, G1), end-start])
+    
+    start = timer()
+    zh = minw(k, G2, Z0, 100, tol=1e-5, verbose=False)
+    end = timer()
+    Zh = ztoZ(zh)
+    t.append_row(["Energy Gauss", metric.accuracy(z, zh), 
+                  objective(Zh, G2), end-start])
+    
+    start = timer()
+    zh = kernel_kmeans(k, G2, Z0, 100, tol=1e-5, verbose=False)
+    end = timer()
+    Zh = ztoZ(zh)
+    t.append_row(["Kernel k-means gauss", metric.accuracy(z, zh), 
+                  objective(Zh, G2), end-start])
+    
     start = timer()
     zh = kmeans(k, X, labels_=z0, mus_=mu0)
     end = timer()
     Zh = ztoZ(zh)
     t.append_row(["k-means", metric.accuracy(z, zh), 
                   '-', end-start])
-        
-    #start = timer()
-    #zh = gmm(k, X, tol=1e-5, max_iter=200)
-    #end = timer()
-    #Zh = ztoZ(zh)
-    #t.append_row(["GMM", metric.accuracy(z, zh), 
-    #              '-', end-start])
+    
+    try:
+        start = timer()
+        zh = gmm(k, X, tol=1e-5, max_iter=200)
+        end = timer()
+        Zh = ztoZ(zh)
+        t.append_row(["GMM", metric.accuracy(z, zh), 
+                    '-', end-start])
+    except:
+        t.append_row(["GMM", '-', '-', '-'])
     
     print t

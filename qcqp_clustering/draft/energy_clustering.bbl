@@ -1,10 +1,26 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{Szkely2013}
 {G. J. Sz{\'e}kely and M. L. Rizzo}.
-\newblock {Energy statistics: A class of statistics based on distances}.
+\newblock {Energy Statistics: A Class of Statistics Based on Distances}.
 \newblock {\em Journal of Statistical Planning and Inference}, 143:1249--1272,
   2013.
+
+\bibitem{RizzoVariance}
+{M. L. Rizzo and G. J. Sz{\'e}kely}.
+\newblock {DISCO Analysis: A Nonparametric Extension of Analysis of Variance}.
+\newblock {\em The Annals of Applied Statistics}, 4(2):1034--1055, 2010.
+
+\bibitem{RizzoClustering}
+{G. J. Sz{\'e}kely and M. L. Rizzo}.
+\newblock {Hierarchical Clustering via Joint Between-Within Distances:
+  Extending Ward's Minimum Variance Method}.
+\newblock {\em Journal of Classification}, 22(2):151--183, 2005.
+
+\bibitem{Lyons}
+{R. Lyons}.
+\newblock {Distance Covariance in Metric Spaces}.
+\newblock {\em The Annals of Probability}, 41(5):3284--3305, 2013.
 
 \bibitem{Sejdinovic2013}
 D.~Sejdinovic, B.~Sriperumbudur, A.~Gretton, and K.~Fukumizu.
@@ -12,11 +28,38 @@ D.~Sejdinovic, B.~Sriperumbudur, A.~Gretton, and K.~Fukumizu.
   Testing}.
 \newblock {\em The Annals of Statistics}, 41(5):2263--2291, 2013.
 
+\bibitem{Mercer}
+{J. Mercer}.
+\newblock {Functions of Positive and Negative Type and their Connection with
+  the Theory of Integral Equations}.
+\newblock {\em Proceedings of the Royal Society of London}, 209:415--446, 1909.
+
+\bibitem{Smola}
+{B. Sch\"{o}lkopf and A. J. Smola and K. R. M\"{u}ller}.
+\newblock {Nonlinear Component Analysis as a Kernel Eigenvalue Problem}.
+\newblock {\em Neural Computation}, 10:1299--1319, 1998.
+
+\bibitem{Girolami}
+{M. Girolami}.
+\newblock {Kernel Based Clustering in Feature Space}.
+\newblock {\em Neural Networks}, 13(3):780--784, 2002.
+
+\bibitem{Filippone}
+{M. Filippone and F. Camastra and F. Masulli and S. Rovetta}.
+\newblock {A Survey of Kernel and Spectral Methods for Clustering}.
+\newblock {\em Pattern Recognition}, 41:176--190, 2008.
+
+\bibitem{Dhillon}
+I.~S. Dhillon, Y.~Guan, and B.~Kulis.
+\newblock {Weighted Graph Cuts without Eigenvectors: A Multilevel Approach}.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  29(11):1944--1957, 2007.
+
 \bibitem{Aronszajn}
 {N. Aronszajn}.
 \newblock {Theory of Reproducing Kernels}.
-\newblock {\em Transactions of the American Mathematical Society}, 68:337--404,
-  1950.
+\newblock {\em Transactions of the American Mathematical Society},
+  68(3):337--404, 1950.
 
 \bibitem{Gretton2012}
 A.~Gretton, K.~M. Borgwardt, M.~J. Rasch, B.~Sch{\"olkopf}, and A.~Smola.
@@ -34,13 +77,6 @@ A.~Y. Ng, M.~I. Jordan, and Y.~Weiss.
 \newblock {On Spectral Clustering: Analysis and an Algorithm}.
 \newblock In {\em Advances in Neural Information Processing Systems},
   volume~14, pages 849--856, Cambridge, MA, 2001. MIT Press.
-
-\bibitem{Dhillon}
-I.~S. Dhillon, Y.~Guan, and B.~Kulis.
-\newblock {Kernel K-means: Spectral Clustering and Normalized Cuts}.
-\newblock In {\em Proceedings of the Tenth ACM SIGKDD International Conference
-  on Knowledge Discovery and Data Mining}, KDD '04, pages 551--556, New York,
-  NY, USA, 2004. ACM.
 
 \bibitem{Vassilvitskii}
 D.~Arthur and S.~Vassilvitskii.

@@ -126,10 +126,112 @@ these most used clustering algorithms.
 
 \section{Introduction}
 
-Mention why energy is important, main results, where it was applied, etc.
-Motivate how this can be used for clustering. Mention most important
-papers on this \ldots Explain main results of this paper and give a brief
-outline.
+Energy statistics is based on the energy distance between probability
+distributions, which provides a notion of statistical potential energy
+to statistical observations, in close analogy to Newton's gravitational
+potential energy in classical mechanics. We refer the reader to
+\cite{Szkely2013}, and references therein, for an overview.
+It has been applied to several goodness-of-fit hypothesis tests, 
+multi-sample tests of equality of distributions, analysis of variance
+\cite{RizzoVariance}, and (nonlinear)
+dependence tests through
+distance covariance and distance correlation, which generalizes the Pearson
+correlation coefficient. 
+Moreover, energy statistics  was applied
+to hierarchical clustering \cite{RizzoClustering} by extending Ward's
+method of minimum variance.
+
+More recently, the distance covariance was 
+generalized from Euclidean
+spaces to metric spaces of strong negative type \cite{Lyons}.
+Furthermore, a unifying framework establishing an equivalence
+between generalized energy distances to maximum
+mean discrepancies (MMD), which are distances between embeddings of
+distributions in reproducing kernel Hilbert spaces (RKHS), was
+provided \cite{Sejdinovic2013}. This important work establishes the link
+between techniques commonly used in the statistics literature, regarding
+energy statistics, and techniques
+commonly used in machine learning.
+
+Given a dataset $\mathbb{X} = \{x_1, x_2,\dotsc,x_n \}$, where each
+datapoint lives in a generic space $x_i \in \mathcal{X}$, the $k$-clustering
+problem consists in grouping these points into $k$ groups $\{
+\C_1,\C_2,\dotsc,\C_k \}$, such that
+points belonging to the same group are more ``similar'' to each other
+than to points in  other groups. This intuitive notion already assumes
+a ``metric'' able to measure the similarity between datapoints. Clustering
+is an unsupervised method, and one of the most important problems in machine
+learning since it provides the first step towards automatically constructing
+labels for previously unseen data. The most used algorithms are
+by far $k$-means and gaussian mixture models (GMM) through expectation
+maximization (EM) algorithm. Both are parametric, making 
+strong assumptions about
+the distribution of the data (normality), and the 
+space where data lie is Euclidean, $\mathcal{X} = \mathbb{R}^D$, hence
+the similarity is based on Euclidean metric, 
+$\| x_i - x_j \|^2 = (x_i - x_j)^\top(x_i-x_j) = 
+\sum_{\ell=1}^D (x_{i,\ell} - x_{j,\ell})^2$. These algorithms provide
+a good clustering when data is linearly separable in Euclidean space.
+
+To account for nonlinearly separable data, which may possibly live
+in an arbitrary non-Euclidean space, kernel methods are usually employed.
+If a Mercer kernel $\kk: \mathcal{X}\times \mathcal{X} \to \mathbb{R}$ 
+is available \cite{Mercer}, which is a symmetric and positive definite 
+function, it guarantees that there exists a map $\varphi : \mathcal{X} \to
+\mathcal{H}$, where $\mathcal{H}$ is a Hilbert space. Thus, one can
+compute similarities through the inner product and 
+perform clustering in the feature space $\mathcal{H}$. The nice thing
+about this is that the map $\varphi$ is only used implicitly, i.e. one
+does not need to know $\varphi$, since the inner
+product can be computed only based on the kernel $\kk(\cdot, \cdot)$, 
+a convenient technique known as kernel trick. The well-known 
+kernel $k$-means problem 
+is exactly $k$-means in the feature space
+\cite{Smola,Girolami} (see also \cite{Filippone} for a survey of clustering
+methods). 
+It exploits the nonlinear structure provided by
+a kernel function to perform clustering in datasets that are not linearly
+separable in their original space $\mathcal{X}$.
+As it stands, kernel $k$-means is an heuristic approach in the sense that
+it is not derived from a statistical theory. Moreover, the choice of
+kernel is crucial, and there is no systematic theory for this. One
+must rely on ad hoc methods.
+
+In this paper, we consider how to perform clustering based on energy
+statistics theory. The original goal is to provide a nonparametric
+clustering method, since energy distance is nonparametric.
+The basis of our work is the theory developed in 
+\cite{Sejdinovic2013}. Based on this and on the multi-sample test
+for equality of distributions from energy statistics, we show that
+there is only one function that provides the clustering optimization
+problem. We then show that this clustering
+optimization problem reduces to a quadratically constrained quadratic
+problem (QCQP). This optimization problem has the same form as kernel $k$-means,
+spectral clustering, and some well-known graph partitioning problems
+\cite{Dhillon}. This lead us to show that energy statistics based
+clustering is actually equivalent to kernel $k$-means optimization problem.
+However, energy statistics fixes a kernel to begin with.
+Furthermore, these results can be seen as a first-principle derivation
+of kernel $k$-means from energy statistics, which thus bring
+these kernel based clustering methods into a unifying mathematical theory.
+We also provide an iterative algorithm, different but with the same
+complexity as kernel $k$-means algorithm. The numerical results indicate
+that this method is more accurate and robust.
+
+Our work is organized as follows. In section~\ref{sec:background} we review
+the necessary background on energy statistics and RKHS.
+Section~\ref{sec:clustering_theory} contains the main results of this paper
+where we consider a clustering theory based on energy statistics, leading
+to a QCQP which is NP-hard.
+In section~\ref{sec:twoclass} we consider a simple example in one dimension,
+where we propose an algorithm which requires no initialization.
+In section~\ref{sec:algo} we briefly review kernel $k$-means algorithm,
+and propose a new iterative algorithm to solve this QCQP.
+Section~\ref{sec:numerics} contains some carefully designed numerical
+experiments indicating that this algorithm outperforms kernel
+$k$-means, standard $k$-means, and GMM algorithms.
+Our conclusions are in section~\ref{sec:conclusion}.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -842,7 +944,7 @@ The zero accuracy values for GMM happened when EM algorithm was unable
 to estimate the parameters. These two simple experiments illustrate
 how energy statistics based clustering is nonparametric, since it is able
 to provide high quality clustering in settings where data comes
-from very different distribtuions.
+from very different distributions.
 
 \begin{figure}
 \begin{minipage}{0.49\textwidth}
@@ -888,7 +990,7 @@ maximizer of the QCQP \eqref{eq:qcqp2}, however, due to
 Proposition~\ref{th:kernel_kmeans} we can also find an approximate
 solution by the well-known kernel $k$-means algorithm, which 
 for convenience
-will also be reestated in the present context.
+will also be restated in the present context.
 First, let us introduce some base notation.
 
 Consider the optimization problem 
@@ -1092,33 +1194,38 @@ entries of $G$.
 
 In the experiments below we fix the semimetric 
 according to the traditional energy distance \eqref{eq:energy}, and
-the fixed point $x_0=0$ is chosen in the associated kernel  
-\eqref{eq:kernel_semimetric}:
+the point $x_0=0$ is chosen in the associated kernel  
+\eqref{eq:kernel_semimetric}. We thus have
 \begin{equation}
+\label{eq:standard_metric}
 \rho(x,y) = \| x-y\|, \qquad \kk(x,y) = 
 \tfrac{1}{2}\left( \| x \| + \| y \| - \| x-y \| \right).
 \end{equation}
-We may consider other semimetrics/kernels as well, 
+We will consider other semimetrics/kernels as well, 
 but the above will be considered the
 standard kernel for energy statistics and will always be present in every
-experiment. Another usual choice would be
-to use $\alpha\ne 1$ according to \eqref{eq:energy2}.
-
-We will compare Algorithm~\ref{algo} with
-kernel $k$-means Algorithm~\ref{kmeans_algo}, and also with
-standard $k$-means and GMM through the expectation maximization (EM) 
-algorithm
-as well. Since for synthetic data the true labels are available,
+experiment as a reference. Notice that this is a convention, 
+we could have chosen
+any other semimetric as the standard.
+One of the main goals of the following 
+experiments is to compare Algorithm~\ref{algo} to
+kernel $k$-means algorithm, described in Algorithm~\ref{kmeans_algo}. Thus,
+for every kernel used in Algorithm~\ref{algo}, we also use the same 
+kernel in Algorithm~\ref{kmeans_algo}. Another goal is to compare
+Algorithm~\ref{algo} with $k$-means and GMM (through expectation maximization
+algorithm), as these are the most used
+clustering algorithms in practice.
+Since for synthetic data the true labels are available,
 our measure of clustering quality
 will be \eqref{eq:accuracy}. Moreover, for all algorithms, we always
 choose the initialization from $k$-means++ \cite{Vassilvitskii}.
 
 We first consider clustering in high dimensions and analyze 
 how the algorithms degrade as the number of dimensions increase, while
-keeping the number of points in each cluster fixed. 
-In Figure~\ref{fig:gauss}a we have data generated from normal 
-distributions in 
-$D$-dimensions:
+keeping the number of points in each cluster fixed. The Bayes error
+is also kept fixed as ambient dimension increases.
+In Figure~\ref{fig:gauss}a we have data generated from $D$-variate normal 
+distributions as follows: 
 \begin{equation}
 \label{eq:gauss1}
 \begin{split}
@@ -1130,17 +1237,16 @@ $D$-dimensions:
 \Sigma_1 = \Sigma_2 = I_D.
 \end{split}
 \end{equation}
-For each experiment we only keep signal in
-$\mu_2$ in the first $10$
-dimensions, and keep increasing the ambient dimension $D$. For each
-data set, we run the algorithms $10$ times and pick the result with
-the best objective function value.
-In Figure~\ref{fig:gauss}a one sees that
+We only keep signal in
+in the first $10$
+dimensions of $\mu_2$, and keep increasing the ambient dimension $D$. For each
+$D$, we perform $100$ experiments, obtaining the clustering accuracy
+for each algorithm.
+We can see that
 GMM is not able to estimate the covariance matrix 
 when the number
-of dimensions exceeds the number of points in each cluster. 
-One can see a slightly better performance of Algorithm~\ref{algo} compared
-to the other ones.
+of dimensions exceeds the number of points in each cluster, so it gives
+zero accuracy for $D \gtrsim 100$.
 In Figure~\ref{fig:gauss}b we have the same type of experiment but 
 with 
 \begin{equation}
@@ -1156,39 +1262,47 @@ with
 \end{smallmatrix}\right). \quad
 \end{split}
 \end{equation}
+Therefore, for both experiments shown in Figure~\ref{fig:gauss}
+we can see a better performance of Algorithm~\ref{algo} compared
+to the other ones, in particular compared to kernel $k$-means algorithm,
+where we recall that both
+aim at optimizing the same problem (see Proposition~\ref{th:kernel_kmeans}). 
+Also, notice that $k$-means
+and GMM are consistently the right model for this dataset, so it is hard
+to perform better than these algorithms in this current setting.
+Notice that Algorithm~\ref{algo} is more robust as the ambient
+dimension increases.
 
 \begin{figure}
 \begin{minipage}{0.49\textwidth}
 \centering
-\includegraphics[width=1\textwidth]{gauss_dim.pdf}\\[-.8em]
+\includegraphics[width=1\textwidth]{gauss_dim.pdf}\\[-1.0em]
 (a)
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
 \centering
-\includegraphics[width=1\textwidth]{gauss_cov.pdf}\\[-.8em]
+\includegraphics[width=1\textwidth]{gauss_cov.pdf}\\[-1.0em]
 (b)
 \end{minipage}
 \caption{
 \label{fig:gauss}
-Two clusters with normally distributed data, with $100$ points in each
-cluster. We analyse the effect of ambient dimension while keeping Bayes
-error fixed.
+Effect of increasing the
+ambient dimension while keeping Bayes error fixed, for 
+two clusters with normally distributed data with $100$ points in each
+cluster. 
 (a) 
 We increase $D$ as described in \eqref{eq:gauss1}. The blue
 line correspond to Algorithm~\ref{algo}, while
 the magenta line 
-corresponds to Algorithm~\ref{kmeans_algo}.
+corresponds to kernel $k$-means, Algorithm~\ref{kmeans_algo}.
 (b) The same but with data following \eqref{eq:gauss2}.
-In both experiments one notice a slightly better accuracy
-of Algorithm~\ref{algo} compared to the other ones.
+One notices that
+Algorithm~\ref{algo} is more robust than the other ones.
 }
 \end{figure}
 
-
-
-In Figure~\ref{fig:unbalanced}a we consider how the previous algorithms
-behave
-for unbalanced clusters. We generate data as
+In Figure~\ref{fig:unbalanced} we consider the effect of having 
+unbalanced clusters. We generate data as
 \begin{equation}
 \label{eq:gauss3}
 \begin{split}
@@ -1206,142 +1320,139 @@ for unbalanced clusters. We generate data as
 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 1 
 \end{smallmatrix}\right), \quad
-n_1 = N - m, \quad  n_2 = N + m, \quad N=200,
+n_1 = N - m, \quad  n_2 = N + m, \quad N=200.
 \end{split}
 \end{equation}
-and we increase $m$, i.e. we make the clusters progressively more unbalanced.
-As well-known, one an see that GMM
-works well for unbalanced clusters, mostly because 
-it is a soft clustering algorithm.
-We can see that all the other kernel based methods
-degrade more rapidly than GMM for
-highly unbalanced clusters.
-This is
-unsurprising since Algorithms~\ref{algo}~and~\ref{kmeans_algo} both 
-make hard assignments. Finally, Figure~\ref{fig:unbalanced}b considers
-the same experiment as in Figure~\ref{fig:gauss}a but for lognormal
-data. With $\rho(x,y) = \| x-y\|^{1/2}$ we even gain a slight improvement.
-Energy statistics clustering outperforms all the other methods since
-it is nonparametric.
+We then increase $m$, i.e. we make the clusters progressively more unbalanced.
+We generate $100$ experiments for each $m$, and plot the clustering accuracy
+versus $m$.
+As expected, GMM
+works better than the other algorithms in the case of unbalanced clusters. 
+This is mostly due to its soft assignments.
+We can see that the other methods based on hard assignments degrade similarly,
+and  more rapidly than GMM. This indicates that a fuzzy version of
+energy statistics clustering should compensate for this effect.
 
 \begin{figure}
-\begin{minipage}{0.49\textwidth}
 \centering
-\includegraphics[width=1\textwidth]{gauss_pi.pdf}\\[-.8em]
-(a)
-\end{minipage}
-\begin{minipage}{0.49\textwidth}
-\centering
-\includegraphics[width=1\textwidth]{loggauss_dim.pdf}\\[-.8em]
-(b)
-\end{minipage}
+\includegraphics[width=0.5\textwidth]{gauss_pi.pdf}
 \caption{
 \label{fig:unbalanced}
-(a) Previous algorithms for unbalanced clusters, 
-according to \eqref{eq:gauss3}.
-(b) The same experiment as in Figure~\ref{fig:gauss}a but for lognormal
-data as 
-$x\sim \tfrac{1}{2}\left( e^{\mathcal{N}(\mu_1,\Sigma_1)} +
-e^{\mathcal{N}(\mu_2,\Sigma_2)} \right)$ with
-$\mu_1 = (0,\dotsc,0)^\top$,
-$\mu_2 = 0.5\times(1,\dotsc,1,0,\dotsc,0)^\top$ with signal in $d=10$, 
-$\Sigma_1 = 0.3 \times I_D$, and $\Sigma_2=I_D$. 
-One see a clear advantage of
-energy statistics clustering. The extra green line correspond
-to $\rho(x,y) = \| x-y\|^{1/2}$.
-}
+Previous algorithms for unbalanced clusters, 
+according to \eqref{eq:gauss3}.}
 \end{figure}
 
-
-In Figure~\ref{fig:weird} we consider other types of data in two dimensions.
-In each case we perform 10 experiments and compute the accuracy
-based on the true labels. The plots show the average results of 10 runs
-of each experiment (dots), and the maximum and minimum values as well (shaded
-area). Although energy clustering is nonparametric, these datasets are
-very specific so we can take advantage and make a suitable choice of
-the semimetric $\rho$. This illustrates that energy clustering is also
-flexible enough to incorporate prior information about the data.
-In Figure~\ref{fig:weird}a we have parallel cigars from
+Now, besides \eqref{eq:standard_metric} we consider two other semimetrics:
+\begin{align}
+\rho_{1/2}(x,y) &= \| x-y \|^{1/2}, & \kk(x,y) &= \tfrac{1}{2} \left( 
+\| x \|^{1/2} + \| y \|^{1/2} 
+- \| x-y \|^{1/2} \right), \label{eq:rhohalf}\\
+\rho_{e}(x,y) &= 2 - 2 e^{-\| x- y\|/2}, & \kk(x,y) &= e^{-\| x-y\|/2}.
+\label{eq:rhoe}
+\end{align}
+In Figure~\ref{fig:consist}a we have data in $20$ dimensions distributed as
 \begin{equation}
-\label{eq:cigar}
+\label{eq:20gauss}
 \begin{split}
-&x \sim \tfrac{1}{2}\left( 
-\mathcal{N}(\mu_1, \Sigma_1) + 
-\mathcal{N}(\mu_2, \Sigma_2)
-\right), \\
-& \mu_1 = (0,0)^\top, \quad \mu_2 = (6.5, 0)^\top, \quad
-\Sigma_1 = \Sigma_2 = \left( \begin{smallmatrix} 
-1 & 0 \\ 0 & 20
-\end{smallmatrix}\right)
+x &\sim \tfrac{1}{2}\left[ \mathcal{N}(\mu_1,\Sigma_1) + \mathcal{N}(\mu_2,
+\Sigma_2) \right], \\
+\mu_1 &= (\underbrace{0,\dotsc,0}_{\times 20})^\top ,\quad
+\mu_2 = \tfrac{1}{2} 
+(\underbrace{1,\dotsc,1}_{5},\underbrace{0,\dotsc,0}_{15})^\top, \quad
+\Sigma_1 = \tfrac{1}{2} I_{20},  \quad
+\Sigma_2 = I_{20}.
 \end{split}
 \end{equation}
-with $100$ points in each cluster. Notice that $k$-means is unable to
-cluster this data, while energy clustering performs pretty much as well
-as GMM, which is the optimal algorithm suited to this kind of data.
-We used the semimetric $\rho(x,y) = \| x -  y\|^{1/2}$ in this case.
-In Figure~\ref{fig:weird}b we generate two concentric circles with a small
-gaussian noise. To make the semimetric a little bit more localized we
-include a decaying exponential in the form:
+We increase the number of points in each cluster and show the clustering
+accuracy with different algorithms. The new semimetrics \eqref{eq:rhohalf}
+and $\eqref{eq:rhoe}$ are indicated in the legend. One can see that
+Algorithm~\ref{algo} performs better than all the other ones, and in 
+particular \eqref{eq:rhoe} provides better results.
+As the number of datapoints 
+get large enough, GMM starts to be as accurate as clustering
+based on energy statistics, as it should since it is 
+consistent model to the data. In Figure~\ref{fig:consist}b, however, we
+use the same parameters as in \eqref{eq:20gauss} but now with data
+log-normally distributed:
 \begin{equation}
-\label{eq:rho_loc}
-\rho(x,y) = \| x-y \|^2 e^{-\tfrac{1}{2}\| x-y \|}.
+\label{eq:20loggauss}
+x \sim \tfrac{1}{2}\left[ e^{\mathcal{N}(\mu_1,\Sigma_1)}
++ e^{\mathcal{N}(\mu_2, \Sigma_2)}\right].
 \end{equation}
-Notice that energy clustering is able to cluster this data almost perfectly
-in most cases.
-In Figure~\ref{fig:weird}c we consider two spirals, also with a small
-gaussian noise. Due to the geometry of the data
-we consider
-\begin{equation}
-\label{eq:rho_sin}
-\rho(x,y) = \| x - y\|^2 \theta \sin \left(  \tfrac{\| x-y \|}{\theta}\right),
-\qquad \theta = 0.9.
-\end{equation}
-Again, energy clustering performs much better than $k$-means and GMM which
-are unable to cluster this kind of dataset.
-
+We see that clustering based on energy statistics still performs accurately
+for this kind of data, while $k$-means works a little bit better than chance,
+and GMM is not even able to estimate the parameters. Again, \eqref{eq:rhoe}
+provides slightly better results than \eqref{eq:standard_metric} or
+\eqref{eq:rhohalf}. Notice also that Algorithm~\ref{algo} performs better
+than Algorithm~\ref{kmeans_algo}. Both experiments in Figure~\ref{fig:consist}
+shows that energy statistics clustering is nonparametric, since it is able
+to cluster data coming from very different distributions.
 
 \begin{figure}
-\begin{minipage}{0.33\textwidth}
-\hspace{.7cm}\includegraphics[width=.82\textwidth]{cigar_data.pdf}
-\end{minipage}
-\begin{minipage}{0.33\textwidth}
-\hspace{.7cm}\includegraphics[width=.82\textwidth]{circles_data.pdf}
-\end{minipage}
-\begin{minipage}{0.33\textwidth}
-\hspace{.7cm}\includegraphics[width=.82\textwidth]{spirals_data.pdf}
-\end{minipage}
-\begin{minipage}{0.33\textwidth}
+\begin{minipage}{0.49\textwidth}
 \centering
-\includegraphics[width=\textwidth]{cigars.pdf}\\[-.8em]
+\includegraphics[width=1\textwidth]{gauss.pdf}\\[-1.0em]
 (a)
 \end{minipage}
-\begin{minipage}{0.33\textwidth}
+\begin{minipage}{0.49\textwidth}
 \centering
-\includegraphics[width=\textwidth]{circles.pdf}\\[-.8em]
+\includegraphics[width=1\textwidth]{loggauss.pdf}\\[-1.0em]
 (b)
 \end{minipage}
-\begin{minipage}{0.33\textwidth}
-\centering
-\includegraphics[width=\textwidth]{spirals.pdf}\\[-.8em]
-(c)
-\end{minipage}
 \caption{
-\label{fig:weird}
-(a) Parallel cigars generated from \eqref{eq:cigar} with $100$ points
-in each class. Use use energy clustering
-with $\rho = \| x - y\|^{1/2}$. (b) Two concentric circles with $150$ points
-in each class. We use the semimetric \eqref{eq:rho_loc}. 
-(c) Two concentric spirals with
-$150$ points in each class. We use the semimetric \eqref{eq:rho_sin}.
+\label{fig:consist}
+(a) Data normally distributed as in 
+\eqref{eq:20gauss}. We increase the number of points in each cluster to
+illustrate the statistical consistency of the algorithms.
+(b) The same experiment but for data following \eqref{eq:20loggauss}.
+In both experiments, for each case we run every algorithm $100$ times and show
+the average results. One can see the better performance of energy statistics
+clustering, Algorithm~\ref{algo}, and in particular by using the semimetric
+\eqref{eq:rhoe}. These two figures illustrate that energy statistics clustering
+is nonparametric since it works well for very different distributions.
 }
 \end{figure}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
+\label{sec:conclusion}
+
+In this paper we have considered clustering from the perspective of energy
+statistics, which provides a nonparametric test for equality of distributions.
+Based on this, we showed that the clustering problem reduces to a quadratically
+constrained optimization problem (QCQP), 
+as described in Proposition~\ref{th:qcqp2}.
+Moreover, we showed that clustering based on energy statistics is equivalent
+to kernel $k$-means optimization problem, once the kernel is fixed; see
+Proposition~\ref{th:kernel_kmeans}. Our results imply that kernel $k$-means
+approach to clustering is actually a consequence of energy statistics
+theory, and thus place this method into a principled statistical basis.
+As already known \cite{Dhillon}, this approach is related to spectral
+clustering, and graph partitioning problems. Therefore, all these problems 
+may be seen as arising naturally from energy statistics clustering.
+It is important to mention that energy statistics clustering, as formulated
+here, is valid for
+arbitrary metric spaces of negative type, and makes no assumptions about
+the distribution of the data. Moreover, it does not rely on the concept of a
+cluster mean, even implicitly.
+
+We also proposed Algorithm~\ref{algo} as an alternative to the well-known
+kernel $k$-means algorithm (see Algorithm~\ref{kmeans_algo}), 
+where both have the same time
+complexity. The numerical results show that Algorithm~\ref{algo}
+might provide better clustering accuracy and is more robust 
+than kernel $k$-means algorithm. Since there exists a huge literature about
+kernel $k$-means, and approximation methods to make it faster, with
+applications to several artificial and real data, 
+we limited ourselves to analyze few but carefully designed experiments, which
+illustrates the advantages of Algorithm~\ref{algo}.
 
 
-\subsection*{Acknowledgements}
-We thank \ldots
+\bigskip
+
+%\subsection*{Acknowledgements}
+%We thank \ldots
 
 
 \bibliographystyle{unsrt}
