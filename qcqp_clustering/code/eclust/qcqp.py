@@ -175,6 +175,81 @@ def minw(k, G, Z0, max_iter=100, tol=1e-4, verbose=False):
     
     return Ztoz(Z)
 
+def minw_online(k, G, Z0, max_iter=100, tol=1e-4, verbose=False):
+    """Optimize the W objective function by considering moving points
+    to different partitions. Compute the change in the cost function by
+    moving a point then decide the best partition to optimize the cost
+    function. This is an online version of the above algorithm where
+    points are selected at random.
+    
+    """
+
+    # initial configuration
+    n = G.shape[0]
+    Z = np.copy(Z0)
+    Zt = Z.T
+    D = Zt.dot(Z)
+    Q_matrix = Zt.dot(G.dot(Z))
+    m = D.dot(np.ones(k)) # number of points
+    Q = np.array([Q_matrix[i,i] for i in range(k)]) # cost per partition
+    count = 0
+    converged = False
+
+    while not converged and count < max_iter:
+        
+        n_changed = 0
+
+        point_indexes = range(n)
+        np.random.shuffle(point_indexes)
+        for i in point_indexes: # for each point chosen at random
+        
+            j = np.where(Z[i]==1)[0][0]
+            nj = m[j]
+            Qj = Q[j]
+            Qj_x = G[i,:].dot(Z[:,j])
+        
+            Aj = (1.0/(nj*(nj-1)))*Qj - (2.0/(nj-1))*Qj_x
+
+            costs = np.zeros(k)
+            Qplus = np.zeros(k)
+            for l in range(k):
+                
+                if l == j:
+                    costs[l] = -np.inf
+                    continue
+                
+                nl = m[l]
+                Ql = Q[l]
+                Ql_plus_x = G[i,:].dot(Z[:,l]) + G[i,i]
+                Qplus[l] = Ql_plus_x
+
+                Al = (1.0/(nl*(nl+1)))*Ql - (2.0/(nl+1))*Ql_plus_x
+
+                costs[l] = Aj - Al
+                
+            j_star = np.argmax(costs)
+            if costs[j_star] > 0:
+                Z[i,j] = 0
+                Z[i,j_star] = 1
+                m[j] -= 1
+                m[j_star] += 1
+                Q[j] -= 2*Qj_x
+                Q[j_star] += 2*Qplus[j_star]
+                n_changed += 1
+
+        if n_changed/n < tol:
+            converged = True
+        else:
+            count += 1
+
+    if verbose:
+        if count >= max_iter:
+            print "\tQCQP didn't converge after %i iterations." % count
+        else:
+            print "\tQCQP converged in %i iterations." % count
+    
+    return Ztoz(Z)
+
 def kernel_kmeans(k, G, Z0, max_iter=100, tol=1e-4, verbose=False):
     """Optimize QCQP through a kernel k-means approach."""
 
@@ -334,129 +409,196 @@ if __name__ == '__main__':
     from gmm import em_gmm_vect as gmm
     import energy1d
     from scipy.spatial.distance import cityblock
+    from sklearn.mixture import GMM
+    from sklearn.cluster import KMeans
+    from scipy.stats import sem
     
     from timeit import default_timer as timer
     
     from beautifultable import BeautifulTable
 
-    # generate data
-    """
-    X, z = data.multivariate_normal(
-        [[0,0,0], [4,0,0]],
-        [
-            np.array([[1,0,0],[0,1,0],[0,0,1]]), 
-            np.array([[1,0,0],[0,19,0],[0,0,1]])
-        ],
-        [200, 200]
-    )
-    """
-    """
-    X, z = data.multivariate_lognormal(
-        [np.zeros(20), 0.5*np.concatenate([np.ones(5), np.zeros(15)])],
-        [0.5*np.eye(20), np.eye(20)],
-        [100, 100]
-    )
-    """
-    X, z = data.circles([1, 3, 5], [0.1, 0.1, 0.1], [200,200, 200])
-    #X, z = data.spirals([1,-1], [300,300], noise=0.2)
+#    # generate data
+#    """
+#    X, z = data.multivariate_normal(
+#        [[0,0,0], [4,0,0]],
+#        [
+#            np.array([[1,0,0],[0,1,0],[0,0,1]]), 
+#            np.array([[1,0,0],[0,19,0],[0,0,1]])
+#        ],
+#        [200, 200]
+#    )
+#    """
+#    """
+#    X, z = data.multivariate_lognormal(
+#        [np.zeros(20), 0.5*np.concatenate([np.ones(5), np.zeros(15)])],
+#        [0.5*np.eye(20), np.eye(20)],
+#        [100, 100]
+#    )
+#    """
+#    X, z = data.circles([1, 3, 5], [0.1, 0.1, 0.1], [200,200, 200])
+#    #X, z = data.spirals([1,-1], [300,300], noise=0.2)
+#
+#    # number of clusters
+#    k = 3
+#
+#    # semimetric
+#    def rho(x,y):
+#        norm = np.power(np.linalg.norm(x-y), 1)
+#        return norm
+#    
+#    def rho_half(x,y):
+#        norm = np.power(np.linalg.norm(x-y), 0.5)
+#        return norm
+#
+#    def rho_gauss(x,y):
+#        #norm = np.power(np.linalg.norm(x-y), 2)
+#        #return 2 - 2*np.exp(-norm/2)
+#        return 2-2*np.exp(-np.linalg.norm(x-y) - 0.5*np.linalg.norm(x-y)**2)
+#    
+#    def rho_per(x,y):
+#        norm = np.power(np.linalg.norm(x-y), 1)
+#        return np.power(norm, 2)*0.9*np.sin(norm/0.9)
+#    
+#    def rho_poly(x,y):
+#        p = 2
+#        return np.power(-1+x.dot(x), p) \
+#                +np.power(-1+y.dot(y), p) \
+#                -2*np.power(-1+y.dot(x), p)
+#
+#
+#    # compute Gram matrix
+#    G = kernel_matrix(X, rho)
+#    G1 = kernel_matrix(X, rho_half)
+#    G2 = kernel_matrix(X, rho_gauss)
+#
+#    # initialization
+#    mu0, z0 = kmeanspp.kpp(k, X, ret='both')
+#    Z0 = ztoZ(z0)
+#
+#    t = BeautifulTable()
+#    t.column_headers = ["Method", "Accuracy", "Objective", "Exec Time"]
+#    
+#    start = timer()
+#    zh = minw(k, G, Z0, 100, tol=1e-5, verbose=False)
+#    end = timer()
+#    Zh = ztoZ(zh)
+#    t.append_row(["Energy Standard", metric.accuracy(z, zh), 
+#                  objective(Zh, G), end-start])
+#    
+#    start = timer()
+#    zh = kernel_kmeans(k, G, Z0, 100, tol=1e-5, verbose=False)
+#    end = timer()
+#    Zh = ztoZ(zh)
+#    t.append_row(["Kernel k-means", metric.accuracy(z, zh), 
+#                  objective(Zh, G), end-start])
+#
+#    start = timer()
+#    zh = minw(k, G1, Z0, 100, tol=1e-5, verbose=False)
+#    end = timer()
+#    Zh = ztoZ(zh)
+#    t.append_row(["Energy Half", metric.accuracy(z, zh), 
+#                  objective(Zh, G1), end-start])
+#    
+#    start = timer()
+#    zh = kernel_kmeans(k, G1, Z0, 100, tol=1e-5, verbose=False)
+#    end = timer()
+#    Zh = ztoZ(zh)
+#    t.append_row(["Kernel k-means half", metric.accuracy(z, zh), 
+#                  objective(Zh, G1), end-start])
+#    
+#    start = timer()
+#    zh = minw(k, G2, Z0, 100, tol=1e-5, verbose=False)
+#    end = timer()
+#    Zh = ztoZ(zh)
+#    t.append_row(["Energy Gauss", metric.accuracy(z, zh), 
+#                  objective(Zh, G2), end-start])
+#    
+#    start = timer()
+#    zh = kernel_kmeans(k, G2, Z0, 100, tol=1e-5, verbose=False)
+#    end = timer()
+#    Zh = ztoZ(zh)
+#    t.append_row(["Kernel k-means gauss", metric.accuracy(z, zh), 
+#                  objective(Zh, G2), end-start])
+#    
+#    start = timer()
+#    zh = kmeans(k, X, labels_=z0, mus_=mu0)
+#    end = timer()
+#    Zh = ztoZ(zh)
+#    t.append_row(["k-means", metric.accuracy(z, zh), 
+#                  '-', end-start])
+#    
+#    try:
+#        start = timer()
+#        zh = gmm(k, X, tol=1e-5, max_iter=200)
+#        end = timer()
+#        Zh = ztoZ(zh)
+#        t.append_row(["GMM", metric.accuracy(z, zh), 
+#                    '-', end-start])
+#    except:
+#        t.append_row(["GMM", '-', '-', '-'])
+#    
+#    print t
 
-    # number of clusters
-    k = 3
+    num_experiments = 5
+    table = np.zeros((num_experiments, 4))
+    for i in range(num_experiments):
+        
+        #X, z = data.circles([0.2, 1, 2], [0.2, 0.2, 0.2], [200, 200, 200])
+        
+        mu1 = np.zeros(10)
+        sigma1 = np.eye(10)
+        #mu2 = np.concatenate((np.ones(5), np.zeros(15)))
+        mu2 = np.ones(10) 
+        sigma2 = np.eye(20)
+        for a in range(10):
+            for b in range(a, 10):
+                if a == b:
+                    sigma2[a,b] = (a*b+1)
+                else:
+                    sigma2[a,b] = sigma2[b,a] = 1/(a+b+1)
+        #print sigma2[:10,:10]
+        sigma2 = np.eye(10)
+        X, z = data.multivariate_normal([mu1, mu2], [sigma1, sigma2], 
+                    [500, 500])
 
-    # semimetric
-    def rho(x,y):
-        norm = np.power(np.linalg.norm(x-y), 1)
-        return norm
+        k = 2
     
-    def rho_half(x,y):
-        norm = np.power(np.linalg.norm(x-y), 0.5)
-        return norm
-
-    def rho_gauss(x,y):
-        #norm = np.power(np.linalg.norm(x-y), 2)
-        #return 2 - 2*np.exp(-norm/2)
-        return 2-2*np.exp(-np.linalg.norm(x-y) - 0.5*np.linalg.norm(x-y)**2)
+        def rho(x,y):
+            norm = np.power(np.linalg.norm(x-y), 1.0)
+            #norm1 = np.power(np.linalg.norm(x-y), 0.5)
+            #return 2 - 2*np.exp(-norm/4)
+            #return norm1*np.exp(-norm/2)
+            return norm
+        
+        G = kernel_matrix(X, rho)
     
-    def rho_per(x,y):
-        norm = np.power(np.linalg.norm(x-y), 1)
-        return np.power(norm, 2)*0.9*np.sin(norm/0.9)
-    
-    def rho_poly(x,y):
-        p = 2
-        return np.power(-1+x.dot(x), p) \
-                +np.power(-1+y.dot(y), p) \
-                -2*np.power(-1+y.dot(x), p)
-
-
-    # compute Gram matrix
-    G = kernel_matrix(X, rho)
-    G1 = kernel_matrix(X, rho_half)
-    G2 = kernel_matrix(X, rho_gauss)
-
-    # initialization
-    mu0, z0 = kmeanspp.kpp(k, X, ret='both')
-    Z0 = ztoZ(z0)
-
-    t = BeautifulTable()
-    t.column_headers = ["Method", "Accuracy", "Objective", "Exec Time"]
-    
-    start = timer()
-    zh = minw(k, G, Z0, 100, tol=1e-5, verbose=False)
-    end = timer()
-    Zh = ztoZ(zh)
-    t.append_row(["Energy Standard", metric.accuracy(z, zh), 
-                  objective(Zh, G), end-start])
-    
-    start = timer()
-    zh = kernel_kmeans(k, G, Z0, 100, tol=1e-5, verbose=False)
-    end = timer()
-    Zh = ztoZ(zh)
-    t.append_row(["Kernel k-means", metric.accuracy(z, zh), 
-                  objective(Zh, G), end-start])
-
-    start = timer()
-    zh = minw(k, G1, Z0, 100, tol=1e-5, verbose=False)
-    end = timer()
-    Zh = ztoZ(zh)
-    t.append_row(["Energy Half", metric.accuracy(z, zh), 
-                  objective(Zh, G1), end-start])
-    
-    start = timer()
-    zh = kernel_kmeans(k, G1, Z0, 100, tol=1e-5, verbose=False)
-    end = timer()
-    Zh = ztoZ(zh)
-    t.append_row(["Kernel k-means half", metric.accuracy(z, zh), 
-                  objective(Zh, G1), end-start])
-    
-    start = timer()
-    zh = minw(k, G2, Z0, 100, tol=1e-5, verbose=False)
-    end = timer()
-    Zh = ztoZ(zh)
-    t.append_row(["Energy Gauss", metric.accuracy(z, zh), 
-                  objective(Zh, G2), end-start])
-    
-    start = timer()
-    zh = kernel_kmeans(k, G2, Z0, 100, tol=1e-5, verbose=False)
-    end = timer()
-    Zh = ztoZ(zh)
-    t.append_row(["Kernel k-means gauss", metric.accuracy(z, zh), 
-                  objective(Zh, G2), end-start])
-    
-    start = timer()
-    zh = kmeans(k, X, labels_=z0, mus_=mu0)
-    end = timer()
-    Zh = ztoZ(zh)
-    t.append_row(["k-means", metric.accuracy(z, zh), 
-                  '-', end-start])
-    
-    try:
-        start = timer()
-        zh = gmm(k, X, tol=1e-5, max_iter=200)
-        end = timer()
+        mu0, z0 = kmeanspp.kpp(k, X, ret='both')
+        Z0 = ztoZ(z0)
+        
+        zh = minw(k, G, Z0, 100, tol=1e-5, verbose=False)
         Zh = ztoZ(zh)
-        t.append_row(["GMM", metric.accuracy(z, zh), 
-                    '-', end-start])
-    except:
-        t.append_row(["GMM", '-', '-', '-'])
-    
-    print t
+        table[i, 0] = metric.accuracy(z, zh)
+        
+        zh = minw_online(k, G, Z0, 100, tol=1e-5, verbose=False)
+        Zh = ztoZ(zh)
+        table[i, 1] = metric.accuracy(z, zh)
+
+        km = KMeans(k)
+        zh = km.fit_predict(X)
+        table[i, 2] = metric.accuracy(z, zh)
+
+        #gmm = GMM(k)
+        #gmm.fit(X)
+        #zh = gmm.predict(X)
+        #table[i, 3] = metric.accuracy(z, zh)
+        try:
+            zh = gmm(k, X, tol=1e-5, max_iter=200)
+            table[i, 3] = metric.accuracy(z, zh)
+        except:
+            table[i, 3] = np.nan
+
+    print "Energy:", table[:,0].mean(), sem(table[:,0])
+    print "Energy Online:", table[:,1].mean(), sem(table[:,1])
+    print "k-means:", table[:,2].mean(), sem(table[:,2])
+    print "GMM:", table[:,3].mean(), sem(table[:,3])
+

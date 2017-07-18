@@ -1,4 +1,13 @@
-"""Functions used to generate or manipulate data."""
+"""
+Generate Data
+=============
+
+Some usefull functions to generate or manipulate data.
+For instance, generate data from multivariate normal distribution,
+circles, lognormal, etc. Also some functions to plot data for
+visualization.
+
+"""
 
 # Guilherme Franca <guifranca@gmail.com>
 # Johns Hopkins Unversity, Neurodata
@@ -15,18 +24,19 @@ from sklearn.decomposition import PCA
 
 from pplotcust import *
 
+
 def multivariate_normal(means, sigmas, ns):
     """Generate several normal distributed data points.
     
-    Parameters: 
+    Input: 
         means = [m1, m2, ...]
         sigmas = [s1, s2, ...]
         ns = [n1, n2, ...]
-
-        Each parameter in these lists are associated to one multivariate
-        normal distribution. The data is shuffled so points are not ordered.
     
-    Returns: data X and labels z.
+    Output: data X and labels z.
+
+    Each parameter in these lists are associated to one multivariate
+    normal distribution. The data is shuffled so points are not ordered.
     
     """
     n = len(means)
@@ -45,12 +55,12 @@ def multivariate_normal(means, sigmas, ns):
 def univariate_normal(means, sigmas, ns):
     """Generate several univariate normal distributed data points.
     
-    Parameters: 
+    Input: 
         means = [m1, m2, ...]
         sigmas = [s1, s2, ...]
         ns = [n1, n2, ...]
     
-    Returns: data X and labels z.
+    Output: data X and labels z.
     
     """
     n = len(means)
@@ -68,39 +78,47 @@ def univariate_normal(means, sigmas, ns):
 
 def univariate_lognormal(means, sigmas, ns):
     """Return data according to log normal distribtion.
+
     Input: means = [mu1, mu2, ...], 
            sigmas = [sigma1, sigma2, ...], 
            ns = [n1, n2, ...]
+    
     Ouput: Data matrix X with corresponding labels z
+    
     """
     x, z = univariate_normal(means, sigmas, ns)
     return np.exp(x), z
     
 def multivariate_lognormal(means, sigmas, ns):
     """Return data according to log normal distribtion.
+
     Input: means = [mu1, mu2, ...], 
            sigmas = [sigma1, sigma2, ...], 
            ns=[n1, n2, ...]
+    
     Ouput: Data matrix X with corresponding labels z
+    
     """
     x, z = multivariate_normal(means, sigmas, ns)
     return np.exp(x), z
 
-def circles(rs, eps, ns):
-    """Generate concentric circles with radius in rs and gaussian noise
-    in eps.
+def circles(rs, ms, eps, ns):
+    """Generate concentric circles in 2D with gaussian noise.
+    
     Input: rs = [r1, r2, ...] radius
+           ms = [m_1, m_2, ...] center of the circles
            eps = [epsilon1, epsilon2, ...] perturbation
            ns = [n1, n2, ...] number of points
+    
     Output: data matrix X with labels z
     
     """
     k = 0
     X = []
     z = []
-    for r, e, n in zip(rs, eps, ns):
-        x = np.array([[r*np.cos(a), r*np.sin(a)] 
-                            for a in np.random.uniform(0, 2*np.pi, n)])
+    for r, m, e, n in zip(rs, ms, eps, ns):
+        x = np.array([[r*np.cos(a)+m[0], r*np.sin(a)+m[1]]
+                        for a in np.random.uniform(0, 2*np.pi, n)])
         x += e*np.random.multivariate_normal([0,0],np.eye(2), n)
         X.append(x)
         z.append([k]*n)
@@ -110,17 +128,24 @@ def circles(rs, eps, ns):
     idx = np.random.permutation(sum(ns))
     return X[idx], z[idx]
 
-def spirals(rs, ns, noise=0.2):
-    """Generate spirals with radiuses in rs=[...] and number of points
-    in ns=[...]
+def spirals(rs, ms, ns, noise=0.2):
+    """Generate spirals in 2D
+    
+    Input: rs = [r1, r2, ...] radius
+           ms = [m_1, m_2, ...] centers
+           ns = [n1, n2, ...] number of points
+           noise = size of guassian noise
+    
+    Output: data matrix X with labels z
     
     """
     X = []
     z = []
-    for k, (r, n) in enumerate(zip(rs, ns)):
+    for k, (r, m, n) in enumerate(zip(rs, ms, ns)):
         ts = np.linspace(0, 4*np.pi, n) 
-        x = np.array([[r*t*np.cos(t)+noise*np.random.normal(0,1),
-                       r*t*np.sin(t)+noise*np.random.normal(0,1)] for t in ts])
+        x = np.array([[r*t*np.cos(t)+noise*np.random.normal(0,1)+m[0],
+                       r*t*np.sin(t)+noise*np.random.normal(0,1)+m[1]] 
+                       for t in ts])
         X.append(x)
         z.append([k]*n)
     X = np.concatenate(X)
@@ -130,7 +155,14 @@ def spirals(rs, ns, noise=0.2):
 
 def plot(X, z, colors=['b', 'r', 'g'], fname='plot.pdf'):
     """Plot data according to labels in z.
-    If data is multidimensional, pick the first two principal components.
+    Use PCA to project in 2D in case data is higher dimensional.
+
+    Input: X = data matrix
+           z = labels of each points
+           colors = list of colors for each class
+           fname = output file
+    
+    Ouput: None
     
     """
 
@@ -144,7 +176,6 @@ def plot(X, z, colors=['b', 'r', 'g'], fname='plot.pdf'):
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    #colors = iter(plt.cm.rainbow(np.linspace(0,1,len(z_unique))))
     colors = iter(colors)
     
     for k in z_unique:
@@ -156,32 +187,47 @@ def plot(X, z, colors=['b', 'r', 'g'], fname='plot.pdf'):
     ax.set_xticks([])
     ax.set_yticks([])
     plt.axes().set_aspect('equal', 'datalim')
-    #ax.set_xlabel(r'$x$')
-    #ax.set_ylabel(r'$y$')
     fig.tight_layout()
     fig.savefig(fname)
 
-def histogram(X, z, colors=['b', 'r'], fname='plot.pdf'):
-    """Plot histograms of 1-dimensional data."""
+def histogram(X, z, colors=['#1F77B4', '#FF7F0E'], fname='plot.pdf',
+              xlim=None, bins=500):
+    """Plot histograms of 1-dimensional data.
+    
+    Input: X = data matrix
+           z = class labels
+           color = color for each class
+           fname = output file
+
+    Output: None
+
+    """
     z_unique = np.unique(z)
     fig = plt.figure()
-    #bins=np.arange(min(X), max(X) + 0.2, 0.2)
     ax = fig.add_subplot(111)
     colors = iter(colors)
     for k in z_unique:
         idx = np.where(z==k)[0]
         x = X[idx]
-        ax.hist(x, bins=200, facecolor=next(colors), 
+        ax.hist(x, bins=bins, facecolor=next(colors), 
                 histtype='stepfilled',
-                alpha=.7, normed=1, linewidth=0)
+                alpha=.8, normed=1, linewidth=0.0)
     ax.set_xlabel(r'$x$')
-    ax.set_ylabel(r'$\phantom{accuracy}$')
-    ax.set_xlim([0, 10])
+    if xlim:
+        ax.set_xlim(xlim)
+    plt.tick_params(top='off', bottom='on', left='off', right='off',
+            labelleft='off', labelbottom='on')
+    for i, spine in enumerate(plt.gca().spines.values()):
+        if i !=2:
+            spine.set_visible(False)
+    frame = plt.gca()
+    frame.axes.get_yaxis().set_visible(False)
     fig.tight_layout()
     fig.savefig(fname)
 
 def shuffle_data(X):
     """Shuffle data and return corresponding labels.
+
     Input: X = [X1, X2, ...]
     Output: data matrix X and labels z
     
@@ -199,6 +245,7 @@ def shuffle_data(X):
 
 def mix_data(A, m):
     """Mix data between subsets of A.
+
     Input: A = [A_1, A_2, ..., A_n] where each A_i is a subset of data
             m is an integer
     Output: Mix m points from each class and returns a new data matrix X
@@ -228,45 +275,21 @@ def from_sets_to_labels(A):
     return shuffle_data(A)
 
 
+
 ###############################################################################
 if __name__ == '__main__':
-    
-    #X, z = multivariate_normal(
-    #    [[0,0], [8,0]], 
-    #    [[[4, 8], [8,20]], [[4,-8],[-8,20]]], 
-    #    [200, 200]
-    #)
-    
-    X, z = circles([1, 3], [0.1, 0.1], [300, 300])
-    X, z = spirals([1,-1], [300,300], noise=0.2)
 
-    """
-    a = np.random.randint(0, 9, 10)
-    b = np.random.randint(10, 19, 10)
-    c = np.random.randint(20, 29, 10)
-    print a, b, c
-    x, y, z = mix_data([a, b, c], 1)
-    print x, y, z
+    import scipy.stats as stats
 
-    X, z = multivariate_gaussians(
-        [[0,0,0], [10,0,0], [1,10,10]], 
-        [np.eye(3), np.eye(3), np.eye(3)], 
-        [5, 10, 15])
-    print X
-    print z
-    print from_label_to_sets(X, z)
-    """
-
-    #plot(X, z, fname='../data/cigar_data.pdf', colors=['#1F77B4', '#FF7F0E'])
-    #plot(X, z, fname='./circles_data1.pdf', colors=['b', 'r', 'g'])
-    plot(X, z, fname='./spirals_data1.pdf', colors=['b', 'r', 'g'])
-    #plot(X, z, fname='../data/spirals_data.pdf', colors=['#1F77B4', '#FF7F0E'])
-    
     #X, z = univariate_normal([0, 5], [1, 2], [6000, 6000])
     #X, z = univariate_lognormal([0, -1.5], [0.3, 1.5], [6000, 6000])
-    #histogram(X, z, colors=['#FF7500', '#0072FF'], 
-    #          fname='two_normal_hist.pdf')
-    #histogram(X, z, colors=['#FF7500', '#0072FF'], 
-    #          fname='two_lognormal_hist.pdf')
+    #X, z = univariate_normal([0, 5], [1,1], [80000,80000])
+    X, z = univariate_lognormal([0, 0.5], [0.8,0.05], [80000,80000])
+    #histogram(X, z, colors=['#434B9E', '#AC393D'], fname='hist_normal.pdf')
+    histogram(X, z, colors=['#434B9E', '#AC393D'], fname='hist_lognormal.pdf',
+              xlim=[0, 4.5])
 
-
+    #X, z = circles([1, 3], [0.1, 0.1], [300, 300])
+    #X, z = spirals([1,-1], [300,300], noise=0.2)
+    #plot(X, z, fname='./spirals_data.pdf', colors=['#1F77B4', '#FF7F0E'])
+    

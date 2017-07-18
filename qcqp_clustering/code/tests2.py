@@ -12,6 +12,7 @@ and variability for several settings.
 from __future__ import division
 
 import numpy as np
+import scipy.stats
 import matplotlib.pyplot as plt
 
 import eclust.data as data
@@ -413,33 +414,39 @@ def circles_or_spirals(num_experiments=range(10), num_points=[100, 100],
 
     return table
 
-def testing1d(num_points_range=range(50, 100, 20), run_times=3):
+def testing1d(num_points_range=range(50, 100, 20), run_times=4,
+                num_experiments=100):
     """Comparing clustering methods in 1 dimension."""
     k = 2
-    table = np.zeros((len(num_points_range), 4))
+    table = np.zeros((num_experiments*len(num_points_range), 4))
+    count = 0
     
-    for i, ne in enumerate(num_points_range):
+    for ne in range(num_experiments):
+
+        for i, ne in enumerate(num_points_range):
         
-        m1 = 0
-        s1 = 0.3
-        m2 = -1.5
-        s2 = 1.5
-        n1 = n2 = ne
-        X, z = data.univariate_lognormal([m1, m2], [s1, s2], [n1, n2])
+            #m1 = 0
+            #s1 = 0.3
+            #m2 = -1.5
+            #s2 = 1.5
+            #n1 = n2 = ne
+            #X, z = data.univariate_lognormal([m1, m2], [s1, s2], [n1, n2])
         
-        #m1 = 0
-        #s1 = 1
-        #m2 = 5
-        #s2 = 2
-        #n1 = n2 = ne
-        #X, z = data.univariate_normal([m1, m2], [s1, s2], [n1, n2])
+            m1 = 0
+            s1 = 1
+            m2 = 5
+            s2 = 2
+            n1 = n2 = ne
+            X, z = data.univariate_normal([m1, m2], [s1, s2], [n1, n2])
         
-        Y = np.array([[x] for x in X])
+            Y = np.array([[x] for x in X])
         
-        table[i, 0] = ne
-        table[i, 1] = two_clusters1D(X, z)
-        table[i, 2] = kmeans(k, Y, z, run_times=run_times)
-        table[i, 3] = gmm(k, Y, z, run_times=run_times)
+            table[count, 0] = ne
+            table[count, 1] = two_clusters1D(X, z)
+            table[count, 2] = kmeans(k, Y, z, run_times=run_times)
+            table[count, 3] = gmm(k, Y, z, run_times=run_times)
+
+            count += 1
 
     return table
 
@@ -470,10 +477,14 @@ def plot_accuracy_errorbar(table,
 
         mean_ = np.array([table[np.where(col0==D)[0],i].mean() 
                                 for D in dimensions])
-        max_ = np.array([table[np.where(col0==D)[0],i].max() 
+        stderr_ = np.array([scipy.stats.sem(table[np.where(col0==D)[0],i]) 
                                 for D in dimensions])
-        min_ = np.array([table[np.where(col0==D)[0],i].min() 
-                                for D in dimensions])
+        #stderr_ = np.array([table[np.where(col0==D)[0],i].std()
+        #                        for D in dimensions])
+        #max_ = np.array([table[np.where(col0==D)[0],i].max() 
+        #                        for D in dimensions])
+        #min_ = np.array([table[np.where(col0==D)[0],i].min() 
+        #                        for D in dimensions])
     
         c = next(colors)
         l = next(legends)
@@ -488,23 +499,33 @@ def plot_accuracy_errorbar(table,
         #ax.plot(dimensions, mean_, 
         #        linestyle=ln, marker=m, markersize=3,
         #        color=c, label=l)
-        ax.errorbar(dimensions, mean_, yerr=[mean_-min_, max_-mean_], 
-                    linestyle=ln, marker=m, markersize=3,
-                    ecolor=c, color=c, capthick=0.7, label=l 
-                    #linewidth=1,
-                    #elinewidth=0.3
-                    )
+        #ax.errorbar(dimensions, mean_, yerr=[mean_-min_, max_-mean_], 
+        #            linestyle=ln, marker=m, markersize=3,
+        #            ecolor=c, color=c, capthick=0.7, label=l 
+        #            #linewidth=1,
+        #            #elinewidth=0.3
+        #            )
+        ax.errorbar(dimensions, mean_, yerr=stderr_, 
+                    linestyle=ln, marker=m, markersize=4,
+                    color=c, elinewidth=.5, 
+                    capthick=0.3,
+                    #capsize=1.2, 
+                    label=l,
+                    linewidth=1,
+                    barsabove=False,
+        )
 
     #ax.set_xlabel('Dimension', fontsize=12)
     #ax.set_ylabel('Accuracy', fontsize=12)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
     #ax.set_xticks([int(D) for D in range(0, 1600, 300)])
-    #ax.set_ylim([0, 1])
-    ax.set_xlim([10, 500])
+    ax.set_ylim([0.4, 0.9])
+    ax.set_xlim([5, 1520])
     #leg = plt.legend()
     #leg.get_frame().set_linewidth(0.5)
-    ax.legend(loc=loc, framealpha=.5, ncol=2)
+    #ax.legend(loc=loc, framealpha=.5, ncol=2)
+    ax.legend(loc=loc, framealpha=.5)
     #box = ax.get_position()
     #ax.set_position([box.x0, box.y0, box.width*0.8, box.height])
     #ax.legend(loc='center left', bbox_to_anchor=(1, 0.5), framealpha=0.0)
@@ -568,177 +589,158 @@ if __name__ == '__main__':
     from timeit import default_timer as timer
     import multiprocessing as mp
 
-    """
-    ### first experiment ###
-    #
-    def worker(dimensions, d, i):
-        table = gauss_dimensions_mean(dimensions=dimensions,
-                                  num_points=[100, 100],
-                                  delta=0.7, 
-                                  run_times=10,
-                                  num_experiments=100,
-                                  d=d)
-        np.savetxt("./data/gauss_means%i.csv"%i, table, delimiter=',')
-        
-    dim_array = [range(10,50,10), 
-                 range(50,100,10), 
-                 range(100, 150, 10),
-                 range(150, 210, 10)]
-    jobs = []
-    for i, dim in enumerate(dim_array):
-        p = mp.Process(target=worker, args=(dim, 10, i))
-        jobs.append(p)
-        p.start()
+#    ### first experiment ###
+#    #
+#    def worker(dimensions, d, i):
+#        table = gauss_dimensions_mean(dimensions=dimensions,
+#                                  num_points=[100, 100],
+#                                  delta=0.7, 
+#                                  run_times=10,
+#                                  num_experiments=100,
+#                                  d=d)
+#        np.savetxt("./data/gauss_means%i.csv"%i, table, delimiter=',')
+#        
+#    dim_array = [range(10,50,10), 
+#                 range(50,100,10), 
+#                 range(100, 150, 10),
+#                 range(150, 210, 10)]
+#    jobs = []
+#    for i, dim in enumerate(dim_array):
+#        p = mp.Process(target=worker, args=(dim, 10, i))
+#        jobs.append(p)
+#        p.start()
+#
+#    ### second experiment ###
+#    #
+#    def worker(dimensions, d, i):
+#        table = gauss_dimensions_cov(dimensions=dimensions,
+#                                  num_points=[100, 100],
+#                                  delta=0.7, 
+#                                  run_times=10,
+#                                  num_experiments=100,
+#                                  d=d)
+#        np.savetxt("./data/gauss_cov%i.csv"%i, table, delimiter=',')
+#        
+#    dim_array = [range(10,50,10), 
+#                 range(50,100,10), 
+#                 range(100, 150, 10),
+#                 range(150, 210, 10)]
+#    jobs = []
+#    for i, dim in enumerate(dim_array):
+#        p = mp.Process(target=worker, args=(dim, 10, i))
+#        jobs.append(p)
+#        p.start()
+#
+#    ### third experiment ###
+#    #
+#    def worker(num_points, i):
+#        table = gauss_dimensions_pi(num_points=num_points,
+#                                    N=210, 
+#                                    D=4,
+#                                    d=2, 
+#                                    run_times=10,
+#                                    num_experiments=100)
+#        np.savetxt("./data/gauss_pis%i.csv"%i, table, delimiter=',')
+#        
+#    m_array = [range(0,50,10), 
+#               range(50,100,10), 
+#               range(100, 150, 10),
+#               range(150, 210, 10)]
+#    jobs = []
+#    for i, m in enumerate(m_array):
+#        p = mp.Process(target=worker, args=(m, i))
+#        jobs.append(p)
+#        p.start()
+#
+#    ### fourth experiment ###
+#    #
+#    def worker(num_points, i):
+#        table = normal_or_lognormal(numpoints=num_points,
+#                                    run_times=4, num_experiments=100, 
+#                                    kind='lognormal')
+#        #np.savetxt("./data/normal2%i.csv"%i, table, delimiter=',')
+#        np.savetxt("./data/lognormal2%i.csv"%i, table, delimiter=',')
+#        
+#    n_array = [range(20,220,20),
+#               range(220,320,20),
+#               range(320,420,20),
+#               range(420,520,20)]
+#    jobs = []
+#    for i, n in enumerate(n_array):
+#        p = mp.Process(target=worker, args=(n, i))
+#        jobs.append(p)
+#        p.start()
 
-    """
-    
-    """
-    ### second experiment ###
-    #
-    def worker(dimensions, d, i):
-        table = gauss_dimensions_cov(dimensions=dimensions,
-                                  num_points=[100, 100],
-                                  delta=0.7, 
-                                  run_times=10,
-                                  num_experiments=100,
-                                  d=d)
-        np.savetxt("./data/gauss_cov%i.csv"%i, table, delimiter=',')
-        
-    dim_array = [range(10,50,10), 
-                 range(50,100,10), 
-                 range(100, 150, 10),
-                 range(150, 210, 10)]
-    jobs = []
-    for i, dim in enumerate(dim_array):
-        p = mp.Process(target=worker, args=(dim, 10, i))
-        jobs.append(p)
-        p.start()
-    """
+#    ### 1D clustering
+#    #
+#    def worker(num_points, i):
+#        table = testing1d(num_points_range=num_points, run_times=4,
+#                            num_experiments=100)
+#        np.savetxt("./data/normal1d%i.csv"%i, table, delimiter=',')
+#        #np.savetxt("./data/lognormal1d%i.csv"%i, table, delimiter=',')
+#        
+#    n_array = [range(10,500,50),
+#               range(510,1000,50),
+#               range(1010,1300,50),
+#               range(1310, 1550,50)]
+#    jobs = []
+#    for i, n in enumerate(n_array):
+#        p = mp.Process(target=worker, args=(n, i))
+#        jobs.append(p)
+#        p.start()
 
-    """
-    ### third experiment ###
-    #
-    def worker(num_points, i):
-        table = gauss_dimensions_pi(num_points=num_points,
-                                    N=210, 
-                                    D=4,
-                                    d=2, 
-                                    run_times=10,
-                                    num_experiments=100)
-        np.savetxt("./data/gauss_pis%i.csv"%i, table, delimiter=',')
-        
-    m_array = [range(0,50,10), 
-               range(50,100,10), 
-               range(100, 150, 10),
-               range(150, 210, 10)]
-    jobs = []
-    for i, m in enumerate(m_array):
-        p = mp.Process(target=worker, args=(m, i))
-        jobs.append(p)
-        p.start()
-    """
-
-    ### fourth experiment ###
-    #
-    def worker(num_points, i):
-        table = normal_or_lognormal(numpoints=num_points,
-                                    run_times=4, num_experiments=100, 
-                                    kind='normal')
-        np.savetxt("./data/normal2%i.csv"%i, table, delimiter=',')
-        #np.savetxt("./data/lognormal%i.csv"%i, table, delimiter=',')
-        
-    n_array = [range(20,220,20),
-               range(220,320,20),
-               range(320,420,20),
-               range(420,520,20)]
-    jobs = []
-    for i, n in enumerate(n_array):
-        p = mp.Process(target=worker, args=(n, i))
-        jobs.append(p)
-        p.start()
-
-    ### cigars ###
-    #
-    #table = cigars(num_experiments=range(10), num_points=[100, 100], 
-    #               num_times=10, run_times=10)
-    #np.savetxt("./data/cigars.csv", table, delimiter=',')
-
-    ### circles and spirals ###
-    #
-    #table = circles_or_spirals(num_experiments=range(10), 
-    #                           num_points=[150, 150], 
-    #                           num_times=10, 
-    #                           run_times=10, 
-    #                           which='spirals')
-    #np.savetxt("./data/circles.csv", table, delimiter=',')
-    #np.savetxt("./data/spirals.csv", table, delimiter=',')
-
-    ### trunk experiment ###
-    #table = compare_trunk(dimensions=range(2,212,10), 
-    #                      num_points=[40, 40],
-    #                      num_times=5)
-    #np.savetxt("data_trunk.csv", table, delimiter=',')
-
-    ### 1D clustering
-    #
-    #table = testing1d(num_points_range=range(20, 2000, 20), 
-    #                  run_times=3)
-    #np.savetxt("./data/normal.csv", table, delimiter=',')
-    #table = testing1d(num_points_range=range(20, 2000, 20), 
-    #                  run_times=3)
-    #np.savetxt("./data/lognormal.csv", table, delimiter=',')
-    
-    """
     ### make the plot
     #
     #table = csv_to_array("./data/gauss_means.csv")
     #table = csv_to_array("./data/gauss_cov.csv")
     #table = csv_to_array("./data/gauss_pis.csv")
-    #table = csv_to_array("./data/normal.csv")
-    table = csv_to_array("./data/lognormal.csv")
+    #table = csv_to_array("./data/normal2.csv")
+    #table = csv_to_array("./data/lognormal2.csv")
     #table = csv_to_array("./data/loggauss_means.csv")
     #table = csv_to_array("./data/cigars.csv")
     #table = csv_to_array("./data/circles.csv")
     #table = csv_to_array("./data/spirals.csv")
     #table = csv_to_array("./data/lognormal.csv")
     #table = csv_to_array("./data/normal.csv")
-    #table = csv_to_array("./data/lognormal.csv")
+    table = csv_to_array("./data/lognormal1d.csv")
+    #table = csv_to_array("./data/normal1d.csv")
     plot_accuracy_errorbar(table, 
                     xlabel='number of points', 
                     #xlabel='dimension', 
                     #xlabel='number of unbalanced points', 
                     ylabel='accuracy', 
-                    #output='../draft/figs/cigars.pdf', 
-                    #output='../draft/figs/circles.pdf', 
-                    #output='../draft/figs/spirals.pdf', 
-                    #output='../draft/figs/normal.pdf', 
-                    #output='../draft/figs/lognormal.pdf', 
                     #output='./gauss_dim.pdf', 
                     #output='./gauss_cov.pdf', 
                     #output='./gauss_pi.pdf', 
                     #output='./gauss.pdf', 
-                    output='./loggauss.pdf', 
-                    #output='./loggauss_dim.pdf', 
-                    #output='./lognormal.pdf', 
-                    #colors=['g', 'y', 'b', 'r'], 
-                    colors=['#1E8F1C', 'r', 
-                            '#BB63BB', '#E89CE8', 'm', 
-                            '#2FA3CC', '#9FD1E3', 'b'], 
-                    symbols=['o', 'o', 'D', 's', 'o', 'D', 's', 'o'], 
-                    lines=['-', '-', '-', '-', '-', '-', '-', '-'], 
+                    #output='./loggauss.pdf', 
+                    output='./loggauss1d.pdf', 
+                    #output='./gauss1d.pdf', 
+                    #colors=['#E87B26', '#00A57F', '#FB0F0E', '#2D95EC'], 
+                    colors=['#E87B26', '#00A57F', '#2D95EC'], 
+                    symbols=['o', 'o', 'o', 'o'], 
+                    lines=['-', '-', '-', '-'], 
                     legends=['GMM', 
                              r'$k$-means', 
-                             r'ker $k$-means $\rho_e$', 
-                             r'ker $k$-means $\rho_{1/2}$', 
-                             r'ker $k$-means', 
-                             r'energy $\rho_e$', 
-                             r'energy $\rho_{1/2}$',
+                    #         r'kernel $k$-means', 
                              r'energy'],
+                    #colors=['#E87B26', '#00A57F', 
+                    #        '#AF0F0F', '#FF5F5F', '#FB0F0E', 
+                    #        '#1F68A5', '#6CB4F1', '#2D95EC'], 
+                    #symbols=['o', 'o', '^', 'v', 'o', '^', 'v', 'o'], 
+                    #lines=['-', '-', '-', '-', '-', '-', '-', '-'], 
+                    #legends=['GMM', 
+                    #         r'$k$-means', 
+                    #         r'ker $k$-means $\rho_e$', 
+                    #         r'ker $k$-means $\rho_{1/2}$', 
+                    #         r'ker $k$-means', 
+                    #         r'energy $\rho_e$', 
+                    #         r'energy $\rho_{1/2}$',
+                    #         r'energy'],
                     #loc=(.51,0.1)
                     #loc=(.51,0.1)
                     #loc=(.05,0.1)
                     #loc=(.2,0.6)
-                    loc=(0.07,0.04)
+                    loc=(0.40,0.35)
     )
-    """
     #gen_data('../draft/figs/two_lognormal_hist.pdf')

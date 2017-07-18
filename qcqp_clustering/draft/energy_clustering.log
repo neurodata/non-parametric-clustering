@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.4.8)  26 JUN 2017 09:53
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.4.8)  12 JUL 2017 11:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -277,33 +277,38 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@every@algorithm=\toks31
 \c@algorithm=\count114
 )
+(/usr/share/texlive/texmf-dist/tex/latex/hyphenat/hyphenat.sty
+Package: hyphenat 2009/09/02 v2.3c hyphenation utilities
+\langwohyphens=\language79
+LaTeX Info: Redefining \_ on input line 43.
+)
 \c@theorem=\count115
 \c@example=\count116
-Class revtex4-1 Info: Patching LaTeX tabular. on input line 72.
+Class revtex4-1 Info: Patching LaTeX tabular. on input line 73.
 
 
 Class revtex4-1 Warning: Repair the float package.
 
-Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 72.
+Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 73.
 
-Class revtex4-1 Info: cite was not loaded (OK!) on input line 72.
-Class revtex4-1 Info: mcite was not loaded (OK!) on input line 72.
-Class revtex4-1 Info: multicol was not loaded (OK!) on input line 72.
+Class revtex4-1 Info: cite was not loaded (OK!) on input line 73.
+Class revtex4-1 Info: mcite was not loaded (OK!) on input line 73.
+Class revtex4-1 Info: multicol was not loaded (OK!) on input line 73.
 (./energy_clustering.aux)
 \openout1 = `energy_clustering.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -331,48 +336,78 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 106.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6] [7
 ] [8] [9] [10]
-[11]
-LaTeX Font Info:    Try loading font information for U+bbm on input line 824.
+[11] [12]
+Overfull \hbox (4.30759pt too wide) in paragraph at lines 918--921
+[]\OT1/cmr/m/n/12 Replacing [] and eli-mat-ing the global terms which do not co
+n-tribute, the op-ti-miza-tion
+ []
+
+[13] [14]
+LaTeX Font Info:    Try loading font information for U+bbm on input line 1070.
  (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [12] [13]
-<./figs/normal.pdf, id=61, 303.33333pt x 187.47032pt>
-File: ./figs/normal.pdf Graphic file (type pdf)
- <use ./figs/normal.pdf>
-Package pdftex.def Info: ./figs/normal.pdf used on input line 951.
-(pdftex.def)             Requested size: 229.32257pt x 141.72945pt.
+) [15]
+<./figs/hist_normal.pdf, id=68, 303.33333pt x 187.47032pt>
+File: ./figs/hist_normal.pdf Graphic file (type pdf)
 
-<./figs/lognormal.pdf, id=62, 303.33333pt x 187.47032pt>
-File: ./figs/lognormal.pdf Graphic file (type pdf)
+<use ./figs/hist_normal.pdf>
+Package pdftex.def Info: ./figs/hist_normal.pdf used on input line 1174.
+(pdftex.def)             Requested size: 137.59494pt x 85.0388pt.
 
-<use ./figs/lognormal.pdf>
-Package pdftex.def Info: ./figs/lognormal.pdf used on input line 955.
-(pdftex.def)             Requested size: 229.32257pt x 141.72945pt.
- [14 <./figs/normal.pdf> <./figs/lognormal.pdf
+<./figs/gauss1d.pdf, id=69, 287.45981pt x 197.90839pt>
+File: ./figs/gauss1d.pdf Graphic file (type pdf)
 
-pdfTeX warning: pdflatex (file ./figs/lognormal.pdf): PDF inclusion: multiple p
-dfs with page group included in a single page
->] [15] [16] [17] <./figs/gauss_dim.pdf, id=112, 303.33333pt x 187.47032pt>
+<use ./figs/gauss1d.pdf>
+Package pdftex.def Info: ./figs/gauss1d.pdf used on input line 1175.
+(pdftex.def)             Requested size: 229.32257pt x 157.883pt.
+
+<./figs/hist_lognormal.pdf, id=70, 303.33333pt x 187.47032pt>
+File: ./figs/hist_lognormal.pdf Graphic file (type pdf)
+
+<use ./figs/hist_lognormal.pdf>
+Package pdftex.def Info: ./figs/hist_lognormal.pdf used on input line 1179.
+(pdftex.def)             Requested size: 137.59494pt x 85.0388pt.
+
+<./figs/loggauss1d.pdf, id=71, 282.83484pt x 197.90839pt>
+File: ./figs/loggauss1d.pdf Graphic file (type pdf)
+
+<use ./figs/loggauss1d.pdf>
+Package pdftex.def Info: ./figs/loggauss1d.pdf used on input line 1180.
+(pdftex.def)             Requested size: 229.32257pt x 160.46495pt.
+ [16] [17 <./figs/hist_normal.pdf> <./figs/gauss1d.pdf
+
+pdfTeX warning: pdflatex (file ./figs/gauss1d.pdf): PDF inclusion: multiple pdf
+s with page group included in a single page
+> <./figs/hist_lognormal.pdf
+
+pdfTeX warning: pdflatex (file ./figs/hist_lognormal.pdf): PDF inclusion: multi
+ple pdfs with page group included in a single page
+> <./figs/loggauss1d.pdf
+
+pdfTeX warning: pdflatex (file ./figs/loggauss1d.pdf): PDF inclusion: multiple 
+pdfs with page group included in a single page
+>] [18] [19] [20] [21]
+<./figs/gauss_dim.pdf, id=354, 289.77231pt x 197.90839pt>
 File: ./figs/gauss_dim.pdf Graphic file (type pdf)
 
 <use ./figs/gauss_dim.pdf>
-Package pdftex.def Info: ./figs/gauss_dim.pdf used on input line 1279.
-(pdftex.def)             Requested size: 229.32257pt x 141.72945pt.
+Package pdftex.def Info: ./figs/gauss_dim.pdf used on input line 1543.
+(pdftex.def)             Requested size: 229.32257pt x 156.62373pt.
 
-<./figs/gauss_cov.pdf, id=113, 303.33333pt x 187.47032pt>
+<./figs/gauss_cov.pdf, id=355, 289.77231pt x 197.90839pt>
 File: ./figs/gauss_cov.pdf Graphic file (type pdf)
 
 <use ./figs/gauss_cov.pdf>
-Package pdftex.def Info: ./figs/gauss_cov.pdf used on input line 1284.
-(pdftex.def)             Requested size: 229.32257pt x 141.72945pt.
- [18]
-<./figs/gauss_pi.pdf, id=119, 303.33333pt x 187.47032pt>
+Package pdftex.def Info: ./figs/gauss_cov.pdf used on input line 1548.
+(pdftex.def)             Requested size: 229.32257pt x 156.62373pt.
+
+<./figs/gauss_pi.pdf, id=356, 289.77231pt x 193.9084pt>
 File: ./figs/gauss_pi.pdf Graphic file (type pdf)
 
 <use ./figs/gauss_pi.pdf>
-Package pdftex.def Info: ./figs/gauss_pi.pdf used on input line 1338.
-(pdftex.def)             Requested size: 234.0pt x 144.62148pt.
- [19 <./figs/gauss_dim.pdf> <./figs/gauss_cov.pdf
+Package pdftex.def Info: ./figs/gauss_pi.pdf used on input line 1602.
+(pdftex.def)             Requested size: 234.0pt x 156.58856pt.
+ [22] [23 <./figs/gauss_dim.pdf> <./figs/gauss_cov.pdf
 
 pdfTeX warning: pdflatex (file ./figs/gauss_cov.pdf): PDF inclusion: multiple p
 dfs with page group included in a single page
@@ -380,59 +415,66 @@ dfs with page group included in a single page
 
 pdfTeX warning: pdflatex (file ./figs/gauss_pi.pdf): PDF inclusion: multiple pd
 fs with page group included in a single page
->] <./figs/gauss.pdf, id=441, 289.77231pt x 197.90839pt>
+>] <./figs/gauss.pdf, id=676, 289.77231pt x 197.90839pt>
 File: ./figs/gauss.pdf Graphic file (type pdf)
 
 <use ./figs/gauss.pdf>
-Package pdftex.def Info: ./figs/gauss.pdf used on input line 1394.
+Package pdftex.def Info: ./figs/gauss.pdf used on input line 1658.
 (pdftex.def)             Requested size: 229.32257pt x 156.62373pt.
 
-<./figs/loggauss.pdf, id=442, 289.77231pt x 197.90839pt>
+<./figs/loggauss.pdf, id=677, 289.77231pt x 197.90839pt>
 File: ./figs/loggauss.pdf Graphic file (type pdf)
 
 <use ./figs/loggauss.pdf>
-Package pdftex.def Info: ./figs/loggauss.pdf used on input line 1399.
+Package pdftex.def Info: ./figs/loggauss.pdf used on input line 1663.
 (pdftex.def)             Requested size: 229.32257pt x 156.62373pt.
- [20] (./energy_clustering.bbl [21 <./figs/gauss.pdf> <./figs/loggauss.pdf
+ [24] (./energy_clustering.bbl [25 <./figs/gauss.pdf> <./figs/loggauss.pdf
 
 pdfTeX warning: pdflatex (file ./figs/loggauss.pdf): PDF inclusion: multiple pd
 fs with page group included in a single page
->] [22]) [23] (./energy_clustering.aux) ) 
+>]
+Underfull \hbox (badness 1796) in paragraph at lines 26--30
+[]\OT1/cmr/m/n/10.95 D. Se-jdi-novic, B. Sripe-rum-budur, A. Gret-ton, and K. F
+uku-mizu.  Equiv-a-lence of
+ []
+
+[26]) [27] (./energy_clustering.aux) ) 
 Here is how much of TeX's memory you used:
- 4802 strings out of 493308
- 60821 string characters out of 6140093
- 142022 words of memory out of 5000000
- 8178 multiletter control sequences out of 15000+600000
+ 4874 strings out of 493308
+ 61955 string characters out of 6140093
+ 141914 words of memory out of 5000000
+ 8244 multiletter control sequences out of 15000+600000
  19804 words of font info for 75 fonts, out of 8000000 for 9000
  960 hyphenation exceptions out of 8191
  36i,22n,30p,1025b,739s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/gui/.texmf-var/fonts/pk/ljfour
-/public/bbm/bbm12.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex1
-0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/symbols/msbm10.pfb>
-Output written on energy_clustering.pdf (23 pages, 824378 bytes).
+ </home/gui/.texmf-var/fonts/pk/ljfour/pu
+blic/bbm/bbm12.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+bx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/symbols/msbm10.pfb>
+Output written on energy_clustering.pdf (27 pages, 958379 bytes).
 PDF statistics:
- 994 PDF objects out of 1000 (max. 8388607)
+ 1233 PDF objects out of 1440 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 
