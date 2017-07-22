@@ -115,7 +115,7 @@ if __name__ == "__main__":
     #plt.hist(X[np.where(z==1)], 80, facecolor='red', alpha=0.6, normed=1)
     #plt.show()
     
-    num_experiments = 4
+    num_experiments = 3
     table = np.zeros((num_experiments, 4))
     for i in range(num_experiments):
         #X, z = data.univariate_normal([0, 2], [1, 1], [500, 500])
