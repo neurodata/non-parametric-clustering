@@ -76,16 +76,26 @@ def detect_clusters(num_points, num_permutations):
     """Check if algorithms are detecting clusters, compared to chance."""
 
     # generate data from uniform
-    Y = np.random.uniform(0, 10, num_points)
-    X = np.array([[x] for x in Y])
+    Y1 = np.random.uniform(0, 1, num_points)
+    Y2 = np.random.uniform(2, 3, num_points)
+    X, z = data.shuffle_data([Y1, Y2])
+    X = np.array([[x] for x in X])
     
     # cluster with k=2 and pick objectives values
     rho = lambda x, y: np.linalg.norm(x-y)
     G = ke.kernel_matrix(X, rho)
-    k=2
+    k=3
     z_energy, J_energy = energy(k, X, G, run_times=5)
     z_kmeans, J_kmeans = kmeans(k, X, run_times=5)
     z_gmm, J_gmm = gmm(k, X, run_times=5)
+    #print J_energy, J_kmeans, J_gmm
+    # 
+    #k=4
+    #z_energy, J_energy = energy(k, X, G, run_times=5)
+    #z_kmeans, J_kmeans = kmeans(k, X, run_times=5)
+    #z_gmm, J_gmm = gmm(k, X, run_times=5)
+    #
+    #print J_energy, J_kmeans, J_gmm
 
     # random permute labels and compute objectives
     times_energy = 0
@@ -93,13 +103,15 @@ def detect_clusters(num_points, num_permutations):
     times_gmm = 0
     for i in range(num_permutations):
 
-        #fake_z = np.random.randint(0, 2, num_points)
-        #fake_Z = ke.ztoZ(fake_z)
-        fake_z_energy = np.random.choice(z_energy, len(z_energy))
+        fake_z_energy = np.random.randint(0, 6, 2*num_points)
+        fake_z_kmeans = np.random.randint(0, 6, 2*num_points)
+        fake_z_gmm = np.random.randint(0, 6, 2*num_points)
+        
+        #fake_z_energy = np.random.choice(z_energy, len(z_energy), replace=False)
         fake_Z_energy = ke.ztoZ(fake_z_energy)
 
-        fake_z_kmeans = np.random.choice(z_kmeans, len(z_kmeans))
-        fake_z_gmm = np.random.choice(z_gmm, len(z_gmm))
+        #fake_z_kmeans = np.random.choice(z_kmeans, len(z_kmeans), replace=False)
+        #fake_z_gmm = np.random.choice(z_gmm, len(z_gmm), replace=False)
         
         JJ_energy = ke.objective(fake_Z_energy, G)
         JJ_kmeans = objectives.kmeans(
@@ -117,4 +129,4 @@ def detect_clusters(num_points, num_permutations):
     return times_energy, times_kmeans, times_gmm
 
 if __name__ == '__main__':
-    print detect_clusters(100, 1000)
+    print detect_clusters(100, 2000)

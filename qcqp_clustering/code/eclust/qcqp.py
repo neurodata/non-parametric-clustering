@@ -539,32 +539,32 @@ if __name__ == '__main__':
 #    
 #    print t
 
-    num_experiments = 5
+    num_experiments = 10
     table = np.zeros((num_experiments, 4))
     for i in range(num_experiments):
         
         #X, z = data.circles([0.2, 1, 2], [0.2, 0.2, 0.2], [200, 200, 200])
         
-        mu1 = np.zeros(10)
-        sigma1 = np.eye(10)
-        #mu2 = np.concatenate((np.ones(5), np.zeros(15)))
-        mu2 = np.ones(10) 
-        sigma2 = np.eye(20)
-        for a in range(10):
-            for b in range(a, 10):
-                if a == b:
-                    sigma2[a,b] = (a*b+1)
-                else:
-                    sigma2[a,b] = sigma2[b,a] = 1/(a+b+1)
-        #print sigma2[:10,:10]
-        sigma2 = np.eye(10)
+        D = 30
+        d = 10 
+        mu1 = np.zeros(D)
+        sigma1 = np.eye(D)
+        mu2 = np.concatenate((np.ones(d), np.zeros(D-d)))
+        sigma2 = np.eye(D)
+        sigma2[0,0] = 10
+        sigma2[1,1] = 10
+        sigma2[2,2] = 10
+        sigma2[3,3] = 10
+        sigma2[4,4] = 10
+        sigma2[0,4] = sigma2[4,0] = 1
+        sigma2[0,2] = sigma2[2,0] = 1
+        
         X, z = data.multivariate_normal([mu1, mu2], [sigma1, sigma2], 
-                    [500, 500])
-
+                    [100, 100])
         k = 2
     
         def rho(x,y):
-            norm = np.power(np.linalg.norm(x-y), 1.0)
+            norm = np.linalg.norm(x-y)
             #norm1 = np.power(np.linalg.norm(x-y), 0.5)
             #return 2 - 2*np.exp(-norm/4)
             #return norm1*np.exp(-norm/2)
@@ -574,31 +574,35 @@ if __name__ == '__main__':
     
         mu0, z0 = kmeanspp.kpp(k, X, ret='both')
         Z0 = ztoZ(z0)
-        
         zh = minw(k, G, Z0, 100, tol=1e-5, verbose=False)
         Zh = ztoZ(zh)
         table[i, 0] = metric.accuracy(z, zh)
         
-        zh = minw_online(k, G, Z0, 100, tol=1e-5, verbose=False)
+        mu0, z0 = kmeanspp.kpp(k, X, ret='both')
+        Z0 = ztoZ(z0)
+        zh = kernel_kmeans(k, G, Z0, 100, tol=1e-5, verbose=False)
         Zh = ztoZ(zh)
         table[i, 1] = metric.accuracy(z, zh)
 
-        km = KMeans(k)
-        zh = km.fit_predict(X)
+        mu0, z0 = kmeanspp.kpp(k, X, ret='both')
+        Z0 = ztoZ(z0)
+        #km = KMeans(k)
+        #zh = km.fit_predict(X)
+        zh = kmeans(k, X, labels_=z0, mus_=mu0, max_iter=100)
         table[i, 2] = metric.accuracy(z, zh)
 
-        #gmm = GMM(k)
-        #gmm.fit(X)
-        #zh = gmm.predict(X)
-        #table[i, 3] = metric.accuracy(z, zh)
-        try:
-            zh = gmm(k, X, tol=1e-5, max_iter=200)
-            table[i, 3] = metric.accuracy(z, zh)
-        except:
-            table[i, 3] = np.nan
+        gmm = GMM(k)
+        gmm.fit(X)
+        zh = gmm.predict(X)
+        table[i, 3] = metric.accuracy(z, zh)
+        #try:
+        #    zh = gmm(k, X, tol=1e-5, max_iter=200)
+        #    table[i, 3] = metric.accuracy(z, zh)
+        #except:
+        #    table[i, 3] = np.nan
 
     print "Energy:", table[:,0].mean(), sem(table[:,0])
-    print "Energy Online:", table[:,1].mean(), sem(table[:,1])
+    print "Kernel Energy:", table[:,1].mean(), sem(table[:,1])
     print "k-means:", table[:,2].mean(), sem(table[:,2])
     print "GMM:", table[:,3].mean(), sem(table[:,3])
 

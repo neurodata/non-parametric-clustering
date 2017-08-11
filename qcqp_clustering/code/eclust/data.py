@@ -117,7 +117,7 @@ def circles(rs, ms, eps, ns):
     X = []
     z = []
     for r, m, e, n in zip(rs, ms, eps, ns):
-        x = np.array([[r*np.cos(a)+m[0], r*np.sin(a)+m[1]]
+        x = np.array([(r*np.cos(a)+m[0], r*np.sin(a)+m[1])
                         for a in np.random.uniform(0, 2*np.pi, n)])
         x += e*np.random.multivariate_normal([0,0],np.eye(2), n)
         X.append(x)
@@ -153,17 +153,10 @@ def spirals(rs, ms, ns, noise=0.2):
     idx = np.random.permutation(sum(ns))
     return X[idx], z[idx]
 
-def plot(X, z, colors=['b', 'r', 'g'], fname='plot.pdf'):
+def plot(X, z, fname='plot.pdf'):
     """Plot data according to labels in z.
     Use PCA to project in 2D in case data is higher dimensional.
 
-    Input: X = data matrix
-           z = labels of each points
-           colors = list of colors for each class
-           fname = output file
-    
-    Ouput: None
-    
     """
 
     z_unique = np.unique(z)
@@ -176,13 +169,14 @@ def plot(X, z, colors=['b', 'r', 'g'], fname='plot.pdf'):
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    colors = iter(colors)
+
+    colors = iter(plt.cm.brg(np.linspace(0,1,5)))
     
     for k in z_unique:
         idx = np.where(z==k)
         x = X_new[idx][:,0]
         y = X_new[idx][:,1]
-        ax.plot(x, y, 'bo', alpha=.8, color=next(colors))
+        ax.plot(x, y, 'bo', markersize=4, alpha=.7, color=next(colors))
     
     ax.set_xticks([])
     ax.set_yticks([])
@@ -211,10 +205,52 @@ def histogram(X, z, colors=['#1F77B4', '#FF7F0E'], fname='plot.pdf',
         x = X[idx]
         ax.hist(x, bins=bins, facecolor=next(colors), 
                 histtype='stepfilled',
-                alpha=.8, normed=1, linewidth=0.0)
+                alpha=.8, normed=1, linewidth=0.5)
     ax.set_xlabel(r'$x$')
     if xlim:
         ax.set_xlim(xlim)
+    plt.tick_params(top='off', bottom='on', left='off', right='off',
+            labelleft='off', labelbottom='on')
+    for i, spine in enumerate(plt.gca().spines.values()):
+        if i !=2:
+            spine.set_visible(False)
+    frame = plt.gca()
+    frame.axes.get_yaxis().set_visible(False)
+    fig.tight_layout()
+    fig.savefig(fname)
+
+def histogram_gauss_loggauss(xlim=None, ylim=None, fname='plot.pdf'):
+    
+    def gauss_func(x, mu, sigma):
+        return 1/(np.sqrt(2*np.pi*sigma**2))*np.exp(-(x-mu)**2/(2*sigma**2))
+
+    def loggauss_func(x, mu, sigma):
+        return 1/(np.sqrt(2*np.pi*sigma**2)*x)*np.exp(
+                    -(np.log(x)-mu)**2/(2*sigma**2))
+
+    colors = iter(plt.cm.brg(np.linspace(0,1,6)))
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    
+    xs = np.arange(-5, 15, 0.001)
+    #xs = np.arange(0.0001, 5, 0.001)
+    y1s = np.array([gauss_func(x, 0, 1) for x in xs])
+    y2s = np.array([gauss_func(x, 5, 2) for x in xs])
+    #y1s = np.array([loggauss_func(x, 0, 0.3) for x in xs])
+    #y2s = np.array([loggauss_func(x, -1.5, 1.5) for x in xs])
+    c = next(colors)
+    ax.plot(xs, y1s, '-', color=c, linewidth=1)
+    ax.fill_between(xs, 0, y1s, color=c, alpha=0.5)
+    c = next(colors)
+    ax.plot(xs, y2s, '-', color=c, linewidth=1)
+    ax.fill_between(xs, 0, y2s, color=c, alpha=0.5)
+
+    ax.set_xlabel(r'$x$')
+    if xlim:
+        ax.set_xlim(xlim)
+    if ylim:
+        ax.set_ylim(ylim)
     plt.tick_params(top='off', bottom='on', left='off', right='off',
             labelleft='off', labelbottom='on')
     for i, spine in enumerate(plt.gca().spines.values()):
@@ -279,17 +315,36 @@ def from_sets_to_labels(A):
 ###############################################################################
 if __name__ == '__main__':
 
-    import scipy.stats as stats
-
-    #X, z = univariate_normal([0, 5], [1, 2], [6000, 6000])
-    #X, z = univariate_lognormal([0, -1.5], [0.3, 1.5], [6000, 6000])
+    #X, z = univariate_normal([0, 5], [1, 2], [80000,80000])
+    #X, z = univariate_lognormal([0, -1.5], [0.3, 1.5], [80000, 80000])
     #X, z = univariate_normal([0, 5], [1,1], [80000,80000])
-    X, z = univariate_lognormal([0, 0.5], [0.8,0.05], [80000,80000])
+    #X, z = univariate_lognormal([0, 0.5], [0.8,0.05], [80000,80000])
     #histogram(X, z, colors=['#434B9E', '#AC393D'], fname='hist_normal.pdf')
-    histogram(X, z, colors=['#434B9E', '#AC393D'], fname='hist_lognormal.pdf',
-              xlim=[0, 4.5])
+    #histogram(X, z, colors=['g', 'k'], fname='hist_normal.pdf', bins=100)
+    #histogram(X, z, colors=['#434B9E', '#AC393D'], fname='hist_lognormal.pdf',
+    #          xlim=[0, 4.5])
+    #histogram(X, z, colors=['g', 'k'], fname='hist_lognormal.pdf', bins=300,
+    #    xlim=[0, 5])
+    #histogram_gauss_loggauss(xlim=[-5,15], fname='hist_normal.pdf')
+    #histogram_gauss_loggauss(xlim=[0,3], ylim=[0,3.7], 
+    #                         fname='hist_lognormal.pdf')
 
-    #X, z = circles([1, 3], [0.1, 0.1], [300, 300])
-    #X, z = spirals([1,-1], [300,300], noise=0.2)
-    #plot(X, z, fname='./spirals_data.pdf', colors=['#1F77B4', '#FF7F0E'])
+    # cigars
+    #m1 = np.zeros(2)
+    #m2 = np.array([6.5,0])
+    #s1 = s2 = np.array([[1,0],[0,20]])
+    #X, z = multivariate_normal([m1, m2], [s1, s2], [200, 200])
+    #plot(X, z, fname='./2cigars.pdf')
+    
+    # 2 circles
+    X, z = circles([1, 3], [[0,0], [0,0]], [0.2, 0.2], [400, 400])
+    plot(X, z, fname='./2circles.pdf')
+    
+    # 3 circles
+    X, z = circles([1, 3, 5], [[0,0], [0,0], [0,0]], [0.2, 0.2, 0.2], 
+                    [400, 400, 400])
+    plot(X, z, fname='./3circles.pdf')
+
+    #X, z = spirals([1,-1], [[0.2,0.0], [-0.2,-0.0]], [400,400], noise=0.2)
+    #plot(X, z, fname='./2spiral.pdf')
     

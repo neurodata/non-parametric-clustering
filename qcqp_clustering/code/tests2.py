@@ -13,7 +13,9 @@ from __future__ import division
 
 import numpy as np
 import scipy.stats
+import matplotlib as mpl
 import matplotlib.pyplot as plt
+import cPickle, gzip
 
 import eclust.data as data
 import eclust.kmeans as km
@@ -115,6 +117,79 @@ def two_clusters1D(X, z):
 ###############################################################################
 # functions to test different settings
 
+def gauss_dimensions_mean(dimensions=range(2,100,20), num_points=[200, 200],
+                          delta=0.7, run_times=5, num_experiments=10, d=None):
+    """Here we keep signal in one dimension and increase the ambient dimension.
+    The covariances are kept fixed.
+    
+    """
+    k = 2
+    if not d:
+        d = dimensions[0]
+    n1, n2 = num_points
+    table = np.zeros((num_experiments*len(dimensions), 5))
+    count = 0
+    
+    for D in dimensions:
+
+        for i in range(num_experiments):
+        
+            # generate data
+            m1 = np.zeros(D)
+            s1 = np.eye(D)
+            m2 = np.concatenate((delta*np.ones(d), np.zeros(D-d)))
+            s2 = np.eye(D)
+        
+            X, z = data.multivariate_normal([m1, m2], [s1, s2], [n1, n2])
+            rho = lambda x, y: np.linalg.norm(x-y)
+            G = ke.kernel_matrix(X, rho)
+        
+            table[count, 0] = D
+            table[count, 1] = cost_energy(k, X, G, z, run_times=run_times)
+            table[count, 2] = kernel_energy(k, X, G, z, run_times=run_times)
+            table[count, 3] = kmeans(k, X, z, run_times=run_times)
+            table[count, 4] = gmm(k, X, z, run_times=run_times)
+
+            count += 1
+
+    return table
+
+def gauss_dimensions_cov(dimensions=range(2,100,20), num_points=[200, 200],
+                         run_times=3, num_experiments=10, d=None):
+    """High dimensions but with nontrivial covariance."""
+    k = 2
+    if not d:
+        d = dimensions[0]
+    n1, n2 = num_points
+    table = np.zeros((num_experiments*len(dimensions), 5))
+    count = 0
+    
+    for D in dimensions:
+
+        for l in range(num_experiments):
+        
+            m1 = np.zeros(D)
+            s1 = np.eye(D)
+            m2 = np.concatenate((np.ones(d), np.zeros(D-d)))
+            s2 = np.eye(D)
+            for a in range(int(d/2)):
+                s2[a,a] = a+1
+            
+            X, z = data.multivariate_normal([m1, m2], [s1, s2], [n1, n2])
+        
+            rho = lambda x, y: np.linalg.norm(x-y)
+            G = ke.kernel_matrix(X, rho)
+        
+            table[count, 0] = D
+            table[count, 1] = cost_energy(k, X, G, z, run_times=run_times)
+            table[count, 2] = kernel_energy(k, X, G, z, run_times=run_times)
+            table[count, 3] = kmeans(k, X, z, run_times=run_times)
+            table[count, 4] = gmm(k, X, z, run_times=run_times)
+
+            count += 1
+
+    return table
+
 def circles_or_spirals(num_points=[200,200], num_times=10, run_times=10):
     
     k = 2
@@ -146,34 +221,30 @@ def circles_or_spirals(num_points=[200,200], num_times=10, run_times=10):
     
     return table
 
-def gauss_dimensions_mean(dimensions=range(2,100,20), num_points=[200, 200],
-                          delta=0.7, run_times=5, num_experiments=10, d=None):
-    """Here we keep signal in one dimension and increase the ambient dimension.
-    The covariances are kept fixed.
-    
-    """
+def gauss_dimensions_pi(num_points=range(0, 180, 10), N=200, D=4, d=2,
+                        run_times=3, num_experiments=10):
+    """Test unbalanced clusters."""
     k = 2
-    if not d:
-        d = dimensions[0]
-    n1, n2 = num_points
-    table = np.zeros((num_experiments*len(dimensions), 5))
+    table = np.zeros((num_experiments*len(num_points), 5))
     count = 0
     
-    for D in dimensions:
+    for p in num_points:
 
         for i in range(num_experiments):
         
             # generate data
             m1 = np.zeros(D)
             s1 = np.eye(D)
-            m2 = np.concatenate((delta*np.ones(d), np.zeros(D-d)))
-            s2 = np.eye(D)
+            m2 = np.concatenate((1.5*np.ones(d), np.zeros(D-d)))
+            s2 = np.diag(np.concatenate((.5*np.ones(d), np.ones(D-d))))
+            n1 = N-p
+            n2 = N+p
         
             X, z = data.multivariate_normal([m1, m2], [s1, s2], [n1, n2])
             rho = lambda x, y: np.linalg.norm(x-y)
             G = ke.kernel_matrix(X, rho)
         
-            table[count, 0] = D
+            table[count, 0] = p
             table[count, 1] = cost_energy(k, X, G, z, run_times=run_times)
             table[count, 2] = kernel_energy(k, X, G, z, run_times=run_times)
             table[count, 3] = kmeans(k, X, z, run_times=run_times)
@@ -228,192 +299,6 @@ def normal_or_lognormal(numpoints=range(10,100,10),
 
     return table
 
-def gauss_dimensions_cov(dimensions=range(2,100,20), num_points=[200, 200],
-                         delta=.5, sigma=.5, run_times=3, num_experiments=10,
-                        d=None):
-    """High dimensions but in spite of the mean we also change the 
-    covariance.
-    
-    """
-    k = 2
-    if not d:
-        d = dimensions[0]
-    n1, n2 = num_points
-    table = np.zeros((num_experiments*len(dimensions), 5))
-    count = 0
-    
-    for D in dimensions:
-
-        for l in range(num_experiments):
-        
-            # generate data
-            m1 = np.zeros(D)
-            s1 = np.eye(D)
-            m2 = np.concatenate((delta*np.ones(d), np.zeros(D-d)))
-            s2 = np.eye(D)
-            for i in range(d): 
-                for j in range(i+1,d):
-                    if i == j:
-                        value = sigma
-                    else:
-                        value = 0
-                s2[i,j] = value
-                s2[j,i] = value
-            X, z = data.multivariate_normal([m1, m2], [s1, s2], [n1, n2])
-        
-            rho = lambda x, y: np.linalg.norm(x-y)
-            G = ke.kernel_matrix(X, rho)
-        
-            table[count, 0] = D
-            table[count, 1] = cost_energy(k, X, G, z, run_times=run_times)
-            table[count, 2] = kernel_energy(k, X, G, z, run_times=run_times)
-            table[count, 3] = kmeans(k, X, z, run_times=run_times)
-            table[count, 4] = gmm(k, X, z, run_times=run_times)
-
-            count += 1
-
-    return table
-
-def gauss_dimensions_pi(num_points=range(0, 180, 10), N=200, D=4, d=2,
-                        run_times=3, num_experiments=10):
-    """Test unbalanced clusters."""
-    k = 2
-    table = np.zeros((num_experiments*len(num_points), 5))
-    count = 0
-    
-    for p in num_points:
-
-        for i in range(num_experiments):
-        
-            # generate data
-            m1 = np.zeros(D)
-            s1 = np.eye(D)
-            m2 = np.concatenate((1.5*np.ones(d), np.zeros(D-d)))
-            s2 = np.diag(np.concatenate((.5*np.ones(d), np.ones(D-d))))
-            n1 = N-p
-            n2 = N+p
-        
-            X, z = data.multivariate_normal([m1, m2], [s1, s2], [n1, n2])
-            rho = lambda x, y: np.linalg.norm(x-y)
-            G = ke.kernel_matrix(X, rho)
-        
-            table[count, 0] = p
-            table[count, 1] = cost_energy(k, X, G, z, run_times=run_times)
-            table[count, 2] = kernel_energy(k, X, G, z, run_times=run_times)
-            table[count, 3] = kmeans(k, X, z, run_times=run_times)
-            table[count, 4] = gmm(k, X, z, run_times=run_times)
-
-            count += 1
-
-    return table
-
-def trunk(dimensions=range(2,100,20), num_points=[200, 200], num_times=5):
-    """We test Trunk's problem for clustering."""
-    
-    k = 2
-    n1, n2 = num_points
-    table = np.zeros((num_times*len(dimensions), 4))
-    count = 0
-    
-    for D in dimensions:
-        
-        # generate data
-        m1 = np.array([np.sqrt(d) for d in range(1, D+1)])
-        s1 = np.eye(D)
-        
-        m2 = np.array([-np.sqrt(d) for d in range(1, D+1)])
-        s2 = np.eye(D)
-        
-        X, z = data.multivariate_normal([m1, m2], [s1, s2], [n1, n2])
-        
-        # for each D, run a few times, cluster, and pick accuracy
-        for i in range(num_times):
-
-            table[count, 0] = D
-            table[count, 1] = kernel_energy(k, X, z, alpha=1, run_times=3)
-            table[count, 2] = kmeans(k, X, z, run_times=3)
-            table[count, 3] = gmm(k, X, z, run_times=3)
-
-            count += 1
-
-    return table
-
-def cigars(num_experiments=range(10), num_points=[100, 100], 
-            num_times=5, run_times=3):
-    """2D Parallel Cigars."""
-    k = 2
-    n1, n2 = num_points
-    table = np.zeros((num_times*len(num_experiments), 5))
-    
-    m1 = np.zeros(2)
-    s1 = np.array([[1,0], [0,20]])
-    
-    m2 = 6.5*np.array([1,0])
-    s2 = np.array([[1,0], [0,20]])
-    
-    count = 0
-    
-    for ne in num_experiments:
-        
-        X, z = data.multivariate_normal([m1, m2], [s1, s2], [n1, n2])
-        
-        rho = lambda x, y: ke.euclidean_rho(x, y, alpha=0.5)
-        G = ke.kernel_matrix(X, rho)
-        
-        for i in range(num_times):
-
-            table[count, 0] = ne
-            table[count, 1] = cost_energy(k, X, G, z, run_times=run_times)
-            table[count, 2] = kernel_energy(k, X, G, z, run_times=run_times)
-            table[count, 3] = kmeans(k, X, z, run_times=run_times)
-            table[count, 4] = gmm(k, X, z, run_times=run_times)
-
-            count += 1
-
-    return table
-
-def circles_or_spirals(num_experiments=range(10), num_points=[100, 100], 
-            num_times=5, run_times=3, which='circles'):
-    """2D Parallel Cigars."""
-    k = 2
-    n1, n2 = num_points
-    table = np.zeros((num_times*len(num_experiments), 5))
-    
-    m1 = np.zeros(2)
-    s1 = np.array([[1,0], [0,20]])
-    
-    m2 = 6.5*np.array([1,0])
-    s2 = np.array([[1,0], [0,20]])
-    
-    count = 0
-    
-    for ne in num_experiments:
-        
-        if which == 'circles':
-            X, z = data.circles([1, 3], [0.1, 0.1], [n1, n2])
-            # this one works for circles
-            rho = lambda x, y: np.power(np.linalg.norm(x-y), 2)*\
-                            np.exp(-0.5*np.linalg.norm(x-y))
-        else:
-            X, z = data.spirals([1, -1], [n1, n2], noise=.15)
-            # this one is working decently for spirals
-            rho = lambda x, y: np.power(np.linalg.norm(x-y), 2)*\
-                        .9*np.sin(np.linalg.norm(x-y)/0.9)
-
-        G = ke.kernel_matrix(X, rho)
-        
-        for i in range(num_times):
-
-            table[count, 0] = ne
-            table[count, 1] = cost_energy(k, X, G, z, run_times=run_times)
-            table[count, 2] = kernel_energy(k, X, G, z, run_times=run_times)
-            table[count, 3] = kmeans(k, X, z, run_times=run_times)
-            table[count, 4] = gmm(k, X, z, run_times=run_times)
-
-            count += 1
-
-    return table
-
 def testing1d(num_points_range=range(50, 100, 20), run_times=4,
                 num_experiments=100):
     """Comparing clustering methods in 1 dimension."""
@@ -450,120 +335,207 @@ def testing1d(num_points_range=range(50, 100, 20), run_times=4,
 
     return table
 
+# some kernels/semmimetric function
+rho_standard = lambda x, y: np.power(np.linalg.norm(x-y), 1)
+rho_half = lambda x, y: np.power(np.linalg.norm(x-y), 1/2)
+rho_gauss = lambda x, y: 2-2*np.exp(-np.linalg.norm(x-y)**2/4)
+rho_exp = lambda x, y, sigma: 2-2*np.exp(-np.linalg.norm(x-y)/(2*sigma))
+rho_rbf = lambda x, y, sigma: 2-2*np.exp(-np.linalg.norm(x-y)**2/(2*sigma**2))
+
+def other_examples(num_experiments=10, run_times=4):
+    """Some other examples."""
+
+    rhos = [rho_standard, rho_half]
+    rho_names = ['standard', 'half', 'exp', 'rbf']
+
+    table = []
+    for i in range(num_experiments):
+        
+        ### generate data ###
+        
+        # cigars
+        #m1 = [0,0]
+        #m2 = [6.5,0]
+        #s1 = np.array([[1,0],[0,20]])
+        #s2 = np.array([[1,0],[0,20]])
+        #X, z = data.multivariate_normal([m1, m2], [s1, s2], [200, 200])
+        #rho_exp2= lambda x, y: rho_exp(x, y, 2)
+        #rho_rbf2 = lambda x, y: rho_rbf(x, y, 2)
+        
+        # 2 circles
+        #X, z = data.circles([1, 3], [[0,0], [0,0]], [0.2, 0.2], [400, 400])
+        #rho_exp2= lambda x, y: rho_exp(x, y, 1)
+        #rho_rbf2 = lambda x, y: rho_rbf(x, y, 1)
+        
+        # 3 circles
+        X, z = data.circles([1, 3, 5], [[0,0], [0,0], [0,0]], [0.2, 0.2, 0.2], 
+                             [400, 400, 400])
+        rho_exp2= lambda x, y: rho_exp(x, y, 2)
+        rho_rbf2 = lambda x, y: rho_rbf(x, y, 2)
+
+        # 2 spirals
+        #X, z = data.spirals([1,-1], [[0,0], [0,0]], [200,200], noise=0.1)
+
+        #####################
+        
+        k = 3
+        
+        n = len(X)
+
+        # build several kernels
+        Gs = [ke.kernel_matrix(X, rho) for rho in rhos]
+        Gs.append(ke.kernel_matrix(X, rho_rbf2))
+        Gs.append(ke.kernel_matrix(X, rho_exp2))
+        
+        for G in Gs:
+            table.append(cost_energy(k, X, G, z, run_times=run_times))
+        for G in Gs:
+            table.append(kernel_energy(k, X, G, z, run_times=run_times))
+        table.append(kmeans(k, X, z, run_times=run_times))
+        table.append(gmm(k, X, z, run_times=run_times))
+    
+    table = np.array(table)
+    num_kernels = len(Gs)
+    table = table.reshape((num_experiments, 2*num_kernels+2))
+    
+    num_cols = num_kernels*2
+    for j in range(num_kernels):
+        vals = table[:, j]
+        print "Energy %-10s:"%rho_names[j], vals.mean(), scipy.stats.sem(vals) 
+    for i, j in enumerate(range(num_kernels, num_cols)):
+        vals = table[:, j]
+        print "Kernel %-10s:"%rho_names[i], vals.mean(), scipy.stats.sem(vals) 
+    vals = table[:, -2]
+    print "k-means          :", vals.mean(), scipy.stats.sem(vals) 
+    vals = table[:, -1]
+    print "gmm              :", vals.mean(), scipy.stats.sem(vals) 
+
+def mnist(num_experiments=10, digits=[0,1,2], num_points=100, run_times=4):
+    """MNIST clustering. We use Hartigan's and Lloyd's with different
+    kernels and compare to k-means.
+    
+    """
+    
+    k = len(digits)
+
+    f = gzip.open('data/mnist.pkl.gz', 'rb')
+    train_set, valid_set, test_set = cPickle.load(f)
+    f.close()
+    images, labels = train_set
+
+    rhos = [rho_standard, rho_half]
+    rho_names = ['standard', 'half', 'rbf']
+
+    table = []
+    for i in range(num_experiments):
+        
+        # sample digits
+        data = []
+        true_labels = []
+        for l, d in enumerate(digits):
+            x = np.where(labels==d)[0]
+            js = np.random.choice(x, num_points, replace=False)
+            for j in js:
+                im = images[j]
+                label = l
+                data.append(im)
+                true_labels.append(label)
+        idx = range(len(data))
+        data = np.array(data)
+        true_labels = np.array(true_labels)
+        np.random.shuffle(idx)
+        X = data[idx]
+        z = true_labels[idx]
+        ################
+
+        n = len(X)
+        sigma = np.sqrt(sum([np.linalg.norm(X[i]-X[j])**2 
+                     for i in range(n) for j in range(n)])/(n**2))
+        #rho_exp2= lambda x, y: rho_exp(x, y, sigma)
+        rho_rbf2 = lambda x, y: rho_rbf(x, y, sigma)
+        
+        #rho_exp2 = lambda x, y: rho_exp(x, y, 1)
+        #rho_rbf2 = lambda x, y: rho_rbf(x, y, 1)
+
+        # build several kernels
+        Gs = [ke.kernel_matrix(X, rho) for rho in rhos]
+        #Gs.append(ke.kernel_matrix(X, rho_exp2))
+        Gs.append(ke.kernel_matrix(X, rho_rbf2))
+        
+        for G in Gs:
+            table.append(cost_energy(k, X, G, z, run_times=run_times))
+        for G in Gs:
+            table.append(kernel_energy(k, X, G, z, run_times=run_times))
+        table.append(kmeans(k, X, z, run_times=run_times))
+    table = np.array(table)
+    num_kernels = len(Gs)
+    table = table.reshape((num_experiments, 2*num_kernels+1))
+    
+    num_cols = num_kernels*2
+    for j in range(num_kernels):
+        vals = table[:, j]
+        print "Energy %-10s:"%rho_names[j], vals.mean(), scipy.stats.sem(vals) 
+    for i, j in enumerate(range(num_kernels, num_cols)):
+        vals = table[:, j]
+        print "Kernel %-10s:"%rho_names[i], vals.mean(), scipy.stats.sem(vals) 
+    vals = table[:, -1]
+    print "k-means          :", vals.mean(), scipy.stats.sem(vals) 
+
 
 ###############################################################################
 # ploting functions
 
-def plot_accuracy_errorbar(table, 
-                    xlabel='dimension', 
-                    ylabel='accuracy',
-                    output='plot.pdf', 
-                    colors=['green', 'red', 'blue'], 
-                    symbols=['o', 'o', 'o'],
-                    legends=['GMM', 'k-means', 'Energy'],
-                    lines=['-', '-', '-'],
-                    loc=(0, 0.1)):
+def plot_accuracy_errorbar(table, xlabel='dimension', ylabel='accuracy',
+        output='plot.pdf', symbols=['o', 's', 'D', 'v'], 
+        legends=['energy', r'$k$-means', 'GMM', r'kernel $k$-means'],
+        xlim=None, ylim=None, bayes=None, loc=None):
+    """Plot average accuracy of several algorithms with errobars being
+    standard error.
+    
+    """
     
     col0 = np.array([int(x) for x in table[:,0]])
-    dimensions = np.unique(col0)
+    xs = np.unique(col0)
+    n = len(table[0][1:])
     
-    colors = iter(colors)
+    colors = iter(plt.cm.brg(np.linspace(0,1,9)))
     legends = iter(legends)
     symbols = iter(symbols)
-    lines = iter(lines)
+
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    for i in range(len(table[0][1:]), 0, -1):
+    for i in range(1, n+1):
 
-        mean_ = np.array([table[np.where(col0==D)[0],i].mean() 
-                                for D in dimensions])
-        stderr_ = np.array([scipy.stats.sem(table[np.where(col0==D)[0],i]) 
-                                for D in dimensions])
-        #stderr_ = np.array([table[np.where(col0==D)[0],i].std()
-        #                        for D in dimensions])
-        #max_ = np.array([table[np.where(col0==D)[0],i].max() 
-        #                        for D in dimensions])
-        #min_ = np.array([table[np.where(col0==D)[0],i].min() 
-        #                        for D in dimensions])
-    
+        mean_ = np.array([table[np.where(col0==x)[0],i].mean() 
+                                for x in xs])
+        stderr_ = np.array([scipy.stats.sem(table[np.where(col0==x)[0],i]) 
+                                for x in xs])
         c = next(colors)
         l = next(legends)
         m = next(symbols)
-        ln = next(lines)
         
-        #ax.plot(dimensions_names, mean_, linestyle='-', marker=m, color=c, 
-        #        alpha=.7, linewidth=1, markersize=4, label=l)
-        #ax.fill_between(dimensions_names, min_, max_, color=c,
-        #                alpha=.4, linewidth=1)
-
-        #ax.plot(dimensions, mean_, 
-        #        linestyle=ln, marker=m, markersize=3,
-        #        color=c, label=l)
-        #ax.errorbar(dimensions, mean_, yerr=[mean_-min_, max_-mean_], 
-        #            linestyle=ln, marker=m, markersize=3,
-        #            ecolor=c, color=c, capthick=0.7, label=l 
-        #            #linewidth=1,
-        #            #elinewidth=0.3
-        #            )
-        ax.errorbar(dimensions, mean_, yerr=stderr_, 
-                    linestyle=ln, marker=m, markersize=4,
-                    color=c, elinewidth=.5, 
-                    capthick=0.3,
-                    #capsize=1.2, 
-                    label=l,
-                    linewidth=1,
-                    barsabove=False,
-        )
-
-    #ax.set_xlabel('Dimension', fontsize=12)
-    #ax.set_ylabel('Accuracy', fontsize=12)
+        if bayes:
+            if not isinstance(bayes, list):
+                bayes = [bayes]*len(xs)
+            ax.plot(2*xs, bayes, '--', color='black', 
+                    linewidth=1, zorder=0)
+        
+        ax.errorbar(2*xs, mean_, yerr=stderr_, 
+            linestyle='-', marker=m, color=c, markersize=4, elinewidth=.5, 
+            capthick=0.4, label=l, linewidth=1, barsabove=False)
+        
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
-    #ax.set_xticks([int(D) for D in range(0, 1600, 300)])
-    ax.set_ylim([0.4, 0.9])
-    ax.set_xlim([5, 1520])
-    #leg = plt.legend()
-    #leg.get_frame().set_linewidth(0.5)
-    #ax.legend(loc=loc, framealpha=.5, ncol=2)
-    ax.legend(loc=loc, framealpha=.5)
-    #box = ax.get_position()
-    #ax.set_position([box.x0, box.y0, box.width*0.8, box.height])
-    #ax.legend(loc='center left', bbox_to_anchor=(1, 0.5), framealpha=0.0)
-    #fig.tight_layout(rect=[0,0,0.75,1])
-    fig.savefig(output, bbox_inches='tight')
-
-def plot_accuracy(table, 
-                  xlabel='dimension', 
-                  ylabel='accuracy',
-                  output='compare_gauss_dim.pdf', 
-                  colors=['green', 'red', 'blue'], 
-                  symbols=['v', '^', 'o'],
-                  legends=['GMM', 'k-means', 'Energy'],
-                  loc=(0, 0.1)):
-    """Just plot results. Use first column as x axis."""
-    
-    x_vals = np.array([int(a) for a in table[:,0]])
-    colors = iter(colors)
-    legends = iter(legends)
-    symbols = iter(symbols)
-    
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    num_plots = len(table[0][1:])
-    
-    for i in range(num_plots, 0, -1):
-        c = next(colors)
-        l = next(legends)
-        m = next(symbols)
-        ax.plot(x_vals, table[:,i], linestyle='-', marker=m, color=c, 
-                alpha=.8, linewidth=0.5, label=l)
-    
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
-    #ax.set_xlim([10,200])
+    if ylim:
+        ax.set_ylim(ylim)
+    if xlim:
+        ax.set_xlim(xlim)
+    if not loc:
+        loc = 0
+    leg = plt.legend()
     #ax.legend(loc=loc, framealpha=.5)
-    fig.tight_layout()
-    fig.savefig(output)
+    ax.legend(loc=loc, framealpha=.5, ncol=2)
+    fig.savefig(output, bbox_inches='tight')
 
 
 ###############################################################################
@@ -615,11 +587,10 @@ if __name__ == '__main__':
 #    def worker(dimensions, d, i):
 #        table = gauss_dimensions_cov(dimensions=dimensions,
 #                                  num_points=[100, 100],
-#                                  delta=0.7, 
 #                                  run_times=10,
 #                                  num_experiments=100,
 #                                  d=d)
-#        np.savetxt("./data/gauss_cov%i.csv"%i, table, delimiter=',')
+#        np.savetxt("./data/gauss_cov_v2_%i.csv"%i, table, delimiter=',')
 #        
 #    dim_array = [range(10,50,10), 
 #                 range(50,100,10), 
@@ -630,6 +601,14 @@ if __name__ == '__main__':
 #        p = mp.Process(target=worker, args=(dim, 10, i))
 #        jobs.append(p)
 #        p.start()
+#    
+#    #dimensions = range(10,210,20) 
+#    #table = gauss_dimensions_cov(dimensions=dimensions,
+#    #                              num_points=[100, 100],
+#    #                              run_times=3,
+#    #                              num_experiments=5,
+#    #                              )
+#    #np.savetxt("./data/gauss_cov_v2.csv", table, delimiter=',')
 #
 #    ### third experiment ###
 #    #
@@ -688,59 +667,65 @@ if __name__ == '__main__':
 #        p = mp.Process(target=worker, args=(n, i))
 #        jobs.append(p)
 #        p.start()
+#    
+#    ### make the plot
+#    #
+#    #table = csv_to_array("./data/gauss_means.csv")
+#    #table = csv_to_array("./data/gauss_cov_v2.csv")
+#    #table = csv_to_array("./data/gauss_pis.csv")
+#    #table = csv_to_array("./data/normal2.csv")
+#    table = csv_to_array("./data/lognormal2.csv")
+#    #table = csv_to_array("./data/loggauss_means.csv")
+#    #table = csv_to_array("./data/cigars.csv")
+#    #table = csv_to_array("./data/circles.csv")
+#    #table = csv_to_array("./data/spirals.csv")
+#    #table = csv_to_array("./data/lognormal.csv")
+#    #table = csv_to_array("./data/normal.csv")
+#    #table = csv_to_array("./data/lognormal1d.csv")
+#    #table = csv_to_array("./data/normal1d.csv")
+#    
+#    plot_accuracy_errorbar(table, 
+#                    xlabel='number of points', 
+#                    #xlabel='number of dimensions', 
+#                    #xlabel='number of unbalanced points', 
+#                    ylabel='accuracy', 
+#                    #output='./gauss_dim.pdf', 
+#                    #output='./gauss_cov.pdf', 
+#                    #output='./gauss_pi.pdf', 
+#                    #output='./gauss.pdf', 
+#                    output='./loggauss.pdf', 
+#                    #output='./loggauss1d.pdf', 
+#                    #output='./gauss1d.pdf', 
+#                    legends=[
+#                        r'Alg.3--$\rho$', 
+#                        r'Alg.3--$\rho_{1/2}$', 
+#                        r'Alg.3--$\rho_{e}$', 
+#                        r'Alg.2--$\rho$', 
+#                        r'Alg.2--$\rho_{1/2}$', 
+#                        r'Alg.2--$\rho_{e}$', 
+#                        r'$k$-means', 
+#                        r'GMM'],
+#                    #legends=['Algorithm 3', r'Algorithm 2', '$k$-means', 'GMM'],
+#                    #legends=['Algorithm 1', '$k$-means', 'GMM'],
+#                    symbols=['o','o','o','s','s','s','D','D','D','v','v','v'],
+#                    #xlim=[10,200],
+#                    #xlim=[0,2000],
+#                    xlim=[40,1000],
+#                    ylim=[0.0,0.915],
+#                    bayes=0.9,
+#                    loc=[.23,.2]
+#    )
+#    #gen_data('../draft/figs/two_lognormal_hist.pdf')
+    
+    #other_examples()
+    
+    #mnist(num_experiments=10, digits=[0,1], num_points=100, run_times=4)
+    #mnist(num_experiments=10, digits=[0,1,2], num_points=100, run_times=4)
+    #mnist(num_experiments=10, digits=[0,1,2,3], num_points=100, run_times=4)
+    #mnist(num_experiments=10, digits=[0,1,2,3,4], num_points=100, run_times=4)
+    #mnist(num_experiments=10, digits=[0,1,2,3,4,5], num_points=100, run_times=4)
+    #mnist(num_experiments=10, digits=[0,1,2,3,4,5,6], num_points=100, run_times=4)
+    #mnist(num_experiments=10, digits=[0,1,2,3,4,5,6,7], num_points=100, run_times=4)
+    mnist(num_experiments=10, digits=[0,1,2,3,4,5,6,7,8], num_points=100, run_times=4)
+    mnist(num_experiments=10, digits=[0,1,2,3,4,5,6,7,8,9], num_points=100, run_times=4)
 
-    ### make the plot
-    #
-    #table = csv_to_array("./data/gauss_means.csv")
-    #table = csv_to_array("./data/gauss_cov.csv")
-    #table = csv_to_array("./data/gauss_pis.csv")
-    #table = csv_to_array("./data/normal2.csv")
-    #table = csv_to_array("./data/lognormal2.csv")
-    #table = csv_to_array("./data/loggauss_means.csv")
-    #table = csv_to_array("./data/cigars.csv")
-    #table = csv_to_array("./data/circles.csv")
-    #table = csv_to_array("./data/spirals.csv")
-    #table = csv_to_array("./data/lognormal.csv")
-    #table = csv_to_array("./data/normal.csv")
-    table = csv_to_array("./data/lognormal1d.csv")
-    #table = csv_to_array("./data/normal1d.csv")
-    plot_accuracy_errorbar(table, 
-                    xlabel='number of points', 
-                    #xlabel='dimension', 
-                    #xlabel='number of unbalanced points', 
-                    ylabel='accuracy', 
-                    #output='./gauss_dim.pdf', 
-                    #output='./gauss_cov.pdf', 
-                    #output='./gauss_pi.pdf', 
-                    #output='./gauss.pdf', 
-                    #output='./loggauss.pdf', 
-                    output='./loggauss1d.pdf', 
-                    #output='./gauss1d.pdf', 
-                    #colors=['#E87B26', '#00A57F', '#FB0F0E', '#2D95EC'], 
-                    colors=['#E87B26', '#00A57F', '#2D95EC'], 
-                    symbols=['o', 'o', 'o', 'o'], 
-                    lines=['-', '-', '-', '-'], 
-                    legends=['GMM', 
-                             r'$k$-means', 
-                    #         r'kernel $k$-means', 
-                             r'energy'],
-                    #colors=['#E87B26', '#00A57F', 
-                    #        '#AF0F0F', '#FF5F5F', '#FB0F0E', 
-                    #        '#1F68A5', '#6CB4F1', '#2D95EC'], 
-                    #symbols=['o', 'o', '^', 'v', 'o', '^', 'v', 'o'], 
-                    #lines=['-', '-', '-', '-', '-', '-', '-', '-'], 
-                    #legends=['GMM', 
-                    #         r'$k$-means', 
-                    #         r'ker $k$-means $\rho_e$', 
-                    #         r'ker $k$-means $\rho_{1/2}$', 
-                    #         r'ker $k$-means', 
-                    #         r'energy $\rho_e$', 
-                    #         r'energy $\rho_{1/2}$',
-                    #         r'energy'],
-                    #loc=(.51,0.1)
-                    #loc=(.51,0.1)
-                    #loc=(.05,0.1)
-                    #loc=(.2,0.6)
-                    loc=(0.40,0.35)
-    )
-    #gen_data('../draft/figs/two_lognormal_hist.pdf')

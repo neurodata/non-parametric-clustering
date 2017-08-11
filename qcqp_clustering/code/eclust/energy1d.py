@@ -91,6 +91,7 @@ if __name__ == "__main__":
     from sklearn.cluster import KMeans
     from sklearn.mixture import GMM
     from scipy.stats import sem
+    import sys
     
     import data
     from metric import accuracy
@@ -101,12 +102,30 @@ if __name__ == "__main__":
     #X1 = np.random.normal(0, 1, 100)
     #X1 = np.random.gamma(2, 2, 1000)
     #X1 = np.random.uniform(0, 1, 1000)
+    X1 = np.random.lognormal(0, 0.3, 1000)
+    X2 = np.random.lognormal(-1, 1, 1000)
     
     #X2 = np.random.uniform(0.5, 1.5, 100)
     #X2 = np.random.normal(2, 1, 100)
     #X2 = np.random.gamma(2, 2, 2000)
     
-    #X, z = data.shuffle_data([X1, X2])
+    X, z = data.shuffle_data([X1, X2])
+    Y = np.array([[x] for x in X])
+    
+    z0 = kpp(2, Y, ret='labels')
+    Z0 = ke.ztoZ(z0)
+
+    zh, cost = two_clusters1D(X)
+    print accuracy(z, zh)
+        
+    km = KMeans(2)
+    zh = km.fit_predict(Y)
+    print accuracy(z, zh)
+        
+    zh = gmm_em(2, Y)
+    print accuracy(z, zh)
+
+    sys.exit()
 
     #X, z = data.univariate_lognormal([0, -1.5], [0.25, 1], [4000, 4000])
     #X, z = data.univariate_lognormal([0, -1.5], [0.3, 1.5], [1000, 1000])

@@ -21,6 +21,11 @@
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage[none]{hyphenat}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{array,booktabs}
+\usepackage{xcolor}
+\usepackage{makecell}
 
 \hyphenation{op-tical net-works semi-conduc-tor}
 
@@ -68,6 +73,8 @@
 \newcommand\Zt{Y}
 %\newcommand{\Ind}[1]{\delta_{#1}}
 \newcommand{\Ind}[1]{\mathbbm{1}_{#1}}
+\newcommand\e{e}
+\newcommand\om{\omega}
 
 
 \begin{document}
@@ -86,199 +93,169 @@
 
 
 \begin{abstract}
-Energy statistics provides a nonparametric test for equality of distributions.
-It was proposed by 
+Energy statistics 
+was proposed by 
 Sz\' ekely in the 80's
-inspired by the Newtonian gravitational potential from classical mechanics. 
-Energy statistics
-was further generalized to probability 
-distributions on arbitrary metric spaces,
-and more recently a connection with reproducing kernel Hilbert spaces 
-was established.
-Nevertheless, although extensively used by the statistics community, it
+inspired by the Newtonian gravitational potential from classical mechanics,
+and it provides a nonparametric test for equality of distributions.
+It was generalized to 
+metric spaces of strong negative type,
+and more recently a connection with reproducing kernel Hilbert spaces (RKHS)
+was proposed.
+Although  
+extensively used in statistics, it
 has not been previously incorporated in machine learning problems.
-In this paper, we consider the problem of clustering data from
+Here we consider the problem of clustering data from
 an energy statistics theory perspective.
 We provide a precise mathematical formulation yielding
-a quadratically constrained quadratic program (QCQP).
-We show the equivalence between the energy statistics clustering
-formulation 
-and the kernel $k$-means optimization problem (not to be confused with
-kernel $k$-means algorithm). 
-Therefore, our results imply a first principles derivation of 
-kernel $k$-means problem
-from energy statistics theory, thus bringing this important 
-clustering method into a formal statistical framework.
-Moreover, energy statistics is nonparametric, it usually fixes
-the kernel choice,
-and if prior information is available
-it can be easily incorporated in the kernel construction.
-We propose an iterative algorithm
-to find local optimizers of the aforementioned QCQP based on the 
-energy change
-of moving points to different clusters. This algorithm 
-is different but has the same computational cost as kernel $k$-means 
-algorithm.
-We compare it to
-kernel $k$-means, standard $k$-means, and GMM/EM algorithms by 
-providing carefully designed numerical experiments. The results
-show that, in general, this algorithm outperforms
-these most used clustering algorithms.
+a quadratically constrained quadratic program (QCQP), which we show
+to be equivalent
+to kernel $k$-means optimization problem.
+Thus, our results imply a first principles derivation of 
+kernel $k$-means from energy statistics.
+Moreover, we also consider a weighted version of energy statistics 
+applied to clustering, which is related to 
+graph partitioning problems.
+To find local optimizers of such QCQP we consider an iterative
+algorithm based on Hartigan's method, which in this case
+has the same computational cost 
+as kernel $k$-means algorithm but usually with better clustering
+performance. We provide carefully designed numerical experiments
+showing the superiority of this method compared to
+kernel $k$-means, standard $k$-means, and gaussian mixture models.
 \end{abstract}
 
 \maketitle
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
-Energy statistics is based on the energy distance between probability
-distributions, which provides a notion of statistical potential energy
-to statistical observations, in close analogy to Newton's gravitational
+Energy statistics \cite{Szkely2013}
+is based on a 
+notion of statistical potential energy between probability distributions,
+in close analogy to Newton's gravitational
 potential in classical mechanics. 
-It provides a nonparametric test for equality of distribution,
-such that minimum energy is achieved under equality of 
-distributions. 
-We refer the reader 
-to \cite{Szkely2013}, and references therein, for an overview.
+It provides a nonparametric test for equality of distribution which
+is achieved under minimum energy. When probability distributions
+are different, this statistical potential 
+energy diverges as sample size increases.
 Energy statistics has been applied to several goodness-of-fit 
 hypothesis tests, 
 multi-sample tests of equality of distributions, analysis of variance
-\cite{RizzoVariance}, and (nonlinear)
+\cite{RizzoVariance}, nonlinear
 dependence tests through
 distance covariance and distance correlation, which generalizes the Pearson
-correlation coefficient. 
-Moreover, energy statistics  was applied
-to hierarchical clustering \cite{RizzoClustering} by extending Ward's
-method of minimum variance.
+correlation coefficient, and  
+hierarchical clustering \cite{RizzoClustering} by extending Ward's
+method of minimum variance. (We refer to \cite{Szkely2013} and 
+references therein for an overview of energy statistics.)
+Moreover, an energy statistics formulation
+to clustering was already proposed in \cite{Kgroups} 
+which greatly motivated this paper.
 
-More recently, distance covariance was 
+Recently, distance covariance was 
 generalized from Euclidean
 spaces to metric spaces of strong negative type \cite{Lyons}.
 Furthermore, a unifying framework establishing an equivalence
 between generalized energy distances to maximum
 mean discrepancies (MMD), which are distances between embeddings of
 distributions in reproducing kernel Hilbert spaces (RKHS), was
-established \cite{Sejdinovic2013}. This important work provides the missing
-link
-between techniques commonly used in the statistics literature, regarding
-energy statistics, and techniques
-commonly used in machine learning.
+established \cite{Sejdinovic2013}. This provides the 
+link between concepts used in energy statistics and concepts
+commonly used in machine learning, and form the basis of our approach.
 
-Given a dataset $\mathbb{X} = \{x_1,\dotsc,x_n \}$, where each
-data point $x_i$ lives in a space $\mathcal{X}$, the clustering
-problem consists in grouping these points into $k$ groups $\{
-\C_1,\C_2,\dotsc,\C_k \}$, such that
-points belonging to the same group are more ``similar'' to each other
-than to points in  other groups. This intuitive notion already assumes
-a ``metric'' able to measure the similarity between points. Clustering
-is an unsupervised method, and one of the most important problems in machine
-learning since it provides the first step towards automatically constructing
-labels for previously unseen data. In practice
-$k$-means is arguably the most used algorithm, and gaussian 
-mixture models (GMM) through the expectation
-maximization (EM) algorithm is also often used. Both are parametric, making 
-strong assumptions about
-the distribution of the data (isotropy and normality), and it assumes
-that data points
-lie in Euclidean space, $\mathcal{X} = \mathbb{R}^D$, hence
-the similarity is based on Euclidean metric, 
-$\| x_i - x_j \|^2 = (x_i - x_j)^\top(x_i-x_j) = 
-\sum_{\ell=1}^D (x_{i,\ell} - x_{j,\ell})^2$. These algorithms provide
-a good quality clustering when data is linearly separable in Euclidean space,
-i.e. there is a clear resolution in the cluster centers
-and points from different clusters do not overlap considerably.
+The clustering problem has a long history in machine learning.
+The most used method is $k$-means \cite{Lloyd,MacQueen,Forgy}, which
+is based on Lloyd's heuristic \cite{Lloyd} of assigning a data point to
+the cluster with closest center. The only statistical 
+information about each cluster
+comes from its mean and thus it is sensitive to outliers. Moreover, $k$-means
+is strongly parametric, assuming that data is isotropically and normally
+distributed since it is a special case of gaussian mixture models (GMM) 
+through the expectation maximization (EM) algorithm. Nevertheless,
+$k$-means works very well when data is linearly separable 
+in Euclidean space, with a clear resolution of cluster centers and without
+significant overlap of the points belonging to different clusters.
 
-To account for nonlinearly separable data, which may live
-in an arbitrary non-Euclidean space, kernel methods are usually employed.
-If a so-called Mercer kernel $\kk: \mathcal{X}\times \mathcal{X} \to \mathbb{R}$
-is available, which is a symmetric and positive definite 
-function, it guarantees that there exists a map $\varphi : \mathcal{X} \to
-\mathcal{H}$ where $\mathcal{H}$ is a Hilbert space \cite{Mercer}. 
-One can thus
-compute similarities between data point through the inner product of
-the feature space $\mathcal{H}$ and 
-perform clustering in $\mathcal{H}$. The convenience of a Mercer
-kernel is that the map $\varphi$ is only used implicitly, i.e. one
-does not need to know $\varphi$, since the inner
-of product of $\mathcal{H}$ can be computed only 
-based on the kernel function $\kk(\cdot, \cdot)$ which acts on the original
-space $\mathcal{X}$. 
-This technique is known as the kernel trick.  
-Kernel $k$-means problem 
-is exactly $k$-means in the feature space
-\cite{Smola,Girolami} (see also \cite{Filippone} for a survey of clustering
-methods).
-To cluster data that is not linearly
-separable in $\mathcal{X}$,
-kernel based methods exploit the nonlinear structure provided by
-the kernel function, which implicitly maps data points to a usually higher
-dimensional feature 
-space, with the hope that they becomes separable by 
-forming well-defined groups.
-The choice of
-kernel is crucial, and yet there is no principled method
-for this. One must rely on ad hoc methods to find an appropriate kernel
-which is data dependent.
-As it stands, kernel $k$-means problem is an heuristic approach to clustering
-in the sense that it is not derived from a statistical theory. 
+To account for nonlinearities, kernel methods were introduced 
+\cite{Smola,Girolami}. A mercer kernel \cite{Mercer} is used to implicitly
+map data points to a RKHS, then clustering can be performed in the associated
+Hilbert
+space by using its inner product. This enables one to cluster way more
+complicated datasets, however, the kernel choice remains the biggest challenge
+since there is no principled theory behind this. The well-known
+kernel $k$-means optimization problem is nothing but $k$-means in the
+feature space \cite{Girolami}. Furthermore, kernel $k$-means algorithm
+\cite{Dhillon2,Dhillon} is still based on Loyd's heuristic \cite{Lloyd} of
+using the mean of each cluster in the feature space. 
+We refer the reader to \cite{Filippone} for a survey of clustering
+methods.
 
-The main contribution of this paper is to provide a consistent formulation
-to clustering based on energy statistics theory. 
-The original goal is to provide a nonparametric
-clustering method, since energy distance is nonparametric.
-The basis of our work is the theory developed in 
-\cite{Sejdinovic2013} which establishes an equivalence between energy
-distance and RKHS. 
-Based on this and on the multi-sample test
-for equality of distributions, we show that
-there is only one possible clustering optimization
-problem consistent with the energy statistics formulation. 
-We then show that this 
-optimization problem is equivalent to a quadratically constrained quadratic
-program (QCQP), which has the same trace maximization
-form as kernel $k$-means,
-spectral clustering, and some well-known graph partitioning problems
-\cite{Dhillon2,Dhillon}. We show the equivalence between this approach
-and kernel $k$-means optimization problem, implying that
-the later can actually be derived from energy statistics, thus
-bringing this important clustering method into a unified statistical theory.
-However, it is important to note that 
-energy statistics fixes a kernel to begin with.
-From an algorithmic perspective, our contribution is to 
-provide an iterative algorithm, which is different but has the same
-complexity as kernel $k$-means algorithm. Our numerical results
-provide compelling evidence that this algorithm 
-is more accurate and robust than kernel $k$-means algorithm.
-Moreover, these experiments 
-puts in evidence the nonparametric aspect of energy
-statistics based clustering, since it is able to perform accurately
-on data having very different distributions, contrary to $k$-means and
-GMM for instance.
+Although clustering from energy statistics was considered
+in \cite{Kgroups}, the precise optimization problem behind this approach
+remains elusive, as well as the connection to kernel methods.
+The main theoretical contribution of this paper is to fill this gap.
+Since the statistical potential energy is minimum when
+distributions are equal, the principle 
+principle behind clustering is to maximize the statistical energy, 
+enforcing probability distributions associated to each cluster
+to be different from one another.
+We provide a precise mathematical formulation to this
+statement, showing that there is only one possible optimization problem
+consistent with energy statistics. Moreover, we show that this is
+a quadratically constrained
+quadratic program (QCQP) in the associated RKHS. Our results immediately 
+establish the connection 
+to kernel methods used in machine learning, 
+by showing that this QCQP is equivalent
+to kernel $k$-means optimization problem. 
+The equivalence between kernel $k$-means, 
+spectral clustering, and graph partitioning problems was already established
+in \cite{Dhillon,Dhillon2}. We show how these connections arise
+from a weighted version of energy statistics.
 
-Our work is organized as follows. In section~\ref{sec:background} we review
+Our algorithmic contribution is to use Hartigan's method
+\cite{Hartigan} to find local solutions of the above mentioned QCQP.
+This approach was also proposed in \cite{Kgroups}. In this case,
+the resulting algorithm has the same
+time complexity as kernel $k$-means algorithm, however, the numerical 
+results provide compelling evidence that this method
+is more accurate and robust than kernel $k$-means. This evidence
+is also supported by general theoretical results \cite{Telgarsky,Slonin}.
+Moreover, in our experiments we put in
+in evidence the nonparametric aspect of energy
+statistics based clustering, which provides a default kernel, showing that
+it is able to perform accurately on data coming very different 
+distributions, contrary to $k$-means and GMM for instance.
+
+Our work is organized as follows. In section~\ref{sec:background} we introduce
 the necessary background on energy statistics and RKHS.
 Section~\ref{sec:clustering_theory} contains the main theoretical 
 results of this paper,
-where we consider a clustering theory based on energy statistics, leading
-to a QCQP which is NP-hard.
-In section~\ref{sec:twoclass} we consider a simple example in one dimension,
+where we consider a clustering theory based on energy statistics leading
+to a QCQP, which is NP-hard. We also show the equivalence to 
+kernel $k$-means problem.
+In Section~\ref{sec:weighted} we generalize these results to a weighted
+version of energy statistics, which provides the connection with graph
+partitioning problems and spectral clustering.
+In Section~\ref{sec:twoclass} we consider a simple example in one dimension,
 where we propose an algorithm which requires no initialization.
 In section~\ref{sec:algo} we briefly review kernel $k$-means algorithm,
-and propose a new iterative algorithm to solve this QCQP.
+and propose a new iterative algorithm based on Hartigan's method
+to solve this QCQP.
 Section~\ref{sec:numerics} contains some carefully designed numerical
 experiments indicating that this algorithm outperforms kernel
 $k$-means, standard $k$-means, and GMM/EM algorithms.
 Our final conclusions are presented in section~\ref{sec:conclusion}.
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Background on Energy Statistics and RKHS}
 \label{sec:background}
 
-In this section we briefly review the main concepts from energy
-statistics and its relation to reproducing kernel Hilbert spaces 
-(RKHS) which form the basis of our work.
+In this section we introduce the main concepts from energy
+statistics and its relation to 
+RKHS which form the basis of our work.
 For more details we refer the reader
 to \cite{Szkely2013} and \cite{Sejdinovic2013}.
 
@@ -286,12 +263,12 @@ Consider random variables in $\mathbb{R}^D$
 such that $X,X' \stackrel{iid}{\sim} P$ and 
 $Y,Y' \stackrel{iid}{\sim} Q$, where $P$ and $Q$ are cumulative
 distribution functions with finite first moments. 
-The quantity \cite{Szkely2013}
+The quantity 
 \begin{equation}
 \label{eq:energy}
-\Energy(P, Q) \equiv 2 \E \| X - Y\| - \E \| X - X' \| - \E \| Y - Y' \|,
+\Energy(P, Q) \equiv 2 \E \| X - Y\| - \E \| X - X' \| - \E \| Y - Y' \|
 \end{equation}
-called \emph{energy distance}, 
+called \emph{energy distance} \cite{Szkely2013} 
 is rotational invariant and nonnegative, $\Energy(P,Q) \ge 0$, where
 equality
 to zero holds if and only if $P = Q$.
@@ -307,19 +284,19 @@ The energy distance can be generalized as, for instance,
 \label{eq:energy2}
 \Energy_\alpha(P, Q) \equiv 
 2 \E \| X - Y\|^{\alpha} - \E \| X - X' \|^{\alpha} - 
-\E \| Y - Y' \|^{\alpha},
+\E \| Y - Y' \|^{\alpha}
 \end{equation}
 where $0<\alpha\le 2$. This quantity is also nonnegative,
 $\Energy_\alpha(P,Q) \ge 0$. Furthermore, for $0<\alpha<2$ we have that
 $\Energy_\alpha(P,Q) = 0$ if and only if $P=Q$, while for $\alpha=2$ 
-we have $\Energy_2(P,Q) = 2\| \E(X) - \E(Y) \|^2$, showing that
+we have $\Energy_2(P,Q) = 2\| \E(X) - \E(Y) \|^2$ which shows that
 equality to zero only requires
 equality of the means, and thus $\Energy_2(P,Q)=0$ does 
 not imply equality of distributions.
 
 It is important to 
 mention that \eqref{eq:energy2} can be even further generalized.
-Let $X, Y \in \mathcal{X}$,  where $\mathcal{X}$ is an arbitrary space endowed
+Let $X, Y \in \mathcal{X}$  where $\mathcal{X}$ is an arbitrary space endowed
 with a \emph{semimetric of negative type}
 $\rho: \mathcal{X}\times\mathcal{X} \to \mathbb{R}$, which is required
 to satisfy
@@ -327,7 +304,7 @@ to satisfy
 \label{eq:negative_type}
 \sum_{i,j=1}^n c_i c_j \rho(X_i, X_j) \le 0,
 \end{equation}
-where $X_i \in \mathcal{X}$, and $c_i \in \mathbb{R}$ such that
+where $X_i \in \mathcal{X}$ and $c_i \in \mathbb{R}$ such that
 $\sum_{i=1}^n c_i = 0$. Then, $\mathcal{X}$ is called a \emph{space of
 negative type}.
 We can thus replace $\mathbb{R}^D \to \mathcal{X}$ and 
@@ -337,10 +314,10 @@ the generalized energy distance
 \label{eq:energy3}
 \Energy(P, Q) \equiv 2 \E \rho(X,Y) - \E \rho(X, X') - \E \rho(Y,Y').
 \end{equation}
-For spaces of negative type, there exists a Hilbert space $\mathcal{H}$ and
+For spaces of negative type there exists a Hilbert space $\mathcal{H}$ and
 a map $\varphi: \mathcal{X} \to
 \mathcal{H}$ such that
-$\rho(X, Y) = \| \varphi(X) - \varphi(Y) \|_{\mathcal{H}}^2$, which
+$\rho(X, Y) = \| \varphi(X) - \varphi(Y) \|_{\mathcal{H}}^2$. This
 allows us to compute quantities related to probability distributions over
 $\mathcal{X}$ in the Hilbert space $\mathcal{H}$.
 Even though the semimetric 
@@ -372,18 +349,18 @@ If such a \emph{kernel}
 function $\kk$ exists, then $\HH$ is called a RKHS. The above two 
 properties immediately imply that $\kk$ is symmetric and positive
 definite. Indeed, notice that
-$\langle \kkk_x, \kkk_y \rangle = \kkk_y(x) = \kk(x,y)$, and since
-this inner product is real,
-$\langle \kkk_x, \kkk_y \rangle^* = \langle \kkk_y, \kkk_x \rangle = 
-\langle \kkk_x, \kkk_y \rangle$, we immediately have that
-the kernel is symmetric,
-$\kk(y,x) = \kk(y,x)$. Moreover, for any $w \in
+$\langle \kkk_x, \kkk_y \rangle = \kkk_y(x) = \kk(x,y)$, and by definition
+$\langle \kkk_x, \kkk_y \rangle^* = \langle \kkk_y, \kkk_x \rangle$, but
+since the inner product is real we have 
+$\langle \kkk_y, \kkk_x \rangle = \langle \kkk_x, \kkk_y \rangle$, or
+equivalently 
+$\kk(y,x) = \kk(x,y)$. Moreover, for any $w \in
 \HH$ we can write $w = \sum_{i=1}^n c_i \kkk_{x_i}$, where
 $\{ \kkk_{x_i} \}_{i=1}^n$ is a basis of $\HH$. It follows that
 $\langle w, w \rangle_{\HH}  = \sum_{i,j=1}^n c_i c_j \kk(x_i,x_j) \ge 0$,
 showing that the kernel is positive definite. If $G$ is a matrix with
 elements $G_{ij} = \kk(x_i,x_j)$, this is equivalent to $G$ being
-positive semidefinite; $v^\top G \, v \ge 0$ for any vector
+positive semidefinite, i.e. $v^\top G \, v \ge 0$ for any vector
 $v \in \mathbb{R}^n$.
 
 The Moore-Aronszajn theorem 
@@ -399,15 +376,16 @@ this theorem enables us to define an embedding of a probability measure
 $P$ into the RKHS as follows: $P \mapsto \kkk_P \in
 \Hk$ such that 
 $\int f(x) d P(x) = \langle f, \kkk_P \rangle$ for all $f \in \Hk$,
-or alternatively, $\kkk_P \equiv \int \kk( \, \cdot \,, x)  d P(x)$. 
+or alternatively $\kkk_P \equiv \int \kk( \, \cdot \,, x)  d P(x)$. 
 We can now  introduce the 
 notion of distance between two probability measures using the inner product
-of $\Hk$. This is called the maximum mean discrepancy (MMD) and
+of $\Hk$, which is called the maximum mean discrepancy (MMD) and
 is given by
-\begin{equation}\label{eq:mmd}
-\gamma_\kk(P,Q) \equiv \| \kkk_P - \kkk_Q \|_{\Hk},
+\begin{equation}
+\label{eq:mmd}
+\gamma_\kk(P,Q) \equiv \| \kkk_P - \kkk_Q \|_{\Hk}.
 \end{equation}
-which can also be written as \cite{Gretton2012}
+This can also be written as \cite{Gretton2012}
 \begin{equation}\label{eq:mmd2}
 \gamma_\kk^2(P,Q) = \E \kk(X,X') + \E \kk(Y,Y') - 2 \E \kk(X, Y)
 \end{equation}
@@ -422,8 +400,8 @@ embedded distributions
 by averaging the kernel function over sampled data.
 
 The following important result shows that semimetrics of negative
-type and symmetric positive semidefinite kernels are closely related
-\cite{Berg1984}. Let $\rho: \mathcal{X} \times \mathcal{X} \to \mathbb{R}$,
+type and symmetric positive definite kernels are closely related
+\cite{Berg1984}. Let $\rho: \mathcal{X} \times \mathcal{X} \to \mathbb{R}$
 and $x_0 \in \mathcal{X}$ an arbitrary but fixed point.
 Define
 \begin{equation}
@@ -435,19 +413,19 @@ Then, it can be shown that
 $\kk$ is positive definite if and only if $\rho$ is a semimetric
 of negative type
 \eqref{eq:negative_type}.
-Here we have a family of kernels, one for each choice of $x_0$. Conversely,
+We have a family of kernels, one for each choice of $x_0$. Conversely,
 if $\rho$ is a semimetric of negative type and $\kk$ is a kernel in this
 family, then 
 \begin{equation}
 \label{eq:gen_kernel}
 \begin{split}
 \rho(x,y) &= \kk(x,x) + \kk(y,y) -2\kk(x,y) \\
-&=  \| \kkk_x - \kkk_y \|^2_{\Hk},
+&=  \| \kkk_x - \kkk_y \|^2_{\Hk}
 \end{split}
 \end{equation}
 and the canonical feature map 
 $\varphi: x \mapsto \kkk_x$ is injective \cite{Sejdinovic2013}.
-When these conditions are satisfied, we say that the kernel $\kk$ 
+When these conditions are satisfied we say that the kernel $\kk$ 
 generates the semimetric $\rho$. 
 If two different kernels generate the same $\rho$ they are
 equivalent kernels.
@@ -463,15 +441,15 @@ replacing \eqref{eq:gen_kernel} into
 2 \left[ \E \, \kk(X, X') + \E \, \kk(Y, Y') - 2\E \, \kk(X, Y)\right] 
 = 2 \gamma_\kk^2(P,Q) .
 \end{equation}
-Since $\gamma_k^2(P, Q) = \| \kkk_P - \kkk_Q \|^2_{\Hk}$ we
-can compute the energy distance using the inner product of $\Hk$. Moreover,
-this can be computed from the data according to \eqref{eq:inner_data}.
+Due to \eqref{eq:mmd} we can compute the energy distance using the inner 
+product of $\Hk$. Moreover, this can be estimated from a sample
+according to \eqref{eq:inner_data}.
 
-Finally, let us recall the main formulas for test statistic
-of equality of distributions \cite{Szkely2013}. 
-Assume we have data $\mathbb{X} = \{ x_1,\dotsc, x_n \}$, where
-$x_i \in \mathcal{X}$, and $\mathcal{X}$ is a space of negative type.
-Consider a partition $\mathbb{X} = \bigcup_{j=1}^k \C_j$, with
+Finally, let us recall the main formulas from energy statistics
+for the test statistic of equality of distributions \cite{Szkely2013}. 
+Assume we have data $\mathbb{X} = \{ x_1,\dotsc, x_n \}$ where
+$x_i \in \mathcal{X}$ and $\mathcal{X}$ is a space of negative type.
+Consider a disjoint partition $\mathbb{X} = \bigcup_{j=1}^k \C_j$, with
 $\C_i \cap \C_j = \emptyset$.
 Each expectation in 
 \eqref{eq:energy3}
@@ -490,7 +468,7 @@ The \emph{within energy dispersion} is defined by
 \begin{equation}
 \label{eq:within}
 W \equiv
-\sum_{j=1}^{k} \dfrac{n_j}{2} g(\C_j, \C_j),
+\sum_{j=1}^{k} \dfrac{n_j}{2} g(\C_j, \C_j)
 \end{equation}
 and the \emph{between-sample energy statistic} is defined by
 \begin{equation}
@@ -500,7 +478,7 @@ S \equiv
 2 g(\C_i, \C_j) - 
 g(\C_i, \C_i) - 
 g(\C_j, \C_j)
-\right],
+\right]
 \end{equation}
 where $n = \sum_{j=1}^k n_j$.
 Given a set of distributions
@@ -518,15 +496,13 @@ This test is nonparametric in the sense that it does not make any assumptions
 about the distributions $P_j$.
 
 One can make the analogy 
-that every data point $ x \in \C_j$ form a massive body, 
+that points $ x \in \C_j$ form a massive body 
 whose total mass is characterized by the distribution function $P_j$.
 The quantity $S$ is thus a potential
 energy of the from $S(P_1,\dotsc,P_k)$ which measures how different
-these
-mass distributions are, and achieves the ground state
+the distribution of these masses are,  and achieves the ground state
 $S=0$ when all bodies have the same mass distribution. The potential energy
 $S$ increases as bodies have different mass distributions.
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -588,21 +564,22 @@ n_i g(\C_i, \C_i)
 Note that the right hand side of this equation 
 only depends on the pooled data, so it is a constant
 independent of the choice of partition. Therefore, maximizing
-$S$ over the choice of partition is equivalent to minimizing~$W$.
+$S$ over the choice of partition is equivalent to minimizing $W$.
 \end{proof}
 
-Therefore, for a given $k$, the clustering problem amounts to
+For a given $k$, the clustering problem amounts to
 finding the best partition of the data by solving~\eqref{eq:minimize}.
-Notice that this is a hard assignment clustering problem as partitions
-are disjoint.
+Notice that this is a hard clustering problem, as partitions
+are disjoint. The problem \eqref{eq:minimize} based on
+energy statistics was already proposed in \cite{Kgroups}. However, it is
+important to note that this is equivalent to maximizing \eqref{eq:between}
+which is the test statistic for equality of distributions. In the following
+we show what is the explicit optimization problem behind \eqref{eq:minimize}.
 
-Now we show how to formulate problem \eqref{eq:minimize} in the corresponding
-RKHS.
-Based on 
-\eqref{eq:kernel_semimetric} and \eqref{eq:gen_kernel}, assume that 
-the kernel $\kk: \mathcal{X} \times \mathcal{X} \to \mathbb{R}$ 
-generates $\rho$. 
-Let us define  the Gram matrix
+Let us formulate \eqref{eq:minimize} in the corresponding
+RKHS. Based on \eqref{eq:kernel_semimetric} and \eqref{eq:gen_kernel}, 
+assume that the kernel $\kk: \mathcal{X} \times \mathcal{X} \to \mathbb{R}$ 
+generates $\rho$.  Let us define  the Gram matrix
 \begin{equation}
 \label{eq:kernel_matrix}
 G \equiv \begin{pmatrix}
@@ -633,8 +610,8 @@ Z_{ij} \equiv \begin{cases}
 \end{equation}
 Throughout the paper, we use the notation $M_{i\bullet}$ to denote
 the $i$th row of a matrix $M$, and $M_{\bullet j}$ denotes its $j$th column.
-Our next result reveals the optimization problem behind \eqref{eq:minimize},
-which is NP-hard since
+Our next result shows the optimization problem \eqref{eq:minimize}
+is NP-hard since
 it is a quadratically constrained quadratic program (QCQP).
 
 \begin{proposition} 
@@ -644,9 +621,9 @@ The problem \eqref{eq:minimize} is equivalent to
 \label{eq:qcqp2}
 \max_{\Zt} \Tr \left( \Zt^\top G \, \Zt \right)  \qquad
 \mbox{s.t. $\Zt \ge 0$, $\Zt^\top \Zt = I$, 
-$\Zt \Zt^\top \bm{e} = \bm{e}$},
+$\Zt \Zt^\top \e = \e$},
 \end{equation}
-where $\bm{e} = (1,1,\dots,1)^\top \in \mathbb{R}^n$ is the all-ones vector,
+where $\e = (1,1,\dots,1)^\top \in \mathbb{R}^n$ is the all-ones vector,
 and $G$ is the Gram matrix \eqref{eq:kernel_matrix}.
 \end{proposition}
 \begin{proof}
@@ -662,8 +639,8 @@ W(\C_1,\dotsc,\C_k  )
 = \sum_{j=1}^k \sum_{x \in \C_j}  \bigg(
 \kk(x,x) - \dfrac{1}{n_j} \sum_{y \in \C_j} \kk(x,y) \bigg).
 \end{equation}
-Note that the first term does not contribute to the optimization problem,
-since it is a global term that does not depend which partition is chosen. 
+Note that the first term is global so it does not contribute to the 
+optimization problem.
 Therefore, minimizing \eqref{eq:W2} is equivalent to
 \begin{equation}
 \label{eq:max_prob}
@@ -701,16 +678,17 @@ Also, every entry of $Y$ is positive by definition,
 $Y \ge 0$. Now it only remains to show the last 
 constraint in \eqref{eq:qcqp2}, which comes from the last
 constraint in \eqref{eq:qcqp}. In matrix form this reads
-$Z^T \bm{e} = D \bm{e}$. Replacing $Z=YD^{1/2}$ we have
-$Y^\top \bm{e} = D^{1/2} \bm{e}$. Multiplying this last equation
+$Z^T \e = D \e$. Replacing $Z=YD^{1/2}$ we have
+$Y^\top \e = D^{1/2} \e$. Multiplying this last equation
 on the left by $Y$, and noticing
-that $Y D^{1/2} \bm{e} = Z \bm{e} = \bm{e}$, we finally obtain
-$Y Y^\top \bm{e} = \bm{e}$. Therefore, the optimization 
+that $Y D^{1/2} \e = Z \e = \e$, we finally obtain
+$Y Y^\top \e = \e$. Therefore, the optimization 
 problem \eqref{eq:qcqp} is equivalent
 to \eqref{eq:qcqp2} .
 \end{proof}
 
-Based on Proposition~\ref{th:qcqp2}, to group data $\{ x_1,\dotsc,x_n \}$
+Based on Proposition~\ref{th:qcqp2}, to group data
+$\mathbb{X} = \{ x_1,\dotsc,x_n \}$
 into  $k$ clusters, we first compute the Gram matrix
 $G$ and then 
 solve the optimization problem \eqref{eq:qcqp2} for $\Zt \in
@@ -736,60 +714,66 @@ The resulting
 optimal objective function is given by
 $\max \Tr \left( {Y^\star}^\top G \, Y^\star \right)  = 
 \sum_{i=1}^k \lambda_i$. One might then normalize and threshold the rows
-of $Y^\star$, or even better, following \cite{NgJordan} we can normalize the
+of $Y^\star$, or better, following \cite{NgJordan} one can normalize the
 rows of $Y^\star$ and apply standard $k$-means on this matrix where each
 row is considered as a data point.
-This is the same 
-procedure done in spectral clustering on the (normalized) Laplacian
-of the graph defined by a similarity matrix.
+This is the procedure done in spectral clustering on a graph Laplacian
+matrix defined by a similarity matrix.
 However, computing eigenvectors of a very large matrix
-can be problematic, and usually iterative methods are preferred.
-We will propose an iterative method to find approximate solutions
-to \eqref{eq:qcqp2} in section~\ref{sec:algo}.
+can be very expensive, and usually iterative methods are preferred. Moreover,
+this procedure is only guaranteed to converge if the normalized $Y^\star$ is
+positive semidefinite.
+In Section~\ref{sec:algo} we will propose an iterative method to directly 
+find approximate solutions to \eqref{eq:qcqp2} that is guaranteed to
+converge and does not require that the similarities $\kk(x_i,x_j)$ be
+nonnegative.
 
-It is important to note 
-that the previous theory for clustering based on energy statistics
-is valid for data living in an \emph{arbitrary} space of negative type.
-This clustering method is
+The clustering problem \eqref{eq:qcqp2} based on energy statistics
+is valid for data living in an \emph{arbitrary} space of negative type, where
+a semimetric $\rho$, and thus the kernel \eqref{eq:kernel_semimetric}, are
+assumed to be known. This clustering method is
 \emph{nonparametric} since it does not make any assumptions
-about 
-the distribution of the data, nor the metric space where data belongs
-to,
+about  the distribution of the data, 
 contrary to $k$-means and gaussian mixture models (GMM), for example.
-Moreover, this approach \emph{does not} require the concept of the 
-\emph{cluster mean},
-which can be ill-defined for some types of data, such as images for
-instance. Since no mean is involved, the method should also be 
-robust to outliers.
+%Moreover, this approach \emph{does not} require the concept of the 
+%\emph{cluster mean},
+%which can be ill-defined for some types of data, such as images for
+%instance. Since no mean is involved, the method should also be 
+%robust to outliers.
 %This method is quite general and makes very few
 %assumptions about the data. 
-If one uses the traditional energy distance
+If one uses the standard energy distance
 defined in \eqref{eq:energy}, 
-then $\rho(x,y) = \| x - y\|$, and this fixes the kernel
+then $\rho(x,y) = \| x - y\|$ and this fixes the kernel
 through \eqref{eq:kernel_semimetric}. In the same way, 
-for data living in more general
-metric spaces $(\mathcal{X}, \rho)$, the corresponding semimetric $\rho$ fixes
+for data living in a more general
+metric space $(\mathcal{X}, \rho)$ the corresponding semimetric $\rho$ fixes
 the kernel.
 In practice, however,
 the clustering quality strongly depend on the choice of a suitable
-$\rho$ which is what measures the similarity between different data points,
+$\rho$ which measures the similarity between data points,
 and is equivalent to choosing an appropriate kernel.
-Nevertheless, if prior knowledge is available for choosing $\rho$, 
-this can easily be taken into account.
+The energy distance \eqref{eq:energy2} fixes a family of choices
+$\rho(x,y) = \| x-y\|^\alpha$ with $0 < \alpha\le 2$. If prior information
+is available one may choose a more appropriate $\rho$.
 
+\subsection*{Relation to Kernel $\bm{k}$-Means}
 One may wonder how energy statistics clustering 
-relates to the well-known kernel $k$-means problem\footnote{
-When we refer to kernel $k$-means problem we mean specifically 
-the optimization
-problem \eqref{eq:kernel_kmeans}, which should not be confused with
-kernel $k$-means algorithm, which is just one possible recipe to solve
-\eqref{eq:kernel_kmeans}.}.
-We now address this question.
-For a positive semidefinite $G$, there exists a map
+relates to the well-known kernel $k$-means problem%
+\footnote{When we refer to kernel $k$-means problem we mean specifically 
+the optimization problem \eqref{eq:kernel_kmeans}, which should not be 
+confused with kernel $k$-means algorithm that is just one possible recipe 
+to solve \eqref{eq:kernel_kmeans}.
+} 
+which is extensively used in machine learning.
+%and was proposed as a kernelized version of $k$-means.
+For a positive semidefinite Gram matrix $G$, as defined in
+\eqref{eq:kernel_matrix},
+there exists a map
 $\varphi: \mathcal{X} \to \HH_\kk$ such that
 $\kk(x,y) = \varphi(x)^\top \varphi(y)$. The kernel $k$-means optimization
 problem,
-in feature space,
+in the feature space,
 is defined by
 \begin{equation}
 \label{eq:kernel_kmeans}
@@ -802,14 +786,16 @@ where $\mu_j = \tfrac{1}{n_j} \sum_{x \in \C_j} x$ is the  mean of cluster
 $\C_j$ in the ambient space. Notice that the above objective function
 is strongly tied to the idea of minimizing distances between points
 and cluster centers, which arises from $k$-means objective function.
-It is known \cite{Dhillon2,Dhillon} that problem \eqref{eq:kernel_kmeans} 
+It was shown \cite{Dhillon2,Dhillon} 
+that problem \eqref{eq:kernel_kmeans} 
 is equivalent to a QCQP in the same form as
 \eqref{eq:qcqp2}. The next result makes this explicit, showing that
 \eqref{eq:minimize} and \eqref{eq:kernel_kmeans} are actually equivalent.
 
 \begin{proposition}
 \label{th:kernel_kmeans}
-The clustering optimization problem
+For a fixed kernel,
+the clustering optimization problem
 \eqref{eq:minimize} based on energy statistics 
 is equivalent to the kernel $k$-means optimization problem
 \eqref{eq:kernel_kmeans}, and both are equivalent to \eqref{eq:qcqp2}.
@@ -829,7 +815,7 @@ The first term is global so it does not contribute to the optimization
 problem. Notice that the third term gives
 $\sum_{x\in\C_j} \tfrac{1}{n_j^2} \sum_{y,z\in\C_j} \kk(y,z) =
 \tfrac{1}{n_j}\sum_{y,z\in\C_j} \kk(y,z)$, which is the same as
-the second term. Thus, the kernel $k$-means optimization problem
+the second term. Thus, problem
 \eqref{eq:kernel_kmeans} is equivalent to
 \begin{equation}
 \min_{\C_1,\dotsc,\C_k} \bigg\{ J(\C_1,\dotsc,\C_k) = \max_{\C_1,\dotsc,\C_k}
@@ -847,24 +833,26 @@ the optimization problem in the form \eqref{eq:qcqp2}.
 
 The above result shows that 
 kernel $k$-means problem is actually a consequence
-of energy statistics. In this vein, kernel $k$-means is part of a
+of energy statistics. In this vein, kernel $k$-means problem is part of a
 statistical framework where we are maximizing distances between probability
-distributions.
+distributions. The kernel function $\kk$ arises from a semimetric $\rho$ of
+negative type which defines the energy distance between distributions.
 
-As shown in \cite{Dhillon}, kernel $k$-means, spectral clustering,
+As shown in \cite{Dhillon2,Dhillon}, kernel $k$-means, spectral clustering,
 and graph partitioning problems such as ratio association, ratio cut, and
-normalized cut are all equivalent to a QCQP of the form \eqref{eq:qcqp2}, thus
+normalized cut are all equivalent to a QCQP of the form \eqref{eq:qcqp2}. Thus
 one can use kernel $k$-means algorithm to solve these problems as well.
-This correspondence involves a weighted version of \eqref{eq:qcqp2}, that
-for the sake of completeness demonstrate next.
+This correspondence involves a weighted version of \eqref{eq:qcqp2} that
+we demonstrate in the following.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Clustering Based on Weighted Energy Statistics}
+\section{Clustering Based on Weighted Energy Statistics}
+\label{sec:weighted}
 
-Now we generalize the formulas from energy statistics to incorporate
+We generalize the formulas from energy statistics to incorporate
 weights associated to each data point.
-Let $w(x)$ be a weight function for the point $x \in \mathbb{X}$.
+Let $w(x)$ be a weight function associated to point $x \in \mathcal{X}$.
 We can generalize \eqref{eq:g_def} as follows:
 \begin{equation}
 \label{eq:g_def2}
@@ -875,7 +863,7 @@ Now we replace this function in the formulas \eqref{eq:within} and
 \eqref{eq:between}, with 
 $n_i \to s_i$ and $n \to s$ where $s = \sum_{j=1}^k s_j$,
 to obtain a weighted version of energy test statistic. With these
-changes, Proposition~\ref{th:minimize} remains the unnaltered, so the
+changes, Proposition~\ref{th:minimize} remains the unaltered, so the
 clustering problem becomes
 \begin{equation}
 \label{eq:minimize2}
@@ -894,9 +882,9 @@ Y_{ij} \equiv \begin{cases}
 \end{cases}, \qquad
 \mathcal{W} \equiv \diag(w_1,\dotsc,w_n), \qquad
 H \equiv \mathcal{W}^{1/2} Y, \qquad
-\bm{\omega} \equiv \mathcal{W} \bm{e},
+\om \equiv \mathcal{W} \e,
 \end{equation}
-where $w_i = w(x_i)$ and $\bm{e} \in \mathbb{R}^n$ is the all-ones
+where $w_i = w(x_i)$ and $\e \in \mathbb{R}^n$ is the all-ones
 vector. Now we can show the analogous of
 Proposition~\ref{th:qcqp2} to the case of \eqref{eq:minimize2}.
 
@@ -907,15 +895,15 @@ problem \eqref{eq:minimize2} is equivalent to
 \begin{equation}
 \label{eq:qcqp3}
 \max_H \Tr \left\{ H^\top (\mathcal{W}^{1/2} G \mathcal{W}^{1/2}) H  \right\}
-\qquad \mbox{s.t. $H \ge 0$, $H^\top H = I$, $H H^\top \bm{\omega} =
-\bm{\omega}$,}
+\qquad \mbox{s.t. $H \ge 0$, $H^\top H = I$, $H H^\top \om =
+\om$,}
 \end{equation}
 where $G$ is the Gram matrix \eqref{eq:kernel_matrix} and the other quantities
 are defined in 
 \eqref{eq:weighted_matrices}.
 \end{proposition}
 \begin{proof}
-Replacing \eqref{eq:gen_kernel} and elimating the global terms which 
+Replacing \eqref{eq:gen_kernel} and eliminating the global terms which 
 do not contribute, the optimization problem \eqref{eq:minimize2}
 becomes 
 \begin{equation}
@@ -947,8 +935,8 @@ Y_{\ell i} \mathcal{W}_{\ell \ell} Y_{\ell j } =
 = \dfrac{\delta_{ij}}{s_i} \sum_{\ell=1}^n w_\ell Z_{\ell i} = \delta_{ij},
 \end{equation}
 therefore $H^\top H = I$. This is a constraint on the rows of $H$.
-Now we obtain a condition on the columns
-of $H$. Observe that
+To obtain a condition on the columns
+of $H$ observe that
 \begin{equation}
 \left(H^\top H\right)_{pq} = \sqrt{w_p w_q}\sum_{j=1}^k \dfrac{Z_{pj}
 Z_{qj}}{s_j} = \begin{cases}
@@ -963,23 +951,22 @@ $(H^\top H \mathcal{W}^{1/2})_{pq} = 0 $ otherwise. Thus, the $p$th
 line of this matrix is nonzero only on entries corresponding to points
 that are in the same cluster as $x_p$. If we sum over the columns of this
 line we obtain $\sqrt{w_p} s_i^{-1} \sum_{q=1}^n w_q Z_{qi} = \sqrt{w_p}$,
-or equivalently $H H^\top \mathcal{W}^{1/2} \bm{e} = \mathcal{W}^{1/2} \bm{e}$,
-which gives the constraint $H H^\top \bm{\omega} = \bm{\omega}$.
+or equivalently $H H^\top \mathcal{W}^{1/2} \e = \mathcal{W}^{1/2} \e$,
+which gives the constraint $H H^\top \om = \om$.
 \end{proof}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Connection with Graph Partioning}
+\subsection*{Connection with Graph Partitioning}
 
 The relation between kernel $k$-means and graph partitioning problems
-was already established \cite{Dhillon}. We repeat a similar analysis
+was already established \cite{Dhillon2,Dhillon}. We repeat a similar analysis
 due to the relation of these problems to
 energy statistics and RKHS, which may provide a different perspective.
 
-Consider a graph $\mathcal{G} = (\mathcal{V}, \mathcal{E}, \mathcal{A})$,
+Consider a graph $\mathcal{G} = (\mathcal{V}, \mathcal{E}, \mathcal{A})$
 where $\mathcal{V}$ is the set of vertices, $\mathcal{E}$ the set of edges,
 and $\mathcal{A}$ is an affinity matrix of the graph 
-that measure the 
+that measures the 
 similarities between pairs of nodes. Thus, $\mathcal{A}_{ij} \ne 0$
 if $(i,j) \in \mathcal{E}$, and $\mathcal{A}_{ij} = 0$ otherwise.
 We also associate weights to every vertex, 
@@ -995,14 +982,14 @@ subsets, $\mathcal{V} = \bigcup_{j=1}^k \C_j $.
 The generalized ratio association problem is given by
 \begin{equation}
 \label{eq:assoc}
-\max_{\C_i,\dots,\C_k} \sum_{j=1}^k \dfrac{\textnormal{links}(\C_j,\C_j)}{s_j},
+\max_{\C_i,\dots,\C_k} \sum_{j=1}^k \dfrac{\textnormal{links}(\C_j,\C_j)}{s_j}
 \end{equation}
 and maximizes the within cluster association.
 The generalized ratio cut problem
 \begin{equation}
 \label{eq:cut}
 \min_{\C_i,\dots,\C_k} \sum_{j=1}^k
-\dfrac{\textnormal{links}(\C_j,\mathcal{V} \backslash \C_j)}{s_j},
+\dfrac{\textnormal{links}(\C_j,\mathcal{V} \backslash \C_j)}{s_j}
 \end{equation}
 minimizes the cut between clusters. These two problems are equivalent,
 in analogous way as minimizing \eqref{eq:within} is equivalent to
@@ -1012,15 +999,15 @@ $\textnormal{links}(\C_j,\mathcal{V} \backslash \C_j)=
 \textnormal{links}(\C_j,\mathcal{V}) - \textnormal{links}(\C_j,\C_j)$.
 Several graph partitioning methods 
 \cite{Kernighan,Malik,Chan,Yu}
-can be seen as a particular
-case of \eqref{eq:assoc} or \eqref{eq:cut}.
+can be seen as a particular case of \eqref{eq:assoc} or \eqref{eq:cut}.
 
 Consider \eqref{eq:assoc}, whose objective function can be written as
 \begin{equation}
 \sum_{j=1}^k \dfrac{1}{s_j} \sum_{p \in \C_j} \sum_{q \in \C_j}
 \mathcal{A}_{pq} = \sum_{j=1}^k \sum_{p=1}^n \sum_{q=1}^n 
-\dfrac{Z^\top_{jp}}{\sqrt{s_j}} \mathcal{A}_{pq} \dfrac{Z_{qj}}{\sqrt{s_j}}
-= \Tr\left( Y^\top \mathcal{A} Y \right)
+\dfrac{Z^\top_{jp}}{\sqrt{s_j}} \, \mathcal{A}_{pq} \, 
+\dfrac{Z_{qj}}{\sqrt{s_j}}
+= \Tr\left( Y^\top \mathcal{A} Y \right) ,
 \end{equation}
 with $Z$ defined in \eqref{eq:label_matrix} and $Y$ in
 \eqref{eq:weighted_matrices}. To make the analogy with \eqref{eq:qcqp3}
@@ -1028,10 +1015,10 @@ explicit,  problem \eqref{eq:assoc} is equivalent to
 \begin{equation}
 \max_H \Tr\left( H^\top \mathcal{W}^{-1/2} \mathcal{A} \mathcal{W}^{-1/2} H 
 \right) \qquad \mbox{s.t. $H\ge 0$, $H^\top H = I$, $H H^\top
-\bm{\omega}=\bm{\omega}$}.
+\om=\om$}.
 \end{equation}
 Therefore, this is exactly the same problem as weighted energy statistics
-clustering \eqref{eq:qcqp3}, with 
+clustering \eqref{eq:qcqp3} with 
 $G = \mathcal{W}^{-1} \mathcal{A} \mathcal{W}^{-1}$. Assuming this
 matrix is positive semidefinite, this generates a semimetric
 \eqref{eq:gen_kernel} for graphs given by
@@ -1045,7 +1032,7 @@ matrix is positive semidefinite, this generates a semimetric
 \end{equation}
 for vertices $i,j \in \mathcal{V}$, and 
 where in the second equation we assume the graph has no self-loops,
-$\mathcal{A}_{ii} = 0$. Using \eqref{eq:metric_graphs} 
+i.e. $\mathcal{A}_{ii} = 0$. Using \eqref{eq:metric_graphs} 
 in \eqref{eq:g_def}--\eqref{eq:between}
 allows one to use energy statistics theory for inference
 over populations of graphs.
@@ -1057,7 +1044,7 @@ over populations of graphs.
 
 Before stating a general algorithm to solve \eqref{eq:qcqp2}, 
 let us first consider the simplest possible case which
-is one-dimensional data and a two-class problem. This will be usefull to test
+is one-dimensional data and a two-class problem. This will be useful to test
 energy statistics clustering on a simple setting.
 
 Fixing
@@ -1071,10 +1058,10 @@ This is done by noticing that
 (x-y) \Ind{x < y}  \\
 &= 
 x \left( \Ind{x \ge y} - \Ind{x < y} \right)  + 
-y \left( \Ind{y > x} - \Ind{y \le x} \right)  ,
+y \left( \Ind{y > x} - \Ind{y \le x} \right)  
 \end{aligned}
 \end{equation}
-where we have the indicator function defined as
+where we have the indicator function defined by 
 $\Ind{A}=1$ if $A$ is true, and $\Ind{A}=0$ otherwise. 
 Let $\C$ be a partition with
 $n$ elements. Using the above distance in \eqref{eq:g_def} we have
@@ -1089,7 +1076,7 @@ x \left(
 The sum over $y$ can be eliminated since each term in
 the parenthesis is simply counting the number of elements in $\C$ that satisfy
 the condition of the indicator function. Assuming
-that we first order the data inside the partition, obtaining
+that we first order the data in $\C$, obtaining
 $\bar{\C} = [ x_j \in \C: x_1 \le x_2 \le \dotsm \le x_{n}]$, we
 can write \eqref{eq:g_ind} in the following simple form:
 \begin{equation}
@@ -1099,12 +1086,12 @@ g\left(\bar{\C}, \bar{\C}\right) =
 \end{equation}
 Note that the cost of computing 
 \eqref{eq:g1d}
-is $\OO(n)$, and the cost of
+is $\OO(n)$ and the cost of
 sorting the data
 is at the most $\OO(n\log n)$.
 Assuming that each partition is ordered  $\mathbb{X} = \bigcup_{j=1}^k
-\bar{\C}_j$, but notice that the entire data set $\mathbb{X}$ does not 
-need to be necessarily ordered, the within energy dispersion
+\bar{\C}_j$ 
+the within energy dispersion
 \eqref{eq:within} can be written as
 \begin{equation}
 \label{eq:w1d}
@@ -1112,7 +1099,7 @@ W\left( \bar{\C}_1,\dotsc,\bar{\C}_k \right) =
 \sum_{j=1}^k \sum_{\ell=1}^{n_j} \dfrac{2\ell - 1 - n_j}{n_j} \, x_\ell.
 \end{equation}
 
-For a two-class problem, we can use \eqref{eq:w1d} to cluster data
+For a two-class problem we can use \eqref{eq:w1d} to cluster data
 through a simple algorithm 
 as follows. We first order
 the entire dataset $\mathbb{X} \to \bar{\mathbb{X}}$. Then 
@@ -1157,7 +1144,7 @@ is from $Z$, up to label
 permutations, is given by
 \begin{equation}
 \label{eq:accuracy}
-\textnormal{accuracy}(\hat{Z}) = \max_\sigma 
+\textnormal{accuracy}(\hat{Z}) \equiv \max_\sigma
 \dfrac{1}{n}\sum_{i=1}^n\sum_{j=1}^k \hat{Z}_{i \sigma(j)} Z_{ij}
 \end{equation}
 where $\sigma$ is a permutation
@@ -1171,89 +1158,93 @@ to chance.
 
 \begin{figure}
 \begin{minipage}{0.49\textwidth}
-\hspace{1cm}\includegraphics[width=.6\textwidth]{hist_normal.pdf}\\[-.5em]
+\includegraphics[width=.8\textwidth]{hist_normal.pdf}\\[-.8em]
 \includegraphics[width=\textwidth]{gauss1d.pdf}\\[-1em]
 (a)
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
-\hspace{1cm}\includegraphics[width=.6\textwidth]{hist_lognormal.pdf}\\[-.5em]
+\includegraphics[width=.8\textwidth]{hist_lognormal.pdf}\\[-.8em]
 \includegraphics[width=\textwidth]{loggauss1d.pdf}\\[-1em]
 (b)
 \end{minipage}
 \caption{
 \label{fig:1d}
-Energy statistics clustering by Algorithm~\ref{algo1d},
-compared to $k$-means and GMM.
-Both clusters
-have the same number of points ($x$-axis), 
-which are increased in each experiment.
-We sample $100$ times from the distributions in the histograms and
-the $y$-axis is the average value of the clustering 
-accuracy \eqref{eq:accuracy} (errorbars are standard error).
-(a) 
-$x\sim \tfrac{1}{2}\left[ \mathcal{N}(\mu_1,\sigma_1) +
-\mathcal{N}(\mu_2,\sigma_2)  \right]$,  
-$\mu_1 = 0$,
-$\mu_2 = 5$,
-$\sigma_1 = 1$, and
-$\sigma_2 = 2$.
-(b) 
-$x\sim \tfrac{1}{2}\left[ e^{\mathcal{N}(\mu_1,\sigma_1)} +
-e^{\mathcal{N}(\mu_2,\sigma_2)}  \right]$,  
-$\mu_1 = 0$,
-$\mu_2 = -1.5$,
-$\sigma_1 = 0.3$, and
-$\sigma_2 = 1.5$. 
+Energy statistics clustering by Algorithm~\ref{algo1d}
+compared to $k$-means and GMM/EM.
+We have the same number of points in both clusters, and for each case
+we sample $100$ times from the distributions in the histograms. We 
+plot the average value of 
+\eqref{eq:accuracy} versus the total number of points 
+(error bars are standard error). The dashed line indicates the
+best possible classification accuracy computed from Bayes error.
+(a) Data coming from \eqref{eq:two_normal}, where the
+optimal accuracy is $\approx 0.956$.
+(b) Data from \eqref{eq:two_lognormal}, where the optimal
+accuracy is $\approx 0.852$.
 }
 \end{figure}
 
 Let us consider two simple experiments with equal number of points
-in each cluster. 
-We keep increasing the number of points in the clusters for each experiment, 
-and cluster the data using Algorithm~\ref{algo1d}. 
-We also cluster the same data set
-with GMM, through EM algorithm, and with standard $k$-means. In both of these
-cases we use the initialization from $k$-means++ \cite{Vassilvitskii} 
+in each cluster. We plot the accuracy \eqref{eq:accuracy} versus the number
+of points in each cluster.
+The data is clustered using 
+Algorithm~\ref{algo1d}, GMM through EM algorithm, and standard $k$-means 
+algorithm. In the last two cases 
+we use the initialization from $k$-means++ \cite{Vassilvitskii} 
 and we run the algorithms
-few times with different initializations and choose the answer
-with best objective function value. We use \eqref{eq:accuracy} to measure
-the clustering quality. Furthermore, we pick $100$ different samples
-for each configuration, and show the average accuracy with errorbars indicating
+few times choosing the result with  best objective function value. 
+Notice that Algorithm~\ref{algo1d} requires no initialization.
+Moreover, for each case we sample $100$ times
+and show the average accuracy with error bars indicating
 the standard error.
 In  Fig.~\ref{fig:1d}a 
-we have data from normal distributions,
-where we can see that all the three methods
-perform closely, with a slight advantage of GMM, as expected, since
+we sample data from two normal distributions, with equal number of
+points in each cluster:
+\begin{equation}
+\label{eq:two_normal}
+x \sim \mathcal{N}\big(\mu_i,\sigma_i^2\big) 
+\quad 
+\mbox{with $\mu_1 = 0$, $\sigma_1=1$ and
+$\mu_2 = 5$, $\sigma_2 = 2$.}
+\end{equation}
+The optimal accuracy obtained from Bayes classification error
+is $ \approx 0.956$, indicated by the dashed line in the plot.
+We see that the three methods
+perform closely, with a slight advantage of GMM as expected since
 it is the true model for the data. Energy statistics performs slightly better
-than $k$-means in this experiment. Now in Fig~\ref{fig:1d}b
-we consider one example of 
-data from lognormal distributions. We can see that energy
-statistics clustering through Algorithm~\ref{algo1d} provides a huge 
-improvement
-compared to both GMM and $k$-means, which basically cluster at chance
-in this case.
-GMM is worst than chance since sometimes it 
-is not able to estimate the parameters, thus giving zero
-accuracy.
+than $k$-means. In Fig~\ref{fig:1d}b
+we consider two clusters with lognormal distributions:
+\begin{equation}
+\label{eq:two_lognormal}
+\log x \sim \mathcal{N}\big( \mu_i,\sigma_i^2\big) \quad
+\mbox{with
+$\mu_1 = 0$,
+$\sigma_1 = 0.3$ and
+$\mu_2 = -1.5$,
+$\sigma_2 = 1.5$.}
+\end{equation}
+The optimal accuracy is $\approx 0.852$.
+In this case,
+Algorithm~\ref{algo1d} provides a very accurate clustering while
+GMM and $k$-means basically cluster at chance.
+Sometimes GMM/EM  was unable to estimate the parameters 
+thus giving zero accuracy.
 These two simple experiments illustrate
 how energy statistics based clustering is nonparametric, being able
 to provide high quality clustering in settings where data comes
 from very different distributions.
 
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Iterative Algorithm for Energy Statistics Clustering}
+\section{Iterative Algorithms for Energy Statistics Clustering}
 \label{sec:algo}
 
-In this section we will introduce a new iterative algorithm to find a local
-maximizer of the QCQP \eqref{eq:qcqp2}, however, due to 
+In this section we introduce an iterative algorithm to find a local
+maximizer of \eqref{eq:qcqp2}. However, due to 
 Proposition~\ref{th:kernel_kmeans} we can also find an approximate
-solution by the well-known kernel $k$-means algorithm, which 
-for convenience
-will also be restated in the present context.
-First, let us introduce some base notation.
+solution by the well-known kernel $k$-means algorithm 
+(see \cite{Dhillon2,Dhillon}), which 
+for convenience will also be restated in the present context.
 
 Consider the optimization problem 
 written in the form \eqref{eq:max_prob} as follows:
@@ -1274,30 +1265,27 @@ with the entire cluster $\C_\ell$ by
 Q_\ell(x_i) \equiv \sum_{y\in\C_\ell} \kk(x_i, y) = 
 G_{i \bullet} \cdot Z_{\bullet \ell},
 \end{equation}
-where, we recall, $G_{i\bullet}$ ($G_{\bullet i}$) denotes
+where we recall that $G_{i\bullet}$ ($G_{\bullet i}$) denotes
 the $i$th row (column) of matrix $G$.
 
-\subsection{Kernel $\bm{k}$-Means Algorithm}
+\subsection*{Kernel $\bm{k}$-Means Algorithm}
 
-To optimize kernel $k$-means objective function
-\eqref{eq:J}, we remove the global term and define the function
+To optimize the kernel $k$-means objective function
+\eqref{eq:J} we remove the global term and define the function
 \begin{equation}
 \label{eq:Jell}
-J^{(\ell)}(x_i) \equiv -\dfrac{2}{n_\ell} Q_\ell(x_i) + \dfrac{1}{n_\ell^2}
-Q_\ell,
+J^{(\ell)}(x_i) \equiv 
+\dfrac{1}{n_\ell^2} Q_\ell
+-\dfrac{2}{n_\ell} Q_\ell(x_i) 
 \end{equation}
 which represents a cost depending on point $x_i$ and cluster $\C_\ell$. One
 thus assigns  $x_i$ to cluster $\C_{j^\star}$ according
 to $j^\star = \argmin_\ell J^{(\ell)}(x_i)$, for $\ell = 1,\dotsc,k$.
-This procedure is performed for every data point, and repeated until
+This procedure is performed for every data point and repeated until
 convergence, i.e. until no new assignments are made.
-The whole procedure shown in Algorithm~\ref{kmeans_algo}.
+The entire procedure is in Algorithm~\ref{kmeans_algo}.
 It can be shown that this algorithm converges provided $G$ is positive
 semidefinite.
-Although our notation looks a little different than the standard
-kernel $k$-means found in the literature \cite{Dhillon2,Dhillon}, 
-this is precisely
-the same algorithm but written in a more concise and explicit way.
 
 Notice that to compute the first term in \eqref{eq:Jell} requires
 $\OO(n_\ell)$ operations, and although the second term requires
@@ -1306,7 +1294,7 @@ data points (step 1).
 Therefore, the time complexity Algorithm~\ref{kmeans_algo} is
 $\OO(n k \max_\ell n_\ell) = \OO(k n^2)$. For a sparse
 Gram matrix $G$ having
-$n'$ nonzero elements, this complexity can be further reduced
+$n'$ nonzero elements this complexity can be further reduced
 to $\OO(k n')$. 
 
 \begin{figure}
@@ -1316,9 +1304,9 @@ to $\OO(k n')$.
     \INPUT number of clusters $k$, Gram matrix $G$, initial label
     matrix $Z = Z_0$
     \OUTPUT label matrix $Z$ 
-  \STATE $\bm{q} \leftarrow (Q_1, \dotsc, Q_k)^\top$ 
+  \STATE $q \leftarrow (Q_1, \dotsc, Q_k)^\top$ 
             have the costs of each cluster, according to \eqref{eq:maxQ}
-  \STATE $\bm{n} \leftarrow (n_1,\dotsc,n_k)^\top$ 
+  \STATE $n \leftarrow (n_1,\dotsc,n_k)^\top$ 
         have the number of points in each cluster, obtained 
         from $D = Z^\top Z$
   \REPEAT
@@ -1329,9 +1317,9 @@ to $\OO(k n')$.
         \IF{ $j^\star \ne j$} 
             \STATE move $x_i$ to $\C_{j^\star}$: $Z_{ij} \leftarrow 0$ and
             $Z_{ij^\star} \leftarrow 1$
-            \STATE update $\bm{n}$: $n_j \leftarrow n_j - 1$ and
+            \STATE update $n$: $n_j \leftarrow n_j - 1$ and
                     $n_{j^\star} \leftarrow n_{j^\star} + 1$
-            \STATE update $\bm{q}$: $q_j \leftarrow q_j - 2Q_j(x_i)$ and
+            \STATE update $q$: $q_j \leftarrow q_j - 2Q_j(x_i)$ and
     $q_{j^\star} \leftarrow q_{j^\star} + 2Q_{j^\star}(x_i)$
     %    \ELSE
     %        \STATE Do nothing;
@@ -1348,17 +1336,20 @@ to find an approximate solution to \eqref{eq:qcqp2}.
 \end{figure}
 
 
-\subsection{Energy Cost Algorithm}
+\subsection*{Hartigan's Algorithm for Energy Statistics Clustering}
 
-Now let us consider a different algorithm, which is based on the change
-in the within energy statistics when moving a given data point to
-a different cluster.
-Suppose we have a data point $x_i \in \mathcal{X}$
-which is currently assigned to  cluster $\C_j$, yielding
+We now consider Hartigan's algorithm \cite{Hartigan} applied to 
+\eqref{eq:maxQ}. This gives approximate solutions to 
+\eqref{eq:qcqp2}. This approach was also proposed in \cite{Kgroups}.
+The method is based on the change
+in the within energy statistic when moving a given data point to
+another cluster.
+Suppose point $x_i \in \mathcal{X}$
+is currently assigned to  cluster $\C_j$, yielding
 a total energy cost function \eqref{eq:maxQ} denoted by $Q^{(j)}$.
 Let us consider the change in the total energy by moving
-$x_i$ to cluster $\C_\ell$. 
-Denote the new energy cost after moving $x_i$ to $\C_\ell$ by $Q^{(\ell)}$.
+$x_i$ to $\C_\ell$. 
+Denote this new energy cost by $Q^{(\ell)}$.
 It is straightforward to see that
 \begin{equation}
 \label{eq:changeQ}
@@ -1374,8 +1365,7 @@ It is straightforward to see that
 Thus, if $\Delta Q^{j\to \ell}(x_i) > 0$ we get closer to a 
 maximum of \eqref{eq:maxQ} by
 moving $x_i$ to $\C_\ell$, otherwise we better keep $x_i$ in $\C_j$. Based on
-this we propose an algorithm where
-the iterates are performed as follows.
+this the algorithm goes as follows.
 We start with an initial configuration for the label matrix $Z$, 
 then for each
 point $x_i$ 
@@ -1387,10 +1377,10 @@ If $\Delta Q^{j \to j^\star}(x_i) > 0$
 we move $x_i$ to cluster $\C_{j^\star}$, otherwise 
 we keep $x_i$ in its original cluster $\C_j$. We update $Z$ accordingly.
 The process is repeated
-until convergence, i.e. until no points are assigned to new clusters. 
+until no points are assigned to new clusters. 
 This whole procedure is described in Algorithm~\ref{algo}.
-Note that \eqref{eq:changeQ} assures that the objective function is
-monotonically increasing at each iteration, therefore the algorithm
+Note that this ensures that the objective function is
+monotonically increasing at each iteration, and consequently the algorithm
 converges in a finite number of steps.
 
 \begin{figure}
@@ -1400,9 +1390,9 @@ converges in a finite number of steps.
     \INPUT number of clusters $k$, Gram matrix $G$, 
                 initial label matrix $Z=Z_0$
     \OUTPUT label matrix $Z$
-  \STATE $\bm{q} \leftarrow (Q_1, \dotsc, Q_k)^\top$ 
+  \STATE $q \leftarrow (Q_1, \dotsc, Q_k)^\top$ 
             have the energy costs of each cluster, according to \eqref{eq:maxQ}
-  \STATE $\bm{n} \leftarrow (n_1,\dotsc,n_k)^\top$ have the number of points 
+  \STATE $n \leftarrow (n_1,\dotsc,n_k)^\top$ have the number of points 
         in each cluster, obtained from $D=Z^\top Z$
   \REPEAT
     \FOR{ $i=1,\dotsc,n$}
@@ -1412,9 +1402,9 @@ converges in a finite number of steps.
         \IF{ $\Delta Q^{j \to j^\star}(x_i) > 0$ }
             \STATE move $x_i$ to $\C_{j^\star}$: $Z_{ij} \leftarrow 0$ and 
             $Z_{ij^\star} \leftarrow 1$
-            \STATE update $\bm{n}$: $n_j \leftarrow n_j - 1$ and
+            \STATE update $n$: $n_j \leftarrow n_j - 1$ and
                     $n_{j^\star} \leftarrow n_{j^\star} + 1$
-            \STATE update $\bm{q}$: $q_j \leftarrow q_j - 2Q_j(x_i)$ and
+            \STATE update $q$: $q_j \leftarrow q_j - 2Q_j(x_i)$ and
     $q_{j^\star} \leftarrow q_{j^\star} + 2\left(Q_{j^\star}(x_i)+
     G_{ii}\right)$
     %    \ELSE
@@ -1424,21 +1414,22 @@ converges in a finite number of steps.
   \UNTIL{convergence}
 \end{algorithmic}
 \caption{\label{algo}
-Energy cost algorithm to find an approximate solution to \eqref{eq:qcqp2}.
+Hartigan's method to find an approximate solution to \eqref{eq:qcqp2}.
 \hspace{\fill}
 }
 \end{algorithm}
 \end{figure}
 
-Notice that computing $G$ requires $\OO( D n^2)$ operations, where 
+Computing $G$ requires $\OO( D n^2)$ operations, where 
 $D$ is the dimension of each data point and $n$ is the data size. However,
-both previous algorithms assume that $G$ is given. There are more efficient
-methods to compute $G$, specially if it is sparse. We will not consider
-this further, and just assume that $G$ is given.
+both Algorithms~\ref{kmeans_algo} and \ref{algo} 
+assume that $G$ is given. There are more efficient
+methods to compute $G$, specially if it is sparse, but we will not consider
+this further and just assume that $G$ is given.
 The computation of each cluster cost
-$Q_j$ has complexity $\OO(n_j^2)$, and overall to compute $\bm{q}$
+$Q_j$ has complexity $\OO(n_j^2)$, and overall to compute $q$
 we have $\OO(n_1^2+\dots + n_k^2) = \OO(k \max_j n_j^2)$. 
-These operations, however, only need to be performed a single time. Now for
+These operations only need to be performed a single time. For
 each point $x_i$ we need to compute $Q_j(x_i)$ once, which is
 $\OO(n_j)$, and we need to compute $Q_\ell(x_i)$ for each $\ell\ne j$. 
 The cost of computing 
@@ -1448,8 +1439,68 @@ For the
 entire dataset this gives a time complexity
 of $\OO(n k  \max_j n_j) =\OO(k n^2)$. This is the same cost as
 in kernel $k$-means, Algorithm~\ref{kmeans_algo}. Again, if $G$ is sparse
-this can be reduced to $\OO(k n')$, where $n'$ is the number of nonzero
+this can be reduced to $\OO(k n')$ where $n'$ is the number of nonzero
 entries of $G$.
+
+Some important properties of Hartigan's method 
+are worth mentioning. 
+
+\begin{theorem}[Telgarsky-Vattani \cite{Telgarsky}]
+Hartigan's method has the cost function strictly decreasing in each
+iteration. Moreover, if $n > k$ then 
+\begin{enumerate}
+\item \label{noempty} the resulting partition has no empty clusters, and
+\item \label{diffmean} the resulting partition has distinct means.
+\end{enumerate}
+\end{theorem}
+
+Both condition above are not satisfied 
+by Lloyd's method, and consequently by (kernel) $k$-means algorithm.
+
+\begin{theorem}[Telgarsky-Vattani \cite{Telgarsky}]
+The set of local optima of Hartigan's method is a (possibly strict) subset
+of local optima of Lloyd's method.
+\end{theorem}
+
+This means that Algorithm~\ref{kmeans_algo} cannot
+improve on a local optima of Algorithm~\ref{algo}. On the other hand,
+Algorithm~\ref{algo} might improve on a local optima of 
+Algorithm~\ref{kmeans_algo}. Lloyd's method forms Voronoi partitions,
+while Hartigan's method groups data
+in regions formed by the intersection of spheres called circlonoi cells.
+It can be shown that the circlonoi cells are contained within
+a smaller volume of a Voronoi cell, and this excess volume grows
+exponentially with the dimension of $\mathcal{X}$ 
+\cite[Theorems 2.4 and 3.1]{Telgarsky}. 
+Points in this excess volume
+force Hartigan's method to iterate, contrary
+to Lloyd's method. Therefore, Hartigan's method 
+can potentially escape local
+optima of Lloyd's method. 
+Moreover, this improvement should be more prominent as
+dimension increases. Also, the improvement grows as $k$
+increases.
+The empirical results of \cite{Telgarsky} show that 
+an implementation of Hartigan's method has comparable execution time 
+as an implementation of
+Lloyd's method,
+but no explicit complexity was provided. In our case, we showed that both
+Algorithms~\ref{kmeans_algo} and \ref{algo} have the same time complexity.
+
+In \cite{Slonin} Hartigan's method was applied to $k$-means problem
+with any Bregman divergence. They showed that the number of Hartigan's
+local minima is upper bounded by $O(1/k)$ \cite[Proposition 5.1]{Slonin}. 
+In addition, they provide examples where
+\emph{any} initial partition correspond to a local optima of Lloyd's 
+method, while  the number of local optima in Hartigan's is small and 
+correspond to true partitions of the data. Empirically, the number of
+Hartigan's local optima was considerably smaller than the number of Lloyd's
+local optima.
+These results indicate that Hartigan's method
+provides several advantages over Lloyd's method. 
+We will see this explicitly in the following 
+numerical results where Algorithm~\ref{algo}
+outperforms Algorithm~\ref{kmeans_algo} when using the same kernel.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1458,84 +1509,108 @@ entries of $G$.
 
 In the experiments below we fix the semimetric 
 according to the traditional energy distance \eqref{eq:energy}, and
-the point $x_0=0$ is chosen in the associated kernel  
+the point $x_0=0$ is chosen in the corresponding kernel  
 \eqref{eq:kernel_semimetric}. We thus have
 \begin{equation}
 \label{eq:standard_metric}
 \rho(x,y) = \| x-y\|, \qquad \kk(x,y) = 
 \tfrac{1}{2}\left( \| x \| + \| y \| - \| x-y \| \right).
 \end{equation}
-We will consider other semimetrics/kernels as well, 
-but the above will be considered the
+We will consider other kernels as well, 
+but \eqref{eq:standard_metric} will be considered the
 standard kernel for energy statistics and will always be present in every
-experiment as a reference. Notice that this is a convention, 
-we could have chosen
-any other semimetric as the standard.
-One of the main goals of the following 
-experiments is to compare Algorithm~\ref{algo} to
-kernel $k$-means algorithm, described in Algorithm~\ref{kmeans_algo}. Thus,
-for every kernel used in Algorithm~\ref{algo}, we also use the same 
-kernel in Algorithm~\ref{kmeans_algo}. Another goal is to compare
-Algorithm~\ref{algo} with $k$-means and GMM (through expectation maximization
-algorithm), as these are the most used
-clustering algorithms in practice.
-Since for synthetic data the true labels are available,
-our measure of clustering quality
-will be \eqref{eq:accuracy}. Moreover, for all algorithms, we always
-choose the initialization from $k$-means++ \cite{Vassilvitskii}.
+experiment for reference. 
+%Notice that this is a convention, 
+%we could have chosen
+%any other semimetric/kernel as the standard.
 
-We first consider clustering in high dimensions and analyze 
+Let us briefly mention that we compared Algorithms~\ref{algo} and
+\ref{algo1d} for several univariate distributions, and
+both perform almost indistinguishable regarding the clustering quality.
+We omit these results since we will analyse more interesting scenarios.
+
+The main goal of the 
+experiments shown in this section 
+is to compare Algorithm~\ref{algo}, based on Hartigan's method, to
+kernel $k$-means as described in Algorithm~\ref{kmeans_algo}, based on
+Lloyd's method. From the discussion in the previous section we expect 
+Algorithm~\ref{algo} to be superior than Algorithm~\ref{kmeans_algo}.
+Another goal is to illustrate the nonparametric aspect of energy statistics.
+To this end we also compare
+Algorithm~\ref{algo} to standard $k$-means and GMM/EM since 
+these are the most used
+clustering algorithms in practice.
+Moreover, for every algorithm, we always
+choose the initialization procedure from $k$-means++%
+\footnote{Notice that we just use the initialization
+procedure and not the full $k$-means++ algorithm.} \cite{Vassilvitskii}.
+Our measure of clustering quality will be the accuracy \eqref{eq:accuracy}
+based on the ground truth. Furthermore, in every experiment we sample
+data many times and show the average value of the accuracy, with error bars
+indicating standard error. Whenever possible, for reference, 
+we also show the best possible accuracy obtained from a numerical estimation
+of Bayes classification error, which uses the true probability distribution
+of the data.
+
+From the results of \cite{Telgarsky}, the improvement of Hartigan's method
+over Lloyd's method should be more prominent in high dimensions.
+To analyse this we show 
 how the algorithms degrade as the number of dimensions increase, while
-keeping the number of points in each cluster fixed. The Bayes error
-is also kept fixed as ambient dimension increases.
-In Figure~\ref{fig:gauss}a we have data generated from $D$-variate normal 
-distributions as follows: 
+keeping the number of points in each cluster fixed. Consider
+two clusters with multivariate normal distributions given by
 \begin{equation}
 \label{eq:gauss1}
 \begin{split}
-&x \sim \tfrac{1}{2}\left[ 
-\mathcal{N}(\mu_1,\Sigma_1) + \mathcal{N}(\mu_2, \Sigma_2)\right], \\
-&\mu_1 = (\underbrace{0,\dotsc,0}_{\times D})^\top , \quad
+x &\in \C_i  \sim 
+\mathcal{N}(\mu_i,\Sigma_i) \qquad (i=1,2),  \\
+\mu_1 &= (\underbrace{0,\dotsc,0}_{\times D})^\top , \quad
 \mu_2 = 0.7 \times (\underbrace{1,\dots,1}_{\times 10},
 \underbrace{0,\dots,0}_{\times (D-10)})^\top, \quad
 \Sigma_1 = \Sigma_2 = I_D.
 \end{split}
 \end{equation}
-We only keep signal in
-in the first $10$
-dimensions of $\mu_2$, and keep increasing the ambient dimension $D$. For each
-$D$, we perform $100$ experiments, obtaining the clustering accuracy
-for each algorithm.
-We can see that
-GMM is not able to estimate the covariance matrix 
-when the number
-of dimensions exceeds the number of points in each cluster, so it gives
-zero accuracy for $D \gtrsim 100$.
-In Figure~\ref{fig:gauss}b we have the same type of experiment but 
-with 
+Note that the Bayes error
+is also kept fixed as $D$ increases, given an optimal classification
+accuracy of $\approx 0.86$.
+We keep signal only the first $10$ dimensions of $\mu_2$ and increase $D$.
+For each $D$ we sample $100$ times, picking $100$ points for each cluster.
+We apply each algorithm to the resulting data set 
+and compute the average value of the accuracy \eqref{eq:accuracy}.
+For both Algorithms~\ref{algo} and \ref{kmeans_algo} we use the standard
+kernel \eqref{eq:standard_metric} from energy statistics.
+The results are shown in Fig.~\ref{fig:gauss}a, where error bars indicate
+the standard error.
+Notice that GMM/EM algorithm is unable to estimate the covariance matrix 
+when the number of dimensions exceeds the number of points in each cluster.
+We see that Algorithm~\ref{algo} performs better than all the other ones,
+and in particular it works better than kernel $k$-means as the number
+of dimensions increase. Note also that although GMM and $k$-means are
+parametric, they are consistent models for the above distributions.
+Now we consider the same experiment but with different covariances:
 \begin{equation}
 \label{eq:gauss2}
 \begin{split}
-&x \sim \tfrac{1}{2}\left[ 
-\mathcal{N}(\mu_1,\Sigma_1) + \mathcal{N}(\mu_2, \Sigma_2)\right], \\
-&\mu_1 = (\underbrace{0,\dotsc,0}_{\times D})^\top , \,
-\mu_2 = 0.7 \times (\underbrace{1,\dots,1}_{\times 10},
-\underbrace{0,\dots,0}_{\times (D-10)})^\top, \,
-\Sigma_1 = I_D, \, 
-\Sigma_2 = \left( \begin{smallmatrix} \tfrac{1}{2} I_{10} & 0 \\ 0 & I_{D-10}
-\end{smallmatrix}\right). \quad
+x &\in \C_i  \sim 
+\mathcal{N}(\mu_i,\Sigma_i) \qquad (i=1,2),  \\
+\mu_1 &= (\underbrace{0,\dotsc,0}_{\times D})^\top , \quad
+\mu_2 = (\underbrace{1,\dots,1}_{\times 10},
+\underbrace{0,\dots,0}_{\times (D-10)})^\top, \quad
+\Sigma_1 = I_D, \quad 
+\Sigma_2 = \left( \begin{smallmatrix} \widetilde{\Sigma} & 0 \\ 0 & I_{D-5}
+\end{smallmatrix}\right)
 \end{split}
 \end{equation}
-Therefore, for both experiments shown in Figure~\ref{fig:gauss}
+where $\widetilde{\Sigma}_{jj} = j$ for $j=1,\dotsc,5$.
+The best possible accuracy from Bayes classification error is
+$\approx 0.95$.
+The results are shown In Figure~\ref{fig:gauss}b.
+In the experiments of Figure~\ref{fig:gauss}
 we can see a better performance of Algorithm~\ref{algo} compared
-to the other ones, in particular compared to kernel $k$-means algorithm,
-where we recall that both
-aim at optimizing the same problem (see Proposition~\ref{th:kernel_kmeans}). 
-Also, notice that $k$-means
-and GMM are consistently the right model for this dataset, so it is hard
-to perform better than these algorithms in this current setting.
-Notice that Algorithm~\ref{algo} is more robust as the ambient
-dimension increases.
+to the other ones, and in particular to kernel $k$-means,
+where we recall that both find approximate solutions
+to the same optimization problem \eqref{eq:qcqp2}.
+Notice that Algorithm~\ref{algo} is more robust as the number of dimensions
+increase.
 
 \begin{figure}
 \begin{minipage}{0.49\textwidth}
@@ -1550,18 +1625,14 @@ dimension increases.
 \end{minipage}
 \caption{
 \label{fig:gauss}
-Effect of increasing the
-ambient dimension while keeping Bayes error fixed, for 
-two clusters with normally distributed data with $100$ points in each
-cluster. 
-(a) 
-We increase $D$ as described in \eqref{eq:gauss1}. The blue
-line correspond to Algorithm~\ref{algo}, while
-the magenta line 
-corresponds to kernel $k$-means, Algorithm~\ref{kmeans_algo}.
-(b) The same but with data following \eqref{eq:gauss2}.
-One notices that
-Algorithm~\ref{algo} is more robust than the other ones.
+Comparison of Algorithm~\ref{algo}, Algorithm~\ref{kmeans_algo},
+standard $k$-means and GMM/EM as the number of dimensions increase.
+We sample $100$ times and show the average of \eqref{eq:accuracy} with
+error bars being standard error. We have two clusters with $100$ points
+each. 
+(a) Data distributed as in \eqref{eq:gauss1}. The optimal accuracy
+from Bayes error is indicated by the dashed line which is $\approx 0.86$.
+(b) Data from \eqref{eq:gauss2}. The optimal accuracy is $\approx 0.95$.
 }
 \end{figure}
 
@@ -1570,13 +1641,11 @@ unbalanced clusters. We generate data as
 \begin{equation}
 \label{eq:gauss3}
 \begin{split}
-&x \sim  
-\dfrac{n_1}{N} \mathcal{N}(\mu_1,\Sigma_1) + 
-\dfrac{n_2}{N} \mathcal{N}(\mu_2, \Sigma_2), 
-\quad \mu_1 = (0,0,0,0)^\top , \,
+x &\in \C_i \sim  
+\dfrac{n_i}{N} \mathcal{N}(\mu_i,\Sigma_i) \quad (i=1,2), \quad 
+\mu_1 = (0,0,0,0)^\top , \quad
 \mu_2 = 1.5\times (1,1,0,0)^\top, \\
-&
-\Sigma_1 = I_4, \quad
+\Sigma_1 &= I_4, \quad
 \Sigma_2 = \left( 
 \begin{smallmatrix} 
 1/2 & 0 & 0 & 0\\
@@ -1587,39 +1656,47 @@ unbalanced clusters. We generate data as
 n_1 = N - m, \quad  n_2 = N + m, \quad N=200.
 \end{split}
 \end{equation}
-We then increase $m$, i.e. we make the clusters progressively more unbalanced.
-We generate $100$ experiments for each $m$, and plot the clustering accuracy
-versus $m$.
+We increase $m$, that is we make the clusters progressively more unbalanced,
+and plot the mean of \eqref{eq:accuracy} with standard errors, where
+we sample $100$ times for each $m$.
 As expected, GMM
-works better than the other algorithms in the case of unbalanced clusters. 
-This is mostly due to its soft assignments.
+works better than the other algorithms since it is a fuzzy clustering.
 We can see that the other methods based on hard assignments degrade similarly,
 and  more rapidly than GMM. This indicates that a fuzzy version of
-energy statistics clustering should compensate for this effect.
+Algorithm~\ref{algo} should compensate for this effect.
 
 \begin{figure}
 \centering
 \includegraphics[width=0.5\textwidth]{gauss_pi.pdf}
 \caption{
 \label{fig:unbalanced}
-Previous algorithms for unbalanced clusters, 
-according to \eqref{eq:gauss3}.}
+Comparison of Algorithm~\ref{algo}, Algorithm~\ref{kmeans_algo}, standard
+$k$-means and GMM/EM for data distributed as in \eqref{eq:gauss3}, where
+we make the two clusters progressively more unbalanced.
+}
 \end{figure}
 
-Now, besides \eqref{eq:standard_metric} we consider two other semimetrics:
+Besides the standard kernel from energy statistics 
+\eqref{eq:standard_metric}, associated to \eqref{eq:energy}, 
+let us consider two other semimetrics with their respective generating
+kernels,
 \begin{align}
-\rho_{1/2}(x,y) &= \| x-y \|^{1/2}, & \kk(x,y) &= \tfrac{1}{2} \left( 
+\rho_{1/2}(x,y) &= \| x-y \|^{1/2} & 
+ \kk_{1/2}(x,y) &= \tfrac{1}{2} \left( 
 \| x \|^{1/2} + \| y \|^{1/2} 
 - \| x-y \|^{1/2} \right), \label{eq:rhohalf}\\
-\rho_{e}(x,y) &= 2 - 2 e^{-\| x- y\|/2}, & \kk(x,y) &= e^{-\| x-y\|/2}.
+\rho_{e}(x,y) &= 
+2 - 2 e^{-\tfrac{1}{2}\| x- y\|} &
+ \kk_{e}(x,y) &= e^{-\tfrac{1}{2}\| x-y\|}.
 \label{eq:rhoe}
 \end{align}
-In Figure~\ref{fig:consist}a we have data in $20$ dimensions distributed as
+The kernel \eqref{eq:rhohalf} corresponds to the energy distance
+\eqref{eq:energy2} with $\alpha=1/2$.
+Now consider data normally distributed in $D=20$ as follows:
 \begin{equation}
 \label{eq:20gauss}
 \begin{split}
-x &\sim \tfrac{1}{2}\left[ \mathcal{N}(\mu_1,\Sigma_1) + \mathcal{N}(\mu_2,
-\Sigma_2) \right], \\
+x &\in \C_i \sim \mathcal{N}(\mu_i,\Sigma_i) \qquad (i=1,2), \\
 \mu_1 &= (\underbrace{0,\dotsc,0}_{\times 20})^\top ,\quad
 \mu_2 = \tfrac{1}{2} 
 (\underbrace{1,\dotsc,1}_{5},\underbrace{0,\dotsc,0}_{15})^\top, \quad
@@ -1627,30 +1704,39 @@ x &\sim \tfrac{1}{2}\left[ \mathcal{N}(\mu_1,\Sigma_1) + \mathcal{N}(\mu_2,
 \Sigma_2 = I_{20}.
 \end{split}
 \end{equation}
-We increase the number of points in each cluster and show the clustering
-accuracy with different algorithms. The new semimetrics \eqref{eq:rhohalf}
-and $\eqref{eq:rhoe}$ are indicated in the legend. One can see that
+We sample an equal number of points for each cluster, which is
+increased. The optimal accuracy of \eqref{eq:20gauss} based on Bayes
+classification error is $\approx 0.90$. We repeat the same experiment as
+before but now using also the kernels \eqref{eq:rhohalf} and
+\eqref{eq:rhoe}. The results are shown in Figure~\ref{fig:consist}a.
 Algorithm~\ref{algo} performs better than all the other ones, and in 
-particular \eqref{eq:rhoe} provides better results.
-As the number of datapoints 
-get large enough, GMM starts to be as accurate as clustering
-based on energy statistics, as it should since it is 
-consistent model to the data. In Figure~\ref{fig:consist}b, however, we
-use the same parameters as in \eqref{eq:20gauss} but now with data
-log-normally distributed:
+particular the kernel \eqref{eq:rhoe} provides better results.
+As the number of points get large enough, GMM starts to approach
+optimal Bayes accuracy, 
+as it should since it is 
+consistent model to the distribution of the data. However, 
+Algorithm~\ref{algo} with kernel \eqref{eq:rhoe} achieves optimal accuracy
+with a much smaller number of points. Moreover, Algorithm~\ref{algo} performs
+better than Algorithm~\ref{kmeans_algo} for any of the kernel choices.
+Standard $k$-means performs poorly on this example.
+
+Consider the same parameters as in \eqref{eq:20gauss} but now with
+lognormal distribution, i.e.
 \begin{equation}
 \label{eq:20loggauss}
-x \sim \tfrac{1}{2}\left[ e^{\mathcal{N}(\mu_1,\Sigma_1)}
-+ e^{\mathcal{N}(\mu_2, \Sigma_2)}\right].
+\log x \in \C_i \sim \mathcal{N}(\mu_i, \Sigma_i) \qquad (i=1,2).
 \end{equation}
-We see that clustering based on energy statistics still performs accurately
-for this kind of data, while $k$-means works a little bit better than chance,
-and GMM is not even able to estimate the parameters. Again, \eqref{eq:rhoe}
-provides slightly better results than \eqref{eq:standard_metric} or
-\eqref{eq:rhohalf}. Notice also that Algorithm~\ref{algo} performs better
-than Algorithm~\ref{kmeans_algo}. Both experiments in Figure~\ref{fig:consist}
-shows that energy statistics clustering is nonparametric, since it is able
-to cluster data coming from very different distributions.
+The same previous experiment is now shown in 
+Fig.~\ref{fig:consist}b.
+We see that Algorithm~\ref{algo} still performs accurately, 
+while $k$-means works a little bit better than chance,
+and GMM is not even able to estimate the parameters. Again, the
+kernel \eqref{eq:rhoe}
+provides better results than \eqref{eq:standard_metric} or
+\eqref{eq:rhohalf}. Algorithm~\ref{algo} performs better
+than Algorithm~\ref{kmeans_algo} for every kernel choice. 
+The experiments in Fig.~\ref{fig:consist}
+illustrates that energy statistics clustering is nonparametric.
 
 \begin{figure}
 \begin{minipage}{0.49\textwidth}
@@ -1665,58 +1751,360 @@ to cluster data coming from very different distributions.
 \end{minipage}
 \caption{
 \label{fig:consist}
-(a) Data normally distributed as in 
-\eqref{eq:20gauss}. We increase the number of points in each cluster to
-illustrate the statistical consistency of the algorithms.
-(b) The same experiment but for data following \eqref{eq:20loggauss}.
-In both experiments, for each case we run every algorithm $100$ times and show
-the average results. One can see the better performance of energy statistics
-clustering, Algorithm~\ref{algo}, and in particular by using the semimetric
-\eqref{eq:rhoe}. These two figures illustrate that energy statistics clustering
-is nonparametric since it works well for very different distributions.
+Comparison of Algorithms~\ref{algo} and \ref{kmeans_algo} with kernels
+\eqref{eq:standard_metric}, \eqref{eq:rhohalf} and \eqref{eq:rhoe}, and
+also with $k$-means and GMM/EM. The optimal accuracy in both cases
+is $\approx 0.9$. We show average of \eqref{eq:accuracy}
+over $100$ samples with standard error.
+(a) Data distributed as in 
+\eqref{eq:20gauss}. 
+(b) Data distributed as in \eqref{eq:20loggauss}.
+%One can see the better performance of energy statistics
+%clustering, Algorithm~\ref{algo}, and in particular by using the semimetric
+%\eqref{eq:rhoe}. 
+These experiments illustrates how energy statistics
+based clustering is nonparametric.
 }
 \end{figure}
+
+\begin{figure}
+\begin{minipage}{0.25\textwidth}
+\includegraphics[width=1\textwidth]{2cigars.pdf}\\[-1em] (a)
+\end{minipage}
+\begin{minipage}{0.25\textwidth}
+\includegraphics[width=1\textwidth]{2circles.pdf}\\[-1em] (b)
+\end{minipage}
+\begin{minipage}{0.25\textwidth}
+\includegraphics[width=1\textwidth]{3circles.pdf}\\[-1em] (c)  
+\end{minipage}
+\begin{minipage}{0.22\textwidth}
+\vspace{-0.3em}
+\includegraphics[width=1\textwidth]{mnist.pdf}\\[-1.8em] (d)  
+\end{minipage}
+\caption{\label{fig:other}
+(a) Parallel cigars, $200$ points in each class. (b) Two  
+concentric
+circles with noise, $400$ points each. (c) Three
+concentric circles, $400$ points each.
+Clustering for (a--c) is shown in Table~\ref{table:other}.
+(d) MNIST handwritten digits. Clustering on Table~\ref{table:mnist}.
+}
+\end{figure}
+
+Now we consider two dimensional data as illustrated in
+Fig~\ref{fig:other}(a--c)
+with the following choices of semimetric and corresponding generating kernel:
+\begin{align}
+\rho_{\alpha}(x,y) &= \| x - y\|^\alpha & 
+\kk_{\alpha}(x,y) &= \tfrac{1}{2}\left(
+\| x \|^\alpha +
+\| y \|^\alpha -
+\| x-y \|^\alpha \right) ,
+\label{eq:rhoalpha} \\
+%
+\widetilde{\rho}_{\sigma}(x,y) &= 2 - 2 e^{-\tfrac{\|x-y\|}{2 \sigma}} &
+\widetilde{\kk}_{\sigma}(x,y) &= e^{-\tfrac{\|x-y\|}{2\sigma}} ,
+\label{eq:rhoesigma} \\
+%
+\widehat{\rho}_{\sigma}(x,y) &= 2 - 2 e^{-\tfrac{\|x-y\|^2}{2 \sigma^2}} &
+\widehat{\kk}_{\sigma}(x,y) &= e^{-\tfrac{\|x-y\|^2}{2\sigma^2}} .
+\label{eq:rhogsigma} 
+\end{align}
+We apply both Algorithms~\ref{algo} and \ref{kmeans_algo}, besides
+$k$-means and GMM, using the above kernels. The results are shown
+in Table~\ref{table:other} where the respective choice of parameters for the
+kernels are indicated. In the data shown in Fig.~\ref{fig:other}a 
+the standard semimetrics from energy statistics, $\rho_1$ and $\rho_{1/2}$, are
+able to provide more accurate results compared to $k$-means. However,
+the gaussian kernel $\widetilde{\rho}_2$ gives results very accurate
+results, similar to GMM,
+which is the true model of the data. In Fig.~\ref{fig:other}b we see
+that the choice of kernel is very sensitive, and only \eqref{eq:rhoesigma}
+was able to cluster accurately. The same kernel choice to the case
+of Fig.~\ref{fig:other} still provides better results than
+the other choices, but the results are less accurate.
+
+\newcolumntype{g}{>{\columncolor{gray!20}}l}
+\begin{table}
+\begin{tabular}{@{}r  l g  l g  l g@{}}
+\toprule[1pt]
+ & & \emph{Fig.~\ref{fig:other}a}
+ & & \emph{Fig.~\ref{fig:other}b}
+ & & \emph{Fig.~\ref{fig:other}c} \\
+\midrule[0.5pt]
+\multirow{4}{*}{\emph{Algorithm \ref{algo}}~~~~} 
+& $\rho_{1}$ & $0.766\pm0.066$
+& $\rho_{1}$ & $0.522\pm0.006$
+& $\rho_{1}$ & $0.437\pm0.030$ \\
+& $\rho_{1/2}$ & $0.859\pm0.062$
+& $\rho_{1/2}$ & $0.524\pm0.007$
+& $\rho_{1/2}$ & $0.547\pm0.026$ \\
+& $\widetilde{\rho}_{2}$ & $0.971\pm0.015$
+& $\widetilde{\rho}_{1}$ & $\bm{0.9999\pm0.0001}$
+& $\widetilde{\rho}_{2}$ & $\bm{0.677\pm0.003}$ \\
+& $\widehat{\rho}_{2}$  & $\bm{0.998\pm0.001}$
+& $\widehat{\rho}_{1}$  & $0.597\pm0.052$
+& $\widehat{\rho}_{2}$ & $0.645\pm0.012$ \\
+\arrayrulecolor{gray!80}\midrule[0.5pt]
+\multirow{4}{*}{\emph{Algorithm \ref{kmeans_algo}}~~~~} 
+& $\rho_{1}$ & $0.758\pm 0.069$
+& $\rho_{1}$ & $0.516\pm 0.002$
+& $\rho_{1}$  & $0.452\pm 0.030$ \\
+& $\rho_{1/2}$ & $0.901\pm 0.060$
+& $\rho_{1/2}$ & $0.524\pm 0.007$
+& $\rho_{1/2}$ & $0.570\pm 0.016$ \\
+& $\widetilde{\rho}_{2}$ & $0.971\pm 0.015$
+& $\widetilde{\rho}_{1}$ & $\bm{0.9999\pm 0.0001}$
+& $\widetilde{\rho}_{2}$ & $\bm{0.673\pm 0.002}$ \\
+& $\widehat{\rho}_{2}$ & $\bm{0.998\pm 0.001}$
+& $\widehat{\rho}_{1}$ & $0.528\pm 0.008$
+& $\widehat{\rho}_{2}$ & $0.640\pm 0.013$ \\
+\arrayrulecolor{gray!80}\midrule[0.5pt]
+\emph{$k$-means}~~~~ 
+& & $0.599\pm0.046$
+& & $0.521\pm0.005$
+& & $0.360\pm0.004$ \\
+\emph{GMM}~~~~
+& & $0.9995\pm0.0003$
+& & $0.598\pm0.018$
+& & $0.479\pm0.021$ \\
+\arrayrulecolor{black}\bottomrule[1pt]
+\end{tabular}
+\caption{\label{table:other}
+Clustering the data shown in Fig.~\ref{fig:other} with Algorithms~\ref{algo}
+and \ref{kmeans_algo}, besides $k$-means and GMM, for the kernels 
+\eqref{eq:rhoalpha},
+\eqref{eq:rhoesigma} and
+\eqref{eq:rhogsigma}. We sample the data $10$ times and show the average
+accuracy \eqref{eq:accuracy} with standard error.
+}
+\end{table}
+
+Next we consider 
+the well-known MNIST handwritten digit dataset 
+as illustrated in Fig.~\ref{fig:other}d.
+Each data point is an $8$-bit gray scale
+image corresponding to one of the digits $\{0,1,\dotsc,9 \}$.
+Each image forms a $784$-dimensional vector.
+We consider subsets of these classes, where we sample $100$ points 
+for each class, and cluster the data using Algorithms~\ref{algo} and
+\ref{kmeans_algo}. Besides the kernel \eqref{eq:rhoalpha}, we
+consider the gaussian kernel \eqref{eq:rhogsigma} with the width
+computed from the data as
+\begin{equation}
+\label{eq:sigma}
+\sigma^2 = \dfrac{1}{n^2} \sum_{i,j=1}^n \| x_i - x_j \|^2
+\end{equation}
+where $\{ x_i \}_{i=1}^n$ is the sampled dataset.
+The results are shown in Table~\ref{table:mnist}.
+Algorithm~\ref{algo} performed slightly better than $k$-means, except
+for the last column where all the methods are comparable. 
+Unsupervised clustering on MNIST dataset without any feature extraction
+or dimensionality reduction is not an easy task. For instance,
+the same experiment was performed in \cite{Sapiro} where a low-rank
+transformation is learned then subsequently used in subspace clustering,
+providing very accurate results. One could explore analogous methods
+for learning a better representation of the data and subsequently apply
+Algorithm~\ref{algo} for clustering.
+
+\newcolumntype{g}{>{\columncolor{gray!20}}l}
+\begin{table}
+\begin{tabular}{@{}r l | l | l | l | l@{}}
+\toprule[1pt]
+& & $\{0,1,2\}$ &
+$\{0,1,\dotsc,4\}$ &
+$\{0,1,\dotsc,6\}$ &
+$\{0,1,\dotsc,8\}$ \\
+\midrule[0.5pt]
+\multirow{3}{*}{\emph{Algorithm \ref{algo}}~~~~} 
+& $\rho_{1}$ 
+&$0.907\pm 0.007$
+&$0.866\pm 0.006$
+&$0.715\pm 0.013$
+&$0.616\pm 0.019$
+\\
+& $\rho_{1/2}$ 
+&$\bm{0.918\pm 0.006}$
+&$0.849\pm 0.025$
+&$0.711\pm 0.010$
+&$0.642\pm 0.009$
+\\
+& $\widetilde{\rho}_{\sigma}$ 
+&$0.900\pm 0.007$
+&$\bm{0.871\pm 0.005}$
+&$\bm{0.719\pm 0.010}$
+&$0.630\pm 0.016$
+\\
+\arrayrulecolor{gray!80}\midrule[0.5pt]
+\multirow{3}{*}{\emph{Algorithm \ref{kmeans_algo}}~~~~} 
+& $\rho_{1}$ 
+&$0.914\pm 0.006$
+&$0.845\pm 0.023$
+&$0.664\pm 0.022$
+&$0.614\pm 0.014$
+\\
+& $\rho_{1/2}$ 
+&$0.895\pm 0.011$
+&$0.822 \pm 0.026$
+&$0.669\pm 0.021$
+&$0.591\pm 0.019$
+\\
+& $\widetilde{\rho}_{\sigma}$ 
+&$0.896\pm 0.007$
+&$0.869\pm 0.006$
+&$0.705\pm 0.016$
+&$\bm{0.646\pm 0.020}$
+\\
+\arrayrulecolor{gray!80}\midrule[0.5pt]
+\emph{$k$-means}~~~~ &
+&$0.871\pm 0.015$
+&$0.840\pm 0.022$
+&$0.707\pm 0.012$
+&$0.634\pm 0.011$
+\\
+\arrayrulecolor{black}\bottomrule[1pt]
+\end{tabular}
+\caption{\label{table:mnist}
+Clustering the data shown in Fig.~\ref{fig:other}d with Algorithms~\ref{algo}
+and \ref{kmeans_algo}, and $k$-means.
+We use the kernel \eqref{eq:rhoalpha} with $\alpha\in\{1,2\}$, and
+the gaussian kernel 
+\eqref{eq:rhogsigma} with $\sigma$ given by \eqref{eq:sigma}. 
+For each subset of digits we sample $10$ times and show the average
+accuracy \eqref{eq:accuracy} with standard error. We pick $100$ points for 
+each class.
+}
+\end{table}
+
+
+%Energy standard  : 0.991 0.00221108319357
+%Energy half      : 0.993 0.000816496580928
+%Energy rbf       : 0.99 0.00235702260396
+%Kernel standard  : 0.9915 0.00183333333333
+%Kernel half      : 0.992 0.00110554159679
+%Kernel rbf       : 0.99 0.00235702260396
+%k-means          : 0.9865 0.00258736244938
+%
+%
+%%%%%%%%%%%%%%%%%%
+%Energy standard  : 0.907333333333 0.00745024649522
+%Energy half      : 0.918 0.00638671460587
+%Energy rbf       : 0.899666666667 0.00708763485947
+%Kernel standard  : 0.913666666667 0.00648740470089
+%Kernel half      : 0.895333333333 0.0113442213494
+%Kernel rbf       : 0.895666666667 0.00723588451341
+%k-means          : 0.870666666667 0.0152412695107
+%
+%
+%
+%Energy standard  : 0.82975 0.0289550657629
+%Energy half      : 0.857 0.0138232895265
+%Energy rbf       : 0.85475 0.0164335784295
+%Kernel standard  : 0.84875 0.016386181509
+%Kernel half      : 0.79025 0.036198622595
+%Kernel rbf       : 0.8545 0.0145334862377
+%k-means          : 0.83425 0.01634289686
+%
+%
+%%%%%%%%%%%%%%%%%%%%%
+%Energy standard  : 0.8662 0.00636972003571
+%Energy half      : 0.8494 0.0250138628231
+%Energy rbf       : 0.8714 0.00536697721669
+%Kernel standard  : 0.845 0.0234932614452
+%Kernel half      : 0.8224 0.0261921107715
+%Kernel rbf       : 0.8688 0.00640971484892
+%k-means          : 0.8398 0.0224151734323
+%
+%
+%Energy standard  : 0.703333333333 0.0166295883857
+%Energy half      : 0.709833333333 0.0133690493859
+%Energy rbf       : 0.702 0.0158149015524
+%Kernel standard  : 0.688833333333 0.0195426883173
+%Kernel half      : 0.708833333333 0.0222403398366
+%Kernel rbf       : 0.7175 0.0153744416741
+%k-means          : 0.693333333333 0.0132590523468
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Energy standard  : 0.714714285714 0.0132292707827
+%Energy half      : 0.711142857143 0.00970728038727
+%Energy rbf       : 0.719142857143 0.010446277641
+%Kernel standard  : 0.663857142857 0.0220872830507
+%Kernel half      : 0.668571428571 0.0209923860509
+%Kernel rbf       : 0.705 0.0157981169405
+%k-means          : 0.707428571429 0.0115799498313
+%
+%Energy standard  : 0.671625 0.0167819450766
+%Energy half      : 0.652875 0.0162233221183
+%Energy rbf       : 0.686375 0.0142173724913
+%Kernel standard  : 0.674875 0.012649728258
+%Kernel half      : 0.654375 0.0232537706023
+%Kernel rbf       : 0.706 0.0188513925215
+%k-means          : 0.6705 0.0121037184369
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Energy standard  : 0.615555555556 0.0190076152525
+%Energy half      : 0.641888888889 0.00939463992175
+%Energy rbf       : 0.630333333333 0.0158222725065
+%Kernel standard  : 0.614444444444 0.0136113000743
+%Kernel half      : 0.590777777778 0.0188685802226
+%Kernel rbf       : 0.645888888889 0.0202454418315
+%k-means          : 0.634222222222 0.0111083947297
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Energy standard  : 0.5369 0.0136100044902
+%Energy half      : 0.5395 0.0138782403624
+%Energy rbf       : 0.5276 0.00942125257065
+%Kernel standard  : 0.518 0.0162446572413
+%Kernel half      : 0.5193 0.0146674620996
+%Kernel rbf       : 0.5289 0.0144001928999
+%k-means          : 0.5066 0.0120103658932
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 \label{sec:conclusion}
 
-In this paper we have considered clustering from the perspective of energy
-statistics, which provides a nonparametric test for equality of distributions.
-Based on this, we showed that the clustering problem reduces to a quadratically
+We considered clustering from the perspective of energy
+statistics theory which provides a nonparametric test for 
+equality of distributions.
+We showed that the clustering problem reduces to a quadratically
 constrained optimization problem (QCQP), 
 as described in Proposition~\ref{th:qcqp2}.
-Moreover, we showed that clustering based on energy statistics is equivalent
+Moreover, this problem is equivalent
 to kernel $k$-means optimization problem, once the kernel is fixed; see
 Proposition~\ref{th:kernel_kmeans}. Our results imply that kernel $k$-means
-approach to clustering is actually a consequence of energy statistics
-theory, and thus place this method into a principled statistical basis.
-As already known \cite{Dhillon}, this approach is related to spectral
-clustering, and graph partitioning problems. Therefore, all these problems 
-may be seen as arising naturally from energy statistics clustering.
-It is important to mention that energy statistics clustering, as formulated
-here, is valid for
-arbitrary metric spaces of negative type, and makes no assumptions about
-the distribution of the data. Moreover, it does not rely on the concept of a
-cluster mean, even implicitly.
+is actually a consequence of energy statistics, and thus place this 
+method into a principled statistical basis.
+We also considered a weighted version of energy statistics clustering
+which establishes connection with spectral
+clustering and graph partitioning problems.
 
-We also proposed Algorithm~\ref{algo} as an alternative to the well-known
-kernel $k$-means algorithm (see Algorithm~\ref{kmeans_algo}), 
-where both have the same time
-complexity. The numerical results show that Algorithm~\ref{algo}
-might provide better clustering accuracy and is more robust 
-than kernel $k$-means algorithm. Since there exists a huge literature about
-kernel $k$-means, and approximation methods to make it faster, with
-applications to several artificial and real data, 
-we limited ourselves to analyze few but carefully designed experiments, which
-illustrates the advantages of Algorithm~\ref{algo}.
+We considered Algorithm~\ref{algo} based on Hartigan's method, and
+compared with 
+kernel $k$-means described in Algorithm~\ref{kmeans_algo} which
+is based on Lloyd's heuristic.
+Both have the same time complexity, however, the numerical 
+results provide evidence that Algorithm~\ref{algo} is more robust with
+a superior clustering performance. This is also theoretically
+supported as described in the end of Section~\ref{sec:algo}.
+
+In the same way that kernel $k$-means can be accelerated by exploring
+sparsity or sampling methods to approximate the Gram matrix, these
+techniques are also applicable to Algorithm~\ref{algo}.
+For instance, it would be interesting explore the methods recently proposed
+in \cite{Mahoney} to this case. 
+Another fruitful avenue of exploration would be to find 
+better methods to tackle the optimization problem \eqref{eq:qcqp2}.
 
 
 \bigskip
 
-%\subsection*{Acknowledgements}
-%We thank \ldots
+\subsection*{Acknowledgements}
+GF would like to thank Carey Priebe for discussions.
+This work was supported by XXX grant.
 
 
 \bibliographystyle{unsrt}
