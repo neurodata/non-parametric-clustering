@@ -170,4 +170,10 @@ S.~Wang, A.~Gittens, and M.~W. Mahoney.
   Relative-Error Bounds}.
 \newblock arXiv:1706.02803v2 [cs.LG], 2017.
 
+\bibitem{Becker}
+F.~Pourkamali-Anaraki and S.~Becker.
+\newblock {Improved Fixed-Rank Nystr\"om Approximation via QR Decomposition:
+  Practical and Theoretical Aspects}.
+\newblock arXiv:1708.03218v2 [stat.ML], 2017.
+
 \end{thebibliography}
