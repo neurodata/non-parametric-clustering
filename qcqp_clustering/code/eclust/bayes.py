@@ -174,13 +174,28 @@ if __name__ == '__main__':
     #for a in range(int(d/2)):
     #    sigma2[a,a] = a+1
 
-    D = 20
-    d = 5
-    mu1 = np.zeros(D)
-    sigma1 = 0.5*np.eye(D)
-    mu2 = np.concatenate((0.5*np.ones(d), np.zeros(D-d)))
-    sigma2 = np.eye(D)
+    #D = 20
+    #d = 5
+    #mu1 = np.zeros(D)
+    #sigma1 = 0.5*np.eye(D)
+    #mu2 = np.concatenate((0.5*np.ones(d), np.zeros(D-d)))
+    #sigma2 = np.eye(D)
+    
+    #print bayes_multivariate_lognormal(mu1, mu2, sigma1, sigma2, 
+    #                                num_times=20, num_points=10000)
 
-    print bayes_multivariate_lognormal(mu1, mu2, sigma1, sigma2, 
-                                    num_times=20, num_points=10000)
+    D = 50
+    d = 10
+    m1 = np.zeros(D)
+    m2 = np.concatenate((np.ones(d), np.zeros(D-d)))
+    s1 = np.eye(D)
+    s2 = np.eye(D)
+    for a in range(d):
+        s1[a,a] = np.power(1/(a+1), 1)
+    for a in range(d):
+        s2[a,a] = np.power(a+1, 1)
+
+    print bayes_multivariate_normal(m1, m2, s1, s2, 
+                              num_times=20, num_points=10000)
+
     

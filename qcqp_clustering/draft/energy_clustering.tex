@@ -114,7 +114,7 @@ to kernel $k$-means optimization problem.
 Thus, our results imply a first principles derivation of 
 kernel $k$-means from energy statistics.
 Moreover, we also consider a weighted version of energy statistics 
-applied to clustering, which makes connections to 
+applied to clustering, which makes connection to 
 graph partitioning problems.
 To find local optimizers of such QCQP we consider an iterative
 algorithm based on Hartigan's method, which in this case
@@ -1516,31 +1516,28 @@ outperforms Algorithm~\ref{kmeans_algo} when using the same kernel.
 In the experiments below we fix the semimetric 
 according to the traditional energy distance \eqref{eq:energy}, and
 the point $x_0=0$ is chosen in the corresponding kernel  
-\eqref{eq:kernel_semimetric}. We thus have
+\eqref{eq:kernel_semimetric}. Therefore,
 \begin{equation}
 \label{eq:standard_metric}
 \rho(x,y) = \| x-y\| \qquad \mbox{and} \qquad \kk(x,y) = 
 \tfrac{1}{2}\left( \| x \| + \| y \| - \| x-y \| \right).
 \end{equation}
-We will consider other kernels as well, 
-but \eqref{eq:standard_metric} will be considered the
-standard kernel for energy statistics and will always be present in every
-experiment for reference. 
-%Notice that this is a convention, 
-%we could have chosen
-%any other semimetric/kernel as the standard.
+We will consider other kernels as well 
+but \eqref{eq:standard_metric} will be the
+standard kernel for energy statistics and will always be present in the
+experiments as a reference.
 
 Let us briefly mention that we compared Algorithm~\ref{algo} and
-Algorithm~\ref{algo1d} for several univariate distributions, and
+Algorithm~\ref{algo1d} for several univariate distributions and
 both perform almost indistinguishable regarding the clustering quality.
-We omit these results since we will analyse more interesting scenarios
-in higher dimensions and with more than two clusters.
+We omit these results since we will analyse more interesting scenarios.
 
 The main goal of the 
-experiments shown in this section 
-is to compare Algorithm~\ref{algo}, based on Hartigan's method, to
-kernel $k$-means as described in Algorithm~\ref{kmeans_algo}, based on
-Lloyd's method. From the discussion in the previous section we expect 
+experiments  to follow
+is to compare Algorithm~\ref{algo} based on Hartigan's method, to
+kernel $k$-means, as described in Algorithm~\ref{kmeans_algo}, which
+is based on Lloyd's method. 
+From the discussion in the previous section we expect 
 that Algorithm~\ref{algo}  be superior than Algorithm~\ref{kmeans_algo}.
 Another goal is to illustrate the nonparametric aspect of energy statistics.
 To this end we also compare
@@ -1552,17 +1549,16 @@ choose the initialization procedure from $k$-means++%
 \footnote{Notice that we just use the initialization
 procedure and not the full $k$-means++ algorithm.} \cite{Vassilvitskii}.
 Our measure of clustering quality will be the accuracy \eqref{eq:accuracy}
-based on the ground truth. Furthermore, in every experiment we sample
-data many times and show the average value of the accuracy, with error bars
-indicating standard error. Whenever possible, for reference, 
-we also show the best possible classification 
-accuracy obtained from a numerical estimation
-of Bayes classification error, which uses the true probability distribution
-of the data.
+based on the ground truth. Furthermore, in every experiment, we sample
+data many times and show the average value of the accuracy with error bars
+indicating the standard error. Whenever possible, 
+we also indicate the optimal 
+accuracy computed from
+Bayes classification error.
 
-From the results of \cite{Telgarsky}, the improvement of Hartigan's method
+From the results of \cite{Telgarsky}, the improvement of Hartigan's 
 over Lloyd's method should be more prominent in high dimensions.
-To analyse this we show 
+Thus, let us analyse
 how the algorithms degrade as the number of dimensions increase, while
 keeping the number of points in each cluster fixed. Consider
 two clusters with multivariate normal distributions given by
@@ -1578,74 +1574,91 @@ x &\in \C_i  \sim
 \end{split}
 \end{equation}
 Note that the Bayes error
-is also kept fixed as $D$ increases, given an optimal classification
+is fixed as $D$ increases, giving an optimal 
 accuracy of $\approx 0.86$.
-We keep signal only the first $10$ dimensions of $\mu_2$ and increase $D$.
 For each $D$ we sample $100$ times, picking $100$ points for each cluster.
 We apply each algorithm to the resulting dataset 
-and compute the average value of the accuracy \eqref{eq:accuracy}.
-For both Algorithm~\ref{algo} and Algorithm~\ref{kmeans_algo} 
-we use the standard
-kernel \eqref{eq:standard_metric} from energy statistics.
+and compute the average of the accuracy \eqref{eq:accuracy} (error bars
+are standard error).
+Algorithm~\ref{algo} and Algorithm~\ref{kmeans_algo} 
+use the standard
+kernel \eqref{eq:standard_metric}.
 The results are shown in Fig.~\ref{fig:gauss}a.
-Notice that GMM/EM algorithm is unable to estimate the covariance matrix 
+GMM/EM is unable to estimate the covariance matrices
 when the number of dimensions exceeds the number of points in each cluster.
 We see that Algorithm~\ref{algo} performs better than all the other ones,
-and in particular it works better than kernel $k$-means as the number
+and in particular it outperforms kernel $k$-means as the number
 of dimensions increase. Note also that although GMM and $k$-means are
-parametric, they are consistent models for the above distributions.
-Now we consider the same experiment but with different covariances,
-\begin{equation}
-\label{eq:gauss2}
-\begin{split}
-x &\in \C_i  \sim 
-\mathcal{N}(\mu_i,\Sigma_i) \qquad (i=1,2),  \\
-\mu_1 &= (\underbrace{0,\dotsc,0}_{\times D})^\top , \quad
-\mu_2 = (\underbrace{1,\dots,1}_{\times 10},
-\underbrace{0,\dots,0}_{\times (D-10)})^\top, \quad
-\Sigma_1 = I_D, \quad 
-\Sigma_2 = \left( \begin{smallmatrix} \widetilde{\Sigma} & 0 \\ 0 & I_{D-5}
-\end{smallmatrix}\right)
-\end{split}
-\end{equation}
-where $\widetilde{\Sigma}_{jj} = j$ for $j=1,\dotsc,5$.
-The best possible accuracy from Bayes classification error is
-$\approx 0.95$.
-The results are shown in Figure~\ref{fig:gauss}b.
-
-In the experiments of Figure~\ref{fig:gauss}
-we can see a better performance of Algorithm~\ref{algo} compared
-to the other ones, and in particular to kernel $k$-means,
-where we recall that both find approximate solutions
-to the same optimization problem \eqref{eq:qcqp2}.
-Notice that Algorithm~\ref{algo} is more robust as the number of dimensions
-increase.
+parametric they are consistent models to the data.
 
 \begin{figure}
 \begin{minipage}{0.49\textwidth}
-\centering
-\includegraphics[width=1\textwidth]{gauss_dim.pdf}\\[-1.0em]
-(a)
+\includegraphics[width=1\textwidth]{gauss_dim.pdf}\\[-1.0em] (a)
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
-\centering
-\includegraphics[width=1\textwidth]{gauss_cov.pdf}\\[-1.0em]
-(b)
+\includegraphics[width=1\textwidth]{gauss_cov_squareroot.pdf}\\[-1.0em] (b)
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\includegraphics[width=1\textwidth]{gauss_cov_linear.pdf}\\[-1.0em] (c)
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\includegraphics[width=1\textwidth]{gauss_cov_square.pdf}\\[-1.0em] (d)
 \end{minipage}
 \caption{
 \label{fig:gauss}
 Comparison of Algorithm~\ref{algo}, Algorithm~\ref{kmeans_algo},
 standard $k$-means and GMM/EM as the number of dimensions increase.
-We sample $100$ times and show the average of \eqref{eq:accuracy} with
+We compute the average of \eqref{eq:accuracy} over $100$ samples with
 error bars being standard error. We have two clusters with $100$ points
 each. 
-(a) Data distributed as in \eqref{eq:gauss1}. The optimal accuracy
-from Bayes error is indicated by the dashed line which is $\approx 0.86$.
-(b) Data from \eqref{eq:gauss2}. The optimal accuracy is $\approx 0.95$.
+(a) Data as in \eqref{eq:gauss1}, where the optimal accuracy
+from Bayes error is the dashed line equal to $\approx 0.86$.
+(b) Data from \eqref{eq:gauss2} with $q=1/2$ in \eqref{eq:cov}. 
+(c) Data from \eqref{eq:gauss2} with $q=1$ in \eqref{eq:cov}.
+(d) Data from \eqref{eq:gauss2} with $q=2$ in \eqref{eq:cov}.
+The optimal accuracy in these last cases is $1$.
 }
 \end{figure}
 
-In Figure~\ref{fig:unbalanced} we consider the effect of having 
+Let us now consider the same experiment as before with data distributed as
+\begin{equation}
+\label{eq:gauss2}
+x \in \C_i  \sim 
+\mathcal{N}(\mu_i,\Sigma_i) \quad (i=1,2),  \quad
+\mu_1 = (\underbrace{0,\dotsc,0}_{\times D})^\top , \quad
+\mu_2 = (\underbrace{1,\dots,1}_{\times 10},
+\underbrace{0,\dots,0}_{\times (D-10)})^\top, 
+\end{equation}
+where
+\begin{equation}
+\label{eq:cov}
+(\Sigma_1)_{ij} = \begin{cases}
+i^{-q} \delta_{ij} & \mbox{if $i \le 10$} \\
+\delta_{ij} & \mbox{if $10 < i \le D$}
+\end{cases} \qquad
+(\Sigma_2)_{ij} = \begin{cases}
+i^{\,q} \delta_{ij} & \mbox{if $i \le 10$} \\
+\delta_{ij} & \mbox{if $10 < i \le D$}
+\end{cases} 
+\end{equation}
+and we choose $q \in \{ 1/2, 1, 2\}$. In these cases,
+the best possible accuracy from Bayes classification error is $\approx 1$.
+In Fig.~\ref{fig:gauss}b--d we have $q=1/2$, $q=1$, and $q=2$, respectivelly.
+GMM/EM was unnable to estimate the covariance matrices
+as dimensions get large. Algorithm~\ref{algo} outperforms
+Algorithm~\ref{kmeans_algo}, and $k$-means degrades faster as 
+$q$ increases.
+
+To summarize, in the experiments of Fig.~\ref{fig:gauss}
+we see a better performance of Algorithm~\ref{algo} compared
+to the other ones, and in particular to kernel $k$-means,
+where we recall that both find approximate and local solutions
+to the same optimization problem \eqref{eq:qcqp2}.
+Algorithm~\ref{algo} is more robust as the number of dimensions
+increase.
+
+Let us now
+consider the effect of having 
 unbalanced clusters. We generate data as
 \begin{equation}
 \label{eq:gauss3}
@@ -1665,12 +1678,15 @@ x &\in \C_i \sim
 n_1 = N - m, \quad  n_2 = N + m, \quad N=200.
 \end{split}
 \end{equation}
-We increase $m$, that is we make the clusters progressively more unbalanced,
-and plot the mean of \eqref{eq:accuracy} with standard errors, where
-we sample $100$ times for each $m$.
+We then increase $m$, 
+that is we make the clusters progressively more unbalanced,
+and plot the average of \eqref{eq:accuracy} 
+over
+$100$ samples for each $m$
+(error bars are standard error). The results are in Fig.~\ref{fig:unbalanced}.
 As expected, GMM
 works better than the other algorithms since it is a fuzzy clustering.
-We can see that the other methods based on hard assignments degrade similarly,
+The other methods based on hard assignments degrade similarly
 and  more rapidly than GMM. This indicates that a fuzzy version of
 Algorithm~\ref{algo} should compensate for this effect.
 
@@ -1678,14 +1694,14 @@ Algorithm~\ref{algo} should compensate for this effect.
 \includegraphics[width=0.5\textwidth]{gauss_pi.pdf}\vspace{-1em}
 \caption{
 \label{fig:unbalanced}
-Comparison of Algorithm~\ref{algo}, Algorithm~\ref{kmeans_algo}, standard
-$k$-means and GMM/EM for data distributed as in \eqref{eq:gauss3}, where
-we make the two clusters progressively more unbalanced.
+Comparison of Algorithm~\ref{algo}, Algorithm~\ref{kmeans_algo}, 
+$k$-means, and GMM/EM. The data is distributed as \eqref{eq:gauss3} where
+we make the clusters progressively more unbalanced.
 }
 \end{figure}
 
 Besides the standard kernel from energy statistics 
-\eqref{eq:standard_metric}, associated to \eqref{eq:energy}, 
+\eqref{eq:standard_metric}, 
 let us consider two other semimetrics with their respective generating
 kernels,
 \begin{align}
@@ -1700,7 +1716,7 @@ kernels,
 \end{align}
 The kernel \eqref{eq:rhohalf} corresponds to the energy distance
 \eqref{eq:energy2} with $\alpha=1/2$.
-Now consider data normally distributed in $D=20$ as follows:
+Now consider data normally distributed in $D=20$ as
 \begin{equation}
 \label{eq:20gauss}
 \begin{split}
@@ -1713,20 +1729,36 @@ x &\in \C_i \sim \mathcal{N}(\mu_i,\Sigma_i) \qquad (i=1,2), \\
 \end{split}
 \end{equation}
 We sample an equal number of points for each cluster, which is progressively
-increased. The optimal accuracy of \eqref{eq:20gauss} based on Bayes
-classification error is $\approx 0.90$. We repeat the same experiment as
-before but now using also the kernels \eqref{eq:rhohalf} and
-\eqref{eq:rhoe}. The results are shown in Fig.~\ref{fig:consist}a.
-Algorithm~\ref{algo} performs better than all the other ones, and in 
+increased. The optimal accuracy based on Bayes
+classification error is $\approx 0.90$. 
+Clustering results are shown in Fig.~\ref{fig:consist}a.
+Algorithm~\ref{algo} outperforms the other ones, and in 
 particular the kernel \eqref{eq:rhoe} provides better results.
-As the number of points get large enough, GMM starts to approach
-optimal Bayes accuracy, 
-as it should since it is 
-consistent model to the distribution of the data. However, 
-Algorithm~\ref{algo} with kernel \eqref{eq:rhoe} achieves optimal accuracy
-with a much smaller number of points. Moreover, Algorithm~\ref{algo} performs
-better than Algorithm~\ref{kmeans_algo} for any of the kernel choices.
-Standard $k$-means performs poorly in this example.
+As the number of points get large enough GMM starts to approach
+optimal Bayes, as it should since it is a
+consistent model to the data. However, 
+Algorithm~\ref{algo} with kernel \eqref{eq:rhoe} approach optimal Bayes
+with a much smaller number of points. Moreover, Algorithm~\ref{algo} 
+outperforms
+Algorithm~\ref{kmeans_algo} for any of the kernel choices.
+%Standard $k$-means performs poorly in this example.
+
+Now consider the same parameters as in \eqref{eq:20gauss} but with
+lognormal distributions, 
+\begin{equation}
+\label{eq:20loggauss}
+\log x \in \C_i \sim \mathcal{N}(\mu_i, \Sigma_i) \qquad (i=1,2).
+\end{equation}
+The same previous experiment is shown in 
+Fig.~\ref{fig:consist}b.
+Note that Algorithm~\ref{algo} still performs accurately, 
+while $k$-means works almost at chance,
+and GMM is not even able to estimate the parameters. Again, the
+kernel \eqref{eq:rhoe}
+provides better results than \eqref{eq:standard_metric} or
+\eqref{eq:rhohalf}. 
+The experiments in Fig.~\ref{fig:consist}
+illustrate how energy statistics clustering is nonparametric.
 
 \begin{figure}
 \begin{minipage}{0.49\textwidth}
@@ -1743,32 +1775,15 @@ Standard $k$-means performs poorly in this example.
 \label{fig:consist}
 Algorithm~\ref{algo} and Algorithm~\ref{kmeans_algo} with kernels
 \eqref{eq:standard_metric}, \eqref{eq:rhohalf} and \eqref{eq:rhoe}, 
-$k$-means and GMM. The optimal accuracy in both cases
+$k$-means, and GMM. The optimal accuracy in both cases
 is $\approx 0.9$. We show the average of \eqref{eq:accuracy}
 over $100$ samples with standard error.
 (a) Data distributed as in 
 \eqref{eq:20gauss}. 
-(b) Data as in \eqref{eq:20loggauss}.
+(b) Data distributed as in \eqref{eq:20loggauss}.
 }
 \end{figure}
 
-Consider the same parameters as in \eqref{eq:20gauss} but now with
-lognormal distributions, 
-\begin{equation}
-\label{eq:20loggauss}
-\log x \in \C_i \sim \mathcal{N}(\mu_i, \Sigma_i) \qquad (i=1,2).
-\end{equation}
-The same previous experiment is shown in 
-Fig.~\ref{fig:consist}b.
-Note that Algorithm~\ref{algo} still performs accurately, 
-while $k$-means works almost at chance,
-and GMM is not even able to estimate the parameters. Again, the
-kernel \eqref{eq:rhoe}
-provides better results than \eqref{eq:standard_metric} or
-\eqref{eq:rhohalf}. Algorithm~\ref{algo} performs better
-than Algorithm~\ref{kmeans_algo} for every kernel choice. 
-The experiments in Fig.~\ref{fig:consist}
-illustrates that energy statistics clustering is nonparametric.
 
 \begin{figure}
 \begin{minipage}{0.24\textwidth}
@@ -1787,13 +1802,13 @@ illustrates that energy statistics clustering is nonparametric.
 \caption{\label{fig:other}
 (a) Parallel cigars. (b) Two  
 concentric circles with noise. (c) Three
-concentric circles. (d) MNIST handwritten digits.
+concentric circles with noise. (d) MNIST handwritten digits.
 Clustering results are in Table~\ref{table:other}
 and Table~\ref{table:mnist}.
 }
 \end{figure}
 
-Now consider the following choices of semimetric and 
+Consider the following choices of semimetric and 
 corresponding generating kernel:
 \begin{align}
 \rho_{\alpha}(x,y) &= \| x - y\|^\alpha & 
@@ -1812,25 +1827,29 @@ corresponding generating kernel:
 \label{eq:rhogsigma} 
 \end{align}
 In Fig.\ref{fig:other} we have examples of
-complex two dimensional datasets. For each class in Fig.\ref{fig:other}a
-we sample $200$ points. In each class of 
-Fig.\ref{fig:other}b and Fig.\ref{fig:other}c we sample $400$ points.
+complex two dimensional datasets. The two parallel cigars of 
+Fig.~\ref{fig:other}a have $200$ points each. For the concentric circles
+of Fig.~\ref{fig:other}b and Fig.~\ref{fig:other}c we
+sample $400$ points for each class.
 We apply Algorithm~\ref{algo} and Algorithm~\ref{kmeans_algo}, besides
 $k$-means and GMM, using the above kernels. The results are shown
 in Table~\ref{table:other} where the respective choice of parameters for the
-kernels are indicated. In the data shown in Fig.~\ref{fig:other}a 
-the standard semimetrics from energy statistics, $\rho_1$ and $\rho_{1/2}$, are
+kernels are indicated. For the data in Fig.~\ref{fig:other}a 
+the semimetrics $\rho_1$ and $\rho_{1/2}$ are
 able to provide more accurate results compared to $k$-means. However,
-the gaussian kernel $\widetilde{\rho}_2$ gives results very accurate
+the gaussian kernel $\widetilde{\rho}_2$ gives very accurate
 results, similar to GMM,
-which is the true model of the data. In Fig.~\ref{fig:other}b we see
+which is the true model of the data. For the data shown in
+Fig.~\ref{fig:other}b we see
 that the choice of kernel is very sensitive, and only \eqref{eq:rhoesigma}
 was able to cluster accurately. The same kernel choice to the case
 of Fig.~\ref{fig:other} still provides better results than
-the other choices, but the results are less accurate.
+the others, but they are less accurate compared to Fig.~\ref{fig:other}b.
+
 
 \newcolumntype{g}{>{\columncolor{gray!20}}l}
-\begin{table}
+\begin{table}[h]
+\renewcommand*{\arraystretch}{0.75}
 \begin{tabular}{@{}r  l g  l g  l g@{}}
 \toprule[1pt]
  & & \emph{Fig.~\ref{fig:other}a}
@@ -1877,10 +1896,9 @@ the other choices, but the results are less accurate.
 \end{tabular}
 \caption{\label{table:other}
 Clustering the data shown in Fig.~\ref{fig:other} with Algorithm~\ref{algo}
-and Algorithm~\ref{kmeans_algo}, besides $k$-means and GMM, for the kernels 
-\eqref{eq:rhoalpha},
-\eqref{eq:rhoesigma} and
-\eqref{eq:rhogsigma}. We sample the data $10$ times and show the average
+and Algorithm~\ref{kmeans_algo}, besides $k$-means and GMM, with kernels 
+\eqref{eq:rhoalpha}--\eqref{eq:rhogsigma}. 
+We sample $10$ times and show the average
 accuracy \eqref{eq:accuracy} with standard error.
 }
 \end{table}
@@ -1889,22 +1907,21 @@ Next we consider
 the well-known MNIST handwritten digit dataset 
 as illustrated in Fig.~\ref{fig:other}d.
 Each data point is an $8$-bit gray scale
-image, forming a $784$-dimensional vector, 
+image forming a $784$-dimensional vector 
 corresponding to the digits $\{0,1,\dotsc,9 \}$.
 Besides the kernel \eqref{eq:rhoalpha}, we
-consider the gaussian kernel \eqref{eq:rhogsigma} with the width
-given by
+consider the gaussian kernel \eqref{eq:rhogsigma} with 
 \begin{equation}
 \label{eq:sigma}
-\sigma^2 = \dfrac{1}{n^2} \sum_{i,j=1}^n \| x_i - x_j \|^2
+\sigma^2 = \dfrac{1}{n^2} \sum_{i,j=1}^n \| x_i - x_j \|^2 ,
 \end{equation}
 which is computed from the sampled data $\{ x_i \}_{i=1}^n$.
 We consider subsets of the  classes $\{0,1,\dotsc,9 \}$, 
 where we sample $100$ points 
-for each class. We cluster the resulting dataset 
-using Algorithm~\ref{algo},
+for each class. We perform clustering through 
+Algorithm~\ref{algo},
 Algorithm~\ref{kmeans_algo}, and $k$-means.
-The results are shown in Table~\ref{table:mnist}, where the kernel
+The results are shown in Table~\ref{table:mnist} where the kernel
 and its parameter for each case is indicated.
 Algorithm~\ref{algo} performed slightly better than $k$-means, except
 for the last column where all the methods are comparable. 
@@ -1917,7 +1934,8 @@ for learning a better representation of the data and subsequently apply
 Algorithm~\ref{algo} for clustering.
 
 \newcolumntype{g}{>{\columncolor{gray!20}}l}
-\begin{table}
+\begin{table}[h]
+\renewcommand*{\arraystretch}{0.75}
 \begin{tabular}{@{}rl|l|l|l|l@{}}
 \toprule[1pt]
 \emph{Class Subset}~~~~ & & $\{0,1,2\}$ &
@@ -1974,13 +1992,13 @@ $\{0,1,\dotsc,8\}$ \\
 \arrayrulecolor{black}\bottomrule[1pt]
 \end{tabular}
 \caption{\label{table:mnist}
-Clustering the data shown in Fig.~\ref{fig:other}d with Algorithms~\ref{algo}
-and \ref{kmeans_algo}, and $k$-means.
-We use the kernel \eqref{eq:rhoalpha} with $\alpha\in\{1,2\}$, and
+Clustering the data shown in Fig.~\ref{fig:other}d with Algorithm~\ref{algo},
+Algorithm~\ref{kmeans_algo}, and $k$-means.
+We use the kernel \eqref{eq:rhoalpha} with $\alpha\in\{1,2\}$ and
 the gaussian kernel 
 \eqref{eq:rhogsigma} with $\sigma$ given by \eqref{eq:sigma}. 
 For each subset of digits we sample $10$ times and show the average
-accuracy \eqref{eq:accuracy} with standard error. We pick $100$ points for 
+accuracy \eqref{eq:accuracy} with standard error. We sample $100$ points for 
 each class.
 }
 \end{table}
@@ -2080,7 +2098,7 @@ We considered clustering from the perspective of energy
 statistics theory which provides a nonparametric test for 
 equality of distributions.
 We showed that the clustering problem reduces to a quadratically
-constrained optimization problem (QCQP), 
+constrained quadratic program, 
 as described in Proposition~\ref{th:qcqp2}.
 Moreover, this problem is equivalent
 to kernel $k$-means optimization problem once the kernel is fixed; see
@@ -2095,7 +2113,7 @@ clustering and graph partitioning problems.
 
 We considered Algorithm~\ref{algo} based on Hartigan's method and
 compared with 
-kernel $k$-means described in Algorithm~\ref{kmeans_algo} which
+kernel $k$-means, described in Algorithm~\ref{kmeans_algo}, which
 is based on Lloyd's heuristic.
 Both have the same time complexity, however, the numerical 
 results provide evidence that Algorithm~\ref{algo} is more robust with
@@ -2108,7 +2126,7 @@ For instance, an approach to make kernel $k$-means scalable
 was recently proposed \cite{Mahoney}, and a modified technique for
 rank reduction in Nystr\"om method was also recently considered 
 \cite{Becker}. It would be interesting to apply these and related
-approaches to the case of Algorithm~\ref{algo}.
+techniques to the case of Algorithm~\ref{algo}.
 Another fruitful avenue of exploration would be to find 
 better methods to tackle the optimization problem \eqref{eq:qcqp2}.
 

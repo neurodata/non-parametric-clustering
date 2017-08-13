@@ -20,8 +20,8 @@ fig_width_pt = 455.0 / 1.5 # take this from LaTeX \textwidth in points
 inches_per_pt = 1.0/72.27
 golden_mean = (np.sqrt(5.0)-1.0)/2.0
 fig_width = fig_width_pt*inches_per_pt
-fig_height = fig_width
-#fig_height = fig_width*golden_mean
+#fig_height = fig_width
+fig_height = fig_width*golden_mean
 #fig_height = fig_width
 pylab.rc('figure', figsize=(fig_width, fig_height))
 

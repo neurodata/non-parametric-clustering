@@ -168,12 +168,21 @@ def gauss_dimensions_cov(dimensions=range(2,100,20), num_points=[200, 200],
 
         for l in range(num_experiments):
         
+            #m1 = np.zeros(D)
+            #s1 = np.eye(D)
+            #m2 = np.concatenate((np.ones(d), np.zeros(D-d)))
+            #s2 = np.eye(D)
+            #for a in range(int(d/2)):
+            #    s2[a,a] = a+1
+
             m1 = np.zeros(D)
-            s1 = np.eye(D)
             m2 = np.concatenate((np.ones(d), np.zeros(D-d)))
+            s1 = np.eye(D)
             s2 = np.eye(D)
-            for a in range(int(d/2)):
-                s2[a,a] = a+1
+            for a in range(d):
+                s1[a,a] = np.power(1/(a+1), 0.5)
+            for a in range(d):
+                s2[a,a] = np.power(a+1, 0.5)
             
             X, z = data.multivariate_normal([m1, m2], [s1, s2], [n1, n2])
         
@@ -488,7 +497,7 @@ def mnist(num_experiments=10, digits=[0,1,2], num_points=100, run_times=4):
 def plot_accuracy_errorbar(table, xlabel='dimension', ylabel='accuracy',
         output='plot.pdf', symbols=['o', 's', 'D', 'v'], 
         legends=['energy', r'$k$-means', 'GMM', r'kernel $k$-means'],
-        xlim=None, ylim=None, bayes=None, loc=None):
+        xlim=None, ylim=None, bayes=None, loc=None, doublex=False):
     """Plot average accuracy of several algorithms with errobars being
     standard error.
     
@@ -498,12 +507,16 @@ def plot_accuracy_errorbar(table, xlabel='dimension', ylabel='accuracy',
     xs = np.unique(col0)
     n = len(table[0][1:])
     
-    colors = iter(plt.cm.brg(np.linspace(0,1,9)))
+    colors = iter(plt.cm.brg(np.linspace(0,1,n+1)))
     legends = iter(legends)
     symbols = iter(symbols)
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
+    if doublex:
+        xs2 = 2*xs
+    else:
+        xs2 = xs
     for i in range(1, n+1):
 
         mean_ = np.array([table[np.where(col0==x)[0],i].mean() 
@@ -517,10 +530,10 @@ def plot_accuracy_errorbar(table, xlabel='dimension', ylabel='accuracy',
         if bayes:
             if not isinstance(bayes, list):
                 bayes = [bayes]*len(xs)
-            ax.plot(2*xs, bayes, '--', color='black', 
+            ax.plot(xs2, bayes, '--', color='black', 
                     linewidth=1, zorder=0)
         
-        ax.errorbar(2*xs, mean_, yerr=stderr_, 
+        ax.errorbar(xs2, mean_, yerr=stderr_, 
             linestyle='-', marker=m, color=c, markersize=4, elinewidth=.5, 
             capthick=0.4, label=l, linewidth=1, barsabove=False)
         
@@ -533,8 +546,8 @@ def plot_accuracy_errorbar(table, xlabel='dimension', ylabel='accuracy',
     if not loc:
         loc = 0
     leg = plt.legend()
-    #ax.legend(loc=loc, framealpha=.5)
-    ax.legend(loc=loc, framealpha=.5, ncol=2)
+    ax.legend(loc=loc, framealpha=.5)
+    #ax.legend(loc=loc, framealpha=.5, ncol=2)
     fig.savefig(output, bbox_inches='tight')
 
 
@@ -560,6 +573,7 @@ if __name__ == '__main__':
 
     from timeit import default_timer as timer
     import multiprocessing as mp
+    import sys
 
 #    ### first experiment ###
 #    #
@@ -584,23 +598,26 @@ if __name__ == '__main__':
 #
 #    ### second experiment ###
 #    #
-#    def worker(dimensions, d, i):
-#        table = gauss_dimensions_cov(dimensions=dimensions,
-#                                  num_points=[100, 100],
-#                                  run_times=10,
-#                                  num_experiments=100,
-#                                  d=d)
-#        np.savetxt("./data/gauss_cov_v2_%i.csv"%i, table, delimiter=',')
-#        
-#    dim_array = [range(10,50,10), 
-#                 range(50,100,10), 
-#                 range(100, 150, 10),
-#                 range(150, 210, 10)]
-#    jobs = []
-#    for i, dim in enumerate(dim_array):
-#        p = mp.Process(target=worker, args=(dim, 10, i))
-#        jobs.append(p)
-#        p.start()
+    """
+    def worker(dimensions, d, i):
+        table = gauss_dimensions_cov(dimensions=dimensions,
+                                  num_points=[100, 100],
+                                  run_times=10,
+                                  num_experiments=100,
+                                  d=d)
+        np.savetxt("./data/gauss_cov_v5_%i.csv"%i, table, delimiter=',')
+        
+    dim_array = [range(10,50,10), 
+                 range(50,100,10), 
+                 range(100, 150, 10),
+                 range(150, 210, 10)]
+    jobs = []
+    for i, dim in enumerate(dim_array):
+        p = mp.Process(target=worker, args=(dim, 10, i))
+        jobs.append(p)
+        p.start()
+    sys.exit()
+    """
 #    
 #    #dimensions = range(10,210,20) 
 #    #table = gauss_dimensions_cov(dimensions=dimensions,
@@ -670,10 +687,13 @@ if __name__ == '__main__':
 #    
 #    ### make the plot
 #    #
-#    #table = csv_to_array("./data/gauss_means.csv")
-#    #table = csv_to_array("./data/gauss_cov_v2.csv")
-#    #table = csv_to_array("./data/gauss_pis.csv")
-#    #table = csv_to_array("./data/normal2.csv")
+    table = csv_to_array("./data/gauss_means.csv")
+#    table = csv_to_array("./data/gauss_cov_v2.csv")
+#    table = csv_to_array("./data/gauss_cov_v4.csv") # linear
+#    table = csv_to_array("./data/gauss_cov_v3.csv") # square
+#    table = csv_to_array("./data/gauss_cov_v5.csv") # square root
+#    table = csv_to_array("./data/gauss_pis.csv")
+#    table = csv_to_array("./data/normal2.csv")
 #    table = csv_to_array("./data/lognormal2.csv")
 #    #table = csv_to_array("./data/loggauss_means.csv")
 #    #table = csv_to_array("./data/cigars.csv")
@@ -681,40 +701,57 @@ if __name__ == '__main__':
 #    #table = csv_to_array("./data/spirals.csv")
 #    #table = csv_to_array("./data/lognormal.csv")
 #    #table = csv_to_array("./data/normal.csv")
-#    #table = csv_to_array("./data/lognormal1d.csv")
-#    #table = csv_to_array("./data/normal1d.csv")
-#    
-#    plot_accuracy_errorbar(table, 
-#                    xlabel='number of points', 
-#                    #xlabel='number of dimensions', 
-#                    #xlabel='number of unbalanced points', 
-#                    ylabel='accuracy', 
-#                    #output='./gauss_dim.pdf', 
-#                    #output='./gauss_cov.pdf', 
-#                    #output='./gauss_pi.pdf', 
-#                    #output='./gauss.pdf', 
-#                    output='./loggauss.pdf', 
-#                    #output='./loggauss1d.pdf', 
-#                    #output='./gauss1d.pdf', 
-#                    legends=[
-#                        r'Alg.3--$\rho$', 
-#                        r'Alg.3--$\rho_{1/2}$', 
-#                        r'Alg.3--$\rho_{e}$', 
-#                        r'Alg.2--$\rho$', 
-#                        r'Alg.2--$\rho_{1/2}$', 
-#                        r'Alg.2--$\rho_{e}$', 
-#                        r'$k$-means', 
-#                        r'GMM'],
-#                    #legends=['Algorithm 3', r'Algorithm 2', '$k$-means', 'GMM'],
-#                    #legends=['Algorithm 1', '$k$-means', 'GMM'],
-#                    symbols=['o','o','o','s','s','s','D','D','D','v','v','v'],
-#                    #xlim=[10,200],
-#                    #xlim=[0,2000],
-#                    xlim=[40,1000],
-#                    ylim=[0.0,0.915],
-#                    bayes=0.9,
-#                    loc=[.23,.2]
-#    )
+#    table = csv_to_array("./data/lognormal1d.csv")
+#    table = csv_to_array("./data/normal1d.csv")
+    
+    plot_accuracy_errorbar(table, 
+                    #xlabel='number of points', 
+                    xlabel='number of dimensions', 
+                    #xlabel='number of unbalanced points', 
+                    ylabel='accuracy', 
+                    output='./gauss_dim.pdf', 
+                    #output='./gauss_cov.pdf', 
+                    #output='./gauss_cov_linear.pdf', 
+                    #output='./gauss_cov_square.pdf', 
+                    #output='./gauss_cov_squareroot.pdf', 
+                    #output='./gauss_pi.pdf', 
+                    #output='./gauss.pdf', 
+                    #output='./loggauss.pdf', 
+                    #output='./loggauss1d.pdf', 
+                    #output='./gauss1d.pdf', 
+                    #legends=[
+                    #    r'Alg.3--$\rho$', 
+                    #    r'Alg.3--$\rho_{1/2}$', 
+                    #    r'Alg.3--$\rho_{e}$', 
+                    #    r'Alg.2--$\rho$', 
+                    #    r'Alg.2--$\rho_{1/2}$', 
+                    #    r'Alg.2--$\rho_{e}$', 
+                    #    r'$k$-means', 
+                    #    r'GMM'],
+                    legends=['Algorithm 3', r'Algorithm 2', '$k$-means', 'GMM'],
+                    #legends=['Algorithm 1', '$k$-means', 'GMM'],
+                    #symbols=['o','o','o','s','s','s','D','D','D','v','v','v'],
+                    #xlim=[10,3020],
+                    xlim=[10,200],
+                    #xlim=[0,200],
+                    #xlim=[0,2000],
+                    #xlim=[40,1000],
+                    #ylim=[0.5,1.01],
+                    #ylim=[0.5,0.915],
+                    ylim=[0.4,0.87],
+                    #ylim=[0.4,0.9],
+                    #ylim=[0.5,0.91],
+                    #ylim=[0.0,0.91],
+                    #bayes=0.956,
+                    #bayes=0.852,
+                    bayes=0.86,
+                    #bayes=0.95,
+                    #bayes=1.0,
+                    #bayes=0.9,
+                    #loc=[.23,.2],
+                    loc=0,
+                    #doublex=True
+    )
 #    #gen_data('../draft/figs/two_lognormal_hist.pdf')
     
     #other_examples()
@@ -726,6 +763,6 @@ if __name__ == '__main__':
     #mnist(num_experiments=10, digits=[0,1,2,3,4,5], num_points=100, run_times=4)
     #mnist(num_experiments=10, digits=[0,1,2,3,4,5,6], num_points=100, run_times=4)
     #mnist(num_experiments=10, digits=[0,1,2,3,4,5,6,7], num_points=100, run_times=4)
-    mnist(num_experiments=10, digits=[0,1,2,3,4,5,6,7,8], num_points=100, run_times=4)
-    mnist(num_experiments=10, digits=[0,1,2,3,4,5,6,7,8,9], num_points=100, run_times=4)
+    #mnist(num_experiments=10, digits=[0,1,2,3,4,5,6,7,8], num_points=100, run_times=4)
+    #mnist(num_experiments=10, digits=[0,1,2,3,4,5,6,7,8,9], num_points=100, run_times=4)
 

@@ -543,25 +543,63 @@ if __name__ == '__main__':
     table = np.zeros((num_experiments, 4))
     for i in range(num_experiments):
         
+        #D = 2
+        #mu1 = np.zeros(D)
+        #mu2 = np.zeros(D)
+        #sigma1 = np.array([[10, 0],[0, 1]])
+        #sigma2 = np.array([[1, 0],[0, 10]])
+        #X, z = data.multivariate_normal([mu1,mu2], [sigma1,sigma2], [100,100])
+        #k = 2
+        
+        #D = 20
+        #mu1 = np.zeros(D)
+        #mu2 = np.zeros(D)
+        #sigma1 = np.eye(D)
+        #sigma2 = np.eye(D)
+        #sigma1[0,0] = 10
+        #sigma1[1,1] = 10
+        #sigma2[2,2] = 10
+        #sigma2[3,3] = 10
+        #X, z = data.multivariate_normal([mu1,mu2], [sigma1,sigma2], [100,100])
+        #k = 2
+        
+        #D = 2
+        #mu1 = np.zeros(D)
+        #mu3 = np.array([0,3])
+        #mu4 = np.array([0,6])
+        #mu2 = np.array([3, 0])
+        #sigma1 = sigma3 = sigma4 = 0.3*np.eye(D)
+        #sigma2 = np.eye(D)
+        #sigma2[1,1] = 15
+        #X, z = data.multivariate_normal([mu1,mu2,mu3,mu4],
+        #[sigma1,sigma2,sigma3,sigma4], [100,100,100,100])
+        #k = 4
+        
+        #D = 2
+        #mu1 = np.zeros(D)
+        #mu2 = np.array([3, 0])
+        #sigma1 = np.array([[10, 0],[0, 1]])
+        #sigma2 = np.array([[1, 0],[0, 10]])
+        #X, z = data.multivariate_normal([mu1,mu2], [sigma1,sigma2], [100,100])
+        #k = 2
+        
+        #mu2 = np.concatenate((np.ones(d), np.zeros(D-d)))
         #X, z = data.circles([0.2, 1, 2], [0.2, 0.2, 0.2], [200, 200, 200])
         
-        D = 30
-        d = 10 
+        D = 300
+        d = 10
         mu1 = np.zeros(D)
-        sigma1 = np.eye(D)
         mu2 = np.concatenate((np.ones(d), np.zeros(D-d)))
+        sigma1 = np.eye(D)
         sigma2 = np.eye(D)
-        sigma2[0,0] = 10
-        sigma2[1,1] = 10
-        sigma2[2,2] = 10
-        sigma2[3,3] = 10
-        sigma2[4,4] = 10
-        sigma2[0,4] = sigma2[4,0] = 1
-        sigma2[0,2] = sigma2[2,0] = 1
+        for a in range(d):
+            sigma1[a,a] = np.power(1/(a+1), 2)
+        for a in range(d):
+            sigma2[a,a] = np.power(a+1, 2)
         
-        X, z = data.multivariate_normal([mu1, mu2], [sigma1, sigma2], 
-                    [100, 100])
+        X, z = data.multivariate_normal([mu1,mu2], [sigma1,sigma2], [100,100])
         k = 2
+        
     
         def rho(x,y):
             norm = np.linalg.norm(x-y)

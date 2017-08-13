@@ -336,14 +336,22 @@ if __name__ == '__main__':
     #X, z = multivariate_normal([m1, m2], [s1, s2], [200, 200])
     #plot(X, z, fname='./2cigars.pdf')
     
+    # ball and cigar
+    m1 = np.zeros(2)
+    m2 = np.array([3,0])
+    s1 = np.array([[.3,0],[0,.3]])
+    s2 = np.array([[1,0],[0,20]])
+    X, z = multivariate_normal([m1, m2], [s1, s2], [200, 200])
+    plot(X, z, fname='./ball_cigar.pdf')
+    
     # 2 circles
-    X, z = circles([1, 3], [[0,0], [0,0]], [0.2, 0.2], [400, 400])
-    plot(X, z, fname='./2circles.pdf')
+    #X, z = circles([1, 3], [[0,0], [0,0]], [0.2, 0.2], [400, 400])
+    #plot(X, z, fname='./2circles.pdf')
     
     # 3 circles
-    X, z = circles([1, 3, 5], [[0,0], [0,0], [0,0]], [0.2, 0.2, 0.2], 
-                    [400, 400, 400])
-    plot(X, z, fname='./3circles.pdf')
+    #X, z = circles([1, 3, 5], [[0,0], [0,0], [0,0]], [0.2, 0.2, 0.2], 
+    #                [400, 400, 400])
+    #plot(X, z, fname='./3circles.pdf')
 
     #X, z = spirals([1,-1], [[0.2,0.0], [-0.2,-0.0]], [400,400], noise=0.2)
     #plot(X, z, fname='./2spiral.pdf')
