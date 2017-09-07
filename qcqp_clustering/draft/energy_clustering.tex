@@ -105,6 +105,7 @@ was proposed.
 Although  
 extensively used in statistics, it
 has not been previously incorporated in machine learning problems.
+% @gui: not sure what you mean?  what counts as machine learning?  be specific, i think yo mean clustering?  even then, it is not true, both the master's thesis and the RKHS paper kind of do it.  be as general as possible about the gap that we are filling, but not more general.
 Here we consider the problem of clustering data from
 an energy statistics theory perspective.
 We provide a precise mathematical formulation yielding
@@ -113,6 +114,7 @@ to be equivalent
 to kernel $k$-means optimization problem.
 Thus, our results imply a first principles derivation of 
 kernel $k$-means from energy statistics.
+% @gui: have other people shown a relationship between kernel k-means and say, RKHS, or something else?  
 Moreover, we also consider a weighted version of energy statistics 
 applied to clustering, which makes connection to 
 graph partitioning problems.
@@ -165,26 +167,36 @@ link between concepts used in energy statistics and concepts
 commonly used in machine learning, and form the basis of our approach.
 
 The clustering problem has a long history in machine learning.
-The most used method is $k$-means \cite{Lloyd,MacQueen,Forgy}, which
+Perhaps the most used method is $k$-means \cite{Lloyd,MacQueen,Forgy}, which
 is based on Lloyd's heuristic \cite{Lloyd} of assigning a data point to
 the cluster with closest center. The only statistical 
 information about each cluster
-comes from its mean and it is thus sensitive to outliers. Moreover, $k$-means
+comes from its mean and it is thus sensitive to outliers. 
+% @gui: algorithms don't make assumptions, theorems do.  also, algorithms cannot be parametric or non-parametric, that is a property only of the statistical model, or an estimator. 
+Moreover, $k$-means
 is strongly parametric, assuming that data is isotropically and normally
 distributed since it is a special case of gaussian mixture models (GMM) 
+% @gui: k-means is NOT a special case of GMM, GMM is a soft clustering (not fuzzy, in stats and machine learning we don't say "fuzzy"), where as k-means is a hard clustering.  k-means is certainly closely related to GMM though.
 through the expectation maximization (EM) algorithm. Nevertheless,
 $k$-means works very well when data is linearly separable 
 in Euclidean space, with a clear resolution of cluster centers and without
 significant overlap of the points belonging to different clusters.
+% i@gui:  don't know what "clear resolution of cluster centers" adds to this?
 
 To account for nonlinearities, kernel methods were introduced 
 \cite{Smola,Girolami}. A mercer kernel \cite{Mercer} is used to implicitly
 map data points to a RKHS, then clustering can be performed in the associated
 Hilbert
 space by using its inner product. This enables one to cluster way more
-complicated datasets, however, the kernel choice remains the biggest challenge
-since there is no principled theory behind this, and it usually introduces
-extra parameters that need to be optimized. The well-known
+complicated datasets, 
+% @gui: algorithms cluster, doesn't matter how complicated the data are.  so, what do you actually mean here?  perform well empirically? what does "complicated" actually mean?
+however, the kernel choice remains the biggest challenge
+since there is no principled theory behind this, 
+% @gui: the words "this" and "it" are often vague and ambiguous, be specific/precise
+and it usually introduces
+extra parameters that need to be optimized. 
+% @gui: not sure what you mean here, in kernel k-means, we don't "optimize" over any parameters typically.  sometimes we select hyperparameters of kernels via cross-validation, is that what you mean?
+The well-known
 kernel $k$-means optimization problem is nothing but $k$-means in the
 feature space \cite{Girolami}. Furthermore, kernel $k$-means algorithm
 \cite{Dhillon2,Dhillon} is still based on Loyd's heuristic \cite{Lloyd} of
@@ -203,7 +215,9 @@ enforcing probability distributions associated to each cluster
 to be different from one another.
 We provide a precise mathematical formulation to this
 statement, showing that there is only one possible optimization problem
-consistent with energy statistics. Moreover, we show that this is
+consistent with energy statistics. 
+% @gui: not sure what you mean "only one possible optimization problem".  we can reformulate it many different ways? also, below, "this" is ambiguous.
+Moreover, we show that this is
 a quadratically constrained
 quadratic program (QCQP) in the associated RKHS. Our results immediately 
 establish the connection 
@@ -231,7 +245,10 @@ statistics based clustering, which provides a family of
 default kernels, showing that
 it is able to perform accurately on datasets coming very different 
 distributions, contrary to $k$-means and GMM for instance.
+% @gui: to me, we did not make explicit one of the most important points.   in this paper, we make clear exactly when we expect energy clustering to perform better than k-means/GMM, and when we expect it to perform worse (empirically).  
 
+
+% @gui: i find ToC paragraphs useless.
 Our work is organized as follows. In section~\ref{sec:background} we introduce
 the necessary background on energy statistics and RKHS.
 Section~\ref{sec:clustering_theory} contains the main theoretical 
@@ -273,7 +290,7 @@ The quantity
 \Energy(P, Q) \equiv 2 \E \| X - Y\| - \E \| X - X' \| - \E \| Y - Y' \|
 \end{equation}
 called \emph{energy distance} \cite{Szkely2013} 
-is rotational invariant and nonnegative, $\Energy(P,Q) \ge 0$, where
+is rotationally invariant and nonnegative, $\Energy(P,Q) \ge 0$, where
 equality
 to zero holds if and only if $P = Q$.
 Above, $\| \cdot \|$ denotes the
@@ -298,6 +315,7 @@ equality to zero only requires
 equality of the means, and thus $\Energy_2(P,Q)=0$ does 
 not imply equality of distributions.
 
+% @gui: let the reader decide what is important, rather than us telling them :)
 It is important to 
 mention that \eqref{eq:energy2} can be even further generalized.
 Let $X, Y \in \mathcal{X}$  where $\mathcal{X}$ is an arbitrary space endowed
@@ -326,7 +344,7 @@ allows us to compute quantities related to probability distributions over
 $\mathcal{X}$ in the Hilbert space $\mathcal{H}$.
 Even though the semimetric 
 $\rho$ may not satisfy the triangle inequality, 
-$\rho^{1/2}$ does since it can be shown to be a legit metric. 
+$\rho^{1/2}$ does since it can be shown to be a legitamate metric. 
 
 There is an equivalence between energy distance, 
 commonly used in statistics,
@@ -449,6 +467,7 @@ replacing \eqref{eq:gen_kernel} into
 Due to \eqref{eq:mmd} we can compute the energy distance using the inner 
 product of $\Hk$. Moreover, this can be estimated from a sample
 according to \eqref{eq:inner_data}.
+% @gui: i don't know what this means.  eqn 7 defines something for a population statistic, not a sample statistic.
 
 Finally, let us recall the main formulas from energy statistics
 for the test statistic of equality of distributions \cite{Szkely2013}. 
@@ -491,6 +510,7 @@ $\{ P_j\}_{j=1}^k$, where $x \in \C_j$ if and only if $x \sim P_j$,
 the quantity $S$ provides
 a \emph{nonparametric test statistic} for equality of distributions
 \cite{Szkely2013}.
+% @gui: i'm not sure the above is true/meaningful.  nonparametric means implicitly estimating an infinite number of parameters.  without any statistical theory, i'm not quite sure what we can say.
 When the sample size is large enough, $n\to \infty$,
 under the null hypothesis $H_0: P_1=P_2=\dotsm=P_k$ we have that
 $S\to 0$, 
@@ -518,6 +538,7 @@ This section contains the main theoretical results of this paper, where
 we formulate an optimization problem for clustering 
 based on energy statistics and RKHS introduced in the previous section.
 
+% @gui: consider only using equation numbers for equations that you later refer to? there are so many, it is easy to get lost.
 Due to the test statistic \eqref{eq:between} for equality of distributions,
 the obvious
 criterion for clustering data is to 
@@ -532,6 +553,7 @@ The following
 straightforward result
 shows that maximizing \eqref{eq:between} is, however, equivalent to minimizing
 \eqref{eq:within} which has a more convenient form.
+% @gui: where possible, i recommend using the "name" of the quantity rather than the number of the equation.  eg, here, write S and W, rather than (13) and (12).
 
 \begin{proposition}
 \label{th:minimize}
@@ -571,9 +593,11 @@ only depends on the pooled data, so it is a constant
 independent of the choice of partition. Therefore, maximizing
 $S$ over the choice of partition is equivalent to minimizing $W$.
 \end{proof}
+% @gui: do other people know this result? if so, cite them, if not, state that.
 
 For a given $k$, the clustering problem amounts to
 finding the best partition of the data by solving~\eqref{eq:minimize}.
+% @gui: here and elsewhere is another good example.  why not just say "by minizing W"?
 Notice that this is a hard clustering problem as partitions
 are disjoint. The problem \eqref{eq:minimize} based on
 energy statistics was already proposed in \cite{Kgroups}. However, it is
@@ -581,6 +605,7 @@ important to note that this is equivalent to maximizing \eqref{eq:between}
 which is the test statistic for equality of distributions. In the following
 we show what is the explicit optimization problem behind \eqref{eq:minimize}.
 
+% @gui: "Let us" is used a bunch, though i think it never adds anything? i'd remove it everywhere.
 Let us formulate \eqref{eq:minimize} in the corresponding
 RKHS. Based on \eqref{eq:kernel_semimetric} and \eqref{eq:gen_kernel}, 
 assume that the kernel $\kk: \mathcal{X} \times \mathcal{X} \to \mathbb{R}$ 
@@ -597,7 +622,7 @@ G \equiv \begin{pmatrix}
 Let $Z \in \{ 0,1 \}^{n\times k}$ be the label matrix, 
 with only one nonvanishing entry per row, 
 indicating to which cluster (column)
-each point (row) belongs to. This matrix satisfy
+each point (row) belongs to. This matrix satisfies
 $Z^\top Z = D$ where the diagonal matrix 
 $D = \diag( n_1,\dotsc, n_k )$  contains
 the number of points in each cluster. Let us also introduce the rescaled
@@ -658,12 +683,15 @@ But
 \sum_{p=1}^{n} \sum_{q=1}^{n} Z_{pj} Z_{qj} G_{pq} = 
 (Z^\top G \, Z)_{jj},
 \end{equation}
+% @gui: i don't understand the notaiton (.)_jj. is a sum missing?
 where we used the definitions \eqref{eq:kernel_matrix} and
 \eqref{eq:label_matrix}. Thus, the objective function in 
 \eqref{eq:max_prob} is equal to
-$\Tr \left( D^{-1} Z^\top G Z \right)$. Now we can
+$\Tr \left( D^{-1} Z^\top G Z \right)$. 
+% @gui: the above step is not obvious
+Now we can
 use the cyclic property
-of the trace, and by the own definition of the matrix $Z$
+of the trace, and by the  definition of the matrix $Z$
 in \eqref{eq:label_matrix}, we obtain the following integer
 programing problem:
 \begin{equation}\label{eq:qcqp}
@@ -733,6 +761,8 @@ In Section~\ref{sec:algo} we will propose an iterative method to directly
 find approximate solutions to \eqref{eq:qcqp2} that is guaranteed to
 converge and does not require that the similarities $\kk(x_i,x_j)$ be
 nonnegative.
+
+% @jovo: stopped here.
 
 The clustering problem \eqref{eq:qcqp2} based on energy statistics
 is valid for data living in an \emph{arbitrary} space of negative type where
