@@ -16,6 +16,7 @@ import scipy.stats
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import cPickle, gzip
+from sklearn.decomposition import PCA
 
 import eclust.data as data
 import eclust.kmeans as km
@@ -28,6 +29,8 @@ from eclust import metric
 from eclust import objectives
 
 from pplotcust import *
+
+import sys
 
 
 ###############################################################################
@@ -490,6 +493,114 @@ def mnist(num_experiments=10, digits=[0,1,2], num_points=100, run_times=4):
     vals = table[:, -1]
     print "k-means          :", vals.mean(), scipy.stats.sem(vals) 
 
+def mnist_pca(num_experiments=10, digits=[0,1,2], num_points=100,
+                n_components=20, run_times=4):
+    """MNIST clustering. We use Hartigan's and Lloyd's with different
+    kernels and compare to k-means. We project the data into PCA
+    with 20 or other components.
+    
+    """
+    
+    k = len(digits)
+
+    f = gzip.open('data/mnist.pkl.gz', 'rb')
+    train_set, valid_set, test_set = cPickle.load(f)
+    f.close()
+    images, labels = train_set
+
+    rhos = [rho_standard, rho_half]
+    rho_names = ['standard', 'half', 'rbf']
+
+    table = []
+    for i in range(num_experiments):
+        
+        # sample digits
+        data = []
+        true_labels = []
+        for l, d in enumerate(digits):
+            x = np.where(labels==d)[0]
+            js = np.random.choice(x, num_points, replace=False)
+            for j in js:
+                im = images[j]
+                label = l
+                data.append(im)
+                true_labels.append(label)
+        idx = range(len(data))
+        data = np.array(data)
+        true_labels = np.array(true_labels)
+        np.random.shuffle(idx)
+        X = data[idx]
+        z = true_labels[idx]
+        ################
+        
+        # do PCA
+        pca = PCA(n_components=n_components)
+        pca.fit(X)
+        X_new = pca.transform(X)
+        ########
+
+        n = len(X)
+        sigma = np.sqrt(sum([np.linalg.norm(X[i]-X[j])**2 
+                     for i in range(n) for j in range(n)])/(n**2))
+        #rho_exp2= lambda x, y: rho_exp(x, y, sigma)
+        rho_rbf2 = lambda x, y: rho_rbf(x, y, sigma)
+        #rho_exp2 = lambda x, y: rho_exp(x, y, 1)
+        #rho_rbf2 = lambda x, y: rho_rbf(x, y, 1)
+
+        # build several kernels
+        Gs = [ke.kernel_matrix(X, rho) for rho in rhos]
+        #Gs.append(ke.kernel_matrix(X, rho_exp2))
+        Gs.append(ke.kernel_matrix(X, rho_rbf2))
+        
+        for G in Gs:
+            table.append(cost_energy(k, X, G, z, run_times=run_times))
+        for G in Gs:
+            table.append(kernel_energy(k, X, G, z, run_times=run_times))
+        table.append(kmeans(k, X, z, run_times=run_times))
+        
+        X = X_new
+        n = len(X)
+        sigma = np.sqrt(sum([np.linalg.norm(X[i]-X[j])**2 
+                     for i in range(n) for j in range(n)])/(n**2))
+        #rho_exp2= lambda x, y: rho_exp(x, y, sigma)
+        rho_rbf2 = lambda x, y: rho_rbf(x, y, sigma)
+        #rho_exp2 = lambda x, y: rho_exp(x, y, 1)
+        #rho_rbf2 = lambda x, y: rho_rbf(x, y, 1)
+
+        # build several kernels
+        Gs = [ke.kernel_matrix(X, rho) for rho in rhos]
+        #Gs.append(ke.kernel_matrix(X, rho_exp2))
+        Gs.append(ke.kernel_matrix(X, rho_rbf2))
+        
+        for G in Gs:
+            table.append(cost_energy(k, X, G, z, run_times=run_times))
+        for G in Gs:
+            table.append(kernel_energy(k, X, G, z, run_times=run_times))
+        table.append(kmeans(k, X, z, run_times=run_times))
+    table = np.array(table)
+    num_kernels = len(Gs)
+    table = table.reshape((num_experiments, 2*(2*num_kernels+1)))
+    
+    num_cols = 2*num_kernels
+    for j in range(num_kernels):
+        vals = table[:, j]
+        print "Energy %-10s:"%rho_names[j], vals.mean(), scipy.stats.sem(vals) 
+    for i, j in enumerate(range(num_kernels, num_cols)):
+        vals = table[:, j]
+        print "Kernel %-10s:"%rho_names[i], vals.mean(), scipy.stats.sem(vals) 
+    vals = table[:, num_cols+1]
+    print "k-means          :", vals.mean(), scipy.stats.sem(vals) 
+    
+    start = num_cols+1
+    for i, j in enumerate(range(start,start+num_kernels)):
+        vals = table[:, j]
+        print "Energy PCA %-10s:"%rho_names[i], vals.mean(), scipy.stats.sem(vals) 
+    for i, j in enumerate(range(start+num_kernels,start+2*num_kernels)):
+        vals = table[:, j]
+        print "Kernel PCA %-10s:"%rho_names[i], vals.mean(), scipy.stats.sem(vals) 
+    vals = table[:, -1]
+    print "k-means PCA          :", vals.mean(), scipy.stats.sem(vals) 
+    
 
 ###############################################################################
 # ploting functions
@@ -687,7 +798,7 @@ if __name__ == '__main__':
 #    
 #    ### make the plot
 #    #
-    table = csv_to_array("./data/gauss_means.csv")
+#    table = csv_to_array("./data/gauss_means.csv")
 #    table = csv_to_array("./data/gauss_cov_v2.csv")
 #    table = csv_to_array("./data/gauss_cov_v4.csv") # linear
 #    table = csv_to_array("./data/gauss_cov_v3.csv") # square
@@ -703,7 +814,7 @@ if __name__ == '__main__':
 #    #table = csv_to_array("./data/normal.csv")
 #    table = csv_to_array("./data/lognormal1d.csv")
 #    table = csv_to_array("./data/normal1d.csv")
-    
+    """
     plot_accuracy_errorbar(table, 
                     #xlabel='number of points', 
                     xlabel='number of dimensions', 
@@ -752,6 +863,7 @@ if __name__ == '__main__':
                     loc=0,
                     #doublex=True
     )
+    """
 #    #gen_data('../draft/figs/two_lognormal_hist.pdf')
     
     #other_examples()
@@ -766,3 +878,5 @@ if __name__ == '__main__':
     #mnist(num_experiments=10, digits=[0,1,2,3,4,5,6,7,8], num_points=100, run_times=4)
     #mnist(num_experiments=10, digits=[0,1,2,3,4,5,6,7,8,9], num_points=100, run_times=4)
 
+    mnist_pca(num_experiments=10, digits=[0,1,2,3,4,5,6], num_points=100,
+                n_components=20, run_times=4)
