@@ -1684,6 +1684,8 @@ parametric they are consistent models to the data.
 Comparison of Algorithm~\ref{algo}, Algorithm~\ref{kmeans_algo},
 standard $k$-means and GMM/EM as the number of dimensions increase
 in gaussian settings.
+% @gui: gaussian is always captilized
+% @gui: also, i don't understand this plot entirely, are you really starting with D=1? or 10? from the equations, it would seem that Bayes error changes when D< 10, but your Bayes error lines do not seem to change?
 We compute the average of \eqref{eq:accuracy} over $100$ samples with
 error bars being standard error. We have two clusters with $100$ points
 each. 
@@ -1739,6 +1741,7 @@ where we recall that both find local solutions
 to the same optimization problem \eqref{eq:qcqp2}.
 Algorithm~\ref{algo} is more robust as the number of dimensions
 increase.
+% @gui: is there any reason to initialize alg 3 with alg 2? is it even worth trying?
 
 Let us now
 consider the effect of having 
@@ -1771,6 +1774,7 @@ As expected, GMM
 works better than the other algorithms since it is a fuzzy clustering.
 The other methods based on hard assignments degrade similarly
 and  more rapidly than GMM. This indicates that a fuzzy version of
+% @gui: in stats, we don't say "fuzzy", we say "soft".  also, why do you think that when clusters are imbalanced that soft clustering is more important? i would say that soft clustering is more important when the cluster centers are close, i don't see how imbalanced matters.
 Algorithm~\ref{algo} should compensate for this effect.
 
 \begin{figure}
@@ -1785,6 +1789,7 @@ we make the clusters progressively more unbalanced.
 
 Besides the standard kernel from energy statistics 
 \eqref{eq:standard_metric}, 
+% @gui: please remove all "let us" from manuscript
 let us consider two other semimetrics with their respective generating
 kernels,
 \begin{align}
@@ -1824,7 +1829,7 @@ Algorithm~\ref{algo} with kernel \eqref{eq:rhoe} approach optimal Bayes
 with a much smaller number of points. Moreover, Algorithm~\ref{algo} 
 outperforms
 Algorithm~\ref{kmeans_algo} for any of the kernel choices.
-%Standard $k$-means performs poorly in this example.
+% @gui: this is a separate point, that i would make a separate figure for if you want to make it. then, one fig would show E-H with 3 kernels vs. kmeans & gmm, and then another would show the difference between accuracy of E-H vs E-L for each of the 3 kernels. 
 
 Now consider the same parameters as in \eqref{eq:20gauss} but with
 lognormal distributions, 
@@ -1836,7 +1841,9 @@ The same previous experiment is shown in
 Fig.~\ref{fig:consist}b.
 Note that Algorithm~\ref{algo} still performs accurately, 
 while $k$-means works almost at chance,
-and GMM is not even able to estimate the parameters. Again, the
+and GMM is not even able to estimate the parameters. 
+% @gui: something is weird with the way you care computing accuracy.  GMM should not be significantly worse than chance.  i think you are probably counting the NaN's as *wrong*, rather than nothing?
+Again, the
 kernel \eqref{eq:rhoe}
 provides better results than \eqref{eq:standard_metric} or
 \eqref{eq:rhohalf}. 
@@ -1856,6 +1863,7 @@ illustrate how energy statistics clustering is nonparametric.
 \end{minipage}
 \caption{
 \label{fig:consist}
+% @gui: too many lines, you demonstrated that E-H is better than E-L already, i don't think we need to show the E-L variants here. 
 Algorithm~\ref{algo} and Algorithm~\ref{kmeans_algo} with kernels
 \eqref{eq:standard_metric}, \eqref{eq:rhohalf} and \eqref{eq:rhoe}, 
 $k$-means, and GMM. The optimal accuracy in both cases
@@ -1914,9 +1922,9 @@ complex two dimensional datasets. The two parallel cigars of
 Fig.~\ref{fig:other}a have $200$ points each. For the concentric circles
 of Fig.~\ref{fig:other}b and Fig.~\ref{fig:other}c we
 sample $400$ points for each class.
-We apply Algorithm~\ref{algo} and Algorithm~\ref{kmeans_algo}, besides
-$k$-means and GMM, using the above kernels 
-\eqref{eq:rhoalpha}--\eqref{eq:rhogsigma}. The results are shown
+We apply Algorithm~\ref{algo} and Algorithm~\ref{kmeans_algo}, using the above kernels 
+\eqref{eq:rhoalpha}--\eqref{eq:rhogsigma}, as well as
+$k$-means and GMM. The results are shown
 in Table~\ref{table:other} where the respective choice of parameters for the
 kernels are indicated. For the data in Fig.~\ref{fig:other}a 
 the semimetrics $\rho_1$ and $\rho_{1/2}$ are
@@ -1925,9 +1933,13 @@ the gaussian kernel $\widetilde{\rho}_2$ gives very accurate
 results, similar to GMM,
 which is the true model of the data. For the data shown in
 Fig.~\ref{fig:other}b we see
-that the choice of kernel is very sensitive, and only \eqref{eq:rhoesigma}
+that the choice of kernel is very sensitive, 
+% @gui: you mean performance is sensitive to the kernel?
+and only \eqref{eq:rhoesigma}
 was able to cluster accurately. The same kernel choice to the case
-of Fig.~\ref{fig:other} still provides better results than
+of Fig.~\ref{fig:other} 
+% @gui: Fig 5 a? 5c?
+still provides better results than
 the others, but they are less accurate compared to Fig.~\ref{fig:other}b.
 
 
@@ -1980,8 +1992,8 @@ the others, but they are less accurate compared to Fig.~\ref{fig:other}b.
 \end{tabular}
 \caption{\label{table:other}
 Clustering the data shown in Fig.~\ref{fig:other} with Algorithm~\ref{algo}
-and Algorithm~\ref{kmeans_algo}, besides $k$-means and GMM, with kernels 
-\eqref{eq:rhoalpha}--\eqref{eq:rhogsigma}. 
+and Algorithm~\ref{kmeans_algo}, with kernels 
+\eqref{eq:rhoalpha}--\eqref{eq:rhogsigma}, as well as $k$-means and GMM. 
 We sample $10$ times and show the average
 accuracy \eqref{eq:accuracy} with standard error.
 }
@@ -2000,6 +2012,7 @@ consider the gaussian kernel \eqref{eq:rhogsigma} with
 \sigma^2 = \dfrac{1}{n^2} \sum_{i,j=1}^n \| x_i - x_j \|^2 ,
 \end{equation}
 which is computed from a sample  $\{ x_i \}_{i=1}^n$.
+% @gui: it is cheating if this sample is part of the data, this should be a sample of "training data", not used for subsequent testing. please clarify
 We consider subsets of the  classes $\{0,1,\dotsc,9 \}$, 
 where we sample $100$ points 
 for each class. We perform clustering through 
@@ -2075,6 +2088,7 @@ $\{0,1,\dotsc,8\}$ \\
 \\
 \arrayrulecolor{black}\bottomrule[1pt]
 \end{tabular}
+% @gui: i'm not convinced you need alg 2 in these tables at all. if i were to add alg 2 to these tables, however, i would do the same thing i would for the figs, that is, for each simulation, compute the diff between performance on alg 2 and alg 3, and report that.
 \caption{\label{table:mnist}
 Clustering the data shown in Fig.~\ref{fig:other}d with Algorithm~\ref{algo},
 Algorithm~\ref{kmeans_algo}, and $k$-means.
@@ -2175,7 +2189,7 @@ each class.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusion}
+\section{Discussion}
 \label{sec:conclusion}
 
 We considered clustering from the perspective of energy
@@ -2190,7 +2204,8 @@ Proposition~\ref{th:kernel_kmeans}. Energy statistics, however, fixes
 a family of standard kernels consistent with \eqref{eq:energy2}, and
 more general kernels related to \eqref{eq:energy3} can be obtained.
 Our results imply that kernel $k$-means
-is actually a consequence of energy statistics, and thus place this 
+can be interpreted as  a consequence of energy statistics, and thus place this 
+% @gui: "this"? what is "this:? clarify
 method into a principled statistical basis.
 We also considered a weighted version of energy statistics clustering,
 establishing connections with spectral
@@ -2216,10 +2231,11 @@ techniques to the case of Algorithm~\ref{algo}.
 Another fruitful avenue of exploration would be to find 
 better methods to tackle the optimization problem \eqref{eq:qcqp2}.
 
+% @gui: your discussion is basically just a summary, which i don't find very helpful to the reader.  if you want to summarize results, 1 paragraph is sufficient.  another paragraph connects it to previous work not already mentioned, and a third paragraph on additional possible extensions.  as you know, one thing i'd like to do next is to theoretically prove when Energy Clustering asymptoticaly gets the right answer. you also mentioned soft clustering, which is another potential extension, or incorporating this into subspace clustering.
 
 \subsection*{Acknowledgements}
-GF would like to thank Carey Priebe for discussions.
-This work was supported by XXX grant.
+We would like to thank Carey Priebe for discussions.
+This work was supported by NIH TRA  grant.
 
 
 \bibliographystyle{unsrt}
