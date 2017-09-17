@@ -124,7 +124,7 @@ has the same computational cost
 as kernel $k$-means algorithm but usually with better clustering
 quality. We provide carefully designed numerical experiments
 showing the superiority of this method compared to
-kernel $k$-means, standard $k$-means, and gaussian mixture models.
+kernel $k$-means, standard $k$-means, and gaussian mixture models in a variety of settings.
 \end{abstract}
 
 \maketitle
@@ -703,6 +703,7 @@ $\sum_{i=1}^n Z_{ij} = n_j$.}
 \end{equation}
 
 Now we write this in terms of the matrix $Y = Z D^{-1/2}$.
+% @gui: Y is a matrix? or a vector? when introducing new terms, always define what space they are in rigorously
 The objective function immediately becomes
 $\Tr\left( Y^\top G \, Y\right)$. Notice that the above constraints
 imply that $Z^T Z = D$, where $D=\diag(n_1,\dotsc,n_k)$, which in turn gives
@@ -718,8 +719,11 @@ that $Y D^{1/2} \e = Z \e = \e$, we finally obtain
 $Y Y^\top \e = \e$. Therefore, the optimization 
 problem \eqref{eq:qcqp} is equivalent
 to \eqref{eq:qcqp2} .
+% @gui: don't use equation numbers here.
 \end{proof}
 
+
+% @jv: stopped here
 Based on Proposition~\ref{th:qcqp2}, to group data
 $\mathbb{X} = \{ x_1,\dotsc,x_n \}$
 into  $k$ clusters we first compute the Gram matrix
@@ -771,6 +775,7 @@ assumed to be known. This clustering method is
 \emph{nonparametric} since it does not make any assumptions
 about  the distribution of the data, 
 contrary to $k$-means and GMM, for example.
+% @gui: algorithms don't make assumptions, proofs do.  we don't prove anything about when we get the right answer, so we can't quite say this.
 If one uses the standard energy distance
 defined in \eqref{eq:energy} 
 we have $\rho(x,y) = \| x - y\|$ and this fixes the kernel
@@ -816,7 +821,7 @@ where $\mu_j = \tfrac{1}{n_j} \sum_{x \in \C_j} x$ is the  mean of cluster
 $\C_j$ in the ambient space. Notice that the above objective function
 is strongly tied to the idea of minimizing distances between points
 and cluster centers, which arises from $k$-means objective function.
-It was shown \cite{Dhillon2,Dhillon} 
+ \cite{Dhillon2,Dhillon} show
 that problem \eqref{eq:kernel_kmeans} 
 is equivalent to a QCQP in the same form as
 \eqref{eq:qcqp2}. The next result makes this explicit, showing that
@@ -863,6 +868,7 @@ already shown in the proof of Proposition~\ref{th:qcqp2}, leading to
 
 The above result shows that 
 kernel $k$-means problem is actually a consequence
+% @gui: i'm not sure about this.  who is to say the correct direction of causality? maybe energy clustering is a special case of kernel k-means?
 of energy statistics. In this vein, kernel $k$-means is part of a
 statistical framework where distances between probability
 distributions are maximized. 
@@ -992,7 +998,7 @@ which gives the constraint $H H^\top \om = \om$.
 The relation between kernel $k$-means and graph partitioning problems
 is known \cite{Dhillon2,Dhillon}. For conciseness, we repeat a similar 
 analysis due to the relation of these problems to
-energy statistics and RKHS, which may provide a different perspective.
+energy statistics and RKHS, which  provides a different perspective.
 
 Consider a graph $\mathcal{G} = (\mathcal{V}, \mathcal{E}, \mathcal{A})$
 where $\mathcal{V}$ is the set of vertices, $\mathcal{E}$ the set of edges,
@@ -1067,6 +1073,7 @@ i.e. $\mathcal{A}_{ii} = 0$. Using \eqref{eq:metric_graphs}
 in \eqref{eq:g_def}--\eqref{eq:between}
 allows one to use energy statistics theory for inference
 on graphs.
+% @gui: can you provide some guidance here, in particular, what do the weights "mean" or "correspond to"? right now, it feels like just math.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1142,6 +1149,7 @@ this method does not require any initialization,
 however,
 it only works for one-dimensional data with Euclidean distance. The total
 complexity of the algorithm is $\OO(n\log n + n^2) = \OO(n^2)$.
+% @gui: "does not require any initiializaton" i think you mean is guaranteed to find the optimal solution in O(n^2) time.
 
 \begin{figure}
 \begin{algorithm}[H]\vspace{.5em}
@@ -1199,6 +1207,20 @@ to chance.
 (b)
 \end{minipage}
 \caption{
+% @gui: to provide intuition to the reader, let's show the kernel density estimate for each of the 3 algorithms for both classes.  i'm not sure the best way to visualize it, maybe play with a few options.
+% @gui: also, the colors are not very different.  i use the following color pallete:
+%co = [0,255,0; % green
+%0,255,255;  % cyan
+%255,0,255;  % magenta
+%255,127,0;  % orange
+%55,126,184; % blue
+%153,153,153;% gray
+%152,78,163; % purple
+%166,86,40;  % brown
+%247,129,191;% pink
+%77,175,74;  % forest
+%228,26,28;  % red
+%255,255,51];% yellow
 \label{fig:1d}
 Energy statistics clustering by Algorithm~\ref{algo1d}
 compared to $k$-means and GMM/EM.
@@ -1219,12 +1241,18 @@ Let us consider two simple experiments with equal number of points
 in each cluster. We plot the accuracy \eqref{eq:accuracy} versus the number
 of points in each cluster.
 The data is clustered using 
-Algorithm~\ref{algo1d}, GMM through EM algorithm, and standard $k$-means 
-algorithm. In the last two cases 
+Algorithm~\ref{algo1d}, 
+% @gui: i see why you call this algorithm 1, but can we call it something with semantic meaning? like 1D-\mathcal{E}-clustering? or maybe \mathcal{E}1 for short? same for the other variants.
+GMM through EM algorithm, and standard $k$-means 
+algorithm. 
+% @gui: there are many k-means algorithms, be specific.
+In the last two cases 
 we use the initialization from $k$-means++ \cite{Vassilvitskii} 
 and we run the algorithms
 few times choosing the result with  best objective function value. 
+% @gui: a few? be specific
 Notice that Algorithm~\ref{algo1d} requires no initialization so we only
+% @gui: "no initiazation" is weird.  do any algs require an initialization?
 run it once.
 Moreover, for each case we sample $100$ times
 and show the average accuracy with error bars indicating
@@ -1258,7 +1286,9 @@ $\sigma_1 = 0.3$ and
 $\mu_2 = -1.5$,
 $\sigma_2 = 1.5$.}
 \end{equation}
+% @gui: why not use the same parameters as in fig 1a?  i feel like if we did, it would seem less like we are cherry picking?  
 The optimal classification accuracy from Bayes error is $\approx 0.852$.
+% @gui: computed numerically?
 In this case,
 Algorithm~\ref{algo1d} provides a very accurate clustering while
 GMM and $k$-means basically cluster at chance.
@@ -1275,7 +1305,7 @@ from very different distributions.
 \label{sec:algo}
 
 In this section we introduce an iterative algorithm to find a local
-maximizer of \eqref{eq:qcqp2}. However, due to 
+maximizer of \eqref{eq:qcqp2}. Due to 
 Proposition~\ref{th:kernel_kmeans} we can also find an approximate
 solution by the well-known kernel $k$-means algorithm 
 (see \cite{Dhillon2,Dhillon}), which 
@@ -1319,6 +1349,7 @@ to $j^\star = \argmin_\ell J^{(\ell)}(x_i)$, for $\ell = 1,\dotsc,k$.
 This procedure is performed for every data point and repeated until
 convergence, i.e. until no new assignments are made.
 The entire procedure is described in Algorithm~\ref{kmeans_algo}.
+% @gui: let's call this something more informative
 It can be shown that this algorithm converges provided $G$ is positive
 semidefinite.
 
@@ -1478,6 +1509,7 @@ this can be reduced to $\OO(k n')$ where $n'$ is the number of nonzero
 entries of $G$.
 
 Let us mention some important results about Hartigan's method.
+% @gui: "let us" again...
 
 \begin{theorem}[Telgarsky-Vattani \cite{Telgarsky}]
 Hartigan's method has the cost function strictly decreasing in each
@@ -1489,7 +1521,9 @@ iteration. Moreover, if $n > k$ then
 \end{theorem}
 
 Both conditions of the  above theorem are not satisfied 
-by Lloyd's method, and consequently by (kernel) $k$-means algorithm.
+by Lloyd's method, 
+% @gui: do you mean Lloyd's method satisfies neither, or does not satisfy both?  please clarify
+and consequently by (kernel) $k$-means algorithm.
 The next result indicates that Hartigan's can potentially 
 escape local optima of Lloyd's method.
 
@@ -1574,7 +1608,7 @@ that Algorithm~\ref{algo} will be superior than Algorithm~\ref{kmeans_algo}.
 Another goal is to illustrate the nonparametric aspect of energy statistics.
 To this end we also compare
 Algorithm~\ref{algo} to standard $k$-means and GMM/EM since 
-these are the most used
+these are reference
 clustering algorithms in practice.
 Moreover, for every algorithm, we always
 choose the initialization procedure from $k$-means++%
@@ -1584,13 +1618,14 @@ Our measure of clustering quality will be the accuracy \eqref{eq:accuracy}
 based on the ground truth. Furthermore, in every experiment, we sample
 data many times and show the average value of the accuracy with error bars
 indicating the standard error. Whenever possible, 
+% @gui: bayes error is always possible to numerically estimate, no? maybe sometimes computationally intractable?
 we also indicate the optimal 
 accuracy computed from
 Bayes classification error.
 
-From the results of \cite{Telgarsky}, the improvement of Hartigan's 
-over Lloyd's method should be more accentuated in high dimensions.
-Thus, let us analyse
+From the results of \cite{Telgarsky}, we expect the improvement of Hartigan's 
+over Lloyd's method to be more accentuated in high dimensions.
+Thus, we analyze
 how the algorithms degrade as the number of dimensions increase, while
 keeping the number of points in each cluster fixed. Consider
 two clusters with multivariate normal distributions given by
