@@ -80,7 +80,8 @@
 \begin{document}
 
 
-\title{Nonparametric Clustering from  Energy Statistics}
+%\title{Nonparametric Clustering from  Energy Statistics}
+\title{Energy Clustering}
 
 \author{Guilherme Fran\c ca}
 \email{guifranca@gmail.com} 
@@ -751,7 +752,9 @@ The resulting
 optimal objective function is given by
 $\max \Tr \left( {Y^\star}^\top G \, Y^\star \right)  = 
 \sum_{i=1}^k \lambda_i$. One might then normalize and threshold the rows
-of $Y^\star$, or better, following \cite{NgJordan} one can normalize the
+of $Y^\star$,
+% @gui: this might be a better initialization than k-means++, which essentially initializes using a different kernel?
+ or better, following \cite{NgJordan} one can normalize the
 rows of $Y^\star$ and apply standard $k$-means on this matrix where each
 row is considered as a data point.
 This is the procedure done in spectral clustering on a graph Laplacian
@@ -766,7 +769,6 @@ find approximate solutions to \eqref{eq:qcqp2} that is guaranteed to
 converge and does not require that the similarities $\kk(x_i,x_j)$ be
 nonnegative.
 
-% @jovo: stopped here.
 
 The clustering problem \eqref{eq:qcqp2} based on energy statistics
 is valid for data living in an \emph{arbitrary} space of negative type where
@@ -1603,6 +1605,7 @@ experiments  to follow
 is to compare Algorithm~\ref{algo} based on Hartigan's method to
 kernel $k$-means, as described in Algorithm~\ref{kmeans_algo}, which
 is based on Lloyd's method. 
+% @gui: i might call them \mathcal{E}-H & \mathcal{E}-L, or some such?
 From the discussion in the end of the previous section we can anticipate
 that Algorithm~\ref{algo} will be superior than Algorithm~\ref{kmeans_algo}.
 Another goal is to illustrate the nonparametric aspect of energy statistics.
@@ -1643,7 +1646,8 @@ x &\in \C_i  \sim
 Note that the Bayes error
 is fixed as $D$ increases, giving an optimal 
 accuracy of $\approx 0.86$.
-For each $D$ we sample $100$ times, picking $100$ points for each cluster.
+For each $D$ we generate $100$ Monte Carlo runs, sampling $100$ points for each cluster.
+% @gui: if you sample 100 points from each cluster, it breaks the GMM model, which assumes you sample n_i points from cluster i with probability \pi_i.  i don't think it matters that much, but good to know :)
 We apply each algorithm to the resulting dataset 
 and compute the average of the accuracy \eqref{eq:accuracy} (error bars
 are standard error).
@@ -1656,8 +1660,11 @@ when the number of dimensions exceeds the number of points in each cluster,
 giving zero accuracy when dimensions are $\gtrsim 100$.
 We see that Algorithm~\ref{algo} performs better than all the other ones,
 and in particular it outperforms kernel $k$-means algorithm as the number
-of dimensions increase. Note also that although GMM and $k$-means are
+of dimensions increase. 
+% @gui: when you say "kernel k-means" here, do you mean algorithm 2?  if so, please clarify, if not, please clarify :)
+Note also that although GMM and $k$-means are
 parametric they are consistent models to the data.
+% @guiL gmm & k-means are not 'models". they are algorithms, or in this context, they are estimators.
 
 \begin{figure}
 \begin{minipage}{0.49\textwidth}
@@ -1686,10 +1693,13 @@ from Bayes error is the dashed line equal to $\approx 0.86$.
 (c) Data from \eqref{eq:gauss2} with $q=1$ in \eqref{eq:cov}.
 (d) Data from \eqref{eq:gauss2} with $q=2$ in \eqref{eq:cov}.
 The optimal accuracy from Bayes error in (b--d) is $\approx 1$.
+% @gui: titles for each, or subcaptions, would be extremely useful.  in general, titles should provide the "setting" of the experiment, ie, the model, etc.
+% @gui: also helpful here would be pairs plots, say, of the first 5 dimensions, showing the performance of our stuff (color points by Alg 3, maybe symbols denote "truth".  i have no intuition how difficult these are.
 }
 \end{figure}
 
 Let us now consider the same experiment as before with data distributed as
+% @gui: what do you mean "the same experiment as before"? clarify, or don't say that. there are obviously differences. 
 \begin{equation}
 \label{eq:gauss2}
 x \in \C_i  \sim 
@@ -1711,6 +1721,7 @@ i^{\,q} \delta_{ij} & \mbox{if $i \le 10$} \\
 \end{cases} 
 \end{equation}
 and we choose $q \in \{ 1/2, 1, 2\}$. In these cases,
+% @gui: what is delta_ij??? can you explain the intuition for this setting, i don't get it, maybe because i don't know what delta_ij is.....
 the best possible accuracy from Bayes classification error is $\approx 1$.
 In Fig.~\ref{fig:gauss}b--d we have $q=1/2$, $q=1$, and $q=2$, respectivelly.
 Again, GMM/EM is unable to estimate the covariance matrices
