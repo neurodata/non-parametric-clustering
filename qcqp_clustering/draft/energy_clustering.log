@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.4.8)  13 AUG 2017 12:41
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.4.8)  18 SEP 2017 19:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -363,31 +363,31 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \c@theorem=\count121
 \c@example=\count122
 Class revtex4-1 Info: colortbl package is loaded. (Proceeding with fingers cros
-sed.) on input line 80.
+sed.) on input line 72.
 
 
 Class revtex4-1 Warning: Repair the float package.
 
-Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 80.
+Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 72.
 
-Class revtex4-1 Info: cite was not loaded (OK!) on input line 80.
-Class revtex4-1 Info: mcite was not loaded (OK!) on input line 80.
-Class revtex4-1 Info: multicol was not loaded (OK!) on input line 80.
+Class revtex4-1 Info: cite was not loaded (OK!) on input line 72.
+Class revtex4-1 Info: mcite was not loaded (OK!) on input line 72.
+Class revtex4-1 Info: multicol was not loaded (OK!) on input line 72.
 (./energy_clustering.aux)
 \openout1 = `energy_clustering.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -405,24 +405,24 @@ LaTeX Font Info:    ... okay on input line 80.
 )
 \openout3 = `energy_clusteringNotes.bib'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 113.
+LaTeX Font Info:    Try loading font information for U+msa on input line 106.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 113.
+LaTeX Font Info:    Try loading font information for U+msb on input line 106.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6] [7
 ] [8] [9] [10]
 [11] [12]
-Overfull \hbox (14.09915pt too wide) in paragraph at lines 907--910
+Overfull \hbox (14.09915pt too wide) in paragraph at lines 1031--1034
 []\OT1/cmr/m/n/12 Replacing [] and elim-i-nat-ing the global terms which do not
  con-tribute, the op-ti-miza-tion
  []
 
 [13] [14]
-LaTeX Font Info:    Try loading font information for U+bbm on input line 1058.
+LaTeX Font Info:    Try loading font information for U+bbm on input line 1188.
  (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
 ) [15]
@@ -430,28 +430,28 @@ File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
 File: ./figs/hist_normal.pdf Graphic file (type pdf)
 
 <use ./figs/hist_normal.pdf>
-Package pdftex.def Info: ./figs/hist_normal.pdf used on input line 1162.
+Package pdftex.def Info: ./figs/hist_normal.pdf used on input line 1297.
 (pdftex.def)             Requested size: 183.45876pt x 113.38412pt.
 
 <./figs/gauss1d.pdf, id=69, 295.14775pt x 197.90839pt>
 File: ./figs/gauss1d.pdf Graphic file (type pdf)
 
 <use ./figs/gauss1d.pdf>
-Package pdftex.def Info: ./figs/gauss1d.pdf used on input line 1163.
+Package pdftex.def Info: ./figs/gauss1d.pdf used on input line 1298.
 (pdftex.def)             Requested size: 229.32257pt x 153.77301pt.
 
 <./figs/hist_lognormal.pdf, id=70, 303.33333pt x 187.47032pt>
 File: ./figs/hist_lognormal.pdf Graphic file (type pdf)
 
 <use ./figs/hist_lognormal.pdf>
-Package pdftex.def Info: ./figs/hist_lognormal.pdf used on input line 1167.
+Package pdftex.def Info: ./figs/hist_lognormal.pdf used on input line 1302.
 (pdftex.def)             Requested size: 183.45876pt x 113.38412pt.
 
 <./figs/loggauss1d.pdf, id=71, 290.52277pt x 197.90839pt>
 File: ./figs/loggauss1d.pdf Graphic file (type pdf)
 
 <use ./figs/loggauss1d.pdf>
-Package pdftex.def Info: ./figs/loggauss1d.pdf used on input line 1168.
+Package pdftex.def Info: ./figs/loggauss1d.pdf used on input line 1303.
 (pdftex.def)             Requested size: 229.32257pt x 156.21907pt.
  [16] [17 <./figs/hist_normal.pdf> <./figs/gauss1d.pdf
 
@@ -465,39 +465,34 @@ ple pdfs with page group included in a single page
 
 pdfTeX warning: pdflatex (file ./figs/loggauss1d.pdf): PDF inclusion: multiple 
 pdfs with page group included in a single page
->] [18] [19]
-Overfull \hbox (5.5022pt too wide) in paragraph at lines 1461--1465
-[]\OT1/cmr/m/n/12 Both con-di-tions of the above the-o-rem are not sat-is-fied 
-by Lloyd's method, and con-se-quently
- []
-
-[20] [21] [22] <./figs/gauss_dim.pdf, id=365, 289.77231pt x 193.9084pt>
+>] [18] [19] [20] [21] [22]
+<./figs/gauss_dim.pdf, id=365, 289.77231pt x 193.9084pt>
 File: ./figs/gauss_dim.pdf Graphic file (type pdf)
 
 <use ./figs/gauss_dim.pdf>
-Package pdftex.def Info: ./figs/gauss_dim.pdf used on input line 1599.
+Package pdftex.def Info: ./figs/gauss_dim.pdf used on input line 1813.
 (pdftex.def)             Requested size: 229.32257pt x 153.45815pt.
 
 <./figs/gauss_cov_squareroot.pdf, id=366, 289.77231pt x 194.96768pt>
 File: ./figs/gauss_cov_squareroot.pdf Graphic file (type pdf)
 
 <use ./figs/gauss_cov_squareroot.pdf>
-Package pdftex.def Info: ./figs/gauss_cov_squareroot.pdf used on input line 160
-2.
+Package pdftex.def Info: ./figs/gauss_cov_squareroot.pdf used on input line 181
+6.
 (pdftex.def)             Requested size: 229.32257pt x 154.29646pt.
 
 <./figs/gauss_cov_linear.pdf, id=367, 289.77231pt x 194.96768pt>
 File: ./figs/gauss_cov_linear.pdf Graphic file (type pdf)
 
 <use ./figs/gauss_cov_linear.pdf>
-Package pdftex.def Info: ./figs/gauss_cov_linear.pdf used on input line 1605.
+Package pdftex.def Info: ./figs/gauss_cov_linear.pdf used on input line 1819.
 (pdftex.def)             Requested size: 229.32257pt x 154.29646pt.
 
 <./figs/gauss_cov_square.pdf, id=368, 289.77231pt x 194.96768pt>
 File: ./figs/gauss_cov_square.pdf Graphic file (type pdf)
 
 <use ./figs/gauss_cov_square.pdf>
-Package pdftex.def Info: ./figs/gauss_cov_square.pdf used on input line 1608.
+Package pdftex.def Info: ./figs/gauss_cov_square.pdf used on input line 1822.
 (pdftex.def)             Requested size: 229.32257pt x 154.29646pt.
  [23] [24 <./figs/gauss_dim.pdf> <./figs/gauss_cov_squareroot.pdf
 
@@ -515,53 +510,57 @@ tiple pdfs with page group included in a single page
 File: ./figs/gauss_pi.pdf Graphic file (type pdf)
 
 <use ./figs/gauss_pi.pdf>
-Package pdftex.def Info: ./figs/gauss_pi.pdf used on input line 1701.
+Package pdftex.def Info: ./figs/gauss_pi.pdf used on input line 1942.
 (pdftex.def)             Requested size: 234.0pt x 156.58856pt.
  [25 <./figs/gauss_pi.pdf>]
 <./figs/gauss.pdf, id=912, 292.0848pt x 194.25044pt>
 File: ./figs/gauss.pdf Graphic file (type pdf)
  <use ./figs/gauss.pdf>
-Package pdftex.def Info: ./figs/gauss.pdf used on input line 1773.
+Package pdftex.def Info: ./figs/gauss.pdf used on input line 2020.
 (pdftex.def)             Requested size: 229.32257pt x 152.5136pt.
 
 <./figs/loggauss.pdf, id=913, 292.0848pt x 193.9084pt>
 File: ./figs/loggauss.pdf Graphic file (type pdf)
 
 <use ./figs/loggauss.pdf>
-Package pdftex.def Info: ./figs/loggauss.pdf used on input line 1778.
+Package pdftex.def Info: ./figs/loggauss.pdf used on input line 2025.
 (pdftex.def)             Requested size: 229.32257pt x 152.24504pt.
 
 <./figs/2cigars.pdf, id=914, 303.33333pt x 303.33333pt>
 File: ./figs/2cigars.pdf Graphic file (type pdf)
 
 <use ./figs/2cigars.pdf>
-Package pdftex.def Info: ./figs/2cigars.pdf used on input line 1797.
+Package pdftex.def Info: ./figs/2cigars.pdf used on input line 2046.
 (pdftex.def)             Requested size: 112.32257pt x 112.32414pt.
 
 <./figs/2circles.pdf, id=915, 303.33333pt x 303.33333pt>
 File: ./figs/2circles.pdf Graphic file (type pdf)
 
 <use ./figs/2circles.pdf>
-Package pdftex.def Info: ./figs/2circles.pdf used on input line 1800.
+Package pdftex.def Info: ./figs/2circles.pdf used on input line 2049.
 (pdftex.def)             Requested size: 112.32257pt x 112.32414pt.
 
 <./figs/3circles.pdf, id=916, 303.33333pt x 303.33333pt>
 File: ./figs/3circles.pdf Graphic file (type pdf)
 
 <use ./figs/3circles.pdf>
-Package pdftex.def Info: ./figs/3circles.pdf used on input line 1803.
+Package pdftex.def Info: ./figs/3circles.pdf used on input line 2052.
 (pdftex.def)             Requested size: 112.32257pt x 112.32414pt.
  <./figs/mnist.pdf, id=917, 289.08pt x 361.35pt>
 File: ./figs/mnist.pdf Graphic file (type pdf)
 
 <use ./figs/mnist.pdf>
-Package pdftex.def Info: ./figs/mnist.pdf used on input line 1807.
+Package pdftex.def Info: ./figs/mnist.pdf used on input line 2056.
 (pdftex.def)             Requested size: 107.638pt x 134.54652pt.
  [26 <./figs/gauss.pdf> <./figs/loggauss.pdf
 
 pdfTeX warning: pdflatex (file ./figs/loggauss.pdf): PDF inclusion: multiple pd
 fs with page group included in a single page
->] [27 <./figs/2cigars.pdf> <./figs/2circles.pdf
+>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[27 <./figs/2cigars.pdf> <./figs/2circles.pdf
 
 pdfTeX warning: pdflatex (file ./figs/2circles.pdf): PDF inclusion: multiple pd
 fs with page group included in a single page
@@ -575,7 +574,7 @@ pdfTeX warning: pdflatex (file ./figs/mnist.pdf): PDF inclusion: multiple pdfs
 with page group included in a single page
 >]
 
-Package array Warning: Column g is already defined on input line 1944.
+Package array Warning: Column g is already defined on input line 2206.
 
 [28] (./energy_clustering.bbl [29]
 Underfull \hbox (badness 1796) in paragraph at lines 31--35
@@ -585,10 +584,10 @@ uku-mizu.  Equiv-a-lence of
 
 [30] [31]) [32] (./energy_clustering.aux) ) 
 Here is how much of TeX's memory you used:
- 6005 strings out of 493308
- 77182 string characters out of 6140093
- 164479 words of memory out of 5000000
- 9335 multiletter control sequences out of 15000+600000
+ 6006 strings out of 493308
+ 77192 string characters out of 6140093
+ 165479 words of memory out of 5000000
+ 9336 multiletter control sequences out of 15000+600000
  20199 words of font info for 78 fonts, out of 8000000 for 9000
  960 hyphenation exceptions out of 8191
  36i,22n,35p,1541b,713s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -617,7 +616,7 @@ t/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts
 /public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
 c/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 /amsfonts/symbols/msbm10.pfb>
-Output written on energy_clustering.pdf (32 pages, 2063795 bytes).
+Output written on energy_clustering.pdf (32 pages, 2062550 bytes).
 PDF statistics:
  1531 PDF objects out of 1728 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
