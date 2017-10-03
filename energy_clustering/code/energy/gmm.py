@@ -162,7 +162,7 @@ if __name__ == "__main__":
     import data
     import metric
 
-    np.random.seed(12)
+    #np.random.seed(12)
 
     D = 10
     m1 = np.zeros(D)

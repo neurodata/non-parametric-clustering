@@ -17,8 +17,8 @@ def gauss_dimensions_pi(num_points=range(0, 180, 10), num_experiments=10):
     k = 2
     D = 4
     d = 2
-    N = 210
-    table = np.zeros((num_experiments*len(num_points), 5))
+    N = 250
+    table = np.zeros((num_experiments*len(num_points), 6))
     count = 0
 
     for p in num_points:
@@ -34,15 +34,19 @@ def gauss_dimensions_pi(num_points=range(0, 180, 10), num_experiments=10):
 
             X, z = data.multivariate_normal([m1, m2], [s1, s2], [n1, n2])
             rho = lambda x, y: np.linalg.norm(x-y)
-            G = ke.kernel_matrix(X, rho)
+            G = eclust.kernel_matrix(X, rho)
 
             table[count, 0] = p
-            table[count, 1] = eclust.energy_hartigan(k, X, G, z, 
-                                    init="spectral", run_times=1)
-            table[count, 2] = eclust.energy_lloyd(k, X, G, z, 
-                                    init="spectral", run_times=1)
-            table[count, 3] = eclust.kmeans(k, X, z)
-            table[count, 4] = eclust.gmm(k, X, z)
+            table[count, 1] = run_clustering.energy_hartigan(k, X, G, z,
+                                                init="k-means++", run_times=5)
+            table[count, 2] = run_clustering.energy_lloyd(k, X, G, z,
+                                                init="k-means++", run_times=5)
+            table[count, 3] = run_clustering.energy_spectral(k, X, G, z,
+                                                init="k-means++", run_times=5)
+            table[count, 4] = run_clustering.kmeans(k, X, z,
+                                                init="k-means++", run_times=5)
+            table[count, 5] = run_clustering.gmm(k, X, z,
+                                                init="kmeans", run_times=5)
 
             count += 1
 
@@ -61,10 +65,12 @@ def make_plot(*data_files):
     p.xlabel = 'number of unbalanced points'
     p.legends = [r'$\mathcal{E}^{H}$-clustering', 
                  r'$\mathcal{E}^{L}$-clustering', 
+                 r'$\mathcal{E}$-spectral', 
                  r'$k$-means', 
-                 'GMM']
-    p.colors = ['b', 'r', 'g', 'm']
-    p.symbols = ['o', 's', '^', 'v']
+                 r'GMM']
+    p.colors = ['b', 'r', 'g', 'm', 'c']
+    p.symbols = ['o', 's', 'D', '^', 'v']
+    p.xlim = [0,240]
     p.output = './experiments_figs/normal_unbalanced.pdf'
     p.make_plot(table)
 
@@ -73,7 +79,7 @@ def gen_data(fname):
     n_array = [range(0,50,10),
                range(50,100,10),
                range(100,150,10),
-               range(150, 210,10)]
+               range(150, 250,10)]
     jobs = []
     for i, n in enumerate(n_array):
         p = mp.Process(target=worker, args=(n, fname%i))
@@ -85,12 +91,12 @@ def worker(dimensions, fname):
     will generate its own output file.
     
     """
-    table = gauss_dimensions_mean(dimensions, d=10)
+    table = gauss_dimensions_pi(dimensions, num_experiments=100)
     np.savetxt(fname, table, delimiter=',')
     
 
 ###############################################################################
 if __name__ == '__main__':
-    fname = './experiments_data/experiment_highdim_mean_%i.csv'
-    gen_data(fname)
-    #make_plot(fname%0, fname%1)
+    fname = './experiments_data/experiment_unbalanced_%i.csv'
+    #gen_data(fname)
+    make_plot(fname%0, fname%1, fname%2, fname%3)

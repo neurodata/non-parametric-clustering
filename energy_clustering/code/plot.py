@@ -21,6 +21,7 @@ class ErrorBar:
         self.symbols = ['o', 's', 'D', 'v']
         self.legends = ['energy', r'$k$-means', 'GMM', r'kernel $k$-means']
         self.colors = ['b', 'r', 'g', 'c']
+        self.lines = ['-', '-', '-', '-', '-', '-']
         self.xlim = None
         self.ylim = None
         self.bayes = None
@@ -38,13 +39,14 @@ class ErrorBar:
         self.colors = iter(self.colors)
         self.legends = iter(self.legends)
         self.symbols = iter(self.symbols)
+        self.lines = iter(self.lines)
     
         if self.doublex:
             self.xs2 = 2*self.xs
         else:
             self.xs2 = self.xs
             
-        if self.bayes:
+        if self.bayes is not None:
             if not isinstance(self.bayes, list):
                 self.bayes = [self.bayes]*len(self.xs)
 
@@ -59,16 +61,17 @@ class ErrorBar:
             c = next(self.colors)
             l = next(self.legends)
             m = next(self.symbols)
+            t = next(self.lines)
 
             mean_ = np.array([table[np.where(self.col0==x)[0],i].mean() 
                               for x in self.xs])
             stderr_ = np.array([scipy.stats.sem(
                 table[np.where(self.col0==x)[0],i]) for x in self.xs])
             if self.bayes:
-                ax.plot(self.xs2, self.bayes, '--', color='black', linewidth=1, 
-                        zorder=0)
+                ax.plot(self.xs2, self.bayes, '--', color='black', 
+                        linewidth=1, zorder=0)
             ax.errorbar(self.xs2, mean_, yerr=stderr_, 
-                        linestyle='-', marker=m, color=c, markersize=4, 
+                        linestyle=t, marker=m, color=c, markersize=4, 
                         elinewidth=.5,  capthick=0.4, label=l, 
                         linewidth=1, barsabove=False)
         

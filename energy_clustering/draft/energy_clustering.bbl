@@ -152,6 +152,13 @@ S.~X. Yu and J.~Shi.
 \newblock In {\em Proceedings Ninth IEEE International Conference on Computer
   Vision}, volume~1, pages 313--319, 2003.
 
+\bibitem{scikit-learn}
+F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel,
+  M.~Blondel, P.~Prettenhofer, R.~Weiss, V.~Dubourg, J.~Vanderplas, A.~Passos,
+  D.~Cournapeau, M.~Brucher, M.~Perrot, and E.~Duchesnay.
+\newblock Scikit-learn: Machine learning in {P}ython.
+\newblock {\em Journal of Machine Learning Research}, 12:2825--2830, 2011.
+
 \bibitem{Vassilvitskii}
 D.~Arthur and S.~Vassilvitskii.
 \newblock {$k$-means++: The Advantage of Careful Seeding}.

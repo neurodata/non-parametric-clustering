@@ -55,7 +55,7 @@ def discrete_rv(p):
     j = np.searchsorted(cdf, u)
     return j
 
-def topeigen(k, G):
+def topeigen(k, G, run_times=1, init='k-means++'):
     """This is similar to the spectral clustering proposed by
     Ng, Jordan, and Weiss, however numerically it seems to be a little better
     and more stable.
@@ -75,11 +75,11 @@ def topeigen(k, G):
     for i in range(k):
         Yt[i] = Yt[i]/np.linalg.norm(Yt[i])
     
-    km = KMeans(k)
+    km = KMeans(k, init=init, n_init=run_times)
     labels = km.fit_predict(Yt)
     return labels
 
-def topeigen2(k, G):
+def topeigen2(k, G, run_times=1, init='k-means++'):
     """This is similar to the spectral clustering proposed by
     Ng, Jordan, and Weiss.
     In this case we are effectivelly solving the eigenvalue problem
@@ -97,11 +97,11 @@ def topeigen2(k, G):
     for i in range(k):
         Yt[i] = Yt[i]/np.linalg.norm(Yt[i])
     
-    km = KMeans(k)
+    km = KMeans(k, init=init, n_init=run_times)
     labels = km.fit_predict(Yt)
     return labels
 
-def spectralNg(k, G):
+def spectralNg(k, G, run_times=1, init='k-means++'):
     """This is spectral clustering proposed by
     Ng, Jordan, and Weiss.
     It considers the eigenvalue problem
@@ -121,7 +121,7 @@ def spectralNg(k, G):
     for i in range(k):
         Yt[i] = Yt[i]/np.linalg.norm(Yt[i])
     
-    km = KMeans(k)
+    km = KMeans(k, init=init, n_init=run_times)
     labels = km.fit_predict(Yt)
     return labels
 
@@ -155,13 +155,13 @@ if __name__ == "__main__":
         s1 = np.eye(D)
         m2 = 2*np.ones(D)
         s2 = 1.2*np.eye(D)
-        #X, z = data.multivariate_lognormal([m1, m2], [s1, s2], [n1, n2])
+        X, z = data.multivariate_normal([m1, m2], [s1, s2], [n1, n2])
         k = 2
-        X, z = data.circles([1, 3], [0.1, 0.1], [200, 200])
-        G = eclust.kernel_matrix(X, 
-            lambda x, y: 2-2*np.exp(-0.5*np.power(np.linalg.norm(x-y),2)))
+        #X, z = data.circles([1, 3], [0.1, 0.1], [200, 200])
         #G = eclust.kernel_matrix(X, 
-        #        lambda x, y: np.power(np.linalg.norm(x-y),1))
+        #    lambda x, y: 2-2*np.exp(-1/4*np.power(np.linalg.norm(x-y),2)))
+        G = eclust.kernel_matrix(X, 
+                lambda x, y: np.power(np.linalg.norm(x-y),1))
         ##############################
         
         results = []
@@ -170,11 +170,11 @@ if __name__ == "__main__":
         results.append(metric.accuracy(z, zh))
         zh = spectral(k, G)
         results.append(metric.accuracy(z, zh))
-        zh = topeigen(k, G)
+        zh = topeigen(k, G, run_times=10, init='k-means++')
         results.append(metric.accuracy(z, zh))
-        zh = topeigen2(k, G)
+        zh = topeigen2(k, G, run_times=10, init='k-means++')
         results.append(metric.accuracy(z, zh))
-        zh = spectralNg(k, G)
+        zh = spectralNg(k, G, init='k-means++', run_times=10)
         results.append(metric.accuracy(z, zh))
 
         table.append(results)

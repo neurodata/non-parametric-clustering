@@ -4,44 +4,44 @@ The top-level auxiliary file: energy_clustering.aux
 The style file: unsrt.bst
 Database file #1: energy_clusteringNotes.bib
 Database file #2: biblio.bib.bib
-You've used 28 entries,
+You've used 29 entries,
             1791 wiz_defined-function locations,
-            659 strings with 8182 characters,
-and the built_in function-call counts, 7699 in all, are:
-= -- 785
-> -- 234
+            665 strings with 8515 characters,
+and the built_in function-call counts, 8134 in all, are:
+= -- 811
+> -- 284
 < -- 11
-+ -- 90
-- -- 62
-* -- 531
-:= -- 1132
-add.period$ -- 91
-call.type$ -- 28
-change.case$ -- 27
++ -- 107
+- -- 78
+* -- 578
+:= -- 1213
+add.period$ -- 94
+call.type$ -- 29
+change.case$ -- 28
 chr.to.int$ -- 0
-cite$ -- 28
-duplicate$ -- 336
-empty$ -- 757
-format.name$ -- 62
-if$ -- 1760
+cite$ -- 29
+duplicate$ -- 345
+empty$ -- 782
+format.name$ -- 78
+if$ -- 1843
 int.to.chr$ -- 0
-int.to.str$ -- 28
-missing$ -- 28
-newline$ -- 143
-num.names$ -- 28
-pop$ -- 53
+int.to.str$ -- 29
+missing$ -- 29
+newline$ -- 148
+num.names$ -- 29
+pop$ -- 54
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 183
+skip$ -- 186
 stack$ -- 0
-substring$ -- 749
-swap$ -- 102
+substring$ -- 780
+swap$ -- 103
 text.length$ -- 11
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 85
-width$ -- 30
-write$ -- 324
+while$ -- 88
+width$ -- 31
+write$ -- 335

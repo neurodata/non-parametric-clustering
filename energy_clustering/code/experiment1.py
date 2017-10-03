@@ -54,6 +54,8 @@ class Clustering1D:
                 table[count, 1] = run_clustering.energy1D(X, z)
                 table[count, 2] = run_clustering.kmeans(k, Y, z)
                 table[count, 3] = run_clustering.gmm(k, Y, z)
+                #table[count, 4] = run_clustering.energy_hartigan(k, X, G, z,
+                #                            init="k-means++", run_times=3)
                 #table[count, 4] = run_clustering.energy_hartigan(k, Y, G, z,
                 #                    init="spectral")
                 count += 1
@@ -76,20 +78,22 @@ def make_plot(*data_files):
     p.xlabel = 'number of points'
     p.legends = [r'$\mathcal{E}^{1D}$-clustering', r'$k$-means', 'GMM']
     p.colors = ['b', 'r', 'g']
+    p.lines = ['-', '-', '-']
     p.doublex = True
     #p.output = './experiments_figs/1D_normal.pdf'
     p.output = './experiments_figs/1D_lognormal.pdf'
     #p.bayes = 0.956
     p.bayes = 0.852
-    p.xlim = [10,3000]
+    #p.xlim = [10,3000]
+    p.xlim = [40,1600]
     p.make_plot(table)
 
 def gen_data(fname):
     ## choose the range for each worker ##
-    n_array = [range(10,500,50),
-               range(510,1000,50),
-               range(1010,1300,50),
-               range(1310, 1550,50)]
+    n_array = [range(20,200,20),
+               range(200,400,20),
+               range(400,600,20),
+               range(600,820,20)]
     jobs = []
     for i, n in enumerate(n_array):
         p = mp.Process(target=worker, args=(n, fname%i))
@@ -115,7 +119,7 @@ def worker(numpoints, fname):
     e.s1 = 0.3
     e.s2 = 1.5
     e.distr = 'lognormal'
-    e.experiments = 10
+    e.experiments = 50
     
     e.numpoints = numpoints
     table = e.run()
