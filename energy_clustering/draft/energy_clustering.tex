@@ -879,7 +879,7 @@ is the $i$th row of $\widetilde{Y}$
 \end{algorithmic}
 \caption{
 \label{spectralalgo}
-$\mathcal{E^S}$-clustering is an exact method to solve
+$\mathcal{E^S}$-clustering is an exact spectral method to solve
 the relaxed problem \eqref{eq:relaxed}.
 \hspace{\fill}
 }
@@ -1678,8 +1678,8 @@ converges in a finite number of steps.
   \UNTIL{convergence}
 \end{algorithmic}
 \caption{\label{algo}
-$\mathcal{E}^H$-clustering: Hartigan's method for energy clustering.
-This algorithm~~~~~~~~ \\ finds local solutions to  
+$\mathcal{E}^H$-clustering is Hartigan's method for energy clustering.
+This algorithm~~~~~~ \\ finds local solutions to  
 the optimization problem \eqref{eq:qcqp2}.\hspace{\fill}
 \hspace{\fill}
 }
@@ -1858,30 +1858,32 @@ accuracy of $\approx 0.86$.
 For each $D$ we generate $100$ Monte Carlo runs, 
 sampling $100$ points for each cluster.
 We apply each algorithm to the resulting dataset 
-and compute the accuracy \eqref{eq:accuracy}.
+and compute the accuracy \eqref{eq:accuracy}. The algorithms
 $\mathcal{E}^H$- and $\mathcal{E}^L$-clustering
 both use the standard
-kernel \eqref{eq:standard_metric}, as $\mathcal{E}^S$-clustering\footnote{We
+kernel \eqref{eq:standard_metric}, as well as the spectral
+$\mathcal{E}^S$-clustering method\footnote{We
 compared our implementation of spectral clustering provided in
 Algorithm~\ref{spectralalgo} with the spectral clustering routine provided
 by \emph{scikit-learn} library \cite{scikit-learn}, 
-which is based on \cite{Malik}, and in the few
+which is based on \cite{Malik}. In the few
 cases considered the algorithms had similar performance.}, 
 and we initialize the algorithms
-with the initialization procedure of $k$-means++ \cite{Vassilvitskii}.
+with the initialization of $k$-means++ \cite{Vassilvitskii}.
 For $k$-means and GMM we use the implementation of \emph{scikit-learn} library
 \cite{scikit-learn}, where $k$-means is also initialized with $k$-means++,
 while GMM is initialized with the output of $k$-means. Every algorithm
-is ran $5$ times, picking the best objective function value.
+is ran $5$ times, returning the answer with best objective function value.
 We plot the average accuracy versus $D$, with error bars indicating
 standard error.
-The results are shown in Fig.~\ref{fig:gauss}a, where 
-$\mathcal{E}^H$-clustering and $\mathcal{E}^S$-clustering have practically
-the same performance in this experiment, which is 
+The results are shown in Fig.~\ref{fig:gauss}a. We can see that
+$\mathcal{E}^H$- and $\mathcal{E}^S$-clustering have practically
+the same performance, which is 
 much higher than $\mathcal{E}^L$-clustering (kernel
-$k$-means), $k$-means, and GMM. The improvement is noticeable 
-specially in high dimensions.
-Note that in this setting, $k$-means and GMM are consistent estimators,
+$k$-means). Moreover, $\mathcal{E}^H$-clustering outperforms 
+$k$-means and GMM, where the improvement is noticeable specially in 
+high dimensions.
+Note that in this setting $k$-means and GMM are consistent estimators,
 however, energy clustering degrades much less as dimension increases.
 
 \begin{figure}
@@ -1936,12 +1938,12 @@ as well.
 The Bayes error is kept fixed yielding
 an optimal accuracy $\approx 0.95$.
 In Fig.~\ref{fig:gauss}b we show the results of energy clustering,
-$k$-means, and GMM, where we do $100$ Monte Carlo runs, sampling
-$100$ points for each cluster. The results of $\mathcal{E}^H$-
-and $\mathcal{E}^S$-clustering are superior than the other algorithms, 
-specially
-in high dimensions.
-
+$k$-means, and GMM.
+Note that GMM performs better in low dimensions, 
+since it is a consistent estimator.
+However, $\mathcal{E}^H$ and $\mathcal{E}^S$ degrade much less as dimensions
+increase, performing better than $k$-means and GMM in high dimensions.
+ 
 Consider the effect of having 
 unbalanced clusters according to
 \begin{equation}
@@ -2013,10 +2015,6 @@ x &\in \C_i \sim \mathcal{N}(\mu_i,\Sigma_i) \qquad (i=1,2), \\
 \end{equation}
 The optimal accuracy based on Bayes
 classification error is $\approx 0.90$. 
-%Since previous results should be already convincing enough that
-%$\mathcal{E}^H$-clustering, based on Hartigan's method, is superior
-%to $\mathcal{E}^L$-clustering, which is based on Lloyd's method, in the
-%following 
 We sample an equal number of points for each cluster which is progressively
 increased, $n \in [5, 200]$. 
 The results over $100$ Monte Carlo trials are 
@@ -2030,11 +2028,12 @@ Note also that $\mathcal{E}^H$-clustering
 with kernel $\kk_e$ is as accurate as GMM for large number of points, however,
 it is superior for small number of points. Still for
 the same setting, in Fig.~\ref{fig:consist}b we
-we show the difference in accuracy provided by $\mathcal{E}^H$- minus
-$\mathcal{E}^L$- and $\mathcal{E}^S$-clustering, when using the
+we show the difference in accuracy provided by $\mathcal{E}^H$ minus
+$\mathcal{E}^L$ and $\mathcal{E}^S$, when using the
 kernel $\kk_e$.
 Note that $\mathcal{E}^H$ was
-always superior than the other methods.
+always superior than the other 
+methods (there would be points negative values on the $y$-axis otherwise).
 
 \begin{figure}
 \begin{minipage}{0.49\textwidth}
@@ -2059,12 +2058,12 @@ always superior than the other methods.
 $\mathcal{E}^H$-clustering with different kernels versus
 $k$-means and GMM. In both settings Bayes accuracy
 is $\approx 0.9$. We show average accuracy (error bars are standard error)
-versus number of points for $100$ Monte Carlo runs.
+versus number of points for $100$ Monte Carlo trials.
 (a,b) Normal distribution \eqref{eq:20gauss}. 
 (c,d) Lognormal distribution~\eqref{eq:20loggauss}.
 The plots in (c) and (d) consider the difference in accuracy
-between $\mathcal{E}^H$- versus $\mathcal{E}^L$- and
-$\mathcal{E}^S$-clustering.
+between $\mathcal{E}^H$ versus $\mathcal{E}^L$ and
+$\mathcal{E}^S$-clustering, with semimetric $\rho_e$.
 }
 \end{figure}
 
@@ -2082,7 +2081,7 @@ this non-normal data. The kernel $\kk_e$ still provides the best results
 for small number of points, but its performance is eventually achieved by
 $\kk_{1/2}$, indicating that $\alpha \approx 1/2$ in the standard
 energy distance should be more appropriate for skewed distributions.
-Still for the same setting, in Fig~.\ref{fig:consist}d
+Still for the same setting, in Fig.~\ref{fig:consist}d
 we show the difference in accuracy provided by $\mathcal{E}^H$ versus
 $\mathcal{E}^L$ and $\mathcal{E}^S$, for the kernel $\kk_e$. Again,
 the accuracy provided by $\mathcal{E}^H$ is higher than the other methods,
@@ -2133,27 +2132,31 @@ corresponding generating kernel:
 \widehat{\kk}_{\sigma}(x,y) &= e^{-\tfrac{\|x-y\|^2}{2\sigma^2}} .
 \label{eq:rhogsigma} 
 \end{align}
-In Fig.~\ref{fig:other} we have examples of
+In Fig.~\ref{fig:other}a--c we have 
 complex two dimensional datasets. The two parallel cigars in (a)
 have $200$ points each. The concentric circles
 in (b) and (c) have $400$ points for each class.
 We apply $\mathcal{E}^H$-clustering  with different choices
 of kernels in \eqref{eq:rhoalpha}--\eqref{eq:rhogsigma}. We also consider
-the best kernel choice for each example for $\mathcal{E}^S$-clustering. 
+the best kernel choice for each example for the spectral
+$\mathcal{E}^S$-clustering. 
 Moreover, we consider
-$k$-means and GMM. We perform $10$ Monte Carlo runs for each example
-and show the results in Table~\ref{table:other}, where the respective 
-choice of parameters for the kernels are indicated. For (a) we initialize
+$k$-means and GMM. We perform $10$ Monte Carlo runs for each example.
+The results are in Table~\ref{table:other}.
+%, where the respective 
+%choice of parameters for the kernels are indicated. 
+For (a) we initialize
 all algorithms with $k$-means++, and for (b) and (c) we initialize at
 random.
-We observe that $\mathcal{E}^H$-clustering has superior performance
-in every example, and in particular better than $\mathcal{E}^S$-clustering.
+$\mathcal{E}^H$ has superior performance
+in every example, and in particular better than the
+spectral $\mathcal{E}^S$.
 For the data in Fig.~\ref{fig:other}a 
 the semimetrics $\rho_1$ and $\rho_{1/2}$ are
 still able to provide accurate results, however, for the
 examples in (b) and (c) the kernel choice is more sensitive.
 
-\begin{table}[h]
+\begin{table}[t]
 \renewcommand*{\arraystretch}{0.75}
 \begin{tabular}{@{}r  l g  l g  l g@{}}
 \toprule[1pt]
@@ -2164,30 +2167,30 @@ examples in (b) and (c) the kernel choice is more sensitive.
 \multirow{4}{*}{\emph{$\mathcal{E}^H$-clustering~~~~}}
 & $\rho_{1}$ & $0.705\pm 0.065$
 & $\rho_{1}$ & $0.521\pm 0.005$
-& $\rho_{1}$ & $0.366\pm 0.005$ \\
+& $\rho_{1}$ & $0.393\pm 0.020$ \\
 & $\rho_{1/2}$ & $0.952\pm 0.048$
 & $\rho_{1/2}$ & $0.522\pm 0.004$
-& $\rho_{1/2}$ & $0.367\pm 0.005$ \\
+& $\rho_{1/2}$ & $0.486\pm 0.040$ \\
 & $\widetilde{\rho}_{2}$ & $\bm{0.9987\pm 0.0008}$
 & $\widetilde{\rho}_{1}$ & $0.778\pm 0.075$
-& $\widetilde{\rho}_{2}$ & $0.374\pm 0.009$ \\
+& $\widetilde{\rho}_{2}$ & $0.666\pm 0.007$ \\
 & $\widehat{\rho}_{2}$  & $0.956\pm 0.020$
 & $\widehat{\rho}_{1}$  & $\bm{1.0\pm 0.0}$
-& $\widehat{\rho}_{2}$ & $\bm{0.572\pm 0.041}$ \\
+& $\widehat{\rho}_{2}$ & $\bm{0.676\pm 0.002}$ \\
 \arrayrulecolor{gray!80}\midrule[0.5pt]
 \emph{$\mathcal{E}$-spectral~~~~}
 & $\widetilde{\rho}_{2}$ & $0.557\pm 0.014$ 
 & $\widehat{\rho}_{1}$ & $0.732\pm 0.002$ 
-& $\widehat{\rho}_{2}$ & $0.370\pm 0.005$  \\
+& $\widehat{\rho}_{2}$ & $0.364\pm 0.004$  \\
 \arrayrulecolor{gray!80}\midrule[0.5pt]
 \emph{$k$-means}~~~~ 
 & & $0.550\pm 0.011$
 & & $0.522\pm 0.004$
-& & $0.362\pm 0.004$ \\
+& & $0.368\pm 0.005$ \\
 \emph{GMM}~~~~
 & & $0.903\pm 0.064$
 & & $0.595\pm 0.011$
-& & $0.520\pm 0.034$ \\
+& & $0.465\pm 0.030$ \\
 \arrayrulecolor{black}\bottomrule[1pt]
 \end{tabular}
 \caption{\label{table:other}
@@ -2197,7 +2200,7 @@ accuracy over $10$ Monte Carlo runs.
 }
 \end{table}
 
-\begin{table}[h]
+\begin{table}[t]
 \renewcommand*{\arraystretch}{0.75}
 \begin{tabular}{@{}r@{}l@{}|@{}l@{}|@{}l@{}|@{}l@{}|@{}l@{}}
 \toprule[1pt]
@@ -2327,7 +2330,7 @@ We proposed the iterative $\mathcal{E}^H$-clustering algorithm based on
 Hartigan's method, which was compared to kernel $k$-means algorithm
 based on Lloyd's heuristic.
 Both have the same time complexity, however, numerical and theoretical
-results provide compelling evidence that $\mathcal{E}^H$
+results provide compelling evidence that $\mathcal{E}^H$-clustering
 is more robust with a superior performance, specially in high
 dimensions. 
 Furthermore, energy clustering, with standard kernels from energy

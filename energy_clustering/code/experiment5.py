@@ -43,7 +43,7 @@ def cigars_circles(num_experiments=10, run_times=5, kind='cigars'):
             init = 'random'
         elif kind == '3circles':
             X, z = data.circles([1, 3, 5], [0.2, 0.2, 0.2], [400, 400, 400])
-            init = 'spectral'
+            init = 'random'
             k = 3
         else:
             raise ValueError("Don't know which example to sample.")
@@ -167,11 +167,11 @@ def mnist(num_experiments=10, digits=[0,1,2], num_points=100, run_times=5):
 if __name__ == "__main__":
     #cigars_circles(num_experiments=10, run_times=5, kind='cigars')
     #cigars_circles(num_experiments=10, run_times=5, kind='2circles')
-    #cigars_circles(num_experiments=10, run_times=5, kind='3circles')
+    cigars_circles(num_experiments=10, run_times=5, kind='3circles')
     #mnist(num_experiments=10,digits=[0,1,2],num_points=100,run_times=5)
     #mnist(num_experiments=10,digits=[0,1,2,3,4], num_points=100,run_times=5)
     #mnist(num_experiments=10,digits=[0,1,2,3,4,5,6],num_points=100,
     #      run_times=5)
-    mnist(num_experiments=10,digits=[0,1,2,3,4,5,6,7,8],num_points=100,
-          run_times=5)
+    #mnist(num_experiments=10,digits=[0,1,2,3,4,5,6,7,8],num_points=100,
+    #      run_times=5)
     

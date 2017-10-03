@@ -63,9 +63,9 @@ def make_plot(*data_files):
     ## customize plot below ##
     p = plot.ErrorBar()
     p.xlabel = 'number of unbalanced points'
-    p.legends = [r'$\mathcal{E}^{H}$-clustering', 
-                 r'$\mathcal{E}^{L}$-clustering', 
-                 r'$\mathcal{E}$-spectral', 
+    p.legends = [r'$\mathcal{E}^{H}$', 
+                 r'$\mathcal{E}^{L}$', 
+                 r'$\mathcal{E}^{S}$', 
                  r'$k$-means', 
                  r'GMM']
     p.colors = ['b', 'r', 'g', 'm', 'c']

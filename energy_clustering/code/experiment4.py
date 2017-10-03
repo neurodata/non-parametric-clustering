@@ -112,19 +112,19 @@ def make_plot(*data_files):
     ## customize plot below ##
     p = plot.ErrorBar()
     p.xlabel = 'number of points'
-    p.legends = [r'$\mathcal{E}^{H}$-clustering $\rho$', 
-                 r'$\mathcal{E}^{H}$-clustering $\rho_{1/2}$', 
-                 r'$\mathcal{E}^{H}$-clustering $\rho_{e}$', 
+    p.legends = [r'$\mathcal{E}^{H}$, $\rho$', 
+                 r'$\mathcal{E}^{H}$, $\rho_{1/2}$', 
+                 r'$\mathcal{E}^{H}$, $\rho_{e}$', 
                  r'$k$-means', 
                  r'GMM']
     p.colors = ['b', 'r', 'g', 'm', 'c']
     p.symbols = ['o', 's', 'D', '^', 'v']
     p.lines = ['-', '-', '-', '-', '-']
-    #p.output = './experiments_figs/normal_kernels.pdf'
-    p.output = './experiments_figs/lognormal_kernels.pdf'
+    p.output = './experiments_figs/normal_kernels.pdf'
+    #p.output = './experiments_figs/lognormal_kernels.pdf'
     p.doublex = True
     p.bayes = 0.9
-    p.xlim = [5, 400]
+    p.xlim = [10, 400]
     p.make_plot(table)
 
 def make_plot_difference(*data_files):
@@ -180,10 +180,10 @@ def worker(numpoints, fname):
 
 ###############################################################################
 if __name__ == '__main__':
-    #fname = './experiments_data/experiment_normal_kernels_%i.csv'
+    fname = './experiments_data/experiment_normal_kernels_%i.csv'
     #fname = './experiments_data/experiment_lognormal_kernels_%i.csv'
     #fname = './experiments_data/experiment_normal_kernels_difference_%i.csv'
-    fname='./experiments_data/experiment_lognormal_kernels_difference_%i.csv'
+    #fname='./experiments_data/experiment_lognormal_kernels_difference_%i.csv'
     #gen_data(fname)
-    #make_plot(fname%0, fname%1, fname%2, fname%3)
-    make_plot_difference(fname%0, fname%1, fname%2, fname%3)
+    make_plot(fname%0, fname%1, fname%2, fname%3)
+    #make_plot_difference(fname%0, fname%1, fname%2, fname%3)
