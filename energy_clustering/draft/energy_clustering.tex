@@ -115,14 +115,9 @@ and Gaussian mixture models in a variety of settings.
 
 \maketitle
 
-% @jovo: About ToC, I agree and wouldn't mind remove it, however it is a 
-% tradition that most referees like to see. In this case I also included 
-% some important information about our work, and it helps to make a transition 
-% between introduction and the remaining of the paper. 
-% I would leave it, but if you prefer to remove it, let me know and I 
-% will adapt the paper.
 
-% @gui: my experience is that most reviewers absolutely do *NOT* want it, rather, we skip it, and journals often remove it prior to publication.
+
+% @gui: my experience is that most reviewers absolutely do *NOT* want a ToC, rather, we skip it, and journals often remove it prior to publication.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1474,7 +1469,7 @@ semidefinite.
 % the term K(x,x) will be hidden inside the mean of the cluster to which
 % x is currently assigned to. This also clarifies the connection to 
 % the standard formulation of kernel k-means.
-Obviously, $\mathcal{E}^{L}$-clustering is precisely
+$\mathcal{E}^{L}$-clustering is precisely
 kernel $k$-means algorithm \cite{Dhillon2,Dhillon} 
 but written more concisely and with the kernel induced by energy statistics. Indeed, recalling that
 $\kk(x,y)=\langle \varphi(x), \varphi(y) \rangle$ where $\varphi: \mathcal{X}
@@ -1852,6 +1847,7 @@ cases considered the algorithms had similar performance.
 and we initialize the algorithms
 with the initialization of $k$-means++ \cite{Vassilvitskii}.
 % @gui: i thought you were goign to initialize E-H & E-L with E-S?
+% @gui: you gotta clearly define E-S, with a pseudocode block, just like the others.  in particular, which matrix are you doing an eigendecomposition on, and how you are choosing the number of dimensions to embed into.
 For $k$-means and GMM we use the implementation of \emph{scikit-learn} library
 \cite{scikit-learn}, where $k$-means is also initialized with $k$-means++,
 while GMM is initialized with the output of $k$-means. Every algorithm
@@ -1890,9 +1886,12 @@ as in \eqref{eq:gauss2}, with Bayes accuracy $\approx 0.95$,
 over the range $D \in [10, 700]$.
 % @gui: also helpful here would be pairs plots, say, of the first 5 dimensions, showing the performance of our stuff (color points by Alg 3, maybe symbols denote "truth".  i have no intuition how difficult these are.
 % @jovo: didn't understand this
+% @gui: https://www.google.com/search?q=pairs+plots&rlz=1C5CHFA_enUS731US731&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjwo9u5w-DWAhXMKyYKHYkhAKMQ_AUICigB&biw=1440&bih=776
+% to show how well separated the classes are.
 }
 \end{figure}
 
+% @gui: for eq 59, E-H & E-S yield the same performance.  but for eq 63, E-H is much better than E-S.  do you have any idea why that is?
 We now allow the diagonal covariance of the second Gaussian distribution to
 have different values by choosing
 $(\Sigma_2)_{ii} \stackrel{iid}{\sim} \textnormal{Uni}(1,5)$ for
