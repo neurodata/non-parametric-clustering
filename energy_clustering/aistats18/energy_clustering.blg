@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: energy_clustering.aux
+The style file: abbrvnat.bst
+Database file #1: biblio.bib.bib
+You've used 25 entries,
+            2773 wiz_defined-function locations,
+            782 strings with 8996 characters,
+and the built_in function-call counts, 13004 in all, are:
+= -- 1226
+> -- 680
+< -- 24
++ -- 232
+- -- 207
+* -- 1049
+:= -- 1941
+add.period$ -- 82
+call.type$ -- 25
+change.case$ -- 143
+chr.to.int$ -- 25
+cite$ -- 50
+duplicate$ -- 579
+empty$ -- 1067
+format.name$ -- 246
+if$ -- 2770
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 25
+newline$ -- 133
+num.names$ -- 100
+pop$ -- 264
+preamble$ -- 1
+purify$ -- 119
+quote$ -- 0
+skip$ -- 460
+stack$ -- 0
+substring$ -- 717
+swap$ -- 88
+text.length$ -- 9
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 270
+warning$ -- 0
+while$ -- 125
+width$ -- 0
+write$ -- 345

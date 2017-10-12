@@ -86,7 +86,8 @@
 \begin{abstract}
 Energy statistics was proposed by Sz\' ekely in the 80's inspired by the 
 Newtonian gravitational potential from classical mechanics, and it provides 
-a non-parametric hypothesis test for equality of distributions. 
+a 
+hypothesis test for equality of distributions. 
 It was further generalized from Euclidean spaces to metric spaces of 
 strong negative type, and more recently, a connection with reproducing 
 kernel Hilbert spaces (RKHS) was established. 
@@ -112,12 +113,10 @@ and Gaussian mixture models in a variety of settings.
 \end{abstract}
 
 % @gui: you didn't update the abstract?
+% @jovo: I did, removed some stuff that you didn't like before, now
+% removing the non-parametric word. You think it's not good enough?
 
 \maketitle
-
-
-
-% @gui: my experience is that most reviewers absolutely do *NOT* want a ToC, rather, we skip it, and journals often remove it prior to publication.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -238,40 +237,32 @@ and GMM in high dimensions, even on Gaussian settings. However, it performs
 worse than GMM, and more closely to $k$-means, for highly unbalanced clusters
 with normal distributions.
 
-Our work is organized as follows. In section~\ref{sec:background}, we introduce
-the necessary background on energy statistics and RKHS.
-Section~\ref{sec:clustering_theory} contains the main theoretical 
-results of this paper,
-where we consider a clustering theory based on energy statistics leading
-to a QCQP, which is NP-hard in general. We also show the equivalence to 
-kernel $k$-means optimization problem.
-In Section~\ref{sec:weighted}, we generalize these results to a weighted
-version of energy statistics, providing connections to graph
-partitioning problems.
-In Section~\ref{sec:twoclass}, we consider the  simple case of a two-class
-problem in one dimension,
-where we propose an algorithm which requires no random initialization.
-In section~\ref{sec:algo}, we consider Lloyd's and Hartigan's methods
-and propose iterative algorithms to solve the QCQP.
-Section~\ref{sec:numerics} contains some carefully designed numerical
-experiments showing that, in a variety of settings, energy clustering based
-on Hartigan's algorithm
-outperform $k$-means, GMM, kernel $k$-means, and a version of
-spectral clustering.
-Our final conclusions are presented in Section~\ref{sec:conclusion}.
+%Our work is organized as follows. In section~\ref{sec:background}, we introduce
+%the necessary background on energy statistics and RKHS.
+%Section~\ref{sec:clustering_theory} contains the main theoretical 
+%results of this paper,
+%where we consider a clustering theory based on energy statistics leading
+%to a QCQP, which is NP-hard in general. We also show the equivalence to 
+%kernel $k$-means optimization problem.
+%In Section~\ref{sec:weighted}, we generalize these results to a weighted
+%version of energy statistics, providing connections to graph
+%partitioning problems.
+%In Section~\ref{sec:twoclass}, we consider the  simple case of a two-class
+%problem in one dimension,
+%where we propose an algorithm which requires no random initialization.
+%In section~\ref{sec:algo}, we consider Lloyd's and Hartigan's methods
+%and propose iterative algorithms to solve the QCQP.
+%Section~\ref{sec:numerics} contains some carefully designed numerical
+%experiments showing that, in a variety of settings, energy clustering based
+%on Hartigan's algorithm
+%outperform $k$-means, GMM, kernel $k$-means, and a version of
+%spectral clustering.
+%Our final conclusions are presented in Section~\ref{sec:conclusion}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Background on Energy Statistics and RKHS}
 \label{sec:background}
-
-% @gui: i'm not sure the above is true/meaningful.  nonparametric means implicitly estimating an infinite number of parameters.  without any statistical theory, i'm not quite sure what we can say.
-% @jovo: I stopped saying non-parametric, however, Kolmogorov-Smirnov is also
-% said to be non-parametric. I think non-parametric tests also mean that
-% it does not assume any form of distributions, i.e. it is a distribution-free
-% statistical test.
-% @gui: KS test is nonparametric because it can reject for any distribution, we cannot cluster for any distribution, so we are not.
-
 
 In this section we introduce the main concepts from energy
 statistics and its relation to 
@@ -530,42 +521,13 @@ $S$ increases as bodies have different mass distributions.
 \section{Clustering Based on Energy Statistics}
 \label{sec:clustering_theory}
 
-% @gui: consider only using equation numbers for equations that you later refer to? there are so many, it is easy to get lost.
-% @jovo: ok, will do that after we finish everything. There is a package that
-% automatically remove numbers from unreferenced equations. It is a common
-% practice however to number every equation in the paper,
-% specially for reviewing purposes. But later 
-% I will remove the numbers from the not cited ones if you don't like
 % @gui: maybe common in math, but certainly not in stats / data science. 
 % in any case, what is the package that does that?
-
-
-% @gui: do other people know this result? (about min W = max X) if so, cite them, if not, state that.
-% @jovo: eq (15), i.e. S + W = T is well-known. Gabor and Rizzo wrote that
-% in their paper, however, they didn't write a proof. They should have
-% it in some other paper.  However, they mention 
-% that this holds only for 0 < alpha < 2, with |x-y|^alpha, while
-% here I did for a general semimetric. Thus I don't really know if in general
-% this is equality is known or not, but it should because it's a very easy
-% derivation. The PhD thesis do not 
-% mention anywhere that minimizing W is equivalent to maximizing S.
-% Therefore, I don't want to sound like this is a big result and possibly
-% a referee can say  "well this is trivial and known".
-% Thus I just preferred to do my own derivation and not say anything.
-% What do you think??
-% @gui: i'd state it as a lemma then.
-
-
-
+% @jovo: \usepackage{mathtools} \mathtoolsset{showonlyrefs}
 
 % @gui: i'm not sure about this.  who is to say the correct direction of causality? maybe energy clustering is a special case of kernel k-means?
-% @jovo: I tried to not commit to a single view. We show they are
-% equivalent, when opperating on the same kernel. However, kernel k-means per
-% se does not consider anything about the kernel choice. Energy statistics,
-% however, provides a theory valid on spaces of negative type, which guarantees
-% that a kernel constructed within this formalism will be 
-% positive-semidefinite. Thus, I still prefer to look in the first direction.
-% @gui: ok, did you update the text? i don't recall where i made this comment and don't want to search for it again. can you point me to the place that you say this?
+% @jovo: I'll put a comment below, I simply removed the previous phrase,
+% didn't say anything instead.
 
 This section contains the main theoretical results of this paper, where 
 we formulate an optimization problem for clustering 
@@ -587,7 +549,7 @@ straightforward result
 shows that maximizing $S$ is, however, equivalent to minimizing
 $W$ which has a more convenient form.
 
-\begin{proposition}
+\begin{lemma}
 \label{th:minimize}
 Let $\mathbb{X} = \{x_1,\dotsc,x_n\}$ where each data point
 $x_i$ lives in a space $\mathcal{X}$ endowed with a semimetric $\rho:
@@ -603,7 +565,7 @@ in equation \eqref{eq:between}, if and only if
 \C_1, \dotsc, \C_k),
 \end{equation}
 where the within energy dispersion $W$ is defined by \eqref{eq:within}.
-\end{proposition}
+\end{lemma}
 \begin{proof}
 From \eqref{eq:within} and \eqref{eq:between}
 we have
@@ -716,15 +678,12 @@ But
 (Z^\top G \, Z)_{jj},
 \end{equation}
 where we used the definitions \eqref{eq:kernel_matrix} and
-\eqref{eq:label_matrix}. Thus, the objective function in 
-\eqref{eq:max_prob} is equal to
-$\Tr \left( D^{-1} Z^\top G Z \right)$. 
-% @gui: the above step is not obvious
-% @jovo: It is obvious. 
-% From (21) we have \sum_j 1/n_j (Z^T G Z)_jj. But 1/n_j is just
-% D^{-1}_jj (the diagonal matrix). The sum over j goes over the diagonals of
-% D^{-1} Z^T G Z which is the definition of the trace
-% @gui: obvious to you \neq obvious.  i understood, i want you to explain it.
+\eqref{eq:label_matrix}. 
+Notice that $n_j^{-1} = D^{-1}_{jj}$, where the diagonal matrix $D = 
+\diag(n_1,\dotsc,n_k)$ contains the number of points in each cluster, 
+thus the objective function in 
+\eqref{eq:max_prob} is equal to $\sum_{j=1}^k D^{-1}_{jj} 
+\left( Z^\top G Z \right)_{jj} = \Tr \left( D^{-1} Z^\top G Z \right)$. 
 Now we can
 use the cyclic property
 of the trace, and by the  definition of the matrix $Z$
@@ -741,7 +700,7 @@ $\sum_{i=1}^n Z_{ij} = n_j$.}
 Now we write this in terms of the matrix $Y = Z D^{-1/2}$.
 The objective function immediately becomes
 $\Tr\left( Y^\top G \, Y\right)$. Notice that the above constraints
-imply that $Z^T Z = D$, where $D=\diag(n_1,\dotsc,n_k)$, which in turn gives
+imply that $Z^T Z = D$, which in turn gives
 $D^{-1/2} Y^T Y D^{-1/2} = D$, or $Y^\top Y = I$. 
 Also, every entry of $Y$ is positive by definition,
 $Y \ge 0$. Now it only remains to show the last 
@@ -955,6 +914,8 @@ already shown in the proof of Proposition~\ref{th:qcqp2}, leading to
 the optimization problem \eqref{eq:qcqp2}.
 \end{proof}
 
+% @jovo: the previous paragraph saying that kernel k-means is a consequence
+% of energy statistics WAS here, I removed and now don't say anything.
 The above result shows that 
 kernel $k$-means problem is equivalent to the clustering problem
 formulated in the energy statistics framework, when operating on the same
@@ -1172,13 +1133,6 @@ its degree $w_i = d(i)$.
 \section{Two-Class Problem in One Dimension}
 \label{sec:twoclass}
 
-% @gui: "does not require any initiializaton" i think you mean is guaranteed to find the optimal solution in O(n^2) time.
-% @jovo: it does not require initialization in the sense that we do not
-% assign points to clusters as an initial step, as k-means++ for instance, or
-% random initialization. This algorithm is "exact" since nothing
-% is random in it, and multiple runs will always give the same answer
-% @gui: i know what you mean, my point is that it is unclear.  state in the manuscript what you mean: "it is a deterministic algorithm." or state something else, that it does not require an initialization i don't feel is correct or informative.
-
 % @gui: to provide intuition to the reader, let's show the kernel density estimate for each of the 3 algorithms for both classes.  i'm not sure the best way to visualize it, maybe play with a few options.
 % @jovo: I didn't do this yet and actually not sure how to do it.
 % Are you thinking about this: 
@@ -1268,8 +1222,7 @@ we compute \eqref{eq:w1d} for each possible split of $\widetilde{\mathbb{X}}$
 and pick the point which gives the minimum value of $W$.
 This procedure is described in Algorithm~\ref{algo1d} and called
 $\mathcal{E}^{1D}$-clustering.
-Note that this algorithm is exact in the sense that it does not involve
-any random initialization,
+Note that this algorithm is deterministic,
 however,
 it only works for one-dimensional data with Euclidean distance. The total
 complexity of $\mathcal{E}^{1D}$-clustering is $\OO(n\log n + n^2) = \OO(n^2)$.
@@ -1337,13 +1290,15 @@ $50$ Monte Carlo runs.
 We plot the average 
 accuracy \eqref{eq:accuracy} versus the total number of points, 
 where error bars are standard error. The dashed line indicates 
-Bayes accuracy. (a) Data distributed as \eqref{eq:two_normal}, where the
+Bayes accuracy. (a) Data normally distributed as in 
+\eqref{eq:two_normal}, where the
 optimal accuracy is $\approx 0.956$.
-(b) Data from \eqref{eq:two_lognormal} where the optimal
-accuracy is $\approx 0.852$.
-% @gui: if you insist on using the equations, at least also mention something semantic about them, ie, Data distributed Gaussian (as in 46), or Data distributed log Gaussian (as in 47).  figures & captions should stand on their own without requiring referring to the paper.
+(b) Data log-normally distributed as in \eqref{eq:two_lognormal} where 
+the optimal accuracy is $\approx 0.852$.
 }
-% @gui: why did you take away the plot of the distribution? those are incredibly helpful.  
+% @gui: if you insist on using the equations, at least also mention something semantic about them, ie, Data distributed Gaussian (as in 46), or Data distributed log Gaussian (as in 47).  figures & captions should stand on their own without requiring referring to the paper.
+% @gui: why did you take away the plot of the distribution? those are incredibly helpful.
+% @jovo: ok will restore them.
 \end{figure}
 
 We now consider two simple experiments where we sample the same 
@@ -1464,14 +1419,10 @@ based on Lloyd's method \cite{Lloyd}.
 It can be shown that this algorithm converges provided $G$ is positive
 semidefinite. 
 
-% @jovo: check this paragraph. I included it to answer your question
-% about having K(x,x) and \ell=1,...,k without exluding \ell=j. Essentially,
-% the term K(x,x) will be hidden inside the mean of the cluster to which
-% x is currently assigned to. This also clarifies the connection to 
-% the standard formulation of kernel k-means.
 $\mathcal{E}^{L}$-clustering is precisely
 kernel $k$-means algorithm \cite{Dhillon2,Dhillon} 
-but written more concisely and with the kernel induced by energy statistics. Indeed, recalling that
+but written more concisely and with the kernel induced by energy statistics. 
+Indeed, recalling that
 $\kk(x,y)=\langle \varphi(x), \varphi(y) \rangle$ where $\varphi: \mathcal{X}
 \to \mathcal{H}_\kk$ is the feature map, we have from \eqref{eq:Jell} that
 \begin{equation}
@@ -1542,20 +1493,17 @@ to $\OO(k n')$.
 \end{algorithmic}
 \caption{\label{kmeans_algo}
 $\mathcal{E}^{L}$-clustering is Lloyd's method for energy clustering, which
-is precisely~~~~~~~~ \\ 
-kernel $k$-means algorithm, with the kernel induced by energy statistics. This procedure finds
+is precisely~~~~~~~~~ \\
+kernel $k$-means algorithm, with the kernel induced by energy statistics. 
+This procedure~~~~~~~ \\
+finds
 local solutions to the problem \eqref{eq:qcqp2}.\hspace{\fill}
-% @gui: spacing is weird.
 }
 \end{algorithm}
 \end{flushleft}
 \end{figure}
 
 \subsection*{Hartigan's Method for Energy Clustering}
-
-% @jovo: I also clarified this section, specially the derivation
-% of the algorithm. Actually there was a mistake in the previous formula,
-% which carried over to my code. Now it's fixed and better.
 
 We now consider Hartigan's method \cite{Hartigan} 
 applied to the optimization problem in the form \eqref{eq:maxQ}, which gives
@@ -1592,30 +1540,6 @@ Therefore, if $\Delta Q^{j\to \ell}(x_i) > 0$ we get closer to a
 maximum of \eqref{eq:maxQ} by
 moving $x_i$ to $\C_\ell$, otherwise we keep $x_i$ in $\C_j$. 
 
-We thus propose an algorithm that goes as follows.
-We start with an initial configuration for the label matrix $Z$, 
-then for each
-point $x_i$ 
-we compute the cost of moving it to another cluster $\C_\ell$, i.e.
-$\Delta Q^{j\to \ell}(x_i)$ for 
-$\ell=1,\dots,k$ with $\ell \ne j$, where $j$ denotes the index of its current
-partition, $x \in \C_j$. Hence, we choose
-\begin{equation}
-j^\star = \argmax_{\ell=1,\dotsc,k \, | \, \ell\ne j} 
-\Delta^{j \to \ell}(x_i).
-\end{equation}
-If $\Delta Q^{j \to j^\star}(x_i) > 0$ 
-we move $x_i$ to cluster $\C_{j^\star}$, otherwise 
-we keep $x_i$ in its original cluster $\C_j$. 
-This process is repeated
-until no points are assigned to new clusters. 
-The entire procedure is explicitly described in Algorithm~\ref{algo}, which we
-denote $\mathcal{E}^H$-clustering to emphasize that it is based on
-Hartigan's method.
-This method automatically ensures that the objective function is
-monotonically increasing at each iteration, and consequently the algorithm
-converges in a finite number of steps.
-
 \begin{figure}
 \begin{flushleft}
 \begin{algorithm}[H]
@@ -1651,13 +1575,39 @@ converges in a finite number of steps.
 \caption{\label{algo}
 $\mathcal{E}^H$-clustering is Hartigan's method for energy clustering.
 This algorithm~~~~~~ \\ finds local solutions to  
-the optimization problem \eqref{eq:qcqp2}.\hspace{\fill}
-% @gui: clarify precisely which steps are different from alg 3 in caption.
-\hspace{\fill}
+the optimization problem \eqref{eq:qcqp2}.
+The steps $6$ and $10$ are different~~~~~~~~ \\
+than $\mathcal{E}^L$-clustering
+described in Algorithm~\ref{kmeans_algo}. \hspace{\fill}
 }
 \end{algorithm}
 \end{flushleft}
 \end{figure}
+
+We thus propose an algorithm that goes as follows.
+We start with an initial configuration for the label matrix $Z$, 
+then for each
+point $x_i$ 
+we compute the cost of moving it to another cluster $\C_\ell$, i.e.
+$\Delta Q^{j\to \ell}(x_i)$ for 
+$\ell=1,\dots,k$ with $\ell \ne j$, where $j$ denotes the index of its current
+partition, $x \in \C_j$. Hence, we choose
+\begin{equation}
+j^\star = \argmax_{\ell=1,\dotsc,k \, | \, \ell\ne j} 
+\Delta^{j \to \ell}(x_i).
+\end{equation}
+If $\Delta Q^{j \to j^\star}(x_i) > 0$ 
+we move $x_i$ to cluster $\C_{j^\star}$, otherwise 
+we keep $x_i$ in its original cluster $\C_j$. 
+This process is repeated
+until no points are assigned to new clusters. 
+The entire procedure is explicitly described in Algorithm~\ref{algo}, which we
+denote $\mathcal{E}^H$-clustering to emphasize that it is based on
+Hartigan's method.
+This method automatically ensures that the objective function is
+monotonically increasing at each iteration, and consequently the algorithm
+converges in a finite number of steps.
+
 
 The complexity analysis of $\mathcal{E}^H$-clustering is the following.
 Computing the Gram matrix $G$ requires $\OO( D n^2)$ operations, where 
@@ -1673,7 +1623,6 @@ These operations only need to be performed a single time. For
 each point $x_i$ we need to compute $Q_j(x_i)$ once, which is
 $\OO(n_j)$, and we need to compute $Q_\ell(x_i)$ for each $\ell\ne j$. 
 The cost of computing 
-%\eqref{eq:costxij} 
 $Q_\ell(x_i)$
 is $\OO(n_\ell)$, thus the cost of step~$6$ in
 Algorithm~\ref{algo} is $\OO(k \max_\ell n_\ell)$ for $\ell=1,\dotsc,k$.
@@ -1762,16 +1711,6 @@ specially in high dimensions.
 \section{Numerical Experiments}
 \label{sec:numerics}
 
-% @gui: something is weird with the way you care computing accuracy.  GMM should not be significantly worse than chance.  i think you are probably counting the NaN's as *wrong*, rather than nothing?
-% now I'm using GMM from sklearn which eliminated previous weird things.
-% I think my method was too crude and the covariance estimate was too bad in
-% some cases
-
-% @gui: i'm not convinced you need alg 2 in these tables at all. if i were to add alg 2 to these tables, however, i would do the same thing i would for the figs, that is, for each simulation, compute the diff between performance on alg 2 and alg 3, and report that.
-% @jovo: yes I agree. I included new plots in the fig, but didn't do anything
-% for the tables cuz I don't think necessary
-
-% @jovo: added this paragraph
 The main goal of this section is threefold. First, we want to compare
 energy clustering, based on the kernels provided by the standard energy
 distance $\mathcal{E}_\alpha$, to $k$-means and GMM. Second, we want
@@ -1835,19 +1774,31 @@ and compute the accuracy \eqref{eq:accuracy}. The algorithms
 $\mathcal{E}^H$- and $\mathcal{E}^L$-clustering
 both use the standard
 kernel \eqref{eq:standard_metric}, as well as the spectral
-$\mathcal{E}^S$-clustering method\footnote{We
-compared our implementation of spectral clustering provided in
-Algorithm~\ref{spectralalgo} with the spectral clustering routine provided
-by \emph{scikit-learn} library \cite{scikit-learn}, 
-which is based on \cite{Malik}. In the few
-cases considered the algorithms had similar performance.
+$\mathcal{E}^S$-clustering method,
 % @gui: dude, this is a crazy sentence to write. use sklearn, or have a *very* good reason not to.  
 % currently, you utterly fail to justify the difference.
-}, 
+% @jovo: Removed the sentence. I have a very good reason to use E^S clustering
+% instead of the spectral clustering from sklearn library. The reason is that
+% E^S clustering is fundamentally different, being an exact solution to
+% a relaxed problem, while 
+% spectral clustering 
+% from sklearn library is, apparently, Shi-Malik's method which is
+% not directly related to the original problem.
+% We have two options. (1) We keep these plots using E^S clustering proposed 
+% before. (2) We remove E^S clustering 
+% from the paper altogether, and if you want to compare with spectral 
+% clustering at all we use sklearn library. However this will be totally 
+% disconnected from the theory. 
 and we initialize the algorithms
 with the initialization of $k$-means++ \cite{Vassilvitskii}.
 % @gui: i thought you were goign to initialize E-H & E-L with E-S?
 % @gui: you gotta clearly define E-S, with a pseudocode block, just like the others.  in particular, which matrix are you doing an eigendecomposition on, and how you are choosing the number of dimensions to embed into.
+% @jovo: what about Algorithm 1? All your points are clearly defined there.
+% I don't think it's a good idea to initialize  E-H and E-L with E-S 
+% because of Theorem 6. If you do this initialization you will not see much
+% difference between E^L and E^H, missing the opportunity to illustrate a good
+% selling point of this paper. What we can do, is to do a separate experiment
+% comparing different initializations and see how the algorithms perform.
 For $k$-means and GMM we use the implementation of \emph{scikit-learn} library
 \cite{scikit-learn}, where $k$-means is also initialized with $k$-means++,
 while GMM is initialized with the output of $k$-means. Every algorithm
@@ -1861,10 +1812,14 @@ much higher than $\mathcal{E}^L$-clustering (kernel
 $k$-means). Moreover, $\mathcal{E}^H$-clustering outperforms 
 $k$-means and GMM, where the improvement is noticeable specially in 
 high dimensions.
-Note that in this setting $k$-means and GMM are consistent estimators,
-however, energy clustering degrades much less as dimension increases.
+%Note that in this setting $k$-means and GMM are consistent estimators,
+%however, energy clustering degrades much less as dimension increases.
+Note that while $k$-means and GMM are appropriate to this type of 
+dataset, energy clustering degrades much less as dimension increases.
 % @gui: k-means is only consistent if the prob of each class is equal.  but you did not actually define this parameter, because you sampled 100 from each.  so, you gotta define the parameter at least if you want to say anythng about consistency.  also, what do you mean k-means is a consistent estimator? estimator of what? clarify.
-
+% @jovo: changed the phrase above. I could re-do all experiments again
+% fliping a 1/2 coin for each distribution, but I don't think it's worthy since
+% nothing will change and will just take extra time. So I just rephrased above.
 \begin{figure}
 \begin{minipage}{0.49\textwidth}
 \includegraphics[width=1\textwidth]{normal_highdim_mean.pdf}\\[-1.0em] (a)
@@ -1892,6 +1847,8 @@ over the range $D \in [10, 700]$.
 \end{figure}
 
 % @gui: for eq 59, E-H & E-S yield the same performance.  but for eq 63, E-H is much better than E-S.  do you have any idea why that is?
+% @jovo: the difference is not increadibly large, but it is a litlle. I don't
+% know why. And in Fig.3b this difference is very small, also don't know why
 We now allow the diagonal covariance of the second Gaussian distribution to
 have different values by choosing
 $(\Sigma_2)_{ii} \stackrel{iid}{\sim} \textnormal{Uni}(1,5)$ for
@@ -1918,9 +1875,19 @@ $\widetilde{\Sigma}_{10}$, it is simply a random choice of sampling
 $\textnormal{Uni}(1,5)$ ten times, and one could pick any other choices
 as well.
 % @gui: if there is nothing special, why not just use 2*ones?  this seems suspicious.  also, it is the result of sampling 1 time, not 10 times.
+% @jovo: This is actually less suspicious since  I'm not even choosing the 
+% numbers, just picking them at random. The point is to make the diagonal 
+% entries different, so 2*ones does not help. Also, I don't want
+% to keep trying many experiments everytime, it's super time consuming.
+% This setting works to illustrate what we want ... a setting where k-means
+% does poorly than GMM, and energy still beats GMM in high D.
 The Bayes error is kept fixed yielding
 an optimal accuracy $\approx 0.95$.
 % @gui: bayes error changes for each random sample, unless you are integrating over all possible samples?  it is not fixed.
+% @jovo: I said explicitly "the fixed setting". 
+% It is exactly as in eq. (59) with those numbers 
+% fixed everytime, this is why I wrote the numbers explicitly. 
+% I'm not generating new numbers everytime I sample.
 In Fig.~\ref{fig:gauss}b we show the results of energy clustering,
 $k$-means, and GMM.
 Note that GMM performs better in low dimensions, 
@@ -1928,49 +1895,14 @@ since it is a consistent estimator.
 However, $\mathcal{E}^H$ and $\mathcal{E}^S$ degrade much less as dimensions
 increase, performing better than $k$-means and GMM in high dimensions.
 % @gui: you gotta explain why GMM doesn't utterly fail when D>n!
+% @jovo: check below
+Notice that a naive implementation of GMM should not be able to 
+estimate the covariances when $D \gtrsim 100$, however, scikit-learn library
+uses $k$-means output as initialization, and a more refined estimation
+of the covariances, therefore the
+output of GMM in this implementation is at least as good as $k$-means, making
+the algorithm more robust in high dimensions.
  
- % @gui: maybe put this below section in the discussion?
-Consider the effect of having 
-unbalanced clusters according to
-\begin{equation}
-\label{eq:gauss3}
-\begin{split}
-x &\in \C_i \sim  
-\dfrac{n_i}{N} \mathcal{N}(\mu_i,\Sigma_i) \quad (i=1,2), \quad 
-\mu_1 = (0,0,0,0)^\top , \quad
-\mu_2 = 1.5\times (1,1,0,0)^\top, \\
-\Sigma_1 &= I_4, \quad
-\Sigma_2 = \left( 
-\begin{array}{c|c} 
-\tfrac{1}{2} I_2 & 0  \\ \hline
-0 & I_2 
-\end{array}\right), \quad
-n_1 = N - m, \quad  n_2 = N + m, \quad N=250.
-\end{split}
-\end{equation}
-We then increase $m \in [0,240]$ making
-the clusters progressively more unbalanced.
-We plot the average accuracy over
-$100$ Monte Carlo runs for each $m$, with error bars indicating 
-standard error. 
-The results are shown in Fig.~\ref{fig:unbalanced}.
-For highly unbalanced clusters we see that GMM performs better than
-the other methods, which have basically similar performance.
-Based on this experiment, an interesting problem would be to
-extend $\mathcal{E}^H$-clustering algorithm to account for 
-highly unbalanced clusters.
-
-\begin{figure}
-\includegraphics[width=0.5\textwidth]{normal_unbalanced.pdf}\vspace{-1em}
-\caption{
-\label{fig:unbalanced}
-Comparison of energy clustering algorithms to $k$-means and GMM on
-unbalanced clusters. The data is distributed as \eqref{eq:gauss3}, where
-we vary $m \in [0, 240]$, and in each case we do $100$ Monte Carlo runs
-showing the average accuracy with standard error.
-}
-\end{figure}
-
 Besides the standard kernel from energy statistics 
 \eqref{eq:standard_metric}, 
 consider the following two other semimetrics with their respective generating
@@ -2073,10 +2005,11 @@ $\mathcal{E}^L$ and $\mathcal{E}^S$, for the kernel $\kk_e$. Again,
 the accuracy provided by $\mathcal{E}^H$ is higher than the other methods,
 although not much higher than $\mathcal{E}^S$ in this example.
 The two experiments of Fig.~\ref{fig:consist}
-illustrate how energy statistics clustering does not make assumptions
-about the distribution of the data, performing well in different settings
+illustrate how energy clustering is more flexible,
+performing well in different settings
 with the same kernel. 
 % @gui: algs don't make assumptions.
+% @jovo: see if above is ok, just said flexible instead
 
 \begin{figure}
 \begin{minipage}{0.24\textwidth}
@@ -2130,8 +2063,6 @@ $\mathcal{E}^S$-clustering.
 Moreover, we consider
 $k$-means and GMM. We perform $10$ Monte Carlo runs for each example.
 The results are in Table~\ref{table:other}.
-%, where the respective 
-%choice of parameters for the kernels are indicated. 
 For (a) we initialize
 all algorithms with $k$-means++, and for (b) and (c) we initialize at
 random.
@@ -2280,6 +2211,14 @@ sampling $100$ points
 for each class. 
 % @gui: i don't understand these results. {0,1,2} we do worse.  why don't we show {0,1,...,9}?
 % also, why don't you use a better metric/similarity designed for images? like using pairwise alignment followed by rho?
+% @jovo: We can't claim we do worse on {0,1,2}, but also don't do better.
+% I did the same experiment as Sapiro, and didn't fit in the table this is
+% why I didn't include {0,...,9}, but I can do that.
+% To treat the images better I would need to do some pre-processing, which
+% can be time consuming, and you know how much I love manipulating images.
+% I don't have any robust code for this, and anything I try to
+% implement will take more than a week to do. I will check if I find something
+% that works out of the box in python though.
 The results are shown in Table~\ref{table:mnist}, where kernels
 and parameters are indicated.
 $\mathcal{E}^H$-clustering performs slightly better than $k$-means
@@ -2294,14 +2233,12 @@ for learning a better representation of the data and subsequently apply
 $\mathcal{E}^H$-clustering.
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
 \label{sec:conclusion}
 
 We considered clustering from the perspective of energy
-statistics, which provides a non-parametric test for 
-equality of distributions.
+statistics theory.
 The mathematical formulation of energy clustering 
 reduces to a QCQP in the associated RKHS, as demonstrated in 
 Proposition~\ref{th:qcqp2}.
@@ -2330,7 +2267,50 @@ settings, the iterative
 $\mathcal{E}^H$-clustering also surpassed $\mathcal{E}^S$-clustering, which
 is a spectral relaxation of the QCQP.
 
-It would be interesting to formally 
+A limitation of the proposed methods for energy clustering is that it cannot
+handle accurately highly unbalanced clusters. As an illustration
+consider the following setting:
+\begin{equation}
+\label{eq:gauss3}
+\begin{split}
+x &\in \C_i \sim  
+\dfrac{n_i}{N} \mathcal{N}(\mu_i,\Sigma_i) \quad (i=1,2), \quad 
+\mu_1 = (0,0,0,0)^\top , \quad
+\mu_2 = 1.5\times (1,1,0,0)^\top, \\
+\Sigma_1 &= I_4, \quad
+\Sigma_2 = \left( 
+\begin{array}{c|c} 
+\tfrac{1}{2} I_2 & 0  \\ \hline
+0 & I_2 
+\end{array}\right), \quad
+n_1 = N - m, \quad  n_2 = N + m, \quad N=250.
+\end{split}
+\end{equation}
+We then increase $m \in [0,240]$ making
+the clusters progressively more unbalanced.
+We plot the average accuracy over
+$100$ Monte Carlo runs for each $m$, with error bars indicating 
+standard error. 
+The results are shown in Fig.~\ref{fig:unbalanced}.
+For highly unbalanced clusters we see that GMM performs better than
+the other methods, which have basically similar performance.
+Based on this experiment, an interesting problem would be to
+extend $\mathcal{E}^H$-clustering algorithm to account for 
+highly unbalanced clusters.
+
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{normal_unbalanced.pdf}\vspace{-1em}
+\caption{
+\label{fig:unbalanced}
+Comparison of energy clustering algorithms to $k$-means and GMM on
+unbalanced clusters. The data is normally 
+distributed as \eqref{eq:gauss3}, where
+we vary $m \in [0, 240]$, and in each case we do $100$ Monte Carlo runs
+showing the average accuracy with standard error.
+}
+\end{figure}
+
+Moreover, it would also be interesting to formally 
 demonstrate cases where energy clustering is a 
 consistent estimator. A soft version of energy clustering is also an
 interesting extension.
@@ -2338,23 +2318,16 @@ Finally, kernel methods can benefit from sparsity and
 fixed-rank approximations of the Gram matrix, and there is plenty
 of room to make $\mathcal{E}^H$-clustering algorithm more scalable.
 
-% @gui: your discussion is basically just a summary, which i don't find very helpful to the reader.  if you want to summarize results, 1 paragraph is sufficient.  another paragraph connects it to previous work not already mentioned, and a third paragraph on additional possible extensions.  as you know, one thing i'd like to do next is to theoretically prove when Energy Clustering asymptoticaly gets the right answer. you also mentioned soft clustering, which is another potential extension, or incorporating this into subspace clustering.
-% @jovo: not clear how to make the conclusion?
-% how do you think I should modify? A summary is important, because it
-% condenses the results of the paper in one place in a non-technical manner.
-% Besides a summary I don't know what else to say
-% I modified above but check if still not good enough
+
 % @gui: better, but still important to have another paragraph between those connecting it to the existing literature.  compare this work with 3-4 other works explicitly stating the difference.
 
+
 \begin{acknowledgements}
-\vspace{-1em}
 We would like to thank Carey Priebe for discussions.
-This work was supported by NIH TRA  grant.
+This work was supported by NIH TRA grant.
 \end{acknowledgements}
 
 \bibliographystyle{unsrt}
 \bibliography{biblio.bib}
-
-
 
 \end{document}

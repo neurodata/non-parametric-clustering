@@ -69,11 +69,11 @@ class ErrorBar:
                 table[np.where(self.col0==x)[0],i]) for x in self.xs])
             if self.bayes:
                 ax.plot(self.xs2, self.bayes, '--', color='black', 
-                        linewidth=1, zorder=0)
+                        linewidth=1.5, zorder=0)
             ax.errorbar(self.xs2, mean_, yerr=stderr_, 
-                        linestyle=t, marker=m, color=c, markersize=4, 
-                        elinewidth=.5,  capthick=0.4, label=l, 
-                        linewidth=1, barsabove=False)
+                        linestyle=t, marker=m, color=c, markersize=5, 
+                        elinewidth=.5,  capthick=0.5, label=l, 
+                        linewidth=1.5, barsabove=False)
         
         ax.set_xlabel(self.xlabel)
         ax.set_ylabel(self.ylabel)

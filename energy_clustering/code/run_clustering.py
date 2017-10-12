@@ -8,6 +8,7 @@ in the tests.
 import numpy as np
 from sklearn.cluster import KMeans
 from sklearn.mixture import GMM
+from sklearn.cluster import SpectralClustering
 
 import energy.initialization as initialization
 import energy.metric as metric
@@ -99,10 +100,21 @@ def gmm(k, X, z, run_times=10, init='kmeans'):
     initializations.
     
     """
-    gm = GMM(k, n_init=10, init_params=init)
+    gm = GMM(k, n_init=run_times, init_params=init)
     gm.fit(X)
     zh = gm.predict(X)
     return metric.accuracy(z, zh)
+
+def spectral(k, X, G, z, run_times=10):
+    """Spectral clustering from sklearn library. 
+    run_times is the number of times the algorithm is gonna run with different
+    initializations.
+    
+    """
+    sc = SpectralClustering(k, affinity='precomputed', n_init=run_times)
+    zh = sc.fit_predict(G)
+    return metric.accuracy(z, zh)
+
 
 ##############################################################################
 if __name__ == "__main__":
@@ -143,7 +155,6 @@ if __name__ == "__main__":
     G = eclust.kernel_matrix(X, lambda x, y: np.linalg.norm(x-y))
     """
     
-    """
     k = 2
     D = 20
     d = 5
@@ -153,10 +164,9 @@ if __name__ == "__main__":
     m2 = 0.5*np.concatenate((np.ones(d), np.zeros(D-d)))
     s2 = np.eye(D)
     X, z = data.multivariate_normal([m1, m2], [s1, s2], [n1, n2])
-    """
 
-    X, z = data.circles([1, 3, 5], [0.2, 0.2, 0.2], [400, 400, 400])
-    k = 3
+    #X, z = data.circles([1, 3, 5], [0.2, 0.2, 0.2], [400, 400, 400])
+    #k = 3
     
     rho = lambda x, y: 2-2*np.exp(-np.linalg.norm(x-y)**2/2/4)
     G = eclust.kernel_matrix(X, rho)
@@ -164,6 +174,7 @@ if __name__ == "__main__":
 
     print "Energy-spectral:", energy_spectral(k, X, G, z, init=init,
                                                 run_times=5)
+    print "Spectral Clustering:", spectral(k, X, G, z, run_times=5)
     print "Energy-Lloyd:", energy_lloyd(k, X, G, z, init=init,
                                         run_times=5)
     print "Energy-Hartigan:", energy_hartigan(k, X, G, z, init=init,

@@ -48,10 +48,12 @@ def cigars_circles(num_experiments=10, run_times=5, kind='cigars'):
         else:
             raise ValueError("Don't know which example to sample.")
 
+        #sigma = 2
+        sigma = 2.2
         G = eclust.kernel_matrix(X, rho_standard)
         G_half = eclust.kernel_matrix(X, rho_half)
-        G_exp = eclust.kernel_matrix(X, lambda x,y: rho_exp(x, y, 2))
-        G_rbf = eclust.kernel_matrix(X, lambda x,y: rho_rbf(x, y, 2))
+        G_exp = eclust.kernel_matrix(X, lambda x,y: rho_exp(x, y, sigma))
+        G_rbf = eclust.kernel_matrix(X, lambda x,y: rho_rbf(x, y, sigma))
         #G_exp = eclust.kernel_matrix(X, lambda x,y: rho_exp(x, y, 1))
         #G_rbf = eclust.kernel_matrix(X, lambda x,y: rho_rbf(x, y, 1))
 
@@ -167,7 +169,8 @@ def mnist(num_experiments=10, digits=[0,1,2], num_points=100, run_times=5):
 if __name__ == "__main__":
     #cigars_circles(num_experiments=10, run_times=5, kind='cigars')
     #cigars_circles(num_experiments=10, run_times=5, kind='2circles')
-    cigars_circles(num_experiments=10, run_times=5, kind='3circles')
+    #cigars_circles(num_experiments=10, run_times=5, kind='3circles')
+    cigars_circles(num_experiments=2, run_times=1, kind='3circles')
     #mnist(num_experiments=10,digits=[0,1,2],num_points=100,run_times=5)
     #mnist(num_experiments=10,digits=[0,1,2,3,4], num_points=100,run_times=5)
     #mnist(num_experiments=10,digits=[0,1,2,3,4,5,6],num_points=100,
