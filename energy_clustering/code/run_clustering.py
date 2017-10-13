@@ -129,9 +129,7 @@ if __name__ == "__main__":
     m2 = np.concatenate((0.7*np.ones(d), np.zeros(D-d)))
     s2 = np.eye(D)
     X, z = data.multivariate_normal([m1,m2], [s1, s2], [n1, n2])
-    """
 
-    """
     D = 10 
     d = 10
     q = 2
@@ -153,7 +151,6 @@ if __name__ == "__main__":
     
     k = 2
     G = eclust.kernel_matrix(X, lambda x, y: np.linalg.norm(x-y))
-    """
     
     k = 2
     D = 20
@@ -165,20 +162,35 @@ if __name__ == "__main__":
     s2 = np.eye(D)
     X, z = data.multivariate_normal([m1, m2], [s1, s2], [n1, n2])
 
-    #X, z = data.circles([1, 3, 5], [0.2, 0.2, 0.2], [400, 400, 400])
-    #k = 3
+    X, z = data.circles([1, 3, 5], [0.2, 0.2, 0.2], [400, 400, 400])
+    k = 3
     
     rho = lambda x, y: 2-2*np.exp(-np.linalg.norm(x-y)**2/2/4)
     G = eclust.kernel_matrix(X, rho)
-    init="random"
+    """
 
-    print "Energy-spectral:", energy_spectral(k, X, G, z, init=init,
+    n = 400
+    n1, n2 = np.random.multinomial(n, [0.5, 0.5])
+    m1 = 1.5
+    s1 = 0.3
+    m2 = 0
+    s2 = 1.5
+    X, z = data.univariate_normal([m1, m2], [s1, s2], [n1, n2])
+    #X, z = data.univariate_lognormal([m1, m2], [s1, s2], [n1, n2])
+    Y = np.array([[x] for x in X])
+    G = eclust.kernel_matrix(Y, lambda x, y: np.linalg.norm(x-y))
+    
+    k = 2
+    init="k-means++"
+    #init="random"
+
+    print "Energy-spectral:", energy_spectral(k, Y, G, z, init=init,
                                                 run_times=5)
-    print "Spectral Clustering:", spectral(k, X, G, z, run_times=5)
-    print "Energy-Lloyd:", energy_lloyd(k, X, G, z, init=init,
+    print "Spectral Clustering:", spectral(k, Y, G, z, run_times=5)
+    print "Energy-Lloyd:", energy_lloyd(k, Y, G, z, init=init,
                                         run_times=5)
-    print "Energy-Hartigan:", energy_hartigan(k, X, G, z, init=init,
+    print "Energy-Hartigan:", energy_hartigan(k, Y, G, z, init=init,
                                         run_times=5)
-    print "k-means:", kmeans(k, X, z, run_times=5, init="random")
-    print  "GMM:", gmm(k, X, z, run_times=5, init="random")
+    print "k-means:", kmeans(k, Y, z, run_times=5, init=init)
+    print  "GMM:", gmm(k, Y, z, run_times=5, init="kmeans")
 

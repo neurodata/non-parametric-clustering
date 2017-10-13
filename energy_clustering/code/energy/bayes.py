@@ -67,7 +67,7 @@ def integrate_univariate_normal(mu1, mu2, sigma1, sigma2, p=0.5):
     return accuracy
 
 def bayes_univariate_lognormal(mu1, mu2, sigma1, sigma2, 
-                            num_times=10, num_points=1000):
+                            num_times=10, num_points=1000, p=0.5):
     """Estimate Bayes' error for two-class normal distributions in 1D."""
 
     def lognorm(x, mu, sigma):
@@ -75,15 +75,17 @@ def bayes_univariate_lognormal(mu1, mu2, sigma1, sigma2,
    
     error = np.zeros(num_times)
     for i in range(num_times):
-        x1 = np.random.lognormal(mu1, sigma1, num_points)
-        x2 = np.random.lognormal(mu2, sigma2, num_points)
+        q = 1-p
+        n1, n2 = np.random.multinomial(num_points, [p,q])
+        x1 = np.random.lognormal(mu1, sigma1, n1)
+        x2 = np.random.lognormal(mu2, sigma2, n2)
         
         error1 = sum([1 for x in x1 
                       if lognorm(x,mu1,sigma1)-lognorm(x,mu2,sigma2)<=0])
         error2 = sum([1 for x in x2 
                       if lognorm(x,mu1,sigma1)-lognorm(x,mu2,sigma2)>=0])
-        error[i] = error1+error2
-    return 1-error.mean()/(2*num_points)
+        error[i] = p*error1/n1+q*error2/n2
+    return 1-error.mean()
 
 def integrate_univariate_lognormal(mu1, mu2, sigma1, sigma2):
     """Same as above but through numerical integration."""
@@ -156,20 +158,20 @@ def bayes_multivariate_lognormal(mu1, mu2, sigma1, sigma2,
     
 #############################################################################
 if __name__ == '__main__':
-    
-    #print bayes_univariate_normal(0, 5, 1, 2,num_times=30,
-    #                                num_points=10000,p=0.9)
-    #print integrate_univariate_normal(0, 5, 1, 2, p=0.9)
-    
-    #print bayes_univariate_lognormal(0, -1.5, 0.3, 1.5, 
-    #                                 num_times=10, num_points=10000)
-    #print integrate_univariate_lognormal(0, -1.5, 0.3, 1.5)
-    
-    D = 25
-    m1 = np.zeros(D)
-    m2 = np.concatenate((0.7*np.ones(10), np.zeros(D-10)))
-    s1 = np.eye(D)
-    s2 = np.eye(D)
+
+    m1 = 1.5
+    s1 = 0.3
+    m2 = 0
+    s2 = 1.5
+    #print bayes_univariate_normal(m1, m2, s1, s2, num_times=30,
+    #                              num_points=10000, p=0.5)
+    print bayes_univariate_lognormal(m1, m2, s1, s2, num_times=30,
+                                  num_points=10000, p=0.5)
+    #D = 25
+    #m1 = np.zeros(D)
+    #m2 = np.concatenate((0.7*np.ones(10), np.zeros(D-10)))
+    #s1 = np.eye(D)
+    #s2 = np.eye(D)
    
     #D = 50
     #d = 10
@@ -209,7 +211,4 @@ if __name__ == '__main__':
     s2_1 = np.array([1.367,  3.175,  3.247,  4.403,  1.249,                                             1.969, 4.035,   4.237,  2.813,  3.637])
     s2 = np.diag(np.concatenate((s2_1, np.ones(D-d))))
     """
-
-    print bayes_multivariate_normal(m1, m2, s1, s2, 
-                              num_times=20, num_points=10000)
 

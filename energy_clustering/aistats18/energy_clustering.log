@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2017.10.5)  12 OCT 2017 10:01
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2017.10.5)  13 OCT 2017 03:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**energy_clustering.tex
+**energy_clustering
 (./energy_clustering.tex
 LaTeX2e <2011/06/27>
 Babel <3.9h> and hyphenation patterns for 78 languages loaded.
@@ -358,26 +358,31 @@ LaTeX Font Info:    ... okay on input line 81.
 \makeMPintoPDFobject=\count122
 \everyMPtoPDFconversion=\toks35
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 103.
+LaTeX Font Info:    Try loading font information for U+msa on input line 109.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 103.
+LaTeX Font Info:    Try loading font information for U+msb on input line 109.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (5.1225pt too wide) in paragraph at lines 105--105
+Overfull \hbox (5.1225pt too wide) in paragraph at lines 111--111
  [] 
  []
 
 
-Underfull \hbox (badness 1308) in paragraph at lines 106--124
+Underfull \hbox (badness 1308) in paragraph at lines 112--130
 \OT1/cmr/m/n/10 i-ta-tional po-ten-tial in physics. We pro-
  []
 
 
-Underfull \hbox (badness 1147) in paragraph at lines 151--162
+Underfull \hbox (badness 1158) in paragraph at lines 112--130
+\OT1/cmr/m/n/10 Our math-e-mat-i-cal for-mu-la-tion es-tab-lishes
+ []
+
+
+Underfull \hbox (badness 1147) in paragraph at lines 157--168
 \OT1/cmr/m/n/10 clidean to met-ric spaces of strong neg-a-tive type
  []
 
@@ -392,80 +397,113 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2]
-[3] [4]
-Underfull \hbox (badness 3536) in paragraph at lines 737--744
-[]\OT1/cmr/m/n/10 The worst time com-plex-ity of $\OMS/cmsy/m/n/10 E[]$\OT1/cmr
-/m/n/10 -clustering is
- []
+[3] [4] [5] <./figs/hist_normal.pdf, id=35, 303.33333pt x 303.33333pt>
+File: ./figs/hist_normal.pdf Graphic file (type pdf)
 
-[5] <./figs/normal_highdim_mean.pdf, id=36, 283.25342pt x 271.80229pt>
+<use ./figs/hist_normal.pdf>
+Package pdftex.def Info: ./figs/hist_normal.pdf used on input line 864.
+(pdftex.def)             Requested size: 115.56871pt x 115.56871pt.
+
+<./figs/hist_lognormal.pdf, id=36, 303.33333pt x 303.33333pt>
+File: ./figs/hist_lognormal.pdf Graphic file (type pdf)
+
+<use ./figs/hist_lognormal.pdf>
+Package pdftex.def Info: ./figs/hist_lognormal.pdf used on input line 865.
+(pdftex.def)             Requested size: 115.56871pt x 115.56871pt.
+
+<./figs/1D_normal.pdf, id=37, 283.25342pt x 271.80229pt>
+File: ./figs/1D_normal.pdf Graphic file (type pdf)
+
+<use ./figs/1D_normal.pdf>
+Package pdftex.def Info: ./figs/1D_normal.pdf used on input line 866.
+(pdftex.def)             Requested size: 116.13464pt x 111.43965pt.
+
+<./figs/1D_lognormal.pdf, id=38, 283.25342pt x 271.80229pt>
+File: ./figs/1D_lognormal.pdf Graphic file (type pdf)
+
+<use ./figs/1D_lognormal.pdf>
+Package pdftex.def Info: ./figs/1D_lognormal.pdf used on input line 867.
+(pdftex.def)             Requested size: 116.13464pt x 111.43965pt.
+
+<./figs/normal_highdim_mean.pdf, id=39, 283.25342pt x 271.80229pt>
 File: ./figs/normal_highdim_mean.pdf Graphic file (type pdf)
 
 <use ./figs/normal_highdim_mean.pdf>
-Package pdftex.def Info: ./figs/normal_highdim_mean.pdf used on input line 859.
+Package pdftex.def Info: ./figs/normal_highdim_mean.pdf used on input line 905.
 
 (pdftex.def)             Requested size: 116.13464pt x 111.43965pt.
 
-<./figs/normal_highdim_cov.pdf, id=37, 283.25342pt x 271.80229pt>
+<./figs/normal_highdim_cov.pdf, id=40, 283.25342pt x 271.80229pt>
 File: ./figs/normal_highdim_cov.pdf Graphic file (type pdf)
 
 <use ./figs/normal_highdim_cov.pdf>
-Package pdftex.def Info: ./figs/normal_highdim_cov.pdf used on input line 860.
+Package pdftex.def Info: ./figs/normal_highdim_cov.pdf used on input line 906.
 (pdftex.def)             Requested size: 116.13464pt x 111.43965pt.
- [6 <./figs/normal_highdim_mean.pdf> <./figs/normal_highdim_cov.pdf
+ [6 <./figs/hist_normal.pdf> <./figs/hist_lognormal.pdf
 
-pdfTeX warning: pdflatex (file ./figs/normal_highdim_cov.pdf): PDF inclusion: m
-ultiple pdfs with page group included in a single page
->] <./figs/normal_kernels.pdf, id=343, 283.25342pt x 271.80229pt>
+pdfTeX warning: pdflatex (file ./figs/hist_lognormal.pdf): PDF inclusion: multi
+ple pdfs with page group included in a single page
+> <./figs/1D_normal.pdf
+
+pdfTeX warning: pdflatex (file ./figs/1D_normal.pdf): PDF inclusion: multiple p
+dfs with page group included in a single page
+> <./figs/1D_lognormal.pdf
+
+pdfTeX warning: pdflatex (file ./figs/1D_lognormal.pdf): PDF inclusion: multipl
+e pdfs with page group included in a single page
+>] <./figs/normal_kernels.pdf, id=360, 283.25342pt x 271.80229pt>
 File: ./figs/normal_kernels.pdf Graphic file (type pdf)
 
 <use ./figs/normal_kernels.pdf>
-Package pdftex.def Info: ./figs/normal_kernels.pdf used on input line 924.
+Package pdftex.def Info: ./figs/normal_kernels.pdf used on input line 965.
 (pdftex.def)             Requested size: 116.13464pt x 111.43965pt.
 
-<./figs/lognormal_kernels.pdf, id=344, 283.25342pt x 271.80229pt>
+<./figs/lognormal_kernels.pdf, id=361, 283.25342pt x 271.80229pt>
 File: ./figs/lognormal_kernels.pdf Graphic file (type pdf)
 
 <use ./figs/lognormal_kernels.pdf>
-Package pdftex.def Info: ./figs/lognormal_kernels.pdf used on input line 925.
+Package pdftex.def Info: ./figs/lognormal_kernels.pdf used on input line 966.
 (pdftex.def)             Requested size: 116.13464pt x 111.43965pt.
 
-<./figs/normal_kernels_difference.pdf, id=345, 283.25342pt x 277.13559pt>
+<./figs/normal_kernels_difference.pdf, id=362, 283.25342pt x 277.13559pt>
 File: ./figs/normal_kernels_difference.pdf Graphic file (type pdf)
 
 <use ./figs/normal_kernels_difference.pdf>
 Package pdftex.def Info: ./figs/normal_kernels_difference.pdf used on input lin
-e 926.
+e 967.
 (pdftex.def)             Requested size: 116.13464pt x 113.62631pt.
 
-<./figs/lognormal_kernels_difference.pdf, id=346, 283.25342pt x 277.13559pt>
+<./figs/lognormal_kernels_difference.pdf, id=363, 283.25342pt x 277.13559pt>
 File: ./figs/lognormal_kernels_difference.pdf Graphic file (type pdf)
 
 <use ./figs/lognormal_kernels_difference.pdf>
 Package pdftex.def Info: ./figs/lognormal_kernels_difference.pdf used on input 
-line 927.
+line 968.
 (pdftex.def)             Requested size: 116.13464pt x 113.62631pt.
 
 
 pdfTeX warning: pdflatex (file ./figs/complex_data.pdf): PDF inclusion: found P
 DF version <1.5>, but at most version <1.4> allowed
-<./figs/complex_data.pdf, id=347, 1128.85742pt x 302.8113pt>
+<./figs/complex_data.pdf, id=364, 1128.85742pt x 302.8113pt>
 File: ./figs/complex_data.pdf Graphic file (type pdf)
 
 <use ./figs/complex_data.pdf>
-Package pdftex.def Info: ./figs/complex_data.pdf used on input line 995.
+Package pdftex.def Info: ./figs/complex_data.pdf used on input line 1018.
 (pdftex.def)             Requested size: 237.06705pt x 63.59224pt.
 
-Overfull \hbox (2.18954pt too wide) in paragraph at lines 995--1006
+Overfull \hbox (2.18954pt too wide) in paragraph at lines 1018--1029
 [][][][][][] 
  []
 
+[7 <./figs/normal_highdim_mean.pdf> <./figs/normal_highdim_cov.pdf
 
-Underfull \hbox (badness 1990) in paragraph at lines 1126--1143
-[]\OT1/cmr/m/n/10 In Fig. 3[]a--c we have com-plex two di-men-sional
- []
+pdfTeX warning: pdflatex (file ./figs/normal_highdim_cov.pdf): PDF inclusion: m
+ultiple pdfs with page group included in a single page
+> <./figs/normal_kernels.pdf
 
-[7 <./figs/normal_kernels.pdf> <./figs/lognormal_kernels.pdf
+pdfTeX warning: pdflatex (file ./figs/normal_kernels.pdf): PDF inclusion: multi
+ple pdfs with page group included in a single page
+> <./figs/lognormal_kernels.pdf
 
 pdfTeX warning: pdflatex (file ./figs/lognormal_kernels.pdf): PDF inclusion: mu
 ltiple pdfs with page group included in a single page
@@ -481,11 +519,10 @@ clusion: multiple pdfs with page group included in a single page
 
 pdfTeX warning: pdflatex (file ./figs/complex_data.pdf): PDF inclusion: multipl
 e pdfs with page group included in a single page
->]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+>] (./energy_clustering.bbl
+Underfull \vbox (badness 4096) has occurred while \output is active []
 
-
-(./energy_clustering.bbl [8]
+ [8]
 Underfull \hbox (badness 4266) in paragraph at lines 59--63
 []\OT1/cmr/m/n/10 A. Gret-ton, K. M. Borg-wardt, M. J. Rasch,
  []
@@ -494,39 +531,43 @@ Underfull \hbox (badness 4266) in paragraph at lines 59--63
 
 ] (./energy_clustering.aux) ) 
 Here is how much of TeX's memory you used:
- 4901 strings out of 493308
- 63547 string characters out of 6140092
- 153856 words of memory out of 5000000
- 8248 multiletter control sequences out of 15000+600000
- 15290 words of font info for 56 fonts, out of 8000000 for 9000
+ 4927 strings out of 493308
+ 64123 string characters out of 6140092
+ 152918 words of memory out of 5000000
+ 8269 multiletter control sequences out of 15000+600000
+ 15995 words of font info for 58 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 34i,23n,45p,272b,547s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,23n,45p,268b,547s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmbsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texlive/texmf-dist/font
-s/type1/urw/zapfding/uzdr.pfb>
-Output written on energy_clustering.pdf (10 pages, 964719 bytes).
+amsfonts/cmextra/cmbsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cmextra/cmmib9.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/symbols/msbm7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/z
+apfding/uzdr.pfb>
+Output written on energy_clustering.pdf (10 pages, 1823106 bytes).
 PDF statistics:
- 1097 PDF objects out of 1200 (max. 8388607)
+ 1424 PDF objects out of 1440 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
