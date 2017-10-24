@@ -244,7 +244,7 @@ def histogram_gauss_loggauss(xlim=None, ylim=None, fname='plot.pdf'):
     ax.plot(xs, y2s, '-', color=c, linewidth=1)
     ax.fill_between(xs, 0, y2s, color=c, alpha=0.3)
 
-    #ax.set_xlabel(r'$x$')
+    ax.set_xlabel(r'$x$')
     if xlim:
         ax.set_xlim(xlim)
     if ylim:
@@ -322,8 +322,9 @@ if __name__ == '__main__':
     #          xlim=[0, 4.5])
     #histogram(X, z, colors=['g', 'k'], fname='hist_lognormal.pdf', bins=300,
     #    xlim=[0, 5])
-    #histogram_gauss_loggauss(fname='hist_normal.pdf')
-    histogram_gauss_loggauss(fname='hist_lognormal.pdf')
+    #histogram_gauss_loggauss(fname='hist_normal.pdf', xlim=[-3,3], ylim=[0,1.4])
+    histogram_gauss_loggauss(fname='hist_lognormal.pdf', xlim=[0,8],
+                    ylim=[0,0.85])
 
     """
     # cigars

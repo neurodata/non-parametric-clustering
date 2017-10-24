@@ -115,11 +115,11 @@ def make_plot(*data_files):
 
     ## customize plot below ##
     p = plot.ErrorBar()
-    #p.xlabel = r'$\#$ dimensions'
-    p.xlabel = ''
-    p.ylabel = ''
+    p.xlabel = r'$\#$ dimensions'
+    p.ylabel = 'accuracy'
     p.legends = [r'$\mathcal{E}^{H}$', 
-                 r'kernel', 
+                 #r'kernel', 
+                 r'$\mathcal{E}^L$', 
                  r'spectral', 
                  r'$k$-means', 
                  r'GMM']
@@ -128,7 +128,7 @@ def make_plot(*data_files):
     p.symbols = ['o', 's', 'D', '^', 'v']
     p.lines = ['-', '-', '-', '-', '-']
     #p.output = './experiments_figs2/normal_highdim_mean.pdf'
-    p.output = './experiments_figs2/normal_highdim_cov.pdf'
+    p.output = './experiments_figs/normal_highdim_cov.pdf'
     #p.bayes = 0.86
     p.bayes = 0.9537075
     #p.xlim = [10, 200]

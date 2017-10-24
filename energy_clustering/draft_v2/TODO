@@ -1,0 +1,12 @@
+- Kernel density estimation for each of the 3 algorithms in 1D
+- Change colors in the graphs
+- Give names to algorithms, 1D E-clustering, E-clustering, k-means, kernel
+  k-means. Should we do E^{H}-clustering, E^{L}-clustering to distinguish
+  Hartigan's and Lloyd's
+- Fig 2a, GMM is doing to bad. Check, remove points with zero accuracy on the
+  mean, also run GMM from sklearn to compare. Do this for every experiment.
+- remove points with zero accuracy on means
+- Fig. 4 too many lines in the plot. Show only E-H with different kernels.
+  Maybe add a new plot showing the difference E-H - E-L for each kernel.
+- Same for tables, show the difference.
+

@@ -1,0 +1,174 @@
+\begin{thebibliography}{10}
+
+\bibitem{Szkely2013}
+G.~J. Sz{\'e}kely and M.~L. Rizzo.
+\newblock {Energy Statistics: A Class of Statistics Based on Distances}.
+\newblock {\em Journal of Statistical Planning and Inference}, 143:1249--1272,
+  2013.
+
+\bibitem{RizzoVariance}
+M.~L. Rizzo and G.~J. Sz{\'e}kely.
+\newblock {DISCO Analysis: A Nonparametric Extension of Analysis of Variance}.
+\newblock {\em The Annals of Applied Statistics}, 4(2):1034--1055, 2010.
+
+\bibitem{RizzoClustering}
+G.~J. Sz{\'e}kely and M.~L. Rizzo.
+\newblock {Hierarchical Clustering via Joint Between-Within Distances:
+  Extending Ward's Minimum Variance Method}.
+\newblock {\em Journal of Classification}, 22(2):151--183, 2005.
+
+\bibitem{Kgroups}
+S.~Li.
+\newblock {$k$-Groups: A Generalization of $k$-Means by Energy Distance}.
+\newblock PhD Thesis, Bowling Green State University, 2015.
+
+\bibitem{Lyons}
+R.~Lyons.
+\newblock {Distance Covariance in Metric Spaces}.
+\newblock {\em The Annals of Probability}, 41(5):3284--3305, 2013.
+
+\bibitem{Sejdinovic2013}
+D.~Sejdinovic, B.~Sriperumbudur, A.~Gretton, and K.~Fukumizu.
+\newblock {Equivalence of Distance-Based and RKHS-Based Statistic in Hypothesis
+  Testing}.
+\newblock {\em The Annals of Statistics}, 41(5):2263--2291, 2013.
+
+\bibitem{Lloyd}
+S.~P. Lloyd.
+\newblock {Least Squares Quantization in PCM}.
+\newblock {\em IEEE Transactions on Information Theory}, 28(2):129--137, 1982.
+
+\bibitem{MacQueen}
+{J. B. MacQueen}.
+\newblock {Some Methods for Classification and Analysis of Multivariate
+  Observations}.
+\newblock In {\em {Proceedings of the 5th Berkeley Symposium on Mathematical
+  Statistics and Probability}}, volume~1, pages 281--297. University of
+  California Press, 1967.
+
+\bibitem{Forgy}
+E.~Forgy.
+\newblock {Cluster Analysis of Multivariate Data: Efficiency versus
+  Interpretabiliby of Classification}.
+\newblock {\em Biometrics}, 21(3):768--769, 1965.
+
+\bibitem{Smola}
+B.~Sch\"{o}lkopf, A.~J. Smola, and K.~R. M\"{u}ller.
+\newblock {Nonlinear Component Analysis as a Kernel Eigenvalue Problem}.
+\newblock {\em Neural Computation}, 10:1299--1319, 1998.
+
+\bibitem{Girolami}
+M.~Girolami.
+\newblock {Kernel Based Clustering in Feature Space}.
+\newblock {\em Neural Networks}, 13(3):780--784, 2002.
+
+\bibitem{Mercer}
+J.~Mercer.
+\newblock {Functions of Positive and Negative Type and their Connection with
+  the Theory of Integral Equations}.
+\newblock {\em Proceedings of the Royal Society of London}, 209:415--446, 1909.
+
+\bibitem{Dhillon2}
+I.~S. Dhillon, Y.~Guan, and B.~Kulis.
+\newblock {Kernel K-means: Spectral Clustering and Normalized Cuts}.
+\newblock In {\em Proceedings of the Tenth ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '04, pages 551--556, New York,
+  NY, USA, 2004. ACM.
+
+\bibitem{Dhillon}
+I.~S. Dhillon, Y.~Guan, and B.~Kulis.
+\newblock {Weighted Graph Cuts without Eigenvectors: A Multilevel Approach}.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  29(11):1944--1957, 2007.
+
+\bibitem{Filippone}
+M.~Filippone, F.~Camastra, F.~Masulli, and S.~Rovetta.
+\newblock {A Survey of Kernel and Spectral Methods for Clustering}.
+\newblock {\em Pattern Recognition}, 41:176--190, 2008.
+
+\bibitem{Hartigan}
+J.~A. Hartigan and M.~A. Wong.
+\newblock {Algorithm AS 136: A $k$-Means Clustering Algorithm}.
+\newblock {\em Journal of the Royal Statistical Society. Series C (Applied
+  Statistics)}, 28(1):100--108, 1979.
+
+\bibitem{Telgarsky}
+M.~Telgarsky and A.~Vattani.
+\newblock {Hartigan's Method: $k$-Means Clustering without Voronoi}.
+\newblock In {\em Proceedings of the 13th International Conference on
+  Artificial Intelligence and Statistics (AISTATS)}, volume~9, pages 313--319.
+  JMLR, 2010.
+
+\bibitem{Slonin}
+N.~Slonim, E.~Aharoni, and K.~Crammer.
+\newblock {Hartigan's $k$-Means versus Lloyd's $k$-Means --- Is it Time for a
+  Change?}
+\newblock In {\em Proceedings of the 20th International Conference on
+  Artificial Intelligence}, pages 1677--1684. AAI Press, 2013.
+
+\bibitem{Aronszajn}
+N.~Aronszajn.
+\newblock {Theory of Reproducing Kernels}.
+\newblock {\em Transactions of the American Mathematical Society},
+  68(3):337--404, 1950.
+
+\bibitem{Gretton2012}
+A.~Gretton, K.~M. Borgwardt, M.~J. Rasch, B.~Sch{\"olkopf}, and A.~Smola.
+\newblock {A Kernel Two-Sample Test}.
+\newblock {\em Journal of Machine Learning Research}, 13:723--773, 2012.
+
+\bibitem{Berg1984}
+C.~Berg, J.~P.~R. Christensen, and P.~Ressel.
+\newblock {\em {Harmonic Analysis on Semigroups: Theory of Positive Definite
+  and Related Functions}}.
+\newblock Graduate Text in Mathematics 100. Springer, New York, 1984.
+
+\bibitem{Malik}
+J.~Shi and J.~Malik.
+\newblock {Normalized Cust and Image Segmentation}.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  22(8):888--905, 2000.
+
+\bibitem{NgJordan}
+A.~Y. Ng, M.~I. Jordan, and Y.~Weiss.
+\newblock {On Spectral Clustering: Analysis and an Algorithm}.
+\newblock In {\em Advances in Neural Information Processing Systems},
+  volume~14, pages 849--856, Cambridge, MA, 2001. MIT Press.
+
+\bibitem{Kernighan}
+B.~Kernighan and S.~Lin.
+\newblock {An Efficient Heuristic Procedure for Partitioning Graphs}.
+\newblock {\em The Bell System Technical Journal}, 49(2):291--307, 1970.
+
+\bibitem{Chan}
+P.~Chan, M.~Schlag, and J.~Zien.
+\newblock {Spectral $k$-Way Ratio Cut Partitioning}.
+\newblock {\em IEEE Transactions on Computer-Aided Design of Integrated
+  Circuits and Systems}, 13:1088--1096, 1994.
+
+\bibitem{Yu}
+S.~X. Yu and J.~Shi.
+\newblock {Multiclass Spectral Clustering}.
+\newblock In {\em Proceedings Ninth IEEE International Conference on Computer
+  Vision}, volume~1, pages 313--319, 2003.
+
+\bibitem{scikit-learn}
+F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel,
+  M.~Blondel, P.~Prettenhofer, R.~Weiss, V.~Dubourg, J.~Vanderplas, A.~Passos,
+  D.~Cournapeau, M.~Brucher, M.~Perrot, and E.~Duchesnay.
+\newblock Scikit-learn: Machine learning in {P}ython.
+\newblock {\em Journal of Machine Learning Research}, 12:2825--2830, 2011.
+
+\bibitem{Vassilvitskii}
+D.~Arthur and S.~Vassilvitskii.
+\newblock {$k$-means++: The Advantage of Careful Seeding}.
+\newblock In {\em Proceedings of the Eighteenth annual ACM-SIAM Symposium on
+  Discrete Algorithms}, pages 1027--1035, Philadelphia, PA, USA, 2007. Society
+  for Industrial and Applied Mathematics.
+
+\bibitem{Sapiro}
+Q.~Qui and G.~Sapiro.
+\newblock {Learning Transformations for Clustering and Classification}.
+\newblock {\em Journal of Machine Learning Research}, 16:187--225, 2015.
+
+\end{thebibliography}

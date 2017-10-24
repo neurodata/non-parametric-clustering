@@ -6,6 +6,8 @@ Using mixtures now.
 # Guilhere Franca <guifranca@gmail.com>
 # Johns Hopkins University, Neurodata
 
+from __future__ import division
+
 import numpy as np
 import multiprocessing as mp
 
@@ -20,7 +22,7 @@ def gauss_dimensions_pi(num_points=range(0, 180, 10), num_experiments=10):
     k = 2
     D = 4
     d = 2
-    N = 250
+    N = 300
     table = np.zeros((num_experiments*len(num_points), 6))
     count = 0
 
@@ -32,9 +34,8 @@ def gauss_dimensions_pi(num_points=range(0, 180, 10), num_experiments=10):
             s1 = np.eye(D)
             m2 = np.concatenate((1.5*np.ones(d), np.zeros(D-d)))
             s2 = np.diag(np.concatenate((.5*np.ones(d), np.ones(D-d))))
-            pi1 = (N-p)/N
-            pi2 = (N+p)/N
-            print pi1, pi2
+            pi1 = (N-p)/N/2.
+            pi2 = (N+p)/N/2.
             n1, n2 = np.random.multinomial(N, [pi1,pi2])
             X, z = data.multivariate_normal([m1, m2], [s1, s2], [n1, n2])
             rho = lambda x, y: np.linalg.norm(x-y)
@@ -66,10 +67,11 @@ def make_plot(*data_files):
 
     ## customize plot below ##
     p = plot.ErrorBar()
-    p.xlabel = 'number of unbalanced points'
+    p.xlabel = r'$\#$ unbalanced points'
+    p.ylabel = r'accuracy'
     p.legends = [r'$\mathcal{E}^{H}$', 
                  r'$\mathcal{E}^{L}$', 
-                 r'$\mathcal{E}^{S}$', 
+                 r'spectral', 
                  r'$k$-means', 
                  r'GMM']
     p.colors = ['b', 'r', 'g', 'm', 'c']
@@ -102,5 +104,5 @@ def worker(dimensions, fname):
 ###############################################################################
 if __name__ == '__main__':
     fname = './experiments_data2/experiment_unbalanced_%i.csv'
-    gen_data(fname)
-    #make_plot(fname%0, fname%1, fname%2, fname%3)
+    #gen_data(fname)
+    make_plot(fname%0, fname%1, fname%2, fname%3)

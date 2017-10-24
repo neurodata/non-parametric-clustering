@@ -12,11 +12,11 @@ import energy.initialization as initialization
 import run_clustering
 import plot
 
-def sample_normal(m1, m2, s1, s2, n):
-    return data.univariate_normal([m1, m2], [s1, s2], [n, n])
+def sample_normal(m1, m2, s1, s2, n1, n2):
+    return data.univariate_normal([m1, m2], [s1, s2], [n1, n2])
 
-def sample_lognormal(m1, m2, s1, s2, n):
-    return data.univariate_lognormal([m1, m2], [s1, s2], [n, n])
+def sample_lognormal(m1, m2, s1, s2, n1, n2):
+    return data.univariate_lognormal([m1, m2], [s1, s2], [n1, n2])
 
 
 class Clustering1D:
@@ -32,10 +32,11 @@ class Clustering1D:
         self.experiments = 100 # number of experiments (Markov samples)
 
     def get_sample(self, n):
+        n1, n2 = np.random.multinomial(n, [0.5, 0.5])
         if self.distr == 'normal':
-            X, z = sample_normal(self.m1, self.m2, self.s1, self.s2, n)
+            X, z = sample_normal(self.m1, self.m2, self.s1, self.s2, n1, n2)
         elif self.distr == 'lognormal':
-            X, z = sample_lognormal(self.m1, self.m2, self.s1, self.s2, n)
+            X, z = sample_lognormal(self.m1, self.m2, self.s1, self.s2, n1, n2)
         else:
             raise ValueError("Clustering 1D, unknown distribution to sample.")
         return X, z
@@ -49,11 +50,11 @@ class Clustering1D:
             for ne in range(self.experiments):
                 X, z = self.get_sample(n)
                 Y = np.array([[x] for x in X])
-                G = eclust.kernel_matrix(Y, lambda x, y: np.linalg.norm(x-y))
+                #G = eclust.kernel_matrix(Y, lambda x, y: np.linalg.norm(x-y))
                 table[count, 0] = n
                 table[count, 1] = run_clustering.energy1D(X, z)
-                table[count, 2] = run_clustering.kmeans(k, Y, z)
-                table[count, 3] = run_clustering.gmm(k, Y, z)
+                table[count, 2] = run_clustering.kmeans(k, Y, z, run_times=5)
+                table[count, 3] = run_clustering.gmm(k, Y, z, run_times=5)
                 #table[count, 4] = run_clustering.energy_hartigan(k, X, G, z,
                 #                            init="k-means++", run_times=3)
                 #table[count, 4] = run_clustering.energy_hartigan(k, Y, G, z,
@@ -75,25 +76,23 @@ def make_plot(*data_files):
 
     ## customize plot below ##
     p = plot.ErrorBar()
-    p.xlabel = 'number of points'
+    p.xlabel = r'$\#$ points'
     p.legends = [r'$\mathcal{E}^{1D}$-clustering', r'$k$-means', 'GMM']
     p.colors = ['b', 'r', 'g']
     p.lines = ['-', '-', '-']
-    p.doublex = True
     #p.output = './experiments_figs/1D_normal.pdf'
     p.output = './experiments_figs/1D_lognormal.pdf'
-    #p.bayes = 0.956
-    p.bayes = 0.852
-    #p.xlim = [10,3000]
-    p.xlim = [40,1600]
+    p.bayes = 0.88
+    p.xlim = [10,800]
+    #p.loc = (0.55,0.45)
     p.make_plot(table)
 
 def gen_data(fname):
     ## choose the range for each worker ##
-    n_array = [range(20,200,20),
-               range(200,400,20),
-               range(400,600,20),
-               range(600,820,20)]
+    n_array = [range(10,400,20),
+               range(400,700,20),
+               range(700,760,20),
+               range(760,820,20)]
     jobs = []
     for i, n in enumerate(n_array):
         p = mp.Process(target=worker, args=(n, fname%i))
@@ -109,17 +108,13 @@ def worker(numpoints, fname):
    
     ## Need to change these parameters below by hand according to
     ## the experiment
-    #e.m1 = 0
-    #e.m2 = 5
-    #e.s1 = 1
-    #e.s2 = 2
-    #e.distr = 'normal'
-    e.m1 = 0
-    e.m2 = -1.5
+    e.m1 = 1.5
+    e.m2 = 0
     e.s1 = 0.3
     e.s2 = 1.5
+    #e.distr = 'normal'
     e.distr = 'lognormal'
-    e.experiments = 50
+    e.experiments = 100
     
     e.numpoints = numpoints
     table = e.run()

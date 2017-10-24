@@ -114,8 +114,8 @@ def make_plot(*data_files):
 
     ## customize plot below ##
     p = plot.ErrorBar()
-    p.xlabel = ''
-    p.ylabel = ''
+    p.xlabel = r'$\#$ points'
+    p.ylabel = 'accuracy'
     p.legends = [r'$\mathcal{E}^{H}$, $\rho_1$', 
                  r'$\mathcal{E}^{H}$, $\rho_{1/2}$', 
                  r'$\mathcal{E}^{H}$, $\widetilde{\rho}_{1}$', 
@@ -131,6 +131,7 @@ def make_plot(*data_files):
     p.xlim = [10, 400]
     #p.ylim = [0.6, 0.91]
     p.ylim = [0.55, 0.91]
+    p.loc = 1
     p.make_plot(table)
 
 def make_plot_difference(*data_files):
@@ -143,21 +144,24 @@ def make_plot_difference(*data_files):
 
     ## customize plot below ##
     p = plot.ErrorBar()
-    p.xlabel = ''
-    p.ylabel = ''
+    p.xlabel = r'$\#$ points'
+    p.ylabel = 'difference in accuracy'
     p.legends = [
-        r'$\mathcal{E}^{H} - \textnormal{kernel $k$-means}$', 
-        r'$\mathcal{E}^{H} - \textnormal{spectral-clustering}$', 
+        #r'$\mathcal{E}^{H} - \textnormal{kernel $k$-means}$', 
+        #r'$\mathcal{E}^{H} - \textnormal{spectral-clustering}$', 
+        r'$\mathcal{E}^{H} - \mathcal{E}^L$', 
+        r'$\mathcal{E}^{H} - \textnormal{spectral}$', 
     ]
     p.colors = ['b', 'r']
     p.symbols = ['o', 's']
     #p.output = './experiments_figs2/normal_kernels_difference.pdf'
-    p.output = './experiments_figs2/lognormal_kernels_difference.pdf'
+    #p.output = './experiments_figs2/lognormal_kernels_difference.pdf'
+    p.output = './experiments_figs/lognormal_kernels_difference.pdf'
     #p.doublex = True
     p.legcols = 1
     #p.bayes = 0.0
     p.xlim = [10, 400]
-    p.loc = 9
+    p.loc = 1
     p.make_plot(table)
 
 def gen_data(fname):
