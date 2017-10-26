@@ -181,7 +181,7 @@ Hilbert space by using its inner product. However, the kernel choice remains
 the biggest challenge since there is no principled theory to construct a kernel
 for a given dataset, and usually a kernel introduces hyperparameters that 
 need to be carefully chosen. A well-known kernel based clustering method
-is kernel $k$-means, which is preciselly $k$-means 
+is kernel $k$-means, which is precisely $k$-means 
 formulated in the feature space \cite{Girolami}. 
 Furthermore, kernel $k$-means algorithm
 \cite{Dhillon2,Dhillon} is still based on Loyd's heuristic \cite{Lloyd}
@@ -199,7 +199,7 @@ distributions are equal, the principle behind clustering is to maximize
 the statistical energy,  enforcing probability distributions associated to 
 each cluster to be different from one another. We provide a precise 
 mathematical formulation to this statement, leading to a quadratically 
-constrained quadratic program (QCQP) in the associated RKHS. This immediatelly
+constrained quadratic program (QCQP) in the associated RKHS. This immediately
 establishes the connection between energy statistics based clustering,
 or \emph{energy clustering} for short, with kernel methods. Moreover,
 our formulation holds for general semimetric spaces of negative type.
@@ -1061,27 +1061,6 @@ its degree $w_i = d(i)$.
 \section{Two-Class Problem in One Dimension}
 \label{sec:twoclass}
 
-% @gui: to provide intuition to the reader, let's show the kernel density estimate for each of the 3 algorithms for both classes.  i'm not sure the best way to visualize it, maybe play with a few options.
-% @jovo: I didn't do this yet and actually not sure how to do it.
-% Are you thinking about this: 
-% https://en.wikipedia.org/wiki/Kernel_density_estimation
-% Also, I'm not sure if the kernel from energy integrates to 1, etc. and is
-% this really worthy it?
-% @gui: yes, it is really worth it, that is why i suggested it. it is trivial to do.  currently, the reader has no idea *why* the different algs get different answers.
-
-% @gui: why not use the same parameters as in fig 1a?  i feel like if we did, it would seem less like we are cherry picking?  
-% @jovo: yes, and GMM would do great! In 1D is very hard to find settings where
-% GMM and k-means perform poorly, so we have to cherry pick a little. In 1D you
-% basically do not have much choice, if data has minimal separation k-means and
-% GMM do well. The purpose is to
-% illustrate that there are settings where k-means/GMM do poorly and energy
-% does not. If I choose the same parameters as before all algorithms are doing
-% great, sometimes GMM can even do better than energy. All I did was to
-% translate one of the lognormals mu2=-1.5 and give it a big variance, so both
-% distributions overlap a lot, but the overlaping is essentially on the tail 
-% of one of them
-% @gui: ok, well why not use the same params from fig 1b in fig 1a then?
-
 Before stating a general algorithm to solve the optimization problem
 \eqref{eq:qcqp2}
 we first consider the simplest possible case which
@@ -1203,7 +1182,6 @@ $0$ to all points wrongly clustered.
 For a balanced two-class problem the value $1/2$ correspond
 to chance.
 
-
 We now consider two simple experiments where we sample $n$ points
 from a two-class mixture.
 We plot the average accuracy \eqref{eq:accuracy} versus $n$, 
@@ -1240,7 +1218,11 @@ The three methods
 perform closely, with a slight advantage of GMM, as expected since
 it is a consistent model to the data, and 
 $\mathcal{E}^{1D}$-clustering performs slightly better
-than $k$-means. On the other hand, in Fig.~\ref{fig:1d}b
+than $k$-means. 
+In Fig.~\ref{fig:1d}c we show a density estimation from clustering
+$1000$ points from this mixture using the three algorithms.
+Notice that all of them are able to distinguish the two classes.
+On the other hand, in Fig.~\ref{fig:1d}b
 we consider a mixture of lognormal distributions,
 \begin{equation}
 \label{eq:two_lognormal}
@@ -1257,30 +1239,39 @@ The optimal Bayes accuracy is again $\approx 0.88$.
 We can now see that $\mathcal{E}^{1D}$-clustering
 is still  very accurate, while
 GMM and $k$-means basically cluster at chance.
-The two simple experiments of Fig.~\ref{fig:1d} illustrate
+Density estimation after clustering $1000$ points this
+mixture using the three algorithms 
+are
+is shown in Fig.~\ref{fig:1d}d. Note that only $\mathcal{E}^{1D}$-clustering
+was able to distinguish the two classes. $k$-means and GMM put most of the
+points in a single cluster, and points on the tail of the second component
+of \eqref{eq:two_lognormal} in the other cluster.
+The experiments of Fig.~\ref{fig:1d} illustrate
 how energy clustering is more flexible compared to $k$-means and GMM.
 
 \begin{figure}
 \begin{minipage}{0.49\textwidth}
-~~~~~\includegraphics[width=.95\textwidth]{hist_normal.pdf}\\[-1em]
-\includegraphics[width=\textwidth]{1D_normal.pdf}\\[-1em](a)
+\includegraphics[width=\textwidth]{1D_normal.pdf}\\[-1em](a)\\
+~~~~~\includegraphics[width=.9\textwidth]{normal_density.pdf}\\[-1.5em](c)
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
-~~~~~\includegraphics[width=.95\textwidth]{hist_lognormal.pdf}\\[-1em]
-\includegraphics[width=\textwidth]{1D_lognormal.pdf}\\[-1em](b)
+\includegraphics[width=\textwidth]{1D_lognormal.pdf}\\[-1em](b)\\
+~~~~~\includegraphics[width=.9\textwidth]{lognormal_density.pdf}\\[-1.5em](d)
 \end{minipage}
 \caption{
 \label{fig:1d}
 $\mathcal{E}^{1D}$-clustering versus $k$-means and GMM.
-We plot the average 
-accuracy \eqref{eq:accuracy}, over $100$ Monte Carlo trials, 
+(a,b) We plot the mean accuracy
+\eqref{eq:accuracy} over $100$ Monte Carlo trials, 
 versus the number of sampled points. 
 Error bars are standard error. The dashed line indicates 
 Bayes accuracy ($\approx 0.88$ in both cases). (a) Clustering results for data normally distributed as in 
-\eqref{eq:two_normal}, where we show the histograms of each component
-above the experimental plot.
-(b) Data lognormally distributed as in \eqref{eq:two_lognormal}
-with histograms of the components in the mixture.
+\eqref{eq:two_normal}.
+(b) Data lognormally distributed as in \eqref{eq:two_lognormal}.
+(c) Density estimation of each component in the mixture \eqref{eq:two_normal} 
+after clustering $1000$ sampled points using the three algorithms, compared
+to the ground truth. 
+(d) The same but for lognormal data \eqref{eq:two_lognormal}.
 }
 \end{figure}
 
@@ -1698,11 +1689,27 @@ Carlo trials, with error bars indicating standard error.
 
 We briefly mention that we compared $\mathcal{E}^H$-clustering,
 as described in Algorithm~\ref{algo}, to
-$\mathcal{E}^{1D}$-clutering, described in Algorithm~\ref{algo1d}, 
+$\mathcal{E}^{1D}$-clustering, described in Algorithm~\ref{algo1d}, 
 for several univariate distributions.
 Both perform very closely.
 However, we omit these results since we will analyse more interesting 
 scenarios in high dimensions.
+
+\begin{figure}
+\begin{minipage}{0.49\textwidth}
+\includegraphics[width=1\textwidth]{pairsplot1.pdf}\\[-1.0em] (a)
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\includegraphics[width=1\textwidth]{pairsplot2.pdf}\\[-1.0em] (a)
+\end{minipage}
+\caption{
+\label{fig:pairsplot}
+Pair plots for the first $5$ dimensions. (a) Data normally distributed
+as in \eqref{eq:gauss1}. (b) Data normally distributed as in 
+\eqref{eq:gauss2}. We sample $200$ points for both cases.
+We can see that there is a considerable overlap between the clusters.
+}
+\end{figure} 
 
 From the results of \cite{Telgarsky}, summarized in the end of the previous
 section, we expect the improvement of Hartigan's 
@@ -1723,6 +1730,9 @@ x  &\stackrel{iid}{\sim}
 \underbrace{0,\dots,0}_{\times (D-10)})^\top.
 \end{split}
 \end{equation}
+To get some intuition about how separated data points from each class
+are, we show scatter plots between the first $5$ dimensions in 
+Fig.~\ref{fig:pairsplot}a.
 Note that the Bayes error
 is fixed as $D$ increases, yielding an optimal 
 accuracy of $\approx 0.86$.
@@ -1757,9 +1767,6 @@ accuracy $\approx 0.86$, over the range $D \in [10,200]$.
 (b) Data normally distributed
 as in \eqref{eq:gauss2}, with Bayes accuracy $\approx 0.95$,
 over the range $D \in [10, 700]$.
-% @gui: also helpful here would be pairs plots, say, of the first 5 dimensions, showing the performance of our stuff (color points by Alg 3, maybe symbols denote "truth".  i have no intuition how difficult these are.
-% @gui: https://www.google.com/search?q=pairs+plots&rlz=1C5CHFA_enUS731US731&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjwo9u5w-DWAhXMKyYKHYkhAKMQ_AUICigB&biw=1440&bih=776
-% to show how well separated the classes are.
 }
 \end{figure} 
 
@@ -1780,13 +1787,15 @@ x & \stackrel{iid}{\sim}
 \widetilde{\Sigma}_{10} & 0 \\ \hline 
 0 & I_{D-10} \end{array}\right), \\
 \widetilde{\Sigma}_{10} &= \diag(1.367,  3.175,  3.247,  4.403,  1.249,
-1.969, 4.035,   4.237,  2.813,  3.637),
+1.969, 4.035,   4.237,  2.813,  3.637).
 \end{split}
 \end{equation}
 We simply chose a fixed set of $10$ numbers uniformly at random on 
 the interval $[1,5]$ for
 the diagonal of $\widetilde{\Sigma}_{10}$, and any other choice would give 
-analogous results. We sample a total of $200$ points from \eqref{eq:gauss2}
+analogous results. 
+We show pair plots of this data in Fig.~\ref{fig:pairsplot}b.
+We sample a total of $200$ points from \eqref{eq:gauss2}
 on each trial.
 The Bayes error is kept fixed when increasing $D$ yielding
 an optimal accuracy $\approx 0.95$.

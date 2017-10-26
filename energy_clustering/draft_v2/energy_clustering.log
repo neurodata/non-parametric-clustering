@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2017.10.5)  24 OCT 2017 12:59
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2017.10.5)  25 OCT 2017 10:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -443,133 +443,143 @@ Overfull \vbox (13.24274pt too high) has occurred while \output is active []
 
 
 [11] [12] [13] [14]
-LaTeX Font Info:    Try loading font information for U+bbm on input line 1099.
+LaTeX Font Info:    Try loading font information for U+bbm on input line 1078.
  (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [15] [16] <./figs/hist_normal.pdf, id=71, 303.33333pt x 187.47032pt>
-File: ./figs/hist_normal.pdf Graphic file (type pdf)
-
-<use ./figs/hist_normal.pdf>
-Package pdftex.def Info: ./figs/hist_normal.pdf used on input line 1265.
-(pdftex.def)             Requested size: 217.85573pt x 134.64383pt.
-
-Overfull \hbox (0.69983pt too wide) in paragraph at lines 1265--1265
- []     [] 
- []
-
-<./figs/1D_normal.pdf, id=72, 300.71655pt x 201.90834pt>
+) [15] [16] <./figs/1D_normal.pdf, id=71, 300.71655pt x 201.90834pt>
 File: ./figs/1D_normal.pdf Graphic file (type pdf)
 
 <use ./figs/1D_normal.pdf>
-Package pdftex.def Info: ./figs/1D_normal.pdf used on input line 1266.
+Package pdftex.def Info: ./figs/1D_normal.pdf used on input line 1254.
 (pdftex.def)             Requested size: 229.32257pt x 153.97874pt.
 
-<./figs/hist_lognormal.pdf, id=73, 303.33333pt x 187.47032pt>
-File: ./figs/hist_lognormal.pdf Graphic file (type pdf)
+<./figs/normal_density.pdf, id=72, 271.50352pt x 201.90834pt>
+File: ./figs/normal_density.pdf Graphic file (type pdf)
 
-<use ./figs/hist_lognormal.pdf>
-Package pdftex.def Info: ./figs/hist_lognormal.pdf used on input line 1269.
-(pdftex.def)             Requested size: 217.85573pt x 134.64383pt.
+<use ./figs/normal_density.pdf>
+Package pdftex.def Info: ./figs/normal_density.pdf used on input line 1255.
+(pdftex.def)             Requested size: 206.3889pt x 153.48581pt.
 
-Overfull \hbox (0.69983pt too wide) in paragraph at lines 1269--1269
- []     [] 
- []
-
-<./figs/1D_lognormal.pdf, id=74, 300.71655pt x 201.90834pt>
+<./figs/1D_lognormal.pdf, id=73, 300.71655pt x 201.90834pt>
 File: ./figs/1D_lognormal.pdf Graphic file (type pdf)
 
 <use ./figs/1D_lognormal.pdf>
-Package pdftex.def Info: ./figs/1D_lognormal.pdf used on input line 1270.
+Package pdftex.def Info: ./figs/1D_lognormal.pdf used on input line 1258.
 (pdftex.def)             Requested size: 229.32257pt x 153.97874pt.
- [17] [18 <./figs/hist_normal.pdf> <./figs/1D_normal.pdf
 
-pdfTeX warning: pdflatex (file ./figs/1D_normal.pdf): PDF inclusion: multiple p
-dfs with page group included in a single page
-> <./figs/hist_lognormal.pdf
+<./figs/lognormal_density.pdf, id=74, 268.56607pt x 201.90834pt>
+File: ./figs/lognormal_density.pdf Graphic file (type pdf)
 
-pdfTeX warning: pdflatex (file ./figs/hist_lognormal.pdf): PDF inclusion: multi
+<use ./figs/lognormal_density.pdf>
+Package pdftex.def Info: ./figs/lognormal_density.pdf used on input line 1259.
+(pdftex.def)             Requested size: 206.3889pt x 155.16489pt.
+ [17] [18 <./figs/1D_normal.pdf> <./figs/normal_density.pdf
+
+pdfTeX warning: pdflatex (file ./figs/normal_density.pdf): PDF inclusion: multi
 ple pdfs with page group included in a single page
 > <./figs/1D_lognormal.pdf
 
 pdfTeX warning: pdflatex (file ./figs/1D_lognormal.pdf): PDF inclusion: multipl
 e pdfs with page group included in a single page
->] [19] [20] [21] [22] [23] [24]
-<./figs/normal_highdim_mean.pdf, id=424, 300.71655pt x 196.57503pt>
+> <./figs/lognormal_density.pdf
+
+pdfTeX warning: pdflatex (file ./figs/lognormal_density.pdf): PDF inclusion: mu
+ltiple pdfs with page group included in a single page
+>] [19] [20] [21] [22] [23]
+<./figs/pairsplot1.pdf, id=436, 878.76456pt x 883.13942pt>
+File: ./figs/pairsplot1.pdf Graphic file (type pdf)
+
+<use ./figs/pairsplot1.pdf>
+Package pdftex.def Info: ./figs/pairsplot1.pdf used on input line 1700.
+(pdftex.def)             Requested size: 229.32257pt x 230.4598pt.
+
+<./figs/pairsplot2.pdf, id=437, 878.76456pt x 883.13942pt>
+File: ./figs/pairsplot2.pdf Graphic file (type pdf)
+
+<use ./figs/pairsplot2.pdf>
+Package pdftex.def Info: ./figs/pairsplot2.pdf used on input line 1703.
+(pdftex.def)             Requested size: 229.32257pt x 230.4598pt.
+ [24]
+<./figs/normal_highdim_mean.pdf, id=441, 300.71655pt x 196.57503pt>
 File: ./figs/normal_highdim_mean.pdf Graphic file (type pdf)
 
 <use ./figs/normal_highdim_mean.pdf>
-Package pdftex.def Info: ./figs/normal_highdim_mean.pdf used on input line 1742
+Package pdftex.def Info: ./figs/normal_highdim_mean.pdf used on input line 1752
 .
 (pdftex.def)             Requested size: 229.32257pt x 149.91147pt.
 
-<./figs/normal_highdim_cov.pdf, id=425, 300.71655pt x 196.57503pt>
+<./figs/normal_highdim_cov.pdf, id=442, 300.71655pt x 196.57503pt>
 File: ./figs/normal_highdim_cov.pdf Graphic file (type pdf)
 
 <use ./figs/normal_highdim_cov.pdf>
-Package pdftex.def Info: ./figs/normal_highdim_cov.pdf used on input line 1745.
+Package pdftex.def Info: ./figs/normal_highdim_cov.pdf used on input line 1755.
 
 (pdftex.def)             Requested size: 229.32257pt x 149.91147pt.
- [25 <./figs/normal_highdim_mean.pdf> <./figs/normal_highdim_cov.pdf
+ [25 <./figs/pairsplot1.pdf> <./figs/pairsplot2.pdf
+
+pdfTeX warning: pdflatex (file ./figs/pairsplot2.pdf): PDF inclusion: multiple 
+pdfs with page group included in a single page
+>] [26 <./figs/normal_highdim_mean.pdf> <./figs/normal_highdim_cov.pdf
 
 pdfTeX warning: pdflatex (file ./figs/normal_highdim_cov.pdf): PDF inclusion: m
 ultiple pdfs with page group included in a single page
->] <./figs/normal_kernels.pdf, id=724, 300.71655pt x 197.07039pt>
+>] <./figs/normal_kernels.pdf, id=874, 300.71655pt x 197.07039pt>
 File: ./figs/normal_kernels.pdf Graphic file (type pdf)
 
 <use ./figs/normal_kernels.pdf>
-Package pdftex.def Info: ./figs/normal_kernels.pdf used on input line 1844.
+Package pdftex.def Info: ./figs/normal_kernels.pdf used on input line 1853.
 (pdftex.def)             Requested size: 229.32257pt x 150.28923pt.
 
-<./figs/lognormal_kernels.pdf, id=725, 300.71655pt x 197.74234pt>
+<./figs/lognormal_kernels.pdf, id=875, 300.71655pt x 197.74234pt>
 File: ./figs/lognormal_kernels.pdf Graphic file (type pdf)
 
 <use ./figs/lognormal_kernels.pdf>
-Package pdftex.def Info: ./figs/lognormal_kernels.pdf used on input line 1848.
+Package pdftex.def Info: ./figs/lognormal_kernels.pdf used on input line 1857.
 (pdftex.def)             Requested size: 229.32257pt x 150.8017pt.
 
-<./figs/normal_kernels_difference.pdf, id=726, 300.71655pt x 201.90834pt>
+<./figs/normal_kernels_difference.pdf, id=876, 300.71655pt x 201.90834pt>
 File: ./figs/normal_kernels_difference.pdf Graphic file (type pdf)
 
 <use ./figs/normal_kernels_difference.pdf>
 Package pdftex.def Info: ./figs/normal_kernels_difference.pdf used on input lin
-e 1852.
+e 1861.
 (pdftex.def)             Requested size: 229.32257pt x 153.97874pt.
 
-<./figs/lognormal_kernels_difference.pdf, id=727, 300.71655pt x 201.90834pt>
+<./figs/lognormal_kernels_difference.pdf, id=877, 300.71655pt x 201.90834pt>
 File: ./figs/lognormal_kernels_difference.pdf Graphic file (type pdf)
 
 <use ./figs/lognormal_kernels_difference.pdf>
 Package pdftex.def Info: ./figs/lognormal_kernels_difference.pdf used on input 
-line 1856.
+line 1865.
 (pdftex.def)             Requested size: 229.32257pt x 153.97874pt.
 
-<./figs/2cigars.pdf, id=728, 303.33333pt x 303.33333pt>
+<./figs/2cigars.pdf, id=878, 303.33333pt x 303.33333pt>
 File: ./figs/2cigars.pdf Graphic file (type pdf)
 
 <use ./figs/2cigars.pdf>
-Package pdftex.def Info: ./figs/2cigars.pdf used on input line 1909.
+Package pdftex.def Info: ./figs/2cigars.pdf used on input line 1918.
 (pdftex.def)             Requested size: 112.32257pt x 112.32414pt.
 
-<./figs/2circles.pdf, id=729, 303.33333pt x 303.33333pt>
+<./figs/2circles.pdf, id=879, 303.33333pt x 303.33333pt>
 File: ./figs/2circles.pdf Graphic file (type pdf)
 
 <use ./figs/2circles.pdf>
-Package pdftex.def Info: ./figs/2circles.pdf used on input line 1912.
+Package pdftex.def Info: ./figs/2circles.pdf used on input line 1921.
 (pdftex.def)             Requested size: 112.32257pt x 112.32414pt.
 
-<./figs/3circles.pdf, id=730, 303.33333pt x 303.33333pt>
+<./figs/3circles.pdf, id=880, 303.33333pt x 303.33333pt>
 File: ./figs/3circles.pdf Graphic file (type pdf)
 
 <use ./figs/3circles.pdf>
-Package pdftex.def Info: ./figs/3circles.pdf used on input line 1915.
+Package pdftex.def Info: ./figs/3circles.pdf used on input line 1924.
 (pdftex.def)             Requested size: 112.32257pt x 112.32414pt.
- <./figs/mnist.pdf, id=731, 289.08pt x 361.35pt>
+ <./figs/mnist.pdf, id=881, 289.08pt x 361.35pt>
 File: ./figs/mnist.pdf Graphic file (type pdf)
 
 <use ./figs/mnist.pdf>
-Package pdftex.def Info: ./figs/mnist.pdf used on input line 1919.
+Package pdftex.def Info: ./figs/mnist.pdf used on input line 1928.
 (pdftex.def)             Requested size: 107.638pt x 134.54652pt.
- [26] [27 <./figs/normal_kernels.pdf> <./figs/lognormal_kernels.pdf
+ [27] [28 <./figs/normal_kernels.pdf> <./figs/lognormal_kernels.pdf
 
 pdfTeX warning: pdflatex (file ./figs/lognormal_kernels.pdf): PDF inclusion: mu
 ltiple pdfs with page group included in a single page
@@ -597,32 +607,31 @@ fs with page group included in a single page
 
 pdfTeX warning: pdflatex (file ./figs/mnist.pdf): PDF inclusion: multiple pdfs 
 with page group included in a single page
->] [28] [29]
-<./figs/normal_unbalanced.pdf, id=1455, 291.90414pt x 201.90834pt>
+>] [29] [30]
+<./figs/normal_unbalanced.pdf, id=1604, 291.90414pt x 201.90834pt>
 File: ./figs/normal_unbalanced.pdf Graphic file (type pdf)
 
 <use ./figs/normal_unbalanced.pdf>
-Package pdftex.def Info: ./figs/normal_unbalanced.pdf used on input line 2178.
+Package pdftex.def Info: ./figs/normal_unbalanced.pdf used on input line 2187.
 (pdftex.def)             Requested size: 234.0pt x 161.86269pt.
- [30 <./figs/normal_unbalanced.pdf>]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
-
-(./energy_clustering.bbl [31] [32])
+ [31 <./figs/normal_unbalanced.pdf>]
+(./energy_clustering.bbl [32] [33])
 
 Class revtex4-1 Warning: Environment acknowledgements is obsolete;
 Use acknowledgments instead.
 
-[33] (./energy_clustering.aux) ) 
+[34] (./energy_clustering.aux) ) 
 Here is how much of TeX's memory you used:
- 6519 strings out of 493308
- 86552 string characters out of 6140092
- 176167 words of memory out of 5000000
- 9837 multiletter control sequences out of 15000+600000
+ 6532 strings out of 493308
+ 86852 string characters out of 6140092
+ 176182 words of memory out of 5000000
+ 9848 multiletter control sequences out of 15000+600000
  21235 words of font info for 81 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 36i,23n,35p,836b,774s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,23n,35p,873b,774s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/gui/.texmf-var/fonts/pk/ljfour/public/b
 bm/bbm12.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 bsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.
@@ -636,19 +645,20 @@ ts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/urw/zapfding/uzdr.pfb>
-Output written on energy_clustering.pdf (33 pages, 1773951 bytes).
+m/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
+/zapfding/uzdr.pfb>
+Output written on energy_clustering.pdf (34 pages, 1317704 bytes).
 PDF statistics:
- 1688 PDF objects out of 1728 (max. 8388607)
+ 1838 PDF objects out of 2073 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 76 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 86 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -174,39 +174,39 @@
 \MT@newlabel{eq:accuracy}
 \newlabel{eq:two_normal}{{29}{17}{}{}{}}
 \newlabel{eq:two_lognormal}{{30}{17}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Iterative Algorithms for Energy Clustering}{17}{}}
-\newlabel{sec:algo}{{VI}{17}{}{}{}}
-\MT@newlabel{eq:qcqp2}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces   $\mathcal  {E}^{1D}$-clustering versus $k$-means and GMM. We plot the average accuracy \MT_extended_eqref:n  {eq:accuracy}, over $100$ Monte Carlo trials, versus the number of sampled points. Error bars are standard error. The dashed line indicates Bayes accuracy ($\approx 0.88$ in both cases). (a) Clustering results for data normally distributed as in \MT_extended_eqref:n  {eq:two_normal}, where we show the histograms of each component above the experimental plot. (b) Data lognormally distributed as in \MT_extended_eqref:n  {eq:two_lognormal} with histograms of the components in the mixture. }}{18}{}}
+\MT@newlabel{eq:two_lognormal}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces   $\mathcal  {E}^{1D}$-clustering versus $k$-means and GMM. (a,b) We plot the mean accuracy \MT_extended_eqref:n  {eq:accuracy} over $100$ Monte Carlo trials, versus the number of sampled points. Error bars are standard error. The dashed line indicates Bayes accuracy ($\approx 0.88$ in both cases). (a) Clustering results for data normally distributed as in \MT_extended_eqref:n  {eq:two_normal}. (b) Data lognormally distributed as in \MT_extended_eqref:n  {eq:two_lognormal}. (c) Density estimation of each component in the mixture \MT_extended_eqref:n  {eq:two_normal} after clustering $1000$ sampled points using the three algorithms, compared to the ground truth. (d) The same but for lognormal data \MT_extended_eqref:n  {eq:two_lognormal}. }}{18}{}}
 \newlabel{fig:1d}{{1}{18}{}{}{}}
 \MT@newlabel{eq:accuracy}
 \MT@newlabel{eq:two_normal}
 \MT@newlabel{eq:two_lognormal}
+\MT@newlabel{eq:two_normal}
+\MT@newlabel{eq:two_lognormal}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Iterative Algorithms for Energy Clustering}{18}{}}
+\newlabel{sec:algo}{{VI}{18}{}{}{}}
+\MT@newlabel{eq:qcqp2}
 \MT@newlabel{eq:max_prob}
 \newlabel{eq:maxQ}{{31}{18}{}{}{}}
-\newlabel{eq:costxij}{{VI}{18}{}{}{}}
 \citation{Lloyd}
 \citation{Dhillon2,Dhillon}
-\citation{Hartigan}
+\newlabel{eq:costxij}{{VI}{19}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {}Lloyd's Method for Energy Clustering}{19}{}}
 \MT@newlabel{eq:J}
 \newlabel{eq:Jell}{{32}{19}{}{}{}}
 \MT@newlabel{eq:Jell}
-\MT@newlabel{eq:Jell}
-\@writefile{toc}{\contentsline {subsection}{\numberline {}Hartigan's Method for Energy Clustering}{19}{}}
-\MT@newlabel{eq:maxQ}
-\MT@newlabel{eq:qcqp2}
+\citation{Hartigan}
 \newlabel{kmeans_algo}{{2}{20}{}{}{}}
 \MT@newlabel{eq:qcqp2}
 \MT@newlabel{eq:maxQ}
 \MT@newlabel{eq:Jell}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces  $\mathcal  {E}^{L}$-clustering is Lloyd's method for energy clustering, which is precisely\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {} \\ kernel $k$-means algorithm, with the kernel induced by energy statistics. This procedure\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {} \\ finds local solutions to the optimization problem \MT_extended_eqref:n  {eq:qcqp2}.\hspace  {\fill } }}{20}{}}
+\MT@newlabel{eq:Jell}
+\@writefile{toc}{\contentsline {subsection}{\numberline {}Hartigan's Method for Energy Clustering}{20}{}}
 \MT@newlabel{eq:maxQ}
-\citation{Telgarsky}
+\MT@newlabel{eq:qcqp2}
+\MT@newlabel{eq:maxQ}
 \newlabel{eq:changeQ}{{33}{21}{}{}{}}
 \MT@newlabel{eq:maxQ}
-\citation{Telgarsky}
-\citation{Telgarsky}
 \citation{Telgarsky}
 \newlabel{algo}{{3}{22}{}{}{}}
 \MT@newlabel{eq:qcqp2}
@@ -216,56 +216,63 @@
 \@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces  $\mathcal  {E}^H$-clustering is Hartigan's method for energy clustering. This algorithm\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {} \\ finds local solutions to the optimization problem \MT_extended_eqref:n  {eq:qcqp2}. The steps $6$ and $10$ are different\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {}\nobreakspace  {} \\ than $\mathcal  {E}^L$-clustering described in Algorithm\nobreakspace  {}2{}{}{}\hbox {}. \hspace  {\fill } }}{22}{}}
 \newlabel{noempty}{{1}{22}{}{}{}}
 \newlabel{diffmean}{{2}{22}{}{}{}}
+\citation{Telgarsky}
+\citation{Telgarsky}
+\citation{Telgarsky}
 \citation{Slonin}
 \citation{Slonin}
-\@writefile{toc}{\contentsline {section}{\numberline {VII}Numerical Experiments}{23}{}}
-\newlabel{sec:numerics}{{VII}{23}{}{}{}}
 \citation{scikit-learn}
 \citation{Vassilvitskii}
 \citation{Malik}
 \citation{Telgarsky}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Numerical Experiments}{24}{}}
+\newlabel{sec:numerics}{{VII}{24}{}{}{}}
 \newlabel{eq:rho_alpha}{{34}{24}{}{}{}}
 \newlabel{eq:rho_tilde}{{35}{24}{}{}{}}
 \newlabel{eq:rho_hat}{{36}{24}{}{}{}}
 \MT@newlabel{eq:kernel_semimetric}
 \MT@newlabel{eq:energy}
 \MT@newlabel{eq:accuracy}
-\newlabel{eq:gauss1}{{37}{24}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces   Comparison of $\mathcal  {E}^H$-clustering, $\mathcal  {E}^L$-clustering (kernel $k$-means), spectral clustering, $k$-means and GMM in high dimensional Gaussian settings. We plot the mean accuracy versus the number of dimensions, with error bars indicating standard error from $100$ Monte Carlo runs. (a) Data normally distributed as in \MT_extended_eqref:n  {eq:gauss1}, with Bayes accuracy $\approx 0.86$, over the range $D \in [10,200]$. (b) Data normally distributed as in \MT_extended_eqref:n  {eq:gauss2}, with Bayes accuracy $\approx 0.95$, over the range $D \in [10, 700]$. }}{25}{}}
-\newlabel{fig:gauss}{{2}{25}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces   Pair plots for the first $5$ dimensions. (a) Data normally distributed as in \MT_extended_eqref:n  {eq:gauss1}. (b) Data normally distributed as in \MT_extended_eqref:n  {eq:gauss2}. We sample $200$ points for both cases. We can see that there is a considerable overlap between the clusters. }}{25}{}}
+\newlabel{fig:pairsplot}{{2}{25}{}{}{}}
 \MT@newlabel{eq:gauss1}
 \MT@newlabel{eq:gauss2}
-\newlabel{eq:gauss2}{{38}{25}{}{}{}}
+\newlabel{eq:gauss1}{{37}{25}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces   Comparison of $\mathcal  {E}^H$-clustering, $\mathcal  {E}^L$-clustering (kernel $k$-means), spectral clustering, $k$-means and GMM in high dimensional Gaussian settings. We plot the mean accuracy versus the number of dimensions, with error bars indicating standard error from $100$ Monte Carlo runs. (a) Data normally distributed as in \MT_extended_eqref:n  {eq:gauss1}, with Bayes accuracy $\approx 0.86$, over the range $D \in [10,200]$. (b) Data normally distributed as in \MT_extended_eqref:n  {eq:gauss2}, with Bayes accuracy $\approx 0.95$, over the range $D \in [10, 700]$. }}{26}{}}
+\newlabel{fig:gauss}{{3}{26}{}{}{}}
+\MT@newlabel{eq:gauss1}
 \MT@newlabel{eq:gauss2}
-\newlabel{eq:20gauss}{{39}{26}{}{}{}}
+\newlabel{eq:gauss2}{{38}{26}{}{}{}}
+\MT@newlabel{eq:gauss2}
+\newlabel{eq:20gauss}{{39}{27}{}{}{}}
 \MT@newlabel{eq:rho_alpha}
 \MT@newlabel{eq:rho_tilde}
-\newlabel{eq:20loggauss}{{40}{26}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces   $\mathcal  {E}^H$-clustering with kernels \MT_extended_eqref:n  {eq:rho_alpha} and \MT_extended_eqref:n  {eq:rho_tilde} versus $k$-means and GMM. In both settings Bayes accuracy is $\approx 0.9$. We show average accuracy (error bars are standard error) versus number of points for $100$ Monte Carlo trials. (a,b) Gaussian mixture \MT_extended_eqref:n  {eq:20gauss}. (c,d) Lognormal mixture \MT_extended_eqref:n  {eq:20loggauss}. The plots in (c) and (d) consider the difference in accuracy between $\mathcal  {E}^H$ versus $\mathcal  {E}^L$ (kernel $k$-means) and spectral clustering, with the kernel $\setbox \z@ \hbox {\frozen@everymath \@emptytoks \mathsurround \z@ $\textstyle K$}\mathaccent "0365{K}_1$. }}{27}{}}
-\newlabel{fig:consist}{{3}{27}{}{}{}}
+\newlabel{eq:20loggauss}{{40}{27}{}{}{}}
+\MT@newlabel{eq:rho_alpha}
+\MT@newlabel{eq:rho_tilde}
+\MT@newlabel{eq:rho_hat}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces   $\mathcal  {E}^H$-clustering with kernels \MT_extended_eqref:n  {eq:rho_alpha} and \MT_extended_eqref:n  {eq:rho_tilde} versus $k$-means and GMM. In both settings Bayes accuracy is $\approx 0.9$. We show average accuracy (error bars are standard error) versus number of points for $100$ Monte Carlo trials. (a,b) Gaussian mixture \MT_extended_eqref:n  {eq:20gauss}. (c,d) Lognormal mixture \MT_extended_eqref:n  {eq:20loggauss}. The plots in (c) and (d) consider the difference in accuracy between $\mathcal  {E}^H$ versus $\mathcal  {E}^L$ (kernel $k$-means) and spectral clustering, with the kernel $\setbox \z@ \hbox {\frozen@everymath \@emptytoks \mathsurround \z@ $\textstyle K$}\mathaccent "0365{K}_1$. }}{28}{}}
+\newlabel{fig:consist}{{4}{28}{}{}{}}
 \MT@newlabel{eq:rho_alpha}
 \MT@newlabel{eq:rho_tilde}
 \MT@newlabel{eq:20gauss}
 \MT@newlabel{eq:20loggauss}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces  (a) Parallel cigars. (b) Two concentric circles with noise. (c) Three concentric circles with noise. (d) MNIST handwritten digits. Clustering results are in Table\nobreakspace  {}I{}{}{}\hbox {} and Table\nobreakspace  {}II{}{}{}\hbox {}. }}{27}{}}
-\newlabel{fig:other}{{4}{27}{}{}{}}
-\citation{Sapiro}
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces  Clustering data from Fig.\nobreakspace  {}4{}{}{}\hbox {}a--c. }}{28}{}}
-\newlabel{table:other}{{I}{28}{}{}{}}
-\MT@newlabel{eq:rho_alpha}
-\MT@newlabel{eq:rho_tilde}
-\MT@newlabel{eq:rho_hat}
-\newlabel{eq:sigma}{{VII}{28}{}{}{}}
-\MT@newlabel{eq:rho_tilde}
-\MT@newlabel{eq:rho_hat}
-\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces  Clustering MNIST data from Fig.\nobreakspace  {}4{}{}{}\hbox {}d. }}{29}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  (a) Parallel cigars. (b) Two concentric circles with noise. (c) Three concentric circles with noise. (d) MNIST handwritten digits. Clustering results are in Table\nobreakspace  {}I{}{}{}\hbox {} and Table\nobreakspace  {}II{}{}{}\hbox {}. }}{28}{}}
+\newlabel{fig:other}{{5}{28}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces  Clustering data from Fig.\nobreakspace  {}5{}{}{}\hbox {}a--c. }}{29}{}}
+\newlabel{table:other}{{I}{29}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces  Clustering MNIST data from Fig.\nobreakspace  {}5{}{}{}\hbox {}d. }}{29}{}}
 \newlabel{table:mnist}{{II}{29}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion}{29}{}}
-\newlabel{sec:conclusion}{{VIII}{29}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces   Comparison of energy clustering algorithms to $k$-means and GMM on unbalanced clusters. The data is normally distributed as \MT_extended_eqref:n  {eq:gauss3}, where we vary $m \in [0, 240]$, and in each case we do $100$ Monte Carlo runs showing the average accuracy with standard error. }}{30}{}}
-\newlabel{fig:unbalanced}{{5}{30}{}{}{}}
+\citation{Sapiro}
+\newlabel{eq:sigma}{{VII}{30}{}{}{}}
+\MT@newlabel{eq:rho_tilde}
+\MT@newlabel{eq:rho_hat}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion}{30}{}}
+\newlabel{sec:conclusion}{{VIII}{30}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces   Comparison of energy clustering algorithms to $k$-means and GMM on unbalanced clusters. The data is normally distributed as \MT_extended_eqref:n  {eq:gauss3}, where we vary $m \in [0, 240]$, and in each case we do $100$ Monte Carlo runs showing the average accuracy with standard error. }}{31}{}}
+\newlabel{fig:unbalanced}{{6}{31}{}{}{}}
 \MT@newlabel{eq:gauss3}
-\newlabel{eq:gauss3}{{41}{30}{}{}{}}
+\newlabel{eq:gauss3}{{41}{31}{}{}{}}
 \bibdata{energy_clusteringNotes,biblio.bib}
 \bibcite{Szkely2013}{{1}{}{{}}{{}}}
 \bibcite{RizzoVariance}{{2}{}{{}}{{}}}
@@ -276,10 +283,10 @@
 \bibcite{Lloyd}{{7}{}{{}}{{}}}
 \bibcite{MacQueen}{{8}{}{{}}{{}}}
 \bibcite{Forgy}{{9}{}{{}}{{}}}
-\@writefile{toc}{\contentsline {section}{\numberline {}Acknowledgments}{31}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {}References}{31}{}}
 \bibcite{Smola}{{10}{}{{}}{{}}}
 \bibcite{Girolami}{{11}{}{{}}{{}}}
+\@writefile{toc}{\contentsline {section}{\numberline {}Acknowledgments}{32}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {}References}{32}{}}
 \bibcite{Mercer}{{12}{}{{}}{{}}}
 \bibcite{Dhillon2}{{13}{}{{}}{{}}}
 \bibcite{Dhillon}{{14}{}{{}}{{}}}
@@ -300,5 +307,5 @@
 \bibcite{Sapiro}{{29}{}{{}}{{}}}
 \bibstyle{unsrt}
 \providecommand\NAT@force@numbers{}\NAT@force@numbers
-\newlabel{LastBibItem}{{29}{33}{}{}{}}
-\newlabel{LastPage}{{}{33}{}{}{}}
+\newlabel{LastBibItem}{{29}{34}{}{}{}}
+\newlabel{LastPage}{{}{34}{}{}{}}
