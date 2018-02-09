@@ -15,6 +15,7 @@ import energy.metric as metric
 import energy.eclust as eclust 
 import energy.energy1d as energy1d
 
+
 def initialize(init, k, G, X):
     """Initializaton function to use in energy Lloyd and Hartigan."""
     if init == "spectral":
@@ -43,7 +44,9 @@ def energy_lloyd(k, X, G, z, run_times=10, init="spectral"):
             best_score = score
             best_z = zh
 
-    return metric.accuracy(z, best_z)
+    a = metric.accuracy(z, best_z)
+    v = metric.variation_information(z, best_z)
+    return a, v
 
 def energy_hartigan(k, X, G, z, run_times=10, init="spectral"):
     """Run few times and pick the best objective function value."""
@@ -58,7 +61,9 @@ def energy_hartigan(k, X, G, z, run_times=10, init="spectral"):
             best_score = score
             best_z = zh
 
-    return metric.accuracy(z, best_z)
+    a = metric.accuracy(z, best_z)
+    v = metric.variation_information(z, best_z)
+    return a, v
 
 def energy_spectral(k, X, G, z, run_times=10, init="random"):
     """Run few times and pick the best objective function value.
@@ -75,7 +80,9 @@ def energy_spectral(k, X, G, z, run_times=10, init="random"):
             best_score = score
             best_z = zh
 
-    return metric.accuracy(z, best_z)
+    a = metric.accuracy(z, best_z)
+    v = metric.variation_information(z, best_z)
+    return a, v
 
 def energy1D(X, z):
     """Energy clustering in 1 dimension. No need to run multiple times since
@@ -92,7 +99,9 @@ def kmeans(k, X, z, run_times=10, init='k-means++'):
     km = KMeans(k, n_init=run_times, init=init)
     km.fit(X)
     zh = km.labels_
-    return metric.accuracy(z, zh)
+    a = metric.accuracy(z, zh)
+    v = metric.variation_information(z, zh)
+    return a, v
 
 def gmm(k, X, z, run_times=10, init='kmeans'):
     """GMM from sklearn library. init = {'kmeans', 'random'}, run_times
@@ -103,7 +112,9 @@ def gmm(k, X, z, run_times=10, init='kmeans'):
     gm = GMM(k, n_init=run_times, init_params=init)
     gm.fit(X)
     zh = gm.predict(X)
-    return metric.accuracy(z, zh)
+    a = metric.accuracy(z, zh)
+    v = metric.variation_information(z, zh)
+    return a, v
 
 def spectral(k, X, G, z, run_times=10):
     """Spectral clustering from sklearn library. 
@@ -113,7 +124,9 @@ def spectral(k, X, G, z, run_times=10):
     """
     sc = SpectralClustering(k, affinity='precomputed', n_init=run_times)
     zh = sc.fit_predict(G)
-    return metric.accuracy(z, zh)
+    a = metric.accuracy(z, zh)
+    v = metric.variation_information(z, zh)
+    return a, v
 
 
 ##############################################################################
@@ -175,8 +188,8 @@ if __name__ == "__main__":
     s1 = 0.3
     m2 = 0
     s2 = 1.5
-    X, z = data.univariate_normal([m1, m2], [s1, s2], [n1, n2])
-    #X, z = data.univariate_lognormal([m1, m2], [s1, s2], [n1, n2])
+    #X, z = data.univariate_normal([m1, m2], [s1, s2], [n1, n2])
+    X, z = data.univariate_lognormal([m1, m2], [s1, s2], [n1, n2])
     Y = np.array([[x] for x in X])
     G = eclust.kernel_matrix(Y, lambda x, y: np.linalg.norm(x-y))
     

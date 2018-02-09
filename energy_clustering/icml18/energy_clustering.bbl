@@ -1,0 +1,178 @@
+\begin{thebibliography}{26}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Aronszajn(1950)]{Aronszajn}
+Aronszajn, N.
+\newblock {Theory of Reproducing Kernels}.
+\newblock \emph{Transactions of the American Mathematical Society}, 68\penalty0
+  (3):\penalty0 337--404, 1950.
+
+\bibitem[Arthur \& Vassilvitskii(2007)Arthur and Vassilvitskii]{Vassilvitskii}
+Arthur, D. and Vassilvitskii, S.
+\newblock {$k$-means++: The Advantage of Careful Seeding}.
+\newblock In \emph{Proceedings of the Eighteenth annual ACM-SIAM Symposium on
+  Discrete Algorithms}, pp.\  1027--1035, Philadelphia, PA, USA, 2007. Society
+  for Industrial and Applied Mathematics.
+
+\bibitem[Berg et~al.(1984)Berg, Christensen, and Ressel]{Berg1984}
+Berg, C., Christensen, J. P.~R., and Ressel, P.
+\newblock \emph{{Harmonic Analysis on Semigroups: Theory of Positive Definite
+  and Related Functions}}.
+\newblock Graduate Text in Mathematics 100. Springer, New York, 1984.
+
+\bibitem[Dhillon et~al.(2004)Dhillon, Guan, and Kulis]{Dhillon2}
+Dhillon, I.~S., Guan, Y., and Kulis, B.
+\newblock {Kernel K-means: Spectral Clustering and Normalized Cuts}.
+\newblock In \emph{Proceedings of the Tenth ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, KDD '04, pp.\  551--556, New York,
+  NY, USA, 2004. ACM.
+
+\bibitem[Dhillon et~al.(2007)Dhillon, Guan, and Kulis]{Dhillon}
+Dhillon, I.~S., Guan, Y., and Kulis, B.
+\newblock {Weighted Graph Cuts without Eigenvectors: A Multilevel Approach}.
+\newblock \emph{IEEE Transactions on Pattern Analysis and Machine
+  Intelligence}, 29\penalty0 (11):\penalty0 1944--1957, 2007.
+
+\bibitem[Filippone et~al.(2008)Filippone, Camastra, Masulli, and
+  Rovetta]{Filippone}
+Filippone, M., Camastra, F., Masulli, F., and Rovetta, S.
+\newblock {A Survey of Kernel and Spectral Methods for Clustering}.
+\newblock \emph{Pattern Recognition}, 41:\penalty0 176--190, 2008.
+
+\bibitem[Forgy(1965)]{Forgy}
+Forgy, E.
+\newblock {Cluster Analysis of Multivariate Data: Efficiency versus
+  Interpretabiliby of Classification}.
+\newblock \emph{Biometrics}, 21\penalty0 (3):\penalty0 768--769, 1965.
+
+\bibitem[Girolami(2002)]{Girolami}
+Girolami, M.
+\newblock {Kernel Based Clustering in Feature Space}.
+\newblock \emph{Neural Networks}, 13\penalty0 (3):\penalty0 780--784, 2002.
+
+\bibitem[Gretton et~al.(2012)Gretton, Borgwardt, Rasch, Sch{\"olkopf}, and
+  Smola]{Gretton2012}
+Gretton, A., Borgwardt, K.~M., Rasch, M.~J., Sch{\"olkopf}, B., and Smola, A.
+\newblock {A Kernel Two-Sample Test}.
+\newblock \emph{Journal of Machine Learning Research}, 13:\penalty0 723--773,
+  2012.
+
+\bibitem[Hartigan \& Wong(1979)Hartigan and Wong]{Hartigan}
+Hartigan, J.~A. and Wong, M.~A.
+\newblock {Algorithm AS 136: A $k$-Means Clustering Algorithm}.
+\newblock \emph{Journal of the Royal Statistical Society. Series C (Applied
+  Statistics)}, 28\penalty0 (1):\penalty0 100--108, 1979.
+
+\bibitem[{J. B. MacQueen}(1967)]{MacQueen}
+{J. B. MacQueen}.
+\newblock {Some Methods for Classification and Analysis of Multivariate
+  Observations}.
+\newblock In \emph{{Proceedings of the 5th Berkeley Symposium on Mathematical
+  Statistics and Probability}}, volume~1, pp.\  281--297. University of
+  California Press, 1967.
+
+\bibitem[Li(2015)]{Kgroups}
+Li, S.
+\newblock {$k$-Groups: A Generalization of $k$-Means by Energy Distance}.
+\newblock PhD Thesis, Bowling Green State University, 2015.
+
+\bibitem[Lloyd(1982)]{Lloyd}
+Lloyd, S.~P.
+\newblock {Least Squares Quantization in PCM}.
+\newblock \emph{IEEE Transactions on Information Theory}, 28\penalty0
+  (2):\penalty0 129--137, 1982.
+
+\bibitem[Lyons(2013)]{Lyons}
+Lyons, R.
+\newblock {Distance Covariance in Metric Spaces}.
+\newblock \emph{The Annals of Probability}, 41\penalty0 (5):\penalty0
+  3284--3305, 2013.
+
+\bibitem[Mercer(1909)]{Mercer}
+Mercer, J.
+\newblock {Functions of Positive and Negative Type and their Connection with
+  the Theory of Integral Equations}.
+\newblock \emph{Proceedings of the Royal Society of London}, 209:\penalty0
+  415--446, 1909.
+
+\bibitem[Pedregosa et~al.(2011)Pedregosa, Varoquaux, Gramfort, Michel, Thirion,
+  Grisel, Blondel, Prettenhofer, Weiss, Dubourg, Vanderplas, Passos,
+  Cournapeau, Brucher, Perrot, and Duchesnay]{scikit-learn}
+Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel,
+  O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V., Vanderplas, J.,
+  Passos, A., Cournapeau, D., Brucher, M., Perrot, M., and Duchesnay, E.
+\newblock Scikit-learn: Machine learning in {P}ython.
+\newblock \emph{Journal of Machine Learning Research}, 12:\penalty0 2825--2830,
+  2011.
+
+\bibitem[Rizzo \& Sz{\'e}kely(2010)Rizzo and Sz{\'e}kely]{RizzoVariance}
+Rizzo, M.~L. and Sz{\'e}kely, G.~J.
+\newblock {DISCO Analysis: A Nonparametric Extension of Analysis of Variance}.
+\newblock \emph{The Annals of Applied Statistics}, 4\penalty0 (2):\penalty0
+  1034--1055, 2010.
+
+\bibitem[Sch\"{o}lkopf et~al.(1998)Sch\"{o}lkopf, Smola, and M\"{u}ller]{Smola}
+Sch\"{o}lkopf, B., Smola, A.~J., and M\"{u}ller, K.~R.
+\newblock {Nonlinear Component Analysis as a Kernel Eigenvalue Problem}.
+\newblock \emph{Neural Computation}, 10:\penalty0 1299--1319, 1998.
+
+\bibitem[Sejdinovic et~al.(2013)Sejdinovic, Sriperumbudur, Gretton, and
+  Fukumizu]{Sejdinovic2013}
+Sejdinovic, D., Sriperumbudur, B., Gretton, A., and Fukumizu, K.
+\newblock {Equivalence of Distance-Based and RKHS-Based Statistic in Hypothesis
+  Testing}.
+\newblock \emph{The Annals of Statistics}, 41\penalty0 (5):\penalty0
+  2263--2291, 2013.
+
+\bibitem[Shi \& Malik(2000)Shi and Malik]{Malik}
+Shi, J. and Malik, J.
+\newblock {Normalized Cust and Image Segmentation}.
+\newblock \emph{IEEE Transactions on Pattern Analysis and Machine
+  Intelligence}, 22\penalty0 (8):\penalty0 888--905, 2000.
+
+\bibitem[Slonim et~al.(2013)Slonim, Aharoni, and Crammer]{Slonin}
+Slonim, N., Aharoni, E., and Crammer, K.
+\newblock {Hartigan's $k$-Means versus Lloyd's $k$-Means --- Is it Time for a
+  Change?}
+\newblock In \emph{Proceedings of the 20th International Conference on
+  Artificial Intelligence}, pp.\  1677--1684. AAI Press, 2013.
+
+\bibitem[Sz{\'e}kely \& Rizzo(2005)Sz{\'e}kely and Rizzo]{RizzoClustering}
+Sz{\'e}kely, G.~J. and Rizzo, M.~L.
+\newblock {Hierarchical Clustering via Joint Between-Within Distances:
+  Extending Ward's Minimum Variance Method}.
+\newblock \emph{Journal of Classification}, 22\penalty0 (2):\penalty0 151--183,
+  2005.
+
+\bibitem[Sz{\'e}kely \& Rizzo(2013)Sz{\'e}kely and Rizzo]{Szkely2013}
+Sz{\'e}kely, G.~J. and Rizzo, M.~L.
+\newblock {Energy Statistics: A Class of Statistics Based on Distances}.
+\newblock \emph{Journal of Statistical Planning and Inference}, 143:\penalty0
+  1249--1272, 2013.
+
+\bibitem[Telgarsky \& Vattani(2010)Telgarsky and Vattani]{Telgarsky}
+Telgarsky, M. and Vattani, A.
+\newblock {Hartigan's Method: $k$-Means Clustering without Voronoi}.
+\newblock In \emph{Proceedings of the 13th International Conference on
+  Artificial Intelligence and Statistics (AISTATS)}, volume~9, pp.\  313--319.
+  JMLR, 2010.
+
+\bibitem[Tibshirani et~al.(2001)Tibshirani, Walther, and
+  Hastie]{Tibshirani2001}
+Tibshirani, R., Walther, G., and Hastie, T.
+\newblock "estimating the number of clusters in a data set via the gap
+  statistic".
+\newblock \emph{J. Royal Statistical Society B}, 63\penalty0 (2):\penalty0
+  411--423, 2001.
+
+\bibitem[von Luxburg(2007)]{vonLuxburg2007}
+von Luxburg, U.
+\newblock "a tutorial on spectral clustering".
+\newblock \emph{Statistics and Computing}, 17\penalty0 (4):\penalty0 395--416,
+  2007.
+
+\end{thebibliography}

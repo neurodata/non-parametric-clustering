@@ -245,6 +245,7 @@ def histogram_gauss_loggauss(xlim=None, ylim=None, fname='plot.pdf'):
     ax.fill_between(xs, 0, y2s, color=c, alpha=0.3)
 
     ax.set_xlabel(r'$x$')
+    ax.set_ylabel(r'density')
     if xlim:
         ax.set_xlim(xlim)
     if ylim:
@@ -322,9 +323,9 @@ if __name__ == '__main__':
     #          xlim=[0, 4.5])
     #histogram(X, z, colors=['g', 'k'], fname='hist_lognormal.pdf', bins=300,
     #    xlim=[0, 5])
-    #histogram_gauss_loggauss(fname='hist_normal.pdf', xlim=[-3,3], ylim=[0,1.4])
-    histogram_gauss_loggauss(fname='hist_lognormal.pdf', xlim=[0,8],
-                    ylim=[0,0.85])
+    #histogram_gauss_loggauss(fname='hist_normal.pdf', xlim=[-4,4], ylim=[0,1.4])
+    #histogram_gauss_loggauss(fname='hist_lognormal.pdf', xlim=[0,8],
+    #                ylim=[0,0.85])
 
     """
     # cigars
@@ -341,6 +342,7 @@ if __name__ == '__main__':
     s2 = np.array([[1,0],[0,20]])
     X, z = multivariate_normal([m1, m2], [s1, s2], [200, 200])
     plot(X, z, fname='./ball_cigar.pdf')
+    """
     
     # 2 circles
     X, z = circles([1, 3], [0.2, 0.2], [400, 400])
@@ -350,6 +352,7 @@ if __name__ == '__main__':
     X, z = circles([1, 3, 5], [0.2, 0.2, 0.2], [400, 400, 400])
     plot(X, z, fname='./3circles.pdf')
 
+    """
     # spirals
     X, z = spirals([1,-1], [[0.2,0.0], [-0.2,-0.0]], [400,400], noise=0.2)
     plot(X, z, fname='./2spiral.pdf')

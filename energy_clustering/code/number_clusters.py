@@ -57,7 +57,6 @@ ax.plot(ks, bic_scores, 'r-o', lw=2, ms=8)
 ax.set_xlabel('number of clusters')
 ax.set_ylabel('gmm BIC')
 
-
 ax = fig.add_subplot(236)
 ax.plot(ks, kmeans_gaps, 'r-o', lw=2, ms=8)
 ax.set_xlabel('number of clusters')

@@ -76,9 +76,9 @@ def make_plot(*data_files):
 
     ## customize plot below ##
     p = plot.ErrorBar()
-    p.xlabel = ''
-    p.ylabel = ''
-    p.legends = [r'$\mathcal{E}^{H}$', r'$k$-means', 'GMM']
+    p.xlabel = r'$n$'
+    p.ylabel = r'accuracy'
+    p.legends = [r'$\mathcal{E}^{H}$-clustering', r'$k$-means', 'GMM']
     p.colors = ['b', 'r', 'g']
     p.lines = ['-', '-', '-']
     #p.output = './experiments_figs2/1D_normal.pdf'
@@ -89,6 +89,7 @@ def make_plot(*data_files):
     #p.ylim = [0.75,0.89]
     p.ylim = [0.5,0.89]
     #p.loc = [0.45,0.5]
+    p.loc = [0.45,0.3]
     p.make_plot(table)
 
 def gen_data(fname):

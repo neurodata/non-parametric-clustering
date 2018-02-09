@@ -11,7 +11,7 @@ pylab.rc('text', usetex=True)
 pylab.rc('text.latex', preamble=[
         '\usepackage{amsmath,amsfonts,amssymb,relsize,cancel}'])
 #pylab.rc('axes', linewidth=0.5, labelsize=20)
-pylab.rc('axes', linewidth=0.5, labelsize=14)
+pylab.rc('axes', linewidth=0.5, labelsize=16)
 #pylab.rc('xtick', labelsize=12)
 pylab.rc('xtick', labelsize=12)
 #pylab.rc('ytick', labelsize=12)
@@ -24,7 +24,7 @@ inches_per_pt = 1.0/72.27
 golden_mean = (np.sqrt(5.0)-1.0)/2.0
 fig_width = fig_width_pt*inches_per_pt
 #fig_height = fig_width
-fig_height = fig_width*golden_mean
-#fig_height = fig_width
+#fig_height = fig_width*golden_mean
+fig_height = fig_width
 pylab.rc('figure', figsize=(fig_width, fig_height))
 

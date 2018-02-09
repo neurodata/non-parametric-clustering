@@ -1,0 +1,26 @@
+* Reviewer 1: We appreciate the comments and questions which will certainly improve the revision.
+
+a) Notice that no mathematical theory of energy statistics to clustering was proposed before, at least on this level. Kernel k-means optimization problem is heuristic, not originally derived from a general statistical theory. The equivalence we show between energy clustering and kernel k-means actually brings the later into a principled statistical basis, emerging as a consequence of energy statistics theory.
+
+b) There is a big gap in going from k-means to kernel k-means which motivated decades of research. The fact that Hartigan's was previously applied to k-means does not immediately imply that it can be extended to a "kernel theory". Moreover, even to k-means, there is pretty much only 2 papers in the literature that considers its advantages in simple settings (not even its complexity was derived). Hartigan's was never applied to clustering with kernels before, and further, we demonstrate that our proposed algorithm has the same complexity as kernel k-means, besides indicating several advantages, confirmed in the numerical  experiments.
+
+1) We should write the precise definition of accuracy, and we will do so in the revision. In simple words, it is the number of correct answers of the algorithm compared to the true labels (normalized in [0, 1]). In classification this is equivalent to Jacard index.
+
+2) That's correct! k-means and GMM model assumptions are not met on this data (non-Gaussian) resulting in more mistakes as sample size increases. Notice from Fig. 2, however, that in high dimensional settings, even when k-means and GMM models are satisfied, our proposed method clearly stands out.
+
+* Reviewer 2: We appreciate the positive feedback and useful suggestions.
+
+2) Section 2 is a review of well-known theory. Although we have a short space, we will incorporate your useful question in the revision. The factor of 2 is mostly a convention as long as one remove from both eqs. (4) and (5). The other factors are necessary to balance within dispersion, between energy statistics, and total dispersion, i.e. to obtain T = S + W, where T is the total dispersion. We refer to (Szekely and Rizzo 2013 pp 1258) for more details but we will clarify this in text.
+
+3) We will include a real experiment about Neural Synapses. This dataset is not large (n~thousands), but took years from experts to obtain this experimental data, which have 11 features describing the shape of neural synapses. We used our method to find k (we found 6) and we report the cluster centers which will be of great interest to Neuroscientists.
+
+* Reviewer 3: We appreciate comments and constructive criticism which will improve the quality of the paper.
+
+a) Theoretical concern: our theory is not just a reformulation of kernel k-means, spectral clustering and graph partitioning. We propose for the first time a first principled derivation of clustering from energy statistics theory, making direct connections with kernel methods; see also a) of reply to Reviwer 1. Our work brings together the seminal works of Szekely Rizzo (since the 80's) with recent connections with kernels from Sejdinovic, Sriperumburdur and Gretton (Annals of Stats. 2013), with application to clustering. Possible unknown connections may arise, however it is beyond the scope of the current paper.
+
+b) Algorithmic side: note the distinction between the optimization problem and the algorithm used to solve it. We showed a mathematical equivalence on an optimization level, however, our proposed algorithm (Hartigan's) is different than k-means algorithm (Lloyd's). Our algorithm has provable and empirical advantages, while keeping the same computational cost as kernel k-means algorithm. This explains the difference in Fig 3, and we will improve the explanation in a revised version.
+
+1) We will include a real data experiment in the revision. See also 3) in the reply to Reviewer 2 above.
+
+2) That's a very good suggestion and we will incorporate Variation of Information in the revision. We used accuracy because its the most direct measure and our settings are simple with true labels available. We plan also to provide other metrics such as Adjusted Rand Index. We did preliminary experiments and other metrics make our conclusions unchanged.
+

@@ -116,25 +116,25 @@ def make_plot(*data_files):
     ## customize plot below ##
     p = plot.ErrorBar()
     p.xlabel = r'$\#$ dimensions'
-    p.ylabel = 'accuracy'
-    p.legends = [r'$\mathcal{E}^{H}$', 
-                 #r'kernel', 
-                 r'$\mathcal{E}^L$', 
-                 r'spectral', 
+    p.ylabel = r'accuracy'
+    p.legends = [r'$\mathcal{E}^{H}$-clustering', 
+                 r'kernel $k$-means', 
+                 #r'$\mathcal{E}^L$', 
+                 r'spectral clustering', 
                  r'$k$-means', 
                  r'GMM']
     p.loc = 3
     p.colors = ['b', 'r', 'g', 'm', 'c']
     p.symbols = ['o', 's', 'D', '^', 'v']
     p.lines = ['-', '-', '-', '-', '-']
-    #p.output = './experiments_figs2/normal_highdim_mean.pdf'
-    p.output = './experiments_figs/normal_highdim_cov.pdf'
-    #p.bayes = 0.86
-    p.bayes = 0.9537075
-    #p.xlim = [10, 200]
-    p.xlim = [10, 700]
-    #p.ylim = [0.55, 0.87]
-    p.ylim = [0.55, 0.965]
+    p.output = './experiments_figs2/normal_highdim_mean.pdf'
+    #p.output = './experiments_figs2/normal_highdim_cov.pdf'
+    p.bayes = 0.86
+    #p.bayes = 0.9537075
+    p.xlim = [10, 200]
+    #p.xlim = [10, 700]
+    p.ylim = [0.55, 0.87]
+    #p.ylim = [0.55, 0.965]
     p.make_plot(table)
 
 def gen_data(fname):
@@ -165,7 +165,7 @@ def worker(dimensions, fname):
 
 ###############################################################################
 if __name__ == '__main__':
-    #fname = './experiments_data2/experiment_highdim_mean_%i.csv'
-    fname = './experiments_data2/experiment_highdim_cov1_%i.csv'
+    fname = './experiments_data2/experiment_highdim_mean_%i.csv'
+    #fname = './experiments_data2/experiment_highdim_cov1_%i.csv'
     #gen_data(fname)
     make_plot(fname%0, fname%1, fname%2, fname%3)

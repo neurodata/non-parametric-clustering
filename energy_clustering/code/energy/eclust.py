@@ -101,7 +101,8 @@ def energy_clustering_brute(k, G, Z0, max_iter=100, tol=1e-4, verbose=False):
     
     return Ztoz(Z)
 
-def energy_hartigan(k, G, Z0, max_iter=100, tol=1e-4, verbose=False):
+def energy_hartigan(k, G, Z0, max_iter=100, tol=1e-4, verbose=False,
+                    return_Z=False):
     """Optimize the W objective function by considering moving points
     to different partitions. Compute the change in the cost function by
     moving a point then decide the best partition to optimize the cost
@@ -174,10 +175,14 @@ def energy_hartigan(k, G, Z0, max_iter=100, tol=1e-4, verbose=False):
             print "\tE-clustering didn't converge after %i iterations." % count
         else:
             print "\tE-clustering converged in %i iterations." % count
-    
-    return Ztoz(Z)
 
-def energy_lloyd(k, G, Z0, max_iter=100, tol=1e-4, verbose=False):
+    if return_Z:
+        return Z
+    else:
+        return Ztoz(Z)
+
+def energy_lloyd(k, G, Z0, max_iter=100, tol=1e-4, verbose=False,
+                    return_Z=False):
     """Optimize QCQP through a kernel k-means approach, which is based
     on Lloyd's heuristic.
     
@@ -232,7 +237,10 @@ def energy_lloyd(k, G, Z0, max_iter=100, tol=1e-4, verbose=False):
         else:
             print "\tE-L-clustering converged in %i iterations." % count
     
-    return Ztoz(Z)
+    if return_Z:
+        return Z
+    else:
+        return Ztoz(Z)
 
 
 ###############################################################################
