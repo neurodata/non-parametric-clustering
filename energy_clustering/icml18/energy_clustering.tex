@@ -29,10 +29,10 @@
 \newcommand{\theHalgorithm}{\arabic{algorithm}}
 
 % Use the following line for the initial blind version submitted for review:
-%\usepackage{icml2018}
+\usepackage{icml2018}
 
 % If accepted, instead use the following line for the camera-ready submission:
-\usepackage[accepted]{icml2018}
+%\usepackage[accepted]{icml2018}
 
 % The \icmltitle you define below is probably too long as a header.
 % Therefore, a short form for the running title is supplied here:
@@ -162,8 +162,9 @@ We provide carefully designed numerical experiments illustrating
 that the proposed method is more flexible and outperforms
 kernel $k$-means, spectral clustering,
 standard $k$-means and Gaussian mixture models in a variety of settings,
-specially in high dimensions. We also employ the method 
-in a real data application describing shapes of neural synapses.
+specially in high dimensions. We employ the method 
+to an important real dataset describing protein expressions
+of neural synapses.
 \end{abstract}
 
 
@@ -887,7 +888,7 @@ The following setup holds unless specified
 otherwise. 
 We consider
 $\mathcal{E}^H$-clustering, kernel $k$-means and spectral clustering
-with \mbox{generating} kernels to the following semimetrics:
+with \mbox{generating} kernels to the following metrics:
 \begin{subequations}
 \label{eq:test_metrics}
 \begin{align}
@@ -1149,7 +1150,7 @@ The results are shown in Table~\ref{table:other}.
 $\mathcal{E}^H$-clustering has superior performance
 in every example, in particular better than the
 spectral clustering.
-For parallel cigars the semimetrics $\rho_1$ and $\rho_{1/2}$ still provide
+For parallel cigars the metrics $\rho_1$ and $\rho_{1/2}$ still provide
 accurate results, however, for
 the concentric circles the kernel choice is more sensitive.
 
@@ -1168,7 +1169,7 @@ Clustering synapse dataset.
 Plots in order from \emph{left} to \emph{right}.
 \emph{First:} Eigenvalues of random walk Laplacian. We choose
 $k=6$ since its the first time we see a peak. We use energy clustering
-with the two semimetrics $\rho_1$ and $\widehat{\rho}_2$; see
+with the two metrics $\rho_1$ and $\widehat{\rho}_2$; see
 \eqref{eq:test_metrics}.
 \emph{Second:} Heat map of the cluster means versus features
 using energy clustering with standard
@@ -1176,7 +1177,7 @@ metric $\rho_1$ from energy statistics.
 \emph{Third:} Clustered points projected into the two principal components,
 using $\rho_1$.
 \emph{Fourth:} Heat map of the cluster means versus features
-using energy clustering with Gaussian semimetric 
+using energy clustering with Gaussian metric 
 $\widehat{\rho}_2$.
 \emph{Fifth:} Clustered points projected into the two principal components,
 using $\widehat{\rho}_2$.
@@ -1184,30 +1185,33 @@ using $\widehat{\rho}_2$.
 \end{figure*}
 
 
-We now illustrate an application to real data of 
-$\mathcal{E}^H$-clustering algorithm based on Hartigan's method.
-This dataset describes the shapes of neural synapses and was collected
-by expert neuroscientists. It consists of $1025$ data points
+The considered dataset 
+describes protein expression of neural synapses (chemical 
+connections between neurons), being
+crucial for understanding the diversity of synapses. This is
+part of a large NIH funded consortium within the BRAIN initiative;
+we refer to \citet{Collman2015} for details.
+We have $1025$ data points
 with $11$ features. Each point
-corresponds to $(x,y,z)$ location in the brain. We normalize this
-dataset beforehand.
+corresponds to a $(x,y,z)$ location in the brain. We normalize this
+dataset before applying $\mathcal{E}^H$-clustering.
 
-We apply $\mathcal{E}^H$-clustering using the two
-semimetrics $\rho_1$ and $\widehat{\rho}_2$; see \eqref{eq:test_metrics}.
+We use the two
+metrics $\rho_1$ and $\widehat{\rho}_2$; see \eqref{eq:test_metrics}.
 We compute the difference between eigenvalues of the random walk Laplacian
 obtained from the kernel matrix $G$ \eqref{eq:kernel_matrix}.
-The choice of $k$ corresponds to the first time we see a meaningfull
+The choice of $k$ corresponds to the first time we see a meaningful
 peak in the plot, which occurs at $k=6$; first plot in
 Fig.~\ref{fig:synapse}.
-This procedure to find $k$ is commonn in the literature \cite{vonLuxburg2007}.
+This procedure to find $k$ is common in the literature \cite{vonLuxburg2007}.
 Having found $k$ we now cluster the data.
-First we use the semimetric $\rho_1$, which
+First we use the metric $\rho_1$, which
 is the standard Euclidean choice in energy statistics.
 In the second and third plots of Fig.~\ref{fig:synapse} we show a heat
 map of the cluster means versus features and the clustered data points
-projected into the 2 principal components, respectivelly.
+projected into the 2 principal components, respectively.
 The fourth and fifth plots in Fig.~\ref{fig:synapse} show the same
-experiment but using the semimetric $\widehat{\rho}_2$ corresponding
+experiment but using the metric $\widehat{\rho}_2$ corresponding
 to a Gaussian kernel.
 
 We remark that we also used the gap statistic \cite{Tibshirani2001} based
@@ -1224,15 +1228,15 @@ statistic test.
 We proposed clustering from the perspective of generalized energy
 statistics, valid for arbitrary spaces of negative type.
 Our mathematical formulation yields
-a QCQP in the associated kernel Hilbert space; 
-see  Proposition~\ref{th:qcqp2}.
-We demonstrated that such QCQP
+a QCQP in the associated RKHS;
+Proposition~\ref{th:qcqp2}.
+We showed that such QCQP
 is equivalent to kernel $k$-means optimization problem, 
-once the kernel is fixed; see
-Proposition~\ref{th:kernel_kmeans}. Energy statistics, however, fixes
+once the kernel is fixed; 
+Proposition~\ref{th:kernel_kmeans}. However, energy statistics fixes
 a family of standard kernels in Euclidean space, and
 more general kernels 
-on spaces of negative type can also be obtained.
+on spaces of negative type as well.
 
 We proposed the iterative $\mathcal{E}^H$-clustering 
 (Algorithm~\ref{algo})
@@ -1240,11 +1244,11 @@ which is
 a kernelized version of Hartigan's method. 
 It was compared to kernel $k$-means algorithm,
 based on Lloyd's heuristic.
-Both have the same time complexity, however, numerical and theoretical
+Both have the same complexity, however, numerical and theoretical
 results provide compelling evidence that $\mathcal{E}^H$-clustering
-is more robust with a superior performance, specially in high
+is more robust with superior performance, specially in high
 dimensions. 
-Furthermore, $\mathcal{E}^H$-clustering with standard kernels from energy
+Moreover, $\mathcal{E}^H$-clustering with standard kernels from energy
 statistics outperformed $k$-means and GMM
 on several settings, even on Gaussian ones.
 In some cases
@@ -1252,19 +1256,20 @@ $\mathcal{E}^H$-clustering also surpassed spectral clustering, and in
 others performed similarly but never worse. 
 Note that computing eigenvectors
 of large matrices can be unfeasible and iterative methods are preferred.
-We provided an application of $\mathcal{E}^H$-clustering to a real dataset
-describing shapes of neural synapses.
+We provided an application of $\mathcal{E}^H$-clustering to an
+important real dataset
+describing protein expression of neural synapses.
 Finally, we remark that kernel methods can benefit from sparsity and
 fixed-rank approximations of the Gram matrix and there is plenty
 of room to make $\mathcal{E}^H$-clustering more scalable.
 
 
-\subsection*{Acknowledgements}
-We would like to thank Carey Priebe 
-for discussions.
-We would like to acknowledge the support of the Transformative
-Research Award (NIH \#R01NS092474) and  the Defense Advanced Research Projects
-Agency’s (DARPA) SIMPLEX program through SPAWAR contract N66001-15-C-4041.
+%\subsection*{Acknowledgements}
+%We would like to thank Carey Priebe 
+%for discussions.
+%We would like to acknowledge the support of the Transformative
+%Research Award (NIH \#R01NS092474) and  the Defense Advanced Research Projects
+%Agency’s (DARPA) SIMPLEX program through SPAWAR contract N66001-15-C-4041.
 
 
 \bibliographystyle{icml2018}

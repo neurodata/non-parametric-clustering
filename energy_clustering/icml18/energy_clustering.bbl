@@ -1,4 +1,4 @@
-\begin{thebibliography}{26}
+\begin{thebibliography}{27}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -23,6 +23,14 @@ Berg, C., Christensen, J. P.~R., and Ressel, P.
 \newblock \emph{{Harmonic Analysis on Semigroups: Theory of Positive Definite
   and Related Functions}}.
 \newblock Graduate Text in Mathematics 100. Springer, New York, 1984.
+
+\bibitem[Collman et~al.(2015)Collman, Buchanan, Phend, Micheva, Weinberg, and
+  Smith]{Collman2015}
+Collman, F., Buchanan, J., Phend, K.~D., Micheva, K.~D., Weinberg, R.~J., and
+  Smith, S.~J.
+\newblock "mapping synapses by conjugate light-electron array tomography".
+\newblock \emph{The Journal of Neuroscience}, 34\penalty0 (14):\penalty0
+  5792--5807, 2015.
 
 \bibitem[Dhillon et~al.(2004)Dhillon, Guan, and Kulis]{Dhillon2}
 Dhillon, I.~S., Guan, Y., and Kulis, B.
