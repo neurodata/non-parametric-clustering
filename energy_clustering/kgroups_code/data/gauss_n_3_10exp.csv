@@ -1,0 +1,2401 @@
+method,points,accuracy
+k-means,10,0.6
+gmm,10,0.6
+spectral clustering $\widetilde{\rho}_1$,10,0.7
+kernel k-groups $\rho_{1}$,10,0.6
+kernel k-groups $\rho_{1/2}$,10,0.6
+kernel k-groups $\widetilde{\rho}_{1}$,10,0.7
+k-means,20,0.65
+gmm,20,0.8
+spectral clustering $\widetilde{\rho}_1$,20,0.8
+kernel k-groups $\rho_{1}$,20,0.65
+kernel k-groups $\rho_{1/2}$,20,0.75
+kernel k-groups $\widetilde{\rho}_{1}$,20,0.9
+k-means,30,0.6
+gmm,30,0.666666666667
+spectral clustering $\widetilde{\rho}_1$,30,0.533333333333
+kernel k-groups $\rho_{1}$,30,0.566666666667
+kernel k-groups $\rho_{1/2}$,30,0.566666666667
+kernel k-groups $\widetilde{\rho}_{1}$,30,0.566666666667
+k-means,40,0.675
+gmm,40,0.675
+spectral clustering $\widetilde{\rho}_1$,40,0.75
+kernel k-groups $\rho_{1}$,40,0.825
+kernel k-groups $\rho_{1/2}$,40,0.875
+kernel k-groups $\widetilde{\rho}_{1}$,40,0.875
+k-means,50,0.66
+gmm,50,0.58
+spectral clustering $\widetilde{\rho}_1$,50,0.56
+kernel k-groups $\rho_{1}$,50,0.82
+kernel k-groups $\rho_{1/2}$,50,0.82
+kernel k-groups $\widetilde{\rho}_{1}$,50,0.84
+k-means,60,0.583333333333
+gmm,60,0.616666666667
+spectral clustering $\widetilde{\rho}_1$,60,0.616666666667
+kernel k-groups $\rho_{1}$,60,0.533333333333
+kernel k-groups $\rho_{1/2}$,60,0.566666666667
+kernel k-groups $\widetilde{\rho}_{1}$,60,0.933333333333
+k-means,70,0.742857142857
+gmm,70,0.671428571429
+spectral clustering $\widetilde{\rho}_1$,70,0.757142857143
+kernel k-groups $\rho_{1}$,70,0.771428571429
+kernel k-groups $\rho_{1/2}$,70,0.771428571429
+kernel k-groups $\widetilde{\rho}_{1}$,70,0.8
+k-means,80,0.5125
+gmm,80,0.6375
+spectral clustering $\widetilde{\rho}_1$,80,0.7625
+kernel k-groups $\rho_{1}$,80,0.5125
+kernel k-groups $\rho_{1/2}$,80,0.575
+kernel k-groups $\widetilde{\rho}_{1}$,80,0.85
+k-means,90,0.733333333333
+gmm,90,0.544444444444
+spectral clustering $\widetilde{\rho}_1$,90,0.777777777778
+kernel k-groups $\rho_{1}$,90,0.777777777778
+kernel k-groups $\rho_{1/2}$,90,0.777777777778
+kernel k-groups $\widetilde{\rho}_{1}$,90,0.866666666667
+k-means,100,0.51
+gmm,100,0.57
+spectral clustering $\widetilde{\rho}_1$,100,0.8
+kernel k-groups $\rho_{1}$,100,0.59
+kernel k-groups $\rho_{1/2}$,100,0.65
+kernel k-groups $\widetilde{\rho}_{1}$,100,0.85
+k-means,110,0.6
+gmm,110,0.6
+spectral clustering $\widetilde{\rho}_1$,110,0.736363636364
+kernel k-groups $\rho_{1}$,110,0.536363636364
+kernel k-groups $\rho_{1/2}$,110,0.563636363636
+kernel k-groups $\widetilde{\rho}_{1}$,110,0.936363636364
+k-means,120,0.55
+gmm,120,0.633333333333
+spectral clustering $\widetilde{\rho}_1$,120,0.858333333333
+kernel k-groups $\rho_{1}$,120,0.766666666667
+kernel k-groups $\rho_{1/2}$,120,0.783333333333
+kernel k-groups $\widetilde{\rho}_{1}$,120,0.9
+k-means,130,0.684615384615
+gmm,130,0.684615384615
+spectral clustering $\widetilde{\rho}_1$,130,0.715384615385
+kernel k-groups $\rho_{1}$,130,0.761538461538
+kernel k-groups $\rho_{1/2}$,130,0.784615384615
+kernel k-groups $\widetilde{\rho}_{1}$,130,0.846153846154
+k-means,140,0.592857142857
+gmm,140,0.578571428571
+spectral clustering $\widetilde{\rho}_1$,140,0.757142857143
+kernel k-groups $\rho_{1}$,140,0.614285714286
+kernel k-groups $\rho_{1/2}$,140,0.614285714286
+kernel k-groups $\widetilde{\rho}_{1}$,140,0.85
+k-means,150,0.686666666667
+gmm,150,0.733333333333
+spectral clustering $\widetilde{\rho}_1$,150,0.7
+kernel k-groups $\rho_{1}$,150,0.713333333333
+kernel k-groups $\rho_{1/2}$,150,0.72
+kernel k-groups $\widetilde{\rho}_{1}$,150,0.82
+k-means,160,0.625
+gmm,160,0.53125
+spectral clustering $\widetilde{\rho}_1$,160,0.80625
+kernel k-groups $\rho_{1}$,160,0.7375
+kernel k-groups $\rho_{1/2}$,160,0.76875
+kernel k-groups $\widetilde{\rho}_{1}$,160,0.90625
+k-means,170,0.623529411765
+gmm,170,0.705882352941
+spectral clustering $\widetilde{\rho}_1$,170,0.723529411765
+kernel k-groups $\rho_{1}$,170,0.729411764706
+kernel k-groups $\rho_{1/2}$,170,0.758823529412
+kernel k-groups $\widetilde{\rho}_{1}$,170,0.805882352941
+k-means,180,0.716666666667
+gmm,180,0.538888888889
+spectral clustering $\widetilde{\rho}_1$,180,0.822222222222
+kernel k-groups $\rho_{1}$,180,0.744444444444
+kernel k-groups $\rho_{1/2}$,180,0.783333333333
+kernel k-groups $\widetilde{\rho}_{1}$,180,0.844444444444
+k-means,190,0.731578947368
+gmm,190,0.815789473684
+spectral clustering $\widetilde{\rho}_1$,190,0.794736842105
+kernel k-groups $\rho_{1}$,190,0.815789473684
+kernel k-groups $\rho_{1/2}$,190,0.847368421053
+kernel k-groups $\widetilde{\rho}_{1}$,190,0.936842105263
+k-means,200,0.655
+gmm,200,0.585
+spectral clustering $\widetilde{\rho}_1$,200,0.8
+kernel k-groups $\rho_{1}$,200,0.65
+kernel k-groups $\rho_{1/2}$,200,0.685
+kernel k-groups $\widetilde{\rho}_{1}$,200,0.79
+k-means,210,0.647619047619
+gmm,210,0.638095238095
+spectral clustering $\widetilde{\rho}_1$,210,0.814285714286
+kernel k-groups $\rho_{1}$,210,0.77619047619
+kernel k-groups $\rho_{1/2}$,210,0.814285714286
+kernel k-groups $\widetilde{\rho}_{1}$,210,0.890476190476
+k-means,220,0.636363636364
+gmm,220,0.518181818182
+spectral clustering $\widetilde{\rho}_1$,220,0.754545454545
+kernel k-groups $\rho_{1}$,220,0.7
+kernel k-groups $\rho_{1/2}$,220,0.713636363636
+kernel k-groups $\widetilde{\rho}_{1}$,220,0.9
+k-means,230,0.582608695652
+gmm,230,0.617391304348
+spectral clustering $\widetilde{\rho}_1$,230,0.847826086957
+kernel k-groups $\rho_{1}$,230,0.739130434783
+kernel k-groups $\rho_{1/2}$,230,0.804347826087
+kernel k-groups $\widetilde{\rho}_{1}$,230,0.882608695652
+k-means,240,0.525
+gmm,240,0.579166666667
+spectral clustering $\widetilde{\rho}_1$,240,0.858333333333
+kernel k-groups $\rho_{1}$,240,0.745833333333
+kernel k-groups $\rho_{1/2}$,240,0.795833333333
+kernel k-groups $\widetilde{\rho}_{1}$,240,0.879166666667
+k-means,250,0.72
+gmm,250,0.58
+spectral clustering $\widetilde{\rho}_1$,250,0.808
+kernel k-groups $\rho_{1}$,250,0.82
+kernel k-groups $\rho_{1/2}$,250,0.848
+kernel k-groups $\widetilde{\rho}_{1}$,250,0.868
+k-means,260,0.623076923077
+gmm,260,0.730769230769
+spectral clustering $\widetilde{\rho}_1$,260,0.788461538462
+kernel k-groups $\rho_{1}$,260,0.715384615385
+kernel k-groups $\rho_{1/2}$,260,0.746153846154
+kernel k-groups $\widetilde{\rho}_{1}$,260,0.834615384615
+k-means,270,0.733333333333
+gmm,270,0.755555555556
+spectral clustering $\widetilde{\rho}_1$,270,0.859259259259
+kernel k-groups $\rho_{1}$,270,0.755555555556
+kernel k-groups $\rho_{1/2}$,270,0.777777777778
+kernel k-groups $\widetilde{\rho}_{1}$,270,0.87037037037
+k-means,280,0.564285714286
+gmm,280,0.646428571429
+spectral clustering $\widetilde{\rho}_1$,280,0.8
+kernel k-groups $\rho_{1}$,280,0.646428571429
+kernel k-groups $\rho_{1/2}$,280,0.728571428571
+kernel k-groups $\widetilde{\rho}_{1}$,280,0.875
+k-means,290,0.624137931034
+gmm,290,0.768965517241
+spectral clustering $\widetilde{\rho}_1$,290,0.844827586207
+kernel k-groups $\rho_{1}$,290,0.793103448276
+kernel k-groups $\rho_{1/2}$,290,0.851724137931
+kernel k-groups $\widetilde{\rho}_{1}$,290,0.868965517241
+k-means,300,0.673333333333
+gmm,300,0.663333333333
+spectral clustering $\widetilde{\rho}_1$,300,0.833333333333
+kernel k-groups $\rho_{1}$,300,0.7
+kernel k-groups $\rho_{1/2}$,300,0.81
+kernel k-groups $\widetilde{\rho}_{1}$,300,0.896666666667
+k-means,310,0.735483870968
+gmm,310,0.790322580645
+spectral clustering $\widetilde{\rho}_1$,310,0.825806451613
+kernel k-groups $\rho_{1}$,310,0.783870967742
+kernel k-groups $\rho_{1/2}$,310,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,310,0.861290322581
+k-means,320,0.7125
+gmm,320,0.73125
+spectral clustering $\widetilde{\rho}_1$,320,0.859375
+kernel k-groups $\rho_{1}$,320,0.809375
+kernel k-groups $\rho_{1/2}$,320,0.828125
+kernel k-groups $\widetilde{\rho}_{1}$,320,0.878125
+k-means,330,0.60303030303
+gmm,330,0.724242424242
+spectral clustering $\widetilde{\rho}_1$,330,0.806060606061
+kernel k-groups $\rho_{1}$,330,0.80303030303
+kernel k-groups $\rho_{1/2}$,330,0.815151515152
+kernel k-groups $\widetilde{\rho}_{1}$,330,0.890909090909
+k-means,340,0.75
+gmm,340,0.755882352941
+spectral clustering $\widetilde{\rho}_1$,340,0.847058823529
+kernel k-groups $\rho_{1}$,340,0.785294117647
+kernel k-groups $\rho_{1/2}$,340,0.832352941176
+kernel k-groups $\widetilde{\rho}_{1}$,340,0.867647058824
+k-means,350,0.714285714286
+gmm,350,0.8
+spectral clustering $\widetilde{\rho}_1$,350,0.825714285714
+kernel k-groups $\rho_{1}$,350,0.76
+kernel k-groups $\rho_{1/2}$,350,0.834285714286
+kernel k-groups $\widetilde{\rho}_{1}$,350,0.874285714286
+k-means,360,0.711111111111
+gmm,360,0.608333333333
+spectral clustering $\widetilde{\rho}_1$,360,0.852777777778
+kernel k-groups $\rho_{1}$,360,0.772222222222
+kernel k-groups $\rho_{1/2}$,360,0.786111111111
+kernel k-groups $\widetilde{\rho}_{1}$,360,0.886111111111
+k-means,370,0.732432432432
+gmm,370,0.818918918919
+spectral clustering $\widetilde{\rho}_1$,370,0.878378378378
+kernel k-groups $\rho_{1}$,370,0.818918918919
+kernel k-groups $\rho_{1/2}$,370,0.824324324324
+kernel k-groups $\widetilde{\rho}_{1}$,370,0.897297297297
+k-means,380,0.642105263158
+gmm,380,0.776315789474
+spectral clustering $\widetilde{\rho}_1$,380,0.863157894737
+kernel k-groups $\rho_{1}$,380,0.802631578947
+kernel k-groups $\rho_{1/2}$,380,0.821052631579
+kernel k-groups $\widetilde{\rho}_{1}$,380,0.907894736842
+k-means,390,0.712820512821
+gmm,390,0.748717948718
+spectral clustering $\widetilde{\rho}_1$,390,0.871794871795
+kernel k-groups $\rho_{1}$,390,0.753846153846
+kernel k-groups $\rho_{1/2}$,390,0.807692307692
+kernel k-groups $\widetilde{\rho}_{1}$,390,0.889743589744
+k-means,400,0.69
+gmm,400,0.785
+spectral clustering $\widetilde{\rho}_1$,400,0.8025
+kernel k-groups $\rho_{1}$,400,0.7475
+kernel k-groups $\rho_{1/2}$,400,0.795
+kernel k-groups $\widetilde{\rho}_{1}$,400,0.8425
+k-means,10,0.6
+gmm,10,0.9
+spectral clustering $\widetilde{\rho}_1$,10,0.8
+kernel k-groups $\rho_{1}$,10,0.6
+kernel k-groups $\rho_{1/2}$,10,0.7
+kernel k-groups $\widetilde{\rho}_{1}$,10,0.9
+k-means,20,0.55
+gmm,20,0.5
+spectral clustering $\widetilde{\rho}_1$,20,0.65
+kernel k-groups $\rho_{1}$,20,0.6
+kernel k-groups $\rho_{1/2}$,20,0.6
+kernel k-groups $\widetilde{\rho}_{1}$,20,0.6
+k-means,30,0.5
+gmm,30,0.5
+spectral clustering $\widetilde{\rho}_1$,30,0.733333333333
+kernel k-groups $\rho_{1}$,30,0.566666666667
+kernel k-groups $\rho_{1/2}$,30,0.6
+kernel k-groups $\widetilde{\rho}_{1}$,30,0.733333333333
+k-means,40,0.75
+gmm,40,0.65
+spectral clustering $\widetilde{\rho}_1$,40,0.625
+kernel k-groups $\rho_{1}$,40,0.85
+kernel k-groups $\rho_{1/2}$,40,0.85
+kernel k-groups $\widetilde{\rho}_{1}$,40,0.9
+k-means,50,0.62
+gmm,50,0.54
+spectral clustering $\widetilde{\rho}_1$,50,0.76
+kernel k-groups $\rho_{1}$,50,0.72
+kernel k-groups $\rho_{1/2}$,50,0.74
+kernel k-groups $\widetilde{\rho}_{1}$,50,0.82
+k-means,60,0.766666666667
+gmm,60,0.55
+spectral clustering $\widetilde{\rho}_1$,60,0.583333333333
+kernel k-groups $\rho_{1}$,60,0.766666666667
+kernel k-groups $\rho_{1/2}$,60,0.766666666667
+kernel k-groups $\widetilde{\rho}_{1}$,60,0.883333333333
+k-means,70,0.628571428571
+gmm,70,0.685714285714
+spectral clustering $\widetilde{\rho}_1$,70,0.628571428571
+kernel k-groups $\rho_{1}$,70,0.657142857143
+kernel k-groups $\rho_{1/2}$,70,0.714285714286
+kernel k-groups $\widetilde{\rho}_{1}$,70,0.7
+k-means,80,0.725
+gmm,80,0.5375
+spectral clustering $\widetilde{\rho}_1$,80,0.7875
+kernel k-groups $\rho_{1}$,80,0.7875
+kernel k-groups $\rho_{1/2}$,80,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,80,0.8875
+k-means,90,0.666666666667
+gmm,90,0.622222222222
+spectral clustering $\widetilde{\rho}_1$,90,0.644444444444
+kernel k-groups $\rho_{1}$,90,0.733333333333
+kernel k-groups $\rho_{1/2}$,90,0.733333333333
+kernel k-groups $\widetilde{\rho}_{1}$,90,0.855555555556
+k-means,100,0.57
+gmm,100,0.51
+spectral clustering $\widetilde{\rho}_1$,100,0.73
+kernel k-groups $\rho_{1}$,100,0.55
+kernel k-groups $\rho_{1/2}$,100,0.6
+kernel k-groups $\widetilde{\rho}_{1}$,100,0.73
+k-means,110,0.727272727273
+gmm,110,0.527272727273
+spectral clustering $\widetilde{\rho}_1$,110,0.818181818182
+kernel k-groups $\rho_{1}$,110,0.727272727273
+kernel k-groups $\rho_{1/2}$,110,0.727272727273
+kernel k-groups $\widetilde{\rho}_{1}$,110,0.854545454545
+k-means,120,0.666666666667
+gmm,120,0.725
+spectral clustering $\widetilde{\rho}_1$,120,0.783333333333
+kernel k-groups $\rho_{1}$,120,0.775
+kernel k-groups $\rho_{1/2}$,120,0.758333333333
+kernel k-groups $\widetilde{\rho}_{1}$,120,0.908333333333
+k-means,130,0.638461538462
+gmm,130,0.561538461538
+spectral clustering $\widetilde{\rho}_1$,130,0.553846153846
+kernel k-groups $\rho_{1}$,130,0.623076923077
+kernel k-groups $\rho_{1/2}$,130,0.638461538462
+kernel k-groups $\widetilde{\rho}_{1}$,130,0.830769230769
+k-means,140,0.607142857143
+gmm,140,0.535714285714
+spectral clustering $\widetilde{\rho}_1$,140,0.735714285714
+kernel k-groups $\rho_{1}$,140,0.678571428571
+kernel k-groups $\rho_{1/2}$,140,0.507142857143
+kernel k-groups $\widetilde{\rho}_{1}$,140,0.857142857143
+k-means,150,0.62
+gmm,150,0.593333333333
+spectral clustering $\widetilde{\rho}_1$,150,0.713333333333
+kernel k-groups $\rho_{1}$,150,0.626666666667
+kernel k-groups $\rho_{1/2}$,150,0.646666666667
+kernel k-groups $\widetilde{\rho}_{1}$,150,0.86
+k-means,160,0.6125
+gmm,160,0.68125
+spectral clustering $\widetilde{\rho}_1$,160,0.74375
+kernel k-groups $\rho_{1}$,160,0.625
+kernel k-groups $\rho_{1/2}$,160,0.6125
+kernel k-groups $\widetilde{\rho}_{1}$,160,0.875
+k-means,170,0.670588235294
+gmm,170,0.752941176471
+spectral clustering $\widetilde{\rho}_1$,170,0.782352941176
+kernel k-groups $\rho_{1}$,170,0.729411764706
+kernel k-groups $\rho_{1/2}$,170,0.752941176471
+kernel k-groups $\widetilde{\rho}_{1}$,170,0.864705882353
+k-means,180,0.583333333333
+gmm,180,0.6
+spectral clustering $\widetilde{\rho}_1$,180,0.755555555556
+kernel k-groups $\rho_{1}$,180,0.616666666667
+kernel k-groups $\rho_{1/2}$,180,0.694444444444
+kernel k-groups $\widetilde{\rho}_{1}$,180,0.838888888889
+k-means,190,0.505263157895
+gmm,190,0.657894736842
+spectral clustering $\widetilde{\rho}_1$,190,0.705263157895
+kernel k-groups $\rho_{1}$,190,0.726315789474
+kernel k-groups $\rho_{1/2}$,190,0.789473684211
+kernel k-groups $\widetilde{\rho}_{1}$,190,0.878947368421
+k-means,200,0.665
+gmm,200,0.665
+spectral clustering $\widetilde{\rho}_1$,200,0.745
+kernel k-groups $\rho_{1}$,200,0.72
+kernel k-groups $\rho_{1/2}$,200,0.79
+kernel k-groups $\widetilde{\rho}_{1}$,200,0.86
+k-means,210,0.561904761905
+gmm,210,0.719047619048
+spectral clustering $\widetilde{\rho}_1$,210,0.733333333333
+kernel k-groups $\rho_{1}$,210,0.833333333333
+kernel k-groups $\rho_{1/2}$,210,0.847619047619
+kernel k-groups $\widetilde{\rho}_{1}$,210,0.828571428571
+k-means,220,0.581818181818
+gmm,220,0.65
+spectral clustering $\widetilde{\rho}_1$,220,0.827272727273
+kernel k-groups $\rho_{1}$,220,0.772727272727
+kernel k-groups $\rho_{1/2}$,220,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,220,0.904545454545
+k-means,230,0.660869565217
+gmm,230,0.673913043478
+spectral clustering $\widetilde{\rho}_1$,230,0.839130434783
+kernel k-groups $\rho_{1}$,230,0.765217391304
+kernel k-groups $\rho_{1/2}$,230,0.786956521739
+kernel k-groups $\widetilde{\rho}_{1}$,230,0.917391304348
+k-means,240,0.6375
+gmm,240,0.658333333333
+spectral clustering $\widetilde{\rho}_1$,240,0.841666666667
+kernel k-groups $\rho_{1}$,240,0.645833333333
+kernel k-groups $\rho_{1/2}$,240,0.754166666667
+kernel k-groups $\widetilde{\rho}_{1}$,240,0.895833333333
+k-means,250,0.724
+gmm,250,0.772
+spectral clustering $\widetilde{\rho}_1$,250,0.844
+kernel k-groups $\rho_{1}$,250,0.808
+kernel k-groups $\rho_{1/2}$,250,0.832
+kernel k-groups $\widetilde{\rho}_{1}$,250,0.864
+k-means,260,0.657692307692
+gmm,260,0.692307692308
+spectral clustering $\widetilde{\rho}_1$,260,0.796153846154
+kernel k-groups $\rho_{1}$,260,0.730769230769
+kernel k-groups $\rho_{1/2}$,260,0.776923076923
+kernel k-groups $\widetilde{\rho}_{1}$,260,0.869230769231
+k-means,270,0.540740740741
+gmm,270,0.57037037037
+spectral clustering $\widetilde{\rho}_1$,270,0.748148148148
+kernel k-groups $\rho_{1}$,270,0.744444444444
+kernel k-groups $\rho_{1/2}$,270,0.762962962963
+kernel k-groups $\widetilde{\rho}_{1}$,270,0.837037037037
+k-means,280,0.717857142857
+gmm,280,0.689285714286
+spectral clustering $\widetilde{\rho}_1$,280,0.839285714286
+kernel k-groups $\rho_{1}$,280,0.739285714286
+kernel k-groups $\rho_{1/2}$,280,0.775
+kernel k-groups $\widetilde{\rho}_{1}$,280,0.871428571429
+k-means,290,0.596551724138
+gmm,290,0.724137931034
+spectral clustering $\widetilde{\rho}_1$,290,0.803448275862
+kernel k-groups $\rho_{1}$,290,0.727586206897
+kernel k-groups $\rho_{1/2}$,290,0.762068965517
+kernel k-groups $\widetilde{\rho}_{1}$,290,0.855172413793
+k-means,300,0.69
+gmm,300,0.516666666667
+spectral clustering $\widetilde{\rho}_1$,300,0.77
+kernel k-groups $\rho_{1}$,300,0.803333333333
+kernel k-groups $\rho_{1/2}$,300,0.783333333333
+kernel k-groups $\widetilde{\rho}_{1}$,300,0.873333333333
+k-means,310,0.654838709677
+gmm,310,0.667741935484
+spectral clustering $\widetilde{\rho}_1$,310,0.787096774194
+kernel k-groups $\rho_{1}$,310,0.71935483871
+kernel k-groups $\rho_{1/2}$,310,0.767741935484
+kernel k-groups $\widetilde{\rho}_{1}$,310,0.883870967742
+k-means,320,0.765625
+gmm,320,0.746875
+spectral clustering $\widetilde{\rho}_1$,320,0.84375
+kernel k-groups $\rho_{1}$,320,0.778125
+kernel k-groups $\rho_{1/2}$,320,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,320,0.86875
+k-means,330,0.763636363636
+gmm,330,0.715151515152
+spectral clustering $\widetilde{\rho}_1$,330,0.79696969697
+kernel k-groups $\rho_{1}$,330,0.790909090909
+kernel k-groups $\rho_{1/2}$,330,0.827272727273
+kernel k-groups $\widetilde{\rho}_{1}$,330,0.866666666667
+k-means,340,0.694117647059
+gmm,340,0.691176470588
+spectral clustering $\widetilde{\rho}_1$,340,0.832352941176
+kernel k-groups $\rho_{1}$,340,0.767647058824
+kernel k-groups $\rho_{1/2}$,340,0.782352941176
+kernel k-groups $\widetilde{\rho}_{1}$,340,0.885294117647
+k-means,350,0.711428571429
+gmm,350,0.774285714286
+spectral clustering $\widetilde{\rho}_1$,350,0.874285714286
+kernel k-groups $\rho_{1}$,350,0.811428571429
+kernel k-groups $\rho_{1/2}$,350,0.834285714286
+kernel k-groups $\widetilde{\rho}_{1}$,350,0.9
+k-means,360,0.733333333333
+gmm,360,0.780555555556
+spectral clustering $\widetilde{\rho}_1$,360,0.838888888889
+kernel k-groups $\rho_{1}$,360,0.802777777778
+kernel k-groups $\rho_{1/2}$,360,0.819444444444
+kernel k-groups $\widetilde{\rho}_{1}$,360,0.880555555556
+k-means,370,0.708108108108
+gmm,370,0.724324324324
+spectral clustering $\widetilde{\rho}_1$,370,0.824324324324
+kernel k-groups $\rho_{1}$,370,0.759459459459
+kernel k-groups $\rho_{1/2}$,370,0.789189189189
+kernel k-groups $\widetilde{\rho}_{1}$,370,0.856756756757
+k-means,380,0.668421052632
+gmm,380,0.689473684211
+spectral clustering $\widetilde{\rho}_1$,380,0.831578947368
+kernel k-groups $\rho_{1}$,380,0.763157894737
+kernel k-groups $\rho_{1/2}$,380,0.792105263158
+kernel k-groups $\widetilde{\rho}_{1}$,380,0.889473684211
+k-means,390,0.7
+gmm,390,0.694871794872
+spectral clustering $\widetilde{\rho}_1$,390,0.823076923077
+kernel k-groups $\rho_{1}$,390,0.725641025641
+kernel k-groups $\rho_{1/2}$,390,0.789743589744
+kernel k-groups $\widetilde{\rho}_{1}$,390,0.874358974359
+k-means,400,0.66
+gmm,400,0.7275
+spectral clustering $\widetilde{\rho}_1$,400,0.845
+kernel k-groups $\rho_{1}$,400,0.7025
+kernel k-groups $\rho_{1/2}$,400,0.7475
+kernel k-groups $\widetilde{\rho}_{1}$,400,0.885
+k-means,10,0.7
+gmm,10,0.8
+spectral clustering $\widetilde{\rho}_1$,10,0.7
+kernel k-groups $\rho_{1}$,10,0.8
+kernel k-groups $\rho_{1/2}$,10,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,10,1.0
+k-means,20,0.5
+gmm,20,0.6
+spectral clustering $\widetilde{\rho}_1$,20,0.6
+kernel k-groups $\rho_{1}$,20,0.65
+kernel k-groups $\rho_{1/2}$,20,0.65
+kernel k-groups $\widetilde{\rho}_{1}$,20,0.6
+k-means,30,0.566666666667
+gmm,30,0.533333333333
+spectral clustering $\widetilde{\rho}_1$,30,0.566666666667
+kernel k-groups $\rho_{1}$,30,0.6
+kernel k-groups $\rho_{1/2}$,30,0.6
+kernel k-groups $\widetilde{\rho}_{1}$,30,0.666666666667
+k-means,40,0.625
+gmm,40,0.75
+spectral clustering $\widetilde{\rho}_1$,40,0.6
+kernel k-groups $\rho_{1}$,40,0.775
+kernel k-groups $\rho_{1/2}$,40,0.775
+kernel k-groups $\widetilde{\rho}_{1}$,40,0.775
+k-means,50,0.62
+gmm,50,0.7
+spectral clustering $\widetilde{\rho}_1$,50,0.66
+kernel k-groups $\rho_{1}$,50,0.58
+kernel k-groups $\rho_{1/2}$,50,0.58
+kernel k-groups $\widetilde{\rho}_{1}$,50,0.96
+k-means,60,0.633333333333
+gmm,60,0.55
+spectral clustering $\widetilde{\rho}_1$,60,0.933333333333
+kernel k-groups $\rho_{1}$,60,0.716666666667
+kernel k-groups $\rho_{1/2}$,60,0.85
+kernel k-groups $\widetilde{\rho}_{1}$,60,0.95
+k-means,70,0.542857142857
+gmm,70,0.6
+spectral clustering $\widetilde{\rho}_1$,70,0.542857142857
+kernel k-groups $\rho_{1}$,70,0.528571428571
+kernel k-groups $\rho_{1/2}$,70,0.757142857143
+kernel k-groups $\widetilde{\rho}_{1}$,70,0.814285714286
+k-means,80,0.6875
+gmm,80,0.5375
+spectral clustering $\widetilde{\rho}_1$,80,0.6875
+kernel k-groups $\rho_{1}$,80,0.6875
+kernel k-groups $\rho_{1/2}$,80,0.75
+kernel k-groups $\widetilde{\rho}_{1}$,80,0.875
+k-means,90,0.677777777778
+gmm,90,0.644444444444
+spectral clustering $\widetilde{\rho}_1$,90,0.566666666667
+kernel k-groups $\rho_{1}$,90,0.655555555556
+kernel k-groups $\rho_{1/2}$,90,0.744444444444
+kernel k-groups $\widetilde{\rho}_{1}$,90,0.866666666667
+k-means,100,0.52
+gmm,100,0.53
+spectral clustering $\widetilde{\rho}_1$,100,0.67
+kernel k-groups $\rho_{1}$,100,0.56
+kernel k-groups $\rho_{1/2}$,100,0.51
+kernel k-groups $\widetilde{\rho}_{1}$,100,0.87
+k-means,110,0.736363636364
+gmm,110,0.745454545455
+spectral clustering $\widetilde{\rho}_1$,110,0.836363636364
+kernel k-groups $\rho_{1}$,110,0.763636363636
+kernel k-groups $\rho_{1/2}$,110,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,110,0.854545454545
+k-means,120,0.6
+gmm,120,0.658333333333
+spectral clustering $\widetilde{\rho}_1$,120,0.825
+kernel k-groups $\rho_{1}$,120,0.725
+kernel k-groups $\rho_{1/2}$,120,0.791666666667
+kernel k-groups $\widetilde{\rho}_{1}$,120,0.825
+k-means,130,0.538461538462
+gmm,130,0.538461538462
+spectral clustering $\widetilde{\rho}_1$,130,0.769230769231
+kernel k-groups $\rho_{1}$,130,0.723076923077
+kernel k-groups $\rho_{1/2}$,130,0.769230769231
+kernel k-groups $\widetilde{\rho}_{1}$,130,0.884615384615
+k-means,140,0.578571428571
+gmm,140,0.664285714286
+spectral clustering $\widetilde{\rho}_1$,140,0.742857142857
+kernel k-groups $\rho_{1}$,140,0.821428571429
+kernel k-groups $\rho_{1/2}$,140,0.828571428571
+kernel k-groups $\widetilde{\rho}_{1}$,140,0.842857142857
+k-means,150,0.673333333333
+gmm,150,0.78
+spectral clustering $\widetilde{\rho}_1$,150,0.633333333333
+kernel k-groups $\rho_{1}$,150,0.646666666667
+kernel k-groups $\rho_{1/2}$,150,0.68
+kernel k-groups $\widetilde{\rho}_{1}$,150,0.88
+k-means,160,0.60625
+gmm,160,0.6
+spectral clustering $\widetilde{\rho}_1$,160,0.7375
+kernel k-groups $\rho_{1}$,160,0.75
+kernel k-groups $\rho_{1/2}$,160,0.75
+kernel k-groups $\widetilde{\rho}_{1}$,160,0.89375
+k-means,170,0.5
+gmm,170,0.558823529412
+spectral clustering $\widetilde{\rho}_1$,170,0.776470588235
+kernel k-groups $\rho_{1}$,170,0.523529411765
+kernel k-groups $\rho_{1/2}$,170,0.505882352941
+kernel k-groups $\widetilde{\rho}_{1}$,170,0.876470588235
+k-means,180,0.694444444444
+gmm,180,0.638888888889
+spectral clustering $\widetilde{\rho}_1$,180,0.844444444444
+kernel k-groups $\rho_{1}$,180,0.783333333333
+kernel k-groups $\rho_{1/2}$,180,0.794444444444
+kernel k-groups $\widetilde{\rho}_{1}$,180,0.894444444444
+k-means,190,0.673684210526
+gmm,190,0.694736842105
+spectral clustering $\widetilde{\rho}_1$,190,0.805263157895
+kernel k-groups $\rho_{1}$,190,0.710526315789
+kernel k-groups $\rho_{1/2}$,190,0.778947368421
+kernel k-groups $\widetilde{\rho}_{1}$,190,0.868421052632
+k-means,200,0.59
+gmm,200,0.57
+spectral clustering $\widetilde{\rho}_1$,200,0.645
+kernel k-groups $\rho_{1}$,200,0.505
+kernel k-groups $\rho_{1/2}$,200,0.655
+kernel k-groups $\widetilde{\rho}_{1}$,200,0.865
+k-means,210,0.819047619048
+gmm,210,0.795238095238
+spectral clustering $\widetilde{\rho}_1$,210,0.871428571429
+kernel k-groups $\rho_{1}$,210,0.847619047619
+kernel k-groups $\rho_{1/2}$,210,0.861904761905
+kernel k-groups $\widetilde{\rho}_{1}$,210,0.904761904762
+k-means,220,0.631818181818
+gmm,220,0.65
+spectral clustering $\widetilde{\rho}_1$,220,0.522727272727
+kernel k-groups $\rho_{1}$,220,0.659090909091
+kernel k-groups $\rho_{1/2}$,220,0.690909090909
+kernel k-groups $\widetilde{\rho}_{1}$,220,0.85
+k-means,230,0.6
+gmm,230,0.652173913043
+spectral clustering $\widetilde{\rho}_1$,230,0.752173913043
+kernel k-groups $\rho_{1}$,230,0.647826086957
+kernel k-groups $\rho_{1/2}$,230,0.726086956522
+kernel k-groups $\widetilde{\rho}_{1}$,230,0.808695652174
+k-means,240,0.666666666667
+gmm,240,0.670833333333
+spectral clustering $\widetilde{\rho}_1$,240,0.779166666667
+kernel k-groups $\rho_{1}$,240,0.716666666667
+kernel k-groups $\rho_{1/2}$,240,0.770833333333
+kernel k-groups $\widetilde{\rho}_{1}$,240,0.9125
+k-means,250,0.656
+gmm,250,0.572
+spectral clustering $\widetilde{\rho}_1$,250,0.78
+kernel k-groups $\rho_{1}$,250,0.716
+kernel k-groups $\rho_{1/2}$,250,0.744
+kernel k-groups $\widetilde{\rho}_{1}$,250,0.876
+k-means,260,0.680769230769
+gmm,260,0.726923076923
+spectral clustering $\widetilde{\rho}_1$,260,0.8
+kernel k-groups $\rho_{1}$,260,0.75
+kernel k-groups $\rho_{1/2}$,260,0.792307692308
+kernel k-groups $\widetilde{\rho}_{1}$,260,0.9
+k-means,270,0.633333333333
+gmm,270,0.574074074074
+spectral clustering $\widetilde{\rho}_1$,270,0.781481481481
+kernel k-groups $\rho_{1}$,270,0.622222222222
+kernel k-groups $\rho_{1/2}$,270,0.711111111111
+kernel k-groups $\widetilde{\rho}_{1}$,270,0.848148148148
+k-means,280,0.710714285714
+gmm,280,0.707142857143
+spectral clustering $\widetilde{\rho}_1$,280,0.778571428571
+kernel k-groups $\rho_{1}$,280,0.732142857143
+kernel k-groups $\rho_{1/2}$,280,0.767857142857
+kernel k-groups $\widetilde{\rho}_{1}$,280,0.825
+k-means,290,0.68275862069
+gmm,290,0.58275862069
+spectral clustering $\widetilde{\rho}_1$,290,0.803448275862
+kernel k-groups $\rho_{1}$,290,0.793103448276
+kernel k-groups $\rho_{1/2}$,290,0.806896551724
+kernel k-groups $\widetilde{\rho}_{1}$,290,0.855172413793
+k-means,300,0.686666666667
+gmm,300,0.756666666667
+spectral clustering $\widetilde{\rho}_1$,300,0.866666666667
+kernel k-groups $\rho_{1}$,300,0.75
+kernel k-groups $\rho_{1/2}$,300,0.823333333333
+kernel k-groups $\widetilde{\rho}_{1}$,300,0.873333333333
+k-means,310,0.716129032258
+gmm,310,0.703225806452
+spectral clustering $\widetilde{\rho}_1$,310,0.858064516129
+kernel k-groups $\rho_{1}$,310,0.829032258065
+kernel k-groups $\rho_{1/2}$,310,0.864516129032
+kernel k-groups $\widetilde{\rho}_{1}$,310,0.861290322581
+k-means,320,0.68125
+gmm,320,0.740625
+spectral clustering $\widetilde{\rho}_1$,320,0.81875
+kernel k-groups $\rho_{1}$,320,0.734375
+kernel k-groups $\rho_{1/2}$,320,0.7875
+kernel k-groups $\widetilde{\rho}_{1}$,320,0.85625
+k-means,330,0.709090909091
+gmm,330,0.730303030303
+spectral clustering $\widetilde{\rho}_1$,330,0.89696969697
+kernel k-groups $\rho_{1}$,330,0.824242424242
+kernel k-groups $\rho_{1/2}$,330,0.860606060606
+kernel k-groups $\widetilde{\rho}_{1}$,330,0.90303030303
+k-means,340,0.708823529412
+gmm,340,0.773529411765
+spectral clustering $\widetilde{\rho}_1$,340,0.802941176471
+kernel k-groups $\rho_{1}$,340,0.735294117647
+kernel k-groups $\rho_{1/2}$,340,0.782352941176
+kernel k-groups $\widetilde{\rho}_{1}$,340,0.852941176471
+k-means,350,0.714285714286
+gmm,350,0.722857142857
+spectral clustering $\widetilde{\rho}_1$,350,0.877142857143
+kernel k-groups $\rho_{1}$,350,0.74
+kernel k-groups $\rho_{1/2}$,350,0.817142857143
+kernel k-groups $\widetilde{\rho}_{1}$,350,0.865714285714
+k-means,360,0.741666666667
+gmm,360,0.769444444444
+spectral clustering $\widetilde{\rho}_1$,360,0.858333333333
+kernel k-groups $\rho_{1}$,360,0.769444444444
+kernel k-groups $\rho_{1/2}$,360,0.844444444444
+kernel k-groups $\widetilde{\rho}_{1}$,360,0.877777777778
+k-means,370,0.618918918919
+gmm,370,0.721621621622
+spectral clustering $\widetilde{\rho}_1$,370,0.797297297297
+kernel k-groups $\rho_{1}$,370,0.710810810811
+kernel k-groups $\rho_{1/2}$,370,0.754054054054
+kernel k-groups $\widetilde{\rho}_{1}$,370,0.897297297297
+k-means,380,0.702631578947
+gmm,380,0.671052631579
+spectral clustering $\widetilde{\rho}_1$,380,0.878947368421
+kernel k-groups $\rho_{1}$,380,0.760526315789
+kernel k-groups $\rho_{1/2}$,380,0.786842105263
+kernel k-groups $\widetilde{\rho}_{1}$,380,0.913157894737
+k-means,390,0.689743589744
+gmm,390,0.769230769231
+spectral clustering $\widetilde{\rho}_1$,390,0.817948717949
+kernel k-groups $\rho_{1}$,390,0.794871794872
+kernel k-groups $\rho_{1/2}$,390,0.817948717949
+kernel k-groups $\widetilde{\rho}_{1}$,390,0.841025641026
+k-means,400,0.7625
+gmm,400,0.855
+spectral clustering $\widetilde{\rho}_1$,400,0.835
+kernel k-groups $\rho_{1}$,400,0.795
+kernel k-groups $\rho_{1/2}$,400,0.835
+kernel k-groups $\widetilde{\rho}_{1}$,400,0.875
+k-means,10,0.6
+gmm,10,0.5
+spectral clustering $\widetilde{\rho}_1$,10,0.5
+kernel k-groups $\rho_{1}$,10,0.5
+kernel k-groups $\rho_{1/2}$,10,0.5
+kernel k-groups $\widetilde{\rho}_{1}$,10,0.5
+k-means,20,0.55
+gmm,20,0.55
+spectral clustering $\widetilde{\rho}_1$,20,0.8
+kernel k-groups $\rho_{1}$,20,0.6
+kernel k-groups $\rho_{1/2}$,20,0.6
+kernel k-groups $\widetilde{\rho}_{1}$,20,0.8
+k-means,30,0.833333333333
+gmm,30,0.8
+spectral clustering $\widetilde{\rho}_1$,30,0.666666666667
+kernel k-groups $\rho_{1}$,30,0.766666666667
+kernel k-groups $\rho_{1/2}$,30,0.766666666667
+kernel k-groups $\widetilde{\rho}_{1}$,30,0.933333333333
+k-means,40,0.575
+gmm,40,0.55
+spectral clustering $\widetilde{\rho}_1$,40,0.6
+kernel k-groups $\rho_{1}$,40,0.525
+kernel k-groups $\rho_{1/2}$,40,0.525
+kernel k-groups $\widetilde{\rho}_{1}$,40,0.825
+k-means,50,0.56
+gmm,50,0.58
+spectral clustering $\widetilde{\rho}_1$,50,0.58
+kernel k-groups $\rho_{1}$,50,0.58
+kernel k-groups $\rho_{1/2}$,50,0.58
+kernel k-groups $\widetilde{\rho}_{1}$,50,0.56
+k-means,60,0.616666666667
+gmm,60,0.616666666667
+spectral clustering $\widetilde{\rho}_1$,60,0.683333333333
+kernel k-groups $\rho_{1}$,60,0.516666666667
+kernel k-groups $\rho_{1/2}$,60,0.75
+kernel k-groups $\widetilde{\rho}_{1}$,60,0.766666666667
+k-means,70,0.542857142857
+gmm,70,0.528571428571
+spectral clustering $\widetilde{\rho}_1$,70,0.728571428571
+kernel k-groups $\rho_{1}$,70,0.542857142857
+kernel k-groups $\rho_{1/2}$,70,0.5
+kernel k-groups $\widetilde{\rho}_{1}$,70,0.785714285714
+k-means,80,0.575
+gmm,80,0.5125
+spectral clustering $\widetilde{\rho}_1$,80,0.6125
+kernel k-groups $\rho_{1}$,80,0.575
+kernel k-groups $\rho_{1/2}$,80,0.7625
+kernel k-groups $\widetilde{\rho}_{1}$,80,0.85
+k-means,90,0.588888888889
+gmm,90,0.6
+spectral clustering $\widetilde{\rho}_1$,90,0.755555555556
+kernel k-groups $\rho_{1}$,90,0.633333333333
+kernel k-groups $\rho_{1/2}$,90,0.822222222222
+kernel k-groups $\widetilde{\rho}_{1}$,90,0.933333333333
+k-means,100,0.72
+gmm,100,0.66
+spectral clustering $\widetilde{\rho}_1$,100,0.85
+kernel k-groups $\rho_{1}$,100,0.77
+kernel k-groups $\rho_{1/2}$,100,0.74
+kernel k-groups $\widetilde{\rho}_{1}$,100,0.84
+k-means,110,0.609090909091
+gmm,110,0.518181818182
+spectral clustering $\widetilde{\rho}_1$,110,0.763636363636
+kernel k-groups $\rho_{1}$,110,0.645454545455
+kernel k-groups $\rho_{1/2}$,110,0.763636363636
+kernel k-groups $\widetilde{\rho}_{1}$,110,0.854545454545
+k-means,120,0.633333333333
+gmm,120,0.5
+spectral clustering $\widetilde{\rho}_1$,120,0.8
+kernel k-groups $\rho_{1}$,120,0.733333333333
+kernel k-groups $\rho_{1/2}$,120,0.808333333333
+kernel k-groups $\widetilde{\rho}_{1}$,120,0.816666666667
+k-means,130,0.676923076923
+gmm,130,0.638461538462
+spectral clustering $\widetilde{\rho}_1$,130,0.715384615385
+kernel k-groups $\rho_{1}$,130,0.723076923077
+kernel k-groups $\rho_{1/2}$,130,0.723076923077
+kernel k-groups $\widetilde{\rho}_{1}$,130,0.761538461538
+k-means,140,0.7
+gmm,140,0.642857142857
+spectral clustering $\widetilde{\rho}_1$,140,0.85
+kernel k-groups $\rho_{1}$,140,0.735714285714
+kernel k-groups $\rho_{1/2}$,140,0.721428571429
+kernel k-groups $\widetilde{\rho}_{1}$,140,0.857142857143
+k-means,150,0.646666666667
+gmm,150,0.66
+spectral clustering $\widetilde{\rho}_1$,150,0.82
+kernel k-groups $\rho_{1}$,150,0.746666666667
+kernel k-groups $\rho_{1/2}$,150,0.76
+kernel k-groups $\widetilde{\rho}_{1}$,150,0.866666666667
+k-means,160,0.79375
+gmm,160,0.7875
+spectral clustering $\widetilde{\rho}_1$,160,0.8875
+kernel k-groups $\rho_{1}$,160,0.85
+kernel k-groups $\rho_{1/2}$,160,0.85
+kernel k-groups $\widetilde{\rho}_{1}$,160,0.9125
+k-means,170,0.617647058824
+gmm,170,0.741176470588
+spectral clustering $\widetilde{\rho}_1$,170,0.823529411765
+kernel k-groups $\rho_{1}$,170,0.776470588235
+kernel k-groups $\rho_{1/2}$,170,0.858823529412
+kernel k-groups $\widetilde{\rho}_{1}$,170,0.929411764706
+k-means,180,0.5
+gmm,180,0.616666666667
+spectral clustering $\widetilde{\rho}_1$,180,0.794444444444
+kernel k-groups $\rho_{1}$,180,0.633333333333
+kernel k-groups $\rho_{1/2}$,180,0.783333333333
+kernel k-groups $\widetilde{\rho}_{1}$,180,0.85
+k-means,190,0.684210526316
+gmm,190,0.594736842105
+spectral clustering $\widetilde{\rho}_1$,190,0.663157894737
+kernel k-groups $\rho_{1}$,190,0.689473684211
+kernel k-groups $\rho_{1/2}$,190,0.689473684211
+kernel k-groups $\widetilde{\rho}_{1}$,190,0.873684210526
+k-means,200,0.65
+gmm,200,0.675
+spectral clustering $\widetilde{\rho}_1$,200,0.775
+kernel k-groups $\rho_{1}$,200,0.79
+kernel k-groups $\rho_{1/2}$,200,0.82
+kernel k-groups $\widetilde{\rho}_{1}$,200,0.91
+k-means,210,0.580952380952
+gmm,210,0.738095238095
+spectral clustering $\widetilde{\rho}_1$,210,0.766666666667
+kernel k-groups $\rho_{1}$,210,0.809523809524
+kernel k-groups $\rho_{1/2}$,210,0.842857142857
+kernel k-groups $\widetilde{\rho}_{1}$,210,0.87619047619
+k-means,220,0.618181818182
+gmm,220,0.681818181818
+spectral clustering $\widetilde{\rho}_1$,220,0.827272727273
+kernel k-groups $\rho_{1}$,220,0.786363636364
+kernel k-groups $\rho_{1/2}$,220,0.818181818182
+kernel k-groups $\widetilde{\rho}_{1}$,220,0.895454545455
+k-means,230,0.678260869565
+gmm,230,0.713043478261
+spectral clustering $\widetilde{\rho}_1$,230,0.817391304348
+kernel k-groups $\rho_{1}$,230,0.769565217391
+kernel k-groups $\rho_{1/2}$,230,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,230,0.860869565217
+k-means,240,0.754166666667
+gmm,240,0.745833333333
+spectral clustering $\widetilde{\rho}_1$,240,0.808333333333
+kernel k-groups $\rho_{1}$,240,0.795833333333
+kernel k-groups $\rho_{1/2}$,240,0.8125
+kernel k-groups $\widetilde{\rho}_{1}$,240,0.858333333333
+k-means,250,0.668
+gmm,250,0.676
+spectral clustering $\widetilde{\rho}_1$,250,0.864
+kernel k-groups $\rho_{1}$,250,0.764
+kernel k-groups $\rho_{1/2}$,250,0.804
+kernel k-groups $\widetilde{\rho}_{1}$,250,0.88
+k-means,260,0.661538461538
+gmm,260,0.657692307692
+spectral clustering $\widetilde{\rho}_1$,260,0.834615384615
+kernel k-groups $\rho_{1}$,260,0.761538461538
+kernel k-groups $\rho_{1/2}$,260,0.788461538462
+kernel k-groups $\widetilde{\rho}_{1}$,260,0.873076923077
+k-means,270,0.648148148148
+gmm,270,0.662962962963
+spectral clustering $\widetilde{\rho}_1$,270,0.874074074074
+kernel k-groups $\rho_{1}$,270,0.718518518519
+kernel k-groups $\rho_{1/2}$,270,0.844444444444
+kernel k-groups $\widetilde{\rho}_{1}$,270,0.885185185185
+k-means,280,0.703571428571
+gmm,280,0.721428571429
+spectral clustering $\widetilde{\rho}_1$,280,0.807142857143
+kernel k-groups $\rho_{1}$,280,0.746428571429
+kernel k-groups $\rho_{1/2}$,280,0.792857142857
+kernel k-groups $\widetilde{\rho}_{1}$,280,0.842857142857
+k-means,290,0.655172413793
+gmm,290,0.703448275862
+spectral clustering $\widetilde{\rho}_1$,290,0.831034482759
+kernel k-groups $\rho_{1}$,290,0.720689655172
+kernel k-groups $\rho_{1/2}$,290,0.796551724138
+kernel k-groups $\widetilde{\rho}_{1}$,290,0.896551724138
+k-means,300,0.753333333333
+gmm,300,0.716666666667
+spectral clustering $\widetilde{\rho}_1$,300,0.83
+kernel k-groups $\rho_{1}$,300,0.813333333333
+kernel k-groups $\rho_{1/2}$,300,0.836666666667
+kernel k-groups $\widetilde{\rho}_{1}$,300,0.88
+k-means,310,0.590322580645
+gmm,310,0.687096774194
+spectral clustering $\widetilde{\rho}_1$,310,0.787096774194
+kernel k-groups $\rho_{1}$,310,0.7
+kernel k-groups $\rho_{1/2}$,310,0.790322580645
+kernel k-groups $\widetilde{\rho}_{1}$,310,0.854838709677
+k-means,320,0.66875
+gmm,320,0.721875
+spectral clustering $\widetilde{\rho}_1$,320,0.80625
+kernel k-groups $\rho_{1}$,320,0.740625
+kernel k-groups $\rho_{1/2}$,320,0.75625
+kernel k-groups $\widetilde{\rho}_{1}$,320,0.875
+k-means,330,0.675757575758
+gmm,330,0.678787878788
+spectral clustering $\widetilde{\rho}_1$,330,0.815151515152
+kernel k-groups $\rho_{1}$,330,0.715151515152
+kernel k-groups $\rho_{1/2}$,330,0.730303030303
+kernel k-groups $\widetilde{\rho}_{1}$,330,0.866666666667
+k-means,340,0.697058823529
+gmm,340,0.747058823529
+spectral clustering $\widetilde{\rho}_1$,340,0.832352941176
+kernel k-groups $\rho_{1}$,340,0.767647058824
+kernel k-groups $\rho_{1/2}$,340,0.823529411765
+kernel k-groups $\widetilde{\rho}_{1}$,340,0.847058823529
+k-means,350,0.634285714286
+gmm,350,0.662857142857
+spectral clustering $\widetilde{\rho}_1$,350,0.831428571429
+kernel k-groups $\rho_{1}$,350,0.734285714286
+kernel k-groups $\rho_{1/2}$,350,0.817142857143
+kernel k-groups $\widetilde{\rho}_{1}$,350,0.871428571429
+k-means,360,0.722222222222
+gmm,360,0.744444444444
+spectral clustering $\widetilde{\rho}_1$,360,0.891666666667
+kernel k-groups $\rho_{1}$,360,0.788888888889
+kernel k-groups $\rho_{1/2}$,360,0.847222222222
+kernel k-groups $\widetilde{\rho}_{1}$,360,0.891666666667
+k-means,370,0.683783783784
+gmm,370,0.762162162162
+spectral clustering $\widetilde{\rho}_1$,370,0.845945945946
+kernel k-groups $\rho_{1}$,370,0.718918918919
+kernel k-groups $\rho_{1/2}$,370,0.772972972973
+kernel k-groups $\widetilde{\rho}_{1}$,370,0.87027027027
+k-means,380,0.7
+gmm,380,0.715789473684
+spectral clustering $\widetilde{\rho}_1$,380,0.894736842105
+kernel k-groups $\rho_{1}$,380,0.778947368421
+kernel k-groups $\rho_{1/2}$,380,0.823684210526
+kernel k-groups $\widetilde{\rho}_{1}$,380,0.894736842105
+k-means,390,0.712820512821
+gmm,390,0.697435897436
+spectral clustering $\widetilde{\rho}_1$,390,0.853846153846
+kernel k-groups $\rho_{1}$,390,0.815384615385
+kernel k-groups $\rho_{1/2}$,390,0.835897435897
+kernel k-groups $\widetilde{\rho}_{1}$,390,0.892307692308
+k-means,400,0.7025
+gmm,400,0.6975
+spectral clustering $\widetilde{\rho}_1$,400,0.855
+kernel k-groups $\rho_{1}$,400,0.765
+kernel k-groups $\rho_{1/2}$,400,0.7925
+kernel k-groups $\widetilde{\rho}_{1}$,400,0.8675
+k-means,10,0.7
+gmm,10,0.9
+spectral clustering $\widetilde{\rho}_1$,10,0.6
+kernel k-groups $\rho_{1}$,10,0.6
+kernel k-groups $\rho_{1/2}$,10,0.6
+kernel k-groups $\widetilde{\rho}_{1}$,10,0.6
+k-means,20,0.9
+gmm,20,0.75
+spectral clustering $\widetilde{\rho}_1$,20,0.65
+kernel k-groups $\rho_{1}$,20,0.9
+kernel k-groups $\rho_{1/2}$,20,0.9
+kernel k-groups $\widetilde{\rho}_{1}$,20,0.9
+k-means,30,0.766666666667
+gmm,30,0.566666666667
+spectral clustering $\widetilde{\rho}_1$,30,0.6
+kernel k-groups $\rho_{1}$,30,0.8
+kernel k-groups $\rho_{1/2}$,30,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,30,0.9
+k-means,40,0.575
+gmm,40,0.55
+spectral clustering $\widetilde{\rho}_1$,40,0.5
+kernel k-groups $\rho_{1}$,40,0.7
+kernel k-groups $\rho_{1/2}$,40,0.7
+kernel k-groups $\widetilde{\rho}_{1}$,40,0.525
+k-means,50,0.7
+gmm,50,0.56
+spectral clustering $\widetilde{\rho}_1$,50,0.76
+kernel k-groups $\rho_{1}$,50,0.68
+kernel k-groups $\rho_{1/2}$,50,0.88
+kernel k-groups $\widetilde{\rho}_{1}$,50,0.86
+k-means,60,0.666666666667
+gmm,60,0.583333333333
+spectral clustering $\widetilde{\rho}_1$,60,0.683333333333
+kernel k-groups $\rho_{1}$,60,0.683333333333
+kernel k-groups $\rho_{1/2}$,60,0.516666666667
+kernel k-groups $\widetilde{\rho}_{1}$,60,0.85
+k-means,70,0.671428571429
+gmm,70,0.614285714286
+spectral clustering $\widetilde{\rho}_1$,70,0.542857142857
+kernel k-groups $\rho_{1}$,70,0.657142857143
+kernel k-groups $\rho_{1/2}$,70,0.657142857143
+kernel k-groups $\widetilde{\rho}_{1}$,70,0.857142857143
+k-means,80,0.65
+gmm,80,0.5625
+spectral clustering $\widetilde{\rho}_1$,80,0.65
+kernel k-groups $\rho_{1}$,80,0.5625
+kernel k-groups $\rho_{1/2}$,80,0.7
+kernel k-groups $\widetilde{\rho}_{1}$,80,0.8125
+k-means,90,0.588888888889
+gmm,90,0.522222222222
+spectral clustering $\widetilde{\rho}_1$,90,0.766666666667
+kernel k-groups $\rho_{1}$,90,0.544444444444
+kernel k-groups $\rho_{1/2}$,90,0.722222222222
+kernel k-groups $\widetilde{\rho}_{1}$,90,0.833333333333
+k-means,100,0.61
+gmm,100,0.51
+spectral clustering $\widetilde{\rho}_1$,100,0.73
+kernel k-groups $\rho_{1}$,100,0.75
+kernel k-groups $\rho_{1/2}$,100,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,100,0.92
+k-means,110,0.654545454545
+gmm,110,0.636363636364
+spectral clustering $\widetilde{\rho}_1$,110,0.645454545455
+kernel k-groups $\rho_{1}$,110,0.709090909091
+kernel k-groups $\rho_{1/2}$,110,0.681818181818
+kernel k-groups $\widetilde{\rho}_{1}$,110,0.863636363636
+k-means,120,0.708333333333
+gmm,120,0.566666666667
+spectral clustering $\widetilde{\rho}_1$,120,0.783333333333
+kernel k-groups $\rho_{1}$,120,0.75
+kernel k-groups $\rho_{1/2}$,120,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,120,0.833333333333
+k-means,130,0.530769230769
+gmm,130,0.638461538462
+spectral clustering $\widetilde{\rho}_1$,130,0.684615384615
+kernel k-groups $\rho_{1}$,130,0.661538461538
+kernel k-groups $\rho_{1/2}$,130,0.692307692308
+kernel k-groups $\widetilde{\rho}_{1}$,130,0.784615384615
+k-means,140,0.514285714286
+gmm,140,0.6
+spectral clustering $\widetilde{\rho}_1$,140,0.592857142857
+kernel k-groups $\rho_{1}$,140,0.585714285714
+kernel k-groups $\rho_{1/2}$,140,0.735714285714
+kernel k-groups $\widetilde{\rho}_{1}$,140,0.814285714286
+k-means,150,0.626666666667
+gmm,150,0.52
+spectral clustering $\widetilde{\rho}_1$,150,0.8
+kernel k-groups $\rho_{1}$,150,0.806666666667
+kernel k-groups $\rho_{1/2}$,150,0.84
+kernel k-groups $\widetilde{\rho}_{1}$,150,0.886666666667
+k-means,160,0.75625
+gmm,160,0.775
+spectral clustering $\widetilde{\rho}_1$,160,0.7875
+kernel k-groups $\rho_{1}$,160,0.79375
+kernel k-groups $\rho_{1/2}$,160,0.79375
+kernel k-groups $\widetilde{\rho}_{1}$,160,0.86875
+k-means,170,0.558823529412
+gmm,170,0.547058823529
+spectral clustering $\widetilde{\rho}_1$,170,0.835294117647
+kernel k-groups $\rho_{1}$,170,0.747058823529
+kernel k-groups $\rho_{1/2}$,170,0.682352941176
+kernel k-groups $\widetilde{\rho}_{1}$,170,0.864705882353
+k-means,180,0.65
+gmm,180,0.716666666667
+spectral clustering $\widetilde{\rho}_1$,180,0.766666666667
+kernel k-groups $\rho_{1}$,180,0.727777777778
+kernel k-groups $\rho_{1/2}$,180,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,180,0.866666666667
+k-means,190,0.673684210526
+gmm,190,0.589473684211
+spectral clustering $\widetilde{\rho}_1$,190,0.842105263158
+kernel k-groups $\rho_{1}$,190,0.742105263158
+kernel k-groups $\rho_{1/2}$,190,0.805263157895
+kernel k-groups $\widetilde{\rho}_{1}$,190,0.873684210526
+k-means,200,0.785
+gmm,200,0.755
+spectral clustering $\widetilde{\rho}_1$,200,0.9
+kernel k-groups $\rho_{1}$,200,0.805
+kernel k-groups $\rho_{1/2}$,200,0.87
+kernel k-groups $\widetilde{\rho}_{1}$,200,0.915
+k-means,210,0.719047619048
+gmm,210,0.590476190476
+spectral clustering $\widetilde{\rho}_1$,210,0.828571428571
+kernel k-groups $\rho_{1}$,210,0.742857142857
+kernel k-groups $\rho_{1/2}$,210,0.785714285714
+kernel k-groups $\widetilde{\rho}_{1}$,210,0.866666666667
+k-means,220,0.731818181818
+gmm,220,0.731818181818
+spectral clustering $\widetilde{\rho}_1$,220,0.818181818182
+kernel k-groups $\rho_{1}$,220,0.759090909091
+kernel k-groups $\rho_{1/2}$,220,0.781818181818
+kernel k-groups $\widetilde{\rho}_{1}$,220,0.881818181818
+k-means,230,0.682608695652
+gmm,230,0.617391304348
+spectral clustering $\widetilde{\rho}_1$,230,0.765217391304
+kernel k-groups $\rho_{1}$,230,0.7
+kernel k-groups $\rho_{1/2}$,230,0.713043478261
+kernel k-groups $\widetilde{\rho}_{1}$,230,0.813043478261
+k-means,240,0.7125
+gmm,240,0.741666666667
+spectral clustering $\widetilde{\rho}_1$,240,0.841666666667
+kernel k-groups $\rho_{1}$,240,0.758333333333
+kernel k-groups $\rho_{1/2}$,240,0.775
+kernel k-groups $\widetilde{\rho}_{1}$,240,0.8875
+k-means,250,0.716
+gmm,250,0.728
+spectral clustering $\widetilde{\rho}_1$,250,0.868
+kernel k-groups $\rho_{1}$,250,0.78
+kernel k-groups $\rho_{1/2}$,250,0.816
+kernel k-groups $\widetilde{\rho}_{1}$,250,0.908
+k-means,260,0.611538461538
+gmm,260,0.684615384615
+spectral clustering $\widetilde{\rho}_1$,260,0.830769230769
+kernel k-groups $\rho_{1}$,260,0.776923076923
+kernel k-groups $\rho_{1/2}$,260,0.784615384615
+kernel k-groups $\widetilde{\rho}_{1}$,260,0.876923076923
+k-means,270,0.692592592593
+gmm,270,0.733333333333
+spectral clustering $\widetilde{\rho}_1$,270,0.87037037037
+kernel k-groups $\rho_{1}$,270,0.8
+kernel k-groups $\rho_{1/2}$,270,0.82962962963
+kernel k-groups $\widetilde{\rho}_{1}$,270,0.877777777778
+k-means,280,0.685714285714
+gmm,280,0.717857142857
+spectral clustering $\widetilde{\rho}_1$,280,0.782142857143
+kernel k-groups $\rho_{1}$,280,0.717857142857
+kernel k-groups $\rho_{1/2}$,280,0.753571428571
+kernel k-groups $\widetilde{\rho}_{1}$,280,0.846428571429
+k-means,290,0.724137931034
+gmm,290,0.655172413793
+spectral clustering $\widetilde{\rho}_1$,290,0.879310344828
+kernel k-groups $\rho_{1}$,290,0.772413793103
+kernel k-groups $\rho_{1/2}$,290,0.78275862069
+kernel k-groups $\widetilde{\rho}_{1}$,290,0.896551724138
+k-means,300,0.593333333333
+gmm,300,0.72
+spectral clustering $\widetilde{\rho}_1$,300,0.81
+kernel k-groups $\rho_{1}$,300,0.683333333333
+kernel k-groups $\rho_{1/2}$,300,0.79
+kernel k-groups $\widetilde{\rho}_{1}$,300,0.876666666667
+k-means,310,0.722580645161
+gmm,310,0.738709677419
+spectral clustering $\widetilde{\rho}_1$,310,0.854838709677
+kernel k-groups $\rho_{1}$,310,0.758064516129
+kernel k-groups $\rho_{1/2}$,310,0.841935483871
+kernel k-groups $\widetilde{\rho}_{1}$,310,0.874193548387
+k-means,320,0.765625
+gmm,320,0.80625
+spectral clustering $\widetilde{\rho}_1$,320,0.81875
+kernel k-groups $\rho_{1}$,320,0.825
+kernel k-groups $\rho_{1/2}$,320,0.865625
+kernel k-groups $\widetilde{\rho}_{1}$,320,0.871875
+k-means,330,0.636363636364
+gmm,330,0.563636363636
+spectral clustering $\widetilde{\rho}_1$,330,0.712121212121
+kernel k-groups $\rho_{1}$,330,0.751515151515
+kernel k-groups $\rho_{1/2}$,330,0.787878787879
+kernel k-groups $\widetilde{\rho}_{1}$,330,0.872727272727
+k-means,340,0.761764705882
+gmm,340,0.75
+spectral clustering $\widetilde{\rho}_1$,340,0.873529411765
+kernel k-groups $\rho_{1}$,340,0.808823529412
+kernel k-groups $\rho_{1/2}$,340,0.832352941176
+kernel k-groups $\widetilde{\rho}_{1}$,340,0.902941176471
+k-means,350,0.702857142857
+gmm,350,0.717142857143
+spectral clustering $\widetilde{\rho}_1$,350,0.794285714286
+kernel k-groups $\rho_{1}$,350,0.725714285714
+kernel k-groups $\rho_{1/2}$,350,0.74
+kernel k-groups $\widetilde{\rho}_{1}$,350,0.837142857143
+k-means,360,0.694444444444
+gmm,360,0.7
+spectral clustering $\widetilde{\rho}_1$,360,0.847222222222
+kernel k-groups $\rho_{1}$,360,0.769444444444
+kernel k-groups $\rho_{1/2}$,360,0.797222222222
+kernel k-groups $\widetilde{\rho}_{1}$,360,0.9
+k-means,370,0.683783783784
+gmm,370,0.791891891892
+spectral clustering $\widetilde{\rho}_1$,370,0.862162162162
+kernel k-groups $\rho_{1}$,370,0.786486486486
+kernel k-groups $\rho_{1/2}$,370,0.859459459459
+kernel k-groups $\widetilde{\rho}_{1}$,370,0.9
+k-means,380,0.705263157895
+gmm,380,0.747368421053
+spectral clustering $\widetilde{\rho}_1$,380,0.871052631579
+kernel k-groups $\rho_{1}$,380,0.763157894737
+kernel k-groups $\rho_{1/2}$,380,0.784210526316
+kernel k-groups $\widetilde{\rho}_{1}$,380,0.905263157895
+k-means,390,0.689743589744
+gmm,390,0.741025641026
+spectral clustering $\widetilde{\rho}_1$,390,0.766666666667
+kernel k-groups $\rho_{1}$,390,0.761538461538
+kernel k-groups $\rho_{1/2}$,390,0.766666666667
+kernel k-groups $\widetilde{\rho}_{1}$,390,0.820512820513
+k-means,400,0.655
+gmm,400,0.7325
+spectral clustering $\widetilde{\rho}_1$,400,0.845
+kernel k-groups $\rho_{1}$,400,0.7175
+kernel k-groups $\rho_{1/2}$,400,0.7725
+kernel k-groups $\widetilde{\rho}_{1}$,400,0.8875
+k-means,10,0.6
+gmm,10,0.6
+spectral clustering $\widetilde{\rho}_1$,10,0.9
+kernel k-groups $\rho_{1}$,10,0.5
+kernel k-groups $\rho_{1/2}$,10,0.5
+kernel k-groups $\widetilde{\rho}_{1}$,10,0.5
+k-means,20,0.65
+gmm,20,0.65
+spectral clustering $\widetilde{\rho}_1$,20,0.7
+kernel k-groups $\rho_{1}$,20,0.65
+kernel k-groups $\rho_{1/2}$,20,0.7
+kernel k-groups $\widetilde{\rho}_{1}$,20,0.7
+k-means,30,0.733333333333
+gmm,30,0.766666666667
+spectral clustering $\widetilde{\rho}_1$,30,0.833333333333
+kernel k-groups $\rho_{1}$,30,0.8
+kernel k-groups $\rho_{1/2}$,30,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,30,0.8
+k-means,40,0.85
+gmm,40,0.7
+spectral clustering $\widetilde{\rho}_1$,40,0.7
+kernel k-groups $\rho_{1}$,40,0.75
+kernel k-groups $\rho_{1/2}$,40,0.75
+kernel k-groups $\widetilde{\rho}_{1}$,40,0.85
+k-means,50,0.62
+gmm,50,0.56
+spectral clustering $\widetilde{\rho}_1$,50,0.68
+kernel k-groups $\rho_{1}$,50,0.62
+kernel k-groups $\rho_{1/2}$,50,0.68
+kernel k-groups $\widetilde{\rho}_{1}$,50,0.74
+k-means,60,0.7
+gmm,60,0.633333333333
+spectral clustering $\widetilde{\rho}_1$,60,0.866666666667
+kernel k-groups $\rho_{1}$,60,0.766666666667
+kernel k-groups $\rho_{1/2}$,60,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,60,0.933333333333
+k-means,70,0.6
+gmm,70,0.7
+spectral clustering $\widetilde{\rho}_1$,70,0.557142857143
+kernel k-groups $\rho_{1}$,70,0.6
+kernel k-groups $\rho_{1/2}$,70,0.585714285714
+kernel k-groups $\widetilde{\rho}_{1}$,70,0.857142857143
+k-means,80,0.6875
+gmm,80,0.5375
+spectral clustering $\widetilde{\rho}_1$,80,0.7625
+kernel k-groups $\rho_{1}$,80,0.675
+kernel k-groups $\rho_{1/2}$,80,0.7
+kernel k-groups $\widetilde{\rho}_{1}$,80,0.8125
+k-means,90,0.566666666667
+gmm,90,0.622222222222
+spectral clustering $\widetilde{\rho}_1$,90,0.522222222222
+kernel k-groups $\rho_{1}$,90,0.5
+kernel k-groups $\rho_{1/2}$,90,0.522222222222
+kernel k-groups $\widetilde{\rho}_{1}$,90,0.7
+k-means,100,0.6
+gmm,100,0.53
+spectral clustering $\widetilde{\rho}_1$,100,0.69
+kernel k-groups $\rho_{1}$,100,0.57
+kernel k-groups $\rho_{1/2}$,100,0.57
+kernel k-groups $\widetilde{\rho}_{1}$,100,0.88
+k-means,110,0.645454545455
+gmm,110,0.672727272727
+spectral clustering $\widetilde{\rho}_1$,110,0.709090909091
+kernel k-groups $\rho_{1}$,110,0.718181818182
+kernel k-groups $\rho_{1/2}$,110,0.718181818182
+kernel k-groups $\widetilde{\rho}_{1}$,110,0.854545454545
+k-means,120,0.716666666667
+gmm,120,0.741666666667
+spectral clustering $\widetilde{\rho}_1$,120,0.866666666667
+kernel k-groups $\rho_{1}$,120,0.808333333333
+kernel k-groups $\rho_{1/2}$,120,0.85
+kernel k-groups $\widetilde{\rho}_{1}$,120,0.883333333333
+k-means,130,0.692307692308
+gmm,130,0.615384615385
+spectral clustering $\widetilde{\rho}_1$,130,0.807692307692
+kernel k-groups $\rho_{1}$,130,0.746153846154
+kernel k-groups $\rho_{1/2}$,130,0.853846153846
+kernel k-groups $\widetilde{\rho}_{1}$,130,0.923076923077
+k-means,140,0.578571428571
+gmm,140,0.55
+spectral clustering $\widetilde{\rho}_1$,140,0.807142857143
+kernel k-groups $\rho_{1}$,140,0.628571428571
+kernel k-groups $\rho_{1/2}$,140,0.685714285714
+kernel k-groups $\widetilde{\rho}_{1}$,140,0.842857142857
+k-means,150,0.706666666667
+gmm,150,0.693333333333
+spectral clustering $\widetilde{\rho}_1$,150,0.793333333333
+kernel k-groups $\rho_{1}$,150,0.686666666667
+kernel k-groups $\rho_{1/2}$,150,0.746666666667
+kernel k-groups $\widetilde{\rho}_{1}$,150,0.84
+k-means,160,0.70625
+gmm,160,0.6
+spectral clustering $\widetilde{\rho}_1$,160,0.8375
+kernel k-groups $\rho_{1}$,160,0.7625
+kernel k-groups $\rho_{1/2}$,160,0.8375
+kernel k-groups $\widetilde{\rho}_{1}$,160,0.8625
+k-means,170,0.664705882353
+gmm,170,0.629411764706
+spectral clustering $\widetilde{\rho}_1$,170,0.735294117647
+kernel k-groups $\rho_{1}$,170,0.676470588235
+kernel k-groups $\rho_{1/2}$,170,0.682352941176
+kernel k-groups $\widetilde{\rho}_{1}$,170,0.858823529412
+k-means,180,0.65
+gmm,180,0.661111111111
+spectral clustering $\widetilde{\rho}_1$,180,0.788888888889
+kernel k-groups $\rho_{1}$,180,0.711111111111
+kernel k-groups $\rho_{1/2}$,180,0.744444444444
+kernel k-groups $\widetilde{\rho}_{1}$,180,0.866666666667
+k-means,190,0.547368421053
+gmm,190,0.557894736842
+spectral clustering $\widetilde{\rho}_1$,190,0.794736842105
+kernel k-groups $\rho_{1}$,190,0.689473684211
+kernel k-groups $\rho_{1/2}$,190,0.736842105263
+kernel k-groups $\widetilde{\rho}_{1}$,190,0.889473684211
+k-means,200,0.615
+gmm,200,0.71
+spectral clustering $\widetilde{\rho}_1$,200,0.765
+kernel k-groups $\rho_{1}$,200,0.685
+kernel k-groups $\rho_{1/2}$,200,0.71
+kernel k-groups $\widetilde{\rho}_{1}$,200,0.825
+k-means,210,0.771428571429
+gmm,210,0.795238095238
+spectral clustering $\widetilde{\rho}_1$,210,0.828571428571
+kernel k-groups $\rho_{1}$,210,0.747619047619
+kernel k-groups $\rho_{1/2}$,210,0.861904761905
+kernel k-groups $\widetilde{\rho}_{1}$,210,0.928571428571
+k-means,220,0.718181818182
+gmm,220,0.781818181818
+spectral clustering $\widetilde{\rho}_1$,220,0.786363636364
+kernel k-groups $\rho_{1}$,220,0.804545454545
+kernel k-groups $\rho_{1/2}$,220,0.85
+kernel k-groups $\widetilde{\rho}_{1}$,220,0.886363636364
+k-means,230,0.686956521739
+gmm,230,0.75652173913
+spectral clustering $\widetilde{\rho}_1$,230,0.826086956522
+kernel k-groups $\rho_{1}$,230,0.747826086957
+kernel k-groups $\rho_{1/2}$,230,0.773913043478
+kernel k-groups $\widetilde{\rho}_{1}$,230,0.895652173913
+k-means,240,0.7625
+gmm,240,0.641666666667
+spectral clustering $\widetilde{\rho}_1$,240,0.854166666667
+kernel k-groups $\rho_{1}$,240,0.795833333333
+kernel k-groups $\rho_{1/2}$,240,0.804166666667
+kernel k-groups $\widetilde{\rho}_{1}$,240,0.895833333333
+k-means,250,0.712
+gmm,250,0.736
+spectral clustering $\widetilde{\rho}_1$,250,0.784
+kernel k-groups $\rho_{1}$,250,0.772
+kernel k-groups $\rho_{1/2}$,250,0.78
+kernel k-groups $\widetilde{\rho}_{1}$,250,0.864
+k-means,260,0.65
+gmm,260,0.688461538462
+spectral clustering $\widetilde{\rho}_1$,260,0.803846153846
+kernel k-groups $\rho_{1}$,260,0.696153846154
+kernel k-groups $\rho_{1/2}$,260,0.792307692308
+kernel k-groups $\widetilde{\rho}_{1}$,260,0.85
+k-means,270,0.581481481481
+gmm,270,0.692592592593
+spectral clustering $\widetilde{\rho}_1$,270,0.862962962963
+kernel k-groups $\rho_{1}$,270,0.759259259259
+kernel k-groups $\rho_{1/2}$,270,0.766666666667
+kernel k-groups $\widetilde{\rho}_{1}$,270,0.888888888889
+k-means,280,0.721428571429
+gmm,280,0.775
+spectral clustering $\widetilde{\rho}_1$,280,0.842857142857
+kernel k-groups $\rho_{1}$,280,0.771428571429
+kernel k-groups $\rho_{1/2}$,280,0.825
+kernel k-groups $\widetilde{\rho}_{1}$,280,0.9
+k-means,290,0.744827586207
+gmm,290,0.741379310345
+spectral clustering $\widetilde{\rho}_1$,290,0.813793103448
+kernel k-groups $\rho_{1}$,290,0.789655172414
+kernel k-groups $\rho_{1/2}$,290,0.806896551724
+kernel k-groups $\widetilde{\rho}_{1}$,290,0.855172413793
+k-means,300,0.7
+gmm,300,0.713333333333
+spectral clustering $\widetilde{\rho}_1$,300,0.846666666667
+kernel k-groups $\rho_{1}$,300,0.756666666667
+kernel k-groups $\rho_{1/2}$,300,0.813333333333
+kernel k-groups $\widetilde{\rho}_{1}$,300,0.87
+k-means,310,0.632258064516
+gmm,310,0.738709677419
+spectral clustering $\widetilde{\rho}_1$,310,0.816129032258
+kernel k-groups $\rho_{1}$,310,0.664516129032
+kernel k-groups $\rho_{1/2}$,310,0.777419354839
+kernel k-groups $\widetilde{\rho}_{1}$,310,0.870967741935
+k-means,320,0.70625
+gmm,320,0.696875
+spectral clustering $\widetilde{\rho}_1$,320,0.85
+kernel k-groups $\rho_{1}$,320,0.7625
+kernel k-groups $\rho_{1/2}$,320,0.809375
+kernel k-groups $\widetilde{\rho}_{1}$,320,0.878125
+k-means,330,0.666666666667
+gmm,330,0.657575757576
+spectral clustering $\widetilde{\rho}_1$,330,0.863636363636
+kernel k-groups $\rho_{1}$,330,0.769696969697
+kernel k-groups $\rho_{1/2}$,330,0.824242424242
+kernel k-groups $\widetilde{\rho}_{1}$,330,0.875757575758
+k-means,340,0.702941176471
+gmm,340,0.517647058824
+spectral clustering $\widetilde{\rho}_1$,340,0.847058823529
+kernel k-groups $\rho_{1}$,340,0.776470588235
+kernel k-groups $\rho_{1/2}$,340,0.797058823529
+kernel k-groups $\widetilde{\rho}_{1}$,340,0.870588235294
+k-means,350,0.722857142857
+gmm,350,0.774285714286
+spectral clustering $\widetilde{\rho}_1$,350,0.882857142857
+kernel k-groups $\rho_{1}$,350,0.805714285714
+kernel k-groups $\rho_{1/2}$,350,0.845714285714
+kernel k-groups $\widetilde{\rho}_{1}$,350,0.917142857143
+k-means,360,0.708333333333
+gmm,360,0.688888888889
+spectral clustering $\widetilde{\rho}_1$,360,0.847222222222
+kernel k-groups $\rho_{1}$,360,0.755555555556
+kernel k-groups $\rho_{1/2}$,360,0.788888888889
+kernel k-groups $\widetilde{\rho}_{1}$,360,0.905555555556
+k-means,370,0.735135135135
+gmm,370,0.77027027027
+spectral clustering $\widetilde{\rho}_1$,370,0.886486486486
+kernel k-groups $\rho_{1}$,370,0.8
+kernel k-groups $\rho_{1/2}$,370,0.824324324324
+kernel k-groups $\widetilde{\rho}_{1}$,370,0.897297297297
+k-means,380,0.655263157895
+gmm,380,0.763157894737
+spectral clustering $\widetilde{\rho}_1$,380,0.886842105263
+kernel k-groups $\rho_{1}$,380,0.797368421053
+kernel k-groups $\rho_{1/2}$,380,0.873684210526
+kernel k-groups $\widetilde{\rho}_{1}$,380,0.892105263158
+k-means,390,0.748717948718
+gmm,390,0.774358974359
+spectral clustering $\widetilde{\rho}_1$,390,0.828205128205
+kernel k-groups $\rho_{1}$,390,0.8
+kernel k-groups $\rho_{1/2}$,390,0.815384615385
+kernel k-groups $\widetilde{\rho}_{1}$,390,0.858974358974
+k-means,400,0.6625
+gmm,400,0.7475
+spectral clustering $\widetilde{\rho}_1$,400,0.795
+kernel k-groups $\rho_{1}$,400,0.7575
+kernel k-groups $\rho_{1/2}$,400,0.7825
+kernel k-groups $\widetilde{\rho}_{1}$,400,0.8775
+k-means,10,0.5
+gmm,10,0.7
+spectral clustering $\widetilde{\rho}_1$,10,0.8
+kernel k-groups $\rho_{1}$,10,0.5
+kernel k-groups $\rho_{1/2}$,10,0.5
+kernel k-groups $\widetilde{\rho}_{1}$,10,0.8
+k-means,20,0.55
+gmm,20,0.55
+spectral clustering $\widetilde{\rho}_1$,20,0.65
+kernel k-groups $\rho_{1}$,20,0.5
+kernel k-groups $\rho_{1/2}$,20,0.5
+kernel k-groups $\widetilde{\rho}_{1}$,20,0.5
+k-means,30,0.666666666667
+gmm,30,0.666666666667
+spectral clustering $\widetilde{\rho}_1$,30,0.6
+kernel k-groups $\rho_{1}$,30,0.533333333333
+kernel k-groups $\rho_{1/2}$,30,0.533333333333
+kernel k-groups $\widetilde{\rho}_{1}$,30,0.533333333333
+k-means,40,0.775
+gmm,40,0.7
+spectral clustering $\widetilde{\rho}_1$,40,0.85
+kernel k-groups $\rho_{1}$,40,0.775
+kernel k-groups $\rho_{1/2}$,40,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,40,0.9
+k-means,50,0.66
+gmm,50,0.56
+spectral clustering $\widetilde{\rho}_1$,50,0.76
+kernel k-groups $\rho_{1}$,50,0.62
+kernel k-groups $\rho_{1/2}$,50,0.7
+kernel k-groups $\widetilde{\rho}_{1}$,50,0.82
+k-means,60,0.683333333333
+gmm,60,0.683333333333
+spectral clustering $\widetilde{\rho}_1$,60,0.716666666667
+kernel k-groups $\rho_{1}$,60,0.766666666667
+kernel k-groups $\rho_{1/2}$,60,0.766666666667
+kernel k-groups $\widetilde{\rho}_{1}$,60,0.75
+k-means,70,0.542857142857
+gmm,70,0.614285714286
+spectral clustering $\widetilde{\rho}_1$,70,0.6
+kernel k-groups $\rho_{1}$,70,0.7
+kernel k-groups $\rho_{1/2}$,70,0.7
+kernel k-groups $\widetilde{\rho}_{1}$,70,0.671428571429
+k-means,80,0.6375
+gmm,80,0.6
+spectral clustering $\widetilde{\rho}_1$,80,0.825
+kernel k-groups $\rho_{1}$,80,0.65
+kernel k-groups $\rho_{1/2}$,80,0.725
+kernel k-groups $\widetilde{\rho}_{1}$,80,0.875
+k-means,90,0.722222222222
+gmm,90,0.633333333333
+spectral clustering $\widetilde{\rho}_1$,90,0.688888888889
+kernel k-groups $\rho_{1}$,90,0.622222222222
+kernel k-groups $\rho_{1/2}$,90,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,90,0.755555555556
+k-means,100,0.64
+gmm,100,0.62
+spectral clustering $\widetilde{\rho}_1$,100,0.8
+kernel k-groups $\rho_{1}$,100,0.78
+kernel k-groups $\rho_{1/2}$,100,0.82
+kernel k-groups $\widetilde{\rho}_{1}$,100,0.86
+k-means,110,0.618181818182
+gmm,110,0.572727272727
+spectral clustering $\widetilde{\rho}_1$,110,0.818181818182
+kernel k-groups $\rho_{1}$,110,0.645454545455
+kernel k-groups $\rho_{1/2}$,110,0.7
+kernel k-groups $\widetilde{\rho}_{1}$,110,0.845454545455
+k-means,120,0.666666666667
+gmm,120,0.508333333333
+spectral clustering $\widetilde{\rho}_1$,120,0.85
+kernel k-groups $\rho_{1}$,120,0.8
+kernel k-groups $\rho_{1/2}$,120,0.875
+kernel k-groups $\widetilde{\rho}_{1}$,120,0.866666666667
+k-means,130,0.7
+gmm,130,0.669230769231
+spectral clustering $\widetilde{\rho}_1$,130,0.9
+kernel k-groups $\rho_{1}$,130,0.838461538462
+kernel k-groups $\rho_{1/2}$,130,0.853846153846
+kernel k-groups $\widetilde{\rho}_{1}$,130,0.923076923077
+k-means,140,0.657142857143
+gmm,140,0.678571428571
+spectral clustering $\widetilde{\rho}_1$,140,0.792857142857
+kernel k-groups $\rho_{1}$,140,0.671428571429
+kernel k-groups $\rho_{1/2}$,140,0.764285714286
+kernel k-groups $\widetilde{\rho}_{1}$,140,0.878571428571
+k-means,150,0.586666666667
+gmm,150,0.553333333333
+spectral clustering $\widetilde{\rho}_1$,150,0.746666666667
+kernel k-groups $\rho_{1}$,150,0.593333333333
+kernel k-groups $\rho_{1/2}$,150,0.606666666667
+kernel k-groups $\widetilde{\rho}_{1}$,150,0.826666666667
+k-means,160,0.69375
+gmm,160,0.74375
+spectral clustering $\widetilde{\rho}_1$,160,0.775
+kernel k-groups $\rho_{1}$,160,0.79375
+kernel k-groups $\rho_{1/2}$,160,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,160,0.88125
+k-means,170,0.535294117647
+gmm,170,0.717647058824
+spectral clustering $\widetilde{\rho}_1$,170,0.729411764706
+kernel k-groups $\rho_{1}$,170,0.6
+kernel k-groups $\rho_{1/2}$,170,0.617647058824
+kernel k-groups $\widetilde{\rho}_{1}$,170,0.858823529412
+k-means,180,0.644444444444
+gmm,180,0.572222222222
+spectral clustering $\widetilde{\rho}_1$,180,0.844444444444
+kernel k-groups $\rho_{1}$,180,0.733333333333
+kernel k-groups $\rho_{1/2}$,180,0.783333333333
+kernel k-groups $\widetilde{\rho}_{1}$,180,0.922222222222
+k-means,190,0.647368421053
+gmm,190,0.689473684211
+spectral clustering $\widetilde{\rho}_1$,190,0.778947368421
+kernel k-groups $\rho_{1}$,190,0.710526315789
+kernel k-groups $\rho_{1/2}$,190,0.763157894737
+kernel k-groups $\widetilde{\rho}_{1}$,190,0.9
+k-means,200,0.52
+gmm,200,0.535
+spectral clustering $\widetilde{\rho}_1$,200,0.685
+kernel k-groups $\rho_{1}$,200,0.685
+kernel k-groups $\rho_{1/2}$,200,0.69
+kernel k-groups $\widetilde{\rho}_{1}$,200,0.83
+k-means,210,0.633333333333
+gmm,210,0.647619047619
+spectral clustering $\widetilde{\rho}_1$,210,0.642857142857
+kernel k-groups $\rho_{1}$,210,0.666666666667
+kernel k-groups $\rho_{1/2}$,210,0.714285714286
+kernel k-groups $\widetilde{\rho}_{1}$,210,0.885714285714
+k-means,220,0.672727272727
+gmm,220,0.536363636364
+spectral clustering $\widetilde{\rho}_1$,220,0.777272727273
+kernel k-groups $\rho_{1}$,220,0.727272727273
+kernel k-groups $\rho_{1/2}$,220,0.740909090909
+kernel k-groups $\widetilde{\rho}_{1}$,220,0.859090909091
+k-means,230,0.682608695652
+gmm,230,0.717391304348
+spectral clustering $\widetilde{\rho}_1$,230,0.830434782609
+kernel k-groups $\rho_{1}$,230,0.826086956522
+kernel k-groups $\rho_{1/2}$,230,0.882608695652
+kernel k-groups $\widetilde{\rho}_{1}$,230,0.895652173913
+k-means,240,0.670833333333
+gmm,240,0.645833333333
+spectral clustering $\widetilde{\rho}_1$,240,0.666666666667
+kernel k-groups $\rho_{1}$,240,0.708333333333
+kernel k-groups $\rho_{1/2}$,240,0.733333333333
+kernel k-groups $\widetilde{\rho}_{1}$,240,0.845833333333
+k-means,250,0.664
+gmm,250,0.728
+spectral clustering $\widetilde{\rho}_1$,250,0.776
+kernel k-groups $\rho_{1}$,250,0.744
+kernel k-groups $\rho_{1/2}$,250,0.792
+kernel k-groups $\widetilde{\rho}_{1}$,250,0.804
+k-means,260,0.607692307692
+gmm,260,0.638461538462
+spectral clustering $\widetilde{\rho}_1$,260,0.657692307692
+kernel k-groups $\rho_{1}$,260,0.630769230769
+kernel k-groups $\rho_{1/2}$,260,0.715384615385
+kernel k-groups $\widetilde{\rho}_{1}$,260,0.896153846154
+k-means,270,0.714814814815
+gmm,270,0.718518518519
+spectral clustering $\widetilde{\rho}_1$,270,0.811111111111
+kernel k-groups $\rho_{1}$,270,0.740740740741
+kernel k-groups $\rho_{1/2}$,270,0.785185185185
+kernel k-groups $\widetilde{\rho}_{1}$,270,0.837037037037
+k-means,280,0.660714285714
+gmm,280,0.714285714286
+spectral clustering $\widetilde{\rho}_1$,280,0.707142857143
+kernel k-groups $\rho_{1}$,280,0.725
+kernel k-groups $\rho_{1/2}$,280,0.725
+kernel k-groups $\widetilde{\rho}_{1}$,280,0.842857142857
+k-means,290,0.610344827586
+gmm,290,0.706896551724
+spectral clustering $\widetilde{\rho}_1$,290,0.748275862069
+kernel k-groups $\rho_{1}$,290,0.758620689655
+kernel k-groups $\rho_{1/2}$,290,0.789655172414
+kernel k-groups $\widetilde{\rho}_{1}$,290,0.844827586207
+k-means,300,0.72
+gmm,300,0.59
+spectral clustering $\widetilde{\rho}_1$,300,0.793333333333
+kernel k-groups $\rho_{1}$,300,0.773333333333
+kernel k-groups $\rho_{1/2}$,300,0.81
+kernel k-groups $\widetilde{\rho}_{1}$,300,0.873333333333
+k-means,310,0.751612903226
+gmm,310,0.725806451613
+spectral clustering $\widetilde{\rho}_1$,310,0.854838709677
+kernel k-groups $\rho_{1}$,310,0.774193548387
+kernel k-groups $\rho_{1/2}$,310,0.793548387097
+kernel k-groups $\widetilde{\rho}_{1}$,310,0.890322580645
+k-means,320,0.65
+gmm,320,0.7
+spectral clustering $\widetilde{\rho}_1$,320,0.878125
+kernel k-groups $\rho_{1}$,320,0.821875
+kernel k-groups $\rho_{1/2}$,320,0.878125
+kernel k-groups $\widetilde{\rho}_{1}$,320,0.9
+k-means,330,0.527272727273
+gmm,330,0.518181818182
+spectral clustering $\widetilde{\rho}_1$,330,0.836363636364
+kernel k-groups $\rho_{1}$,330,0.536363636364
+kernel k-groups $\rho_{1/2}$,330,0.521212121212
+kernel k-groups $\widetilde{\rho}_{1}$,330,0.860606060606
+k-means,340,0.738235294118
+gmm,340,0.770588235294
+spectral clustering $\widetilde{\rho}_1$,340,0.858823529412
+kernel k-groups $\rho_{1}$,340,0.785294117647
+kernel k-groups $\rho_{1/2}$,340,0.805882352941
+kernel k-groups $\widetilde{\rho}_{1}$,340,0.879411764706
+k-means,350,0.737142857143
+gmm,350,0.8
+spectral clustering $\widetilde{\rho}_1$,350,0.845714285714
+kernel k-groups $\rho_{1}$,350,0.837142857143
+kernel k-groups $\rho_{1/2}$,350,0.848571428571
+kernel k-groups $\widetilde{\rho}_{1}$,350,0.88
+k-means,360,0.619444444444
+gmm,360,0.669444444444
+spectral clustering $\widetilde{\rho}_1$,360,0.747222222222
+kernel k-groups $\rho_{1}$,360,0.680555555556
+kernel k-groups $\rho_{1/2}$,360,0.7
+kernel k-groups $\widetilde{\rho}_{1}$,360,0.841666666667
+k-means,370,0.681081081081
+gmm,370,0.694594594595
+spectral clustering $\widetilde{\rho}_1$,370,0.886486486486
+kernel k-groups $\rho_{1}$,370,0.7
+kernel k-groups $\rho_{1/2}$,370,0.810810810811
+kernel k-groups $\widetilde{\rho}_{1}$,370,0.891891891892
+k-means,380,0.694736842105
+gmm,380,0.778947368421
+spectral clustering $\widetilde{\rho}_1$,380,0.860526315789
+kernel k-groups $\rho_{1}$,380,0.742105263158
+kernel k-groups $\rho_{1/2}$,380,0.778947368421
+kernel k-groups $\widetilde{\rho}_{1}$,380,0.878947368421
+k-means,390,0.648717948718
+gmm,390,0.638461538462
+spectral clustering $\widetilde{\rho}_1$,390,0.861538461538
+kernel k-groups $\rho_{1}$,390,0.764102564103
+kernel k-groups $\rho_{1/2}$,390,0.794871794872
+kernel k-groups $\widetilde{\rho}_{1}$,390,0.887179487179
+k-means,400,0.69
+gmm,400,0.69
+spectral clustering $\widetilde{\rho}_1$,400,0.8975
+kernel k-groups $\rho_{1}$,400,0.7425
+kernel k-groups $\rho_{1/2}$,400,0.8125
+kernel k-groups $\widetilde{\rho}_{1}$,400,0.8975
+k-means,10,0.5
+gmm,10,0.8
+spectral clustering $\widetilde{\rho}_1$,10,0.8
+kernel k-groups $\rho_{1}$,10,0.8
+kernel k-groups $\rho_{1/2}$,10,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,10,0.9
+k-means,20,0.65
+gmm,20,0.65
+spectral clustering $\widetilde{\rho}_1$,20,0.65
+kernel k-groups $\rho_{1}$,20,0.65
+kernel k-groups $\rho_{1/2}$,20,0.65
+kernel k-groups $\widetilde{\rho}_{1}$,20,0.65
+k-means,30,0.633333333333
+gmm,30,0.766666666667
+spectral clustering $\widetilde{\rho}_1$,30,0.666666666667
+kernel k-groups $\rho_{1}$,30,0.7
+kernel k-groups $\rho_{1/2}$,30,0.733333333333
+kernel k-groups $\widetilde{\rho}_{1}$,30,0.833333333333
+k-means,40,0.675
+gmm,40,0.525
+spectral clustering $\widetilde{\rho}_1$,40,0.75
+kernel k-groups $\rho_{1}$,40,0.725
+kernel k-groups $\rho_{1/2}$,40,0.65
+kernel k-groups $\widetilde{\rho}_{1}$,40,0.775
+k-means,50,0.54
+gmm,50,0.52
+spectral clustering $\widetilde{\rho}_1$,50,0.74
+kernel k-groups $\rho_{1}$,50,0.66
+kernel k-groups $\rho_{1/2}$,50,0.66
+kernel k-groups $\widetilde{\rho}_{1}$,50,0.82
+k-means,60,0.533333333333
+gmm,60,0.583333333333
+spectral clustering $\widetilde{\rho}_1$,60,0.733333333333
+kernel k-groups $\rho_{1}$,60,0.616666666667
+kernel k-groups $\rho_{1/2}$,60,0.616666666667
+kernel k-groups $\widetilde{\rho}_{1}$,60,0.866666666667
+k-means,70,0.728571428571
+gmm,70,0.6
+spectral clustering $\widetilde{\rho}_1$,70,0.7
+kernel k-groups $\rho_{1}$,70,0.671428571429
+kernel k-groups $\rho_{1/2}$,70,0.7
+kernel k-groups $\widetilde{\rho}_{1}$,70,0.785714285714
+k-means,80,0.6875
+gmm,80,0.5625
+spectral clustering $\widetilde{\rho}_1$,80,0.7875
+kernel k-groups $\rho_{1}$,80,0.6875
+kernel k-groups $\rho_{1/2}$,80,0.6875
+kernel k-groups $\widetilde{\rho}_{1}$,80,0.925
+k-means,90,0.655555555556
+gmm,90,0.511111111111
+spectral clustering $\widetilde{\rho}_1$,90,0.533333333333
+kernel k-groups $\rho_{1}$,90,0.688888888889
+kernel k-groups $\rho_{1/2}$,90,0.677777777778
+kernel k-groups $\widetilde{\rho}_{1}$,90,0.777777777778
+k-means,100,0.73
+gmm,100,0.59
+spectral clustering $\widetilde{\rho}_1$,100,0.76
+kernel k-groups $\rho_{1}$,100,0.78
+kernel k-groups $\rho_{1/2}$,100,0.79
+kernel k-groups $\widetilde{\rho}_{1}$,100,0.87
+k-means,110,0.754545454545
+gmm,110,0.7
+spectral clustering $\widetilde{\rho}_1$,110,0.863636363636
+kernel k-groups $\rho_{1}$,110,0.836363636364
+kernel k-groups $\rho_{1/2}$,110,0.845454545455
+kernel k-groups $\widetilde{\rho}_{1}$,110,0.854545454545
+k-means,120,0.7
+gmm,120,0.516666666667
+spectral clustering $\widetilde{\rho}_1$,120,0.808333333333
+kernel k-groups $\rho_{1}$,120,0.691666666667
+kernel k-groups $\rho_{1/2}$,120,0.766666666667
+kernel k-groups $\widetilde{\rho}_{1}$,120,0.85
+k-means,130,0.538461538462
+gmm,130,0.592307692308
+spectral clustering $\widetilde{\rho}_1$,130,0.823076923077
+kernel k-groups $\rho_{1}$,130,0.692307692308
+kernel k-groups $\rho_{1/2}$,130,0.692307692308
+kernel k-groups $\widetilde{\rho}_{1}$,130,0.869230769231
+k-means,140,0.678571428571
+gmm,140,0.671428571429
+spectral clustering $\widetilde{\rho}_1$,140,0.728571428571
+kernel k-groups $\rho_{1}$,140,0.721428571429
+kernel k-groups $\rho_{1/2}$,140,0.75
+kernel k-groups $\widetilde{\rho}_{1}$,140,0.871428571429
+k-means,150,0.646666666667
+gmm,150,0.653333333333
+spectral clustering $\widetilde{\rho}_1$,150,0.766666666667
+kernel k-groups $\rho_{1}$,150,0.693333333333
+kernel k-groups $\rho_{1/2}$,150,0.7
+kernel k-groups $\widetilde{\rho}_{1}$,150,0.84
+k-means,160,0.625
+gmm,160,0.65625
+spectral clustering $\widetilde{\rho}_1$,160,0.66875
+kernel k-groups $\rho_{1}$,160,0.71875
+kernel k-groups $\rho_{1/2}$,160,0.75625
+kernel k-groups $\widetilde{\rho}_{1}$,160,0.825
+k-means,170,0.741176470588
+gmm,170,0.788235294118
+spectral clustering $\widetilde{\rho}_1$,170,0.858823529412
+kernel k-groups $\rho_{1}$,170,0.805882352941
+kernel k-groups $\rho_{1/2}$,170,0.847058823529
+kernel k-groups $\widetilde{\rho}_{1}$,170,0.888235294118
+k-means,180,0.722222222222
+gmm,180,0.738888888889
+spectral clustering $\widetilde{\rho}_1$,180,0.844444444444
+kernel k-groups $\rho_{1}$,180,0.75
+kernel k-groups $\rho_{1/2}$,180,0.833333333333
+kernel k-groups $\widetilde{\rho}_{1}$,180,0.927777777778
+k-means,190,0.657894736842
+gmm,190,0.7
+spectral clustering $\widetilde{\rho}_1$,190,0.873684210526
+kernel k-groups $\rho_{1}$,190,0.805263157895
+kernel k-groups $\rho_{1/2}$,190,0.831578947368
+kernel k-groups $\widetilde{\rho}_{1}$,190,0.905263157895
+k-means,200,0.545
+gmm,200,0.575
+spectral clustering $\widetilde{\rho}_1$,200,0.655
+kernel k-groups $\rho_{1}$,200,0.56
+kernel k-groups $\rho_{1/2}$,200,0.58
+kernel k-groups $\widetilde{\rho}_{1}$,200,0.88
+k-means,210,0.619047619048
+gmm,210,0.519047619048
+spectral clustering $\widetilde{\rho}_1$,210,0.842857142857
+kernel k-groups $\rho_{1}$,210,0.77619047619
+kernel k-groups $\rho_{1/2}$,210,0.866666666667
+kernel k-groups $\widetilde{\rho}_{1}$,210,0.885714285714
+k-means,220,0.690909090909
+gmm,220,0.554545454545
+spectral clustering $\widetilde{\rho}_1$,220,0.822727272727
+kernel k-groups $\rho_{1}$,220,0.686363636364
+kernel k-groups $\rho_{1/2}$,220,0.772727272727
+kernel k-groups $\widetilde{\rho}_{1}$,220,0.85
+k-means,230,0.726086956522
+gmm,230,0.669565217391
+spectral clustering $\widetilde{\rho}_1$,230,0.84347826087
+kernel k-groups $\rho_{1}$,230,0.765217391304
+kernel k-groups $\rho_{1/2}$,230,0.765217391304
+kernel k-groups $\widetilde{\rho}_{1}$,230,0.85652173913
+k-means,240,0.691666666667
+gmm,240,0.725
+spectral clustering $\widetilde{\rho}_1$,240,0.733333333333
+kernel k-groups $\rho_{1}$,240,0.708333333333
+kernel k-groups $\rho_{1/2}$,240,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,240,0.866666666667
+k-means,250,0.7
+gmm,250,0.716
+spectral clustering $\widetilde{\rho}_1$,250,0.872
+kernel k-groups $\rho_{1}$,250,0.764
+kernel k-groups $\rho_{1/2}$,250,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,250,0.888
+k-means,260,0.711538461538
+gmm,260,0.788461538462
+spectral clustering $\widetilde{\rho}_1$,260,0.869230769231
+kernel k-groups $\rho_{1}$,260,0.773076923077
+kernel k-groups $\rho_{1/2}$,260,0.803846153846
+kernel k-groups $\widetilde{\rho}_{1}$,260,0.9
+k-means,270,0.633333333333
+gmm,270,0.666666666667
+spectral clustering $\widetilde{\rho}_1$,270,0.87037037037
+kernel k-groups $\rho_{1}$,270,0.785185185185
+kernel k-groups $\rho_{1/2}$,270,0.818518518519
+kernel k-groups $\widetilde{\rho}_{1}$,270,0.907407407407
+k-means,280,0.703571428571
+gmm,280,0.757142857143
+spectral clustering $\widetilde{\rho}_1$,280,0.839285714286
+kernel k-groups $\rho_{1}$,280,0.778571428571
+kernel k-groups $\rho_{1/2}$,280,0.821428571429
+kernel k-groups $\widetilde{\rho}_{1}$,280,0.864285714286
+k-means,290,0.706896551724
+gmm,290,0.713793103448
+spectral clustering $\widetilde{\rho}_1$,290,0.813793103448
+kernel k-groups $\rho_{1}$,290,0.762068965517
+kernel k-groups $\rho_{1/2}$,290,0.803448275862
+kernel k-groups $\widetilde{\rho}_{1}$,290,0.886206896552
+k-means,300,0.683333333333
+gmm,300,0.66
+spectral clustering $\widetilde{\rho}_1$,300,0.773333333333
+kernel k-groups $\rho_{1}$,300,0.67
+kernel k-groups $\rho_{1/2}$,300,0.726666666667
+kernel k-groups $\widetilde{\rho}_{1}$,300,0.843333333333
+k-means,310,0.625806451613
+gmm,310,0.612903225806
+spectral clustering $\widetilde{\rho}_1$,310,0.832258064516
+kernel k-groups $\rho_{1}$,310,0.751612903226
+kernel k-groups $\rho_{1/2}$,310,0.787096774194
+kernel k-groups $\widetilde{\rho}_{1}$,310,0.851612903226
+k-means,320,0.628125
+gmm,320,0.7625
+spectral clustering $\widetilde{\rho}_1$,320,0.76875
+kernel k-groups $\rho_{1}$,320,0.75
+kernel k-groups $\rho_{1/2}$,320,0.8125
+kernel k-groups $\widetilde{\rho}_{1}$,320,0.85
+k-means,330,0.766666666667
+gmm,330,0.763636363636
+spectral clustering $\widetilde{\rho}_1$,330,0.842424242424
+kernel k-groups $\rho_{1}$,330,0.80303030303
+kernel k-groups $\rho_{1/2}$,330,0.851515151515
+kernel k-groups $\widetilde{\rho}_{1}$,330,0.884848484848
+k-means,340,0.702941176471
+gmm,340,0.726470588235
+spectral clustering $\widetilde{\rho}_1$,340,0.85
+kernel k-groups $\rho_{1}$,340,0.75
+kernel k-groups $\rho_{1/2}$,340,0.794117647059
+kernel k-groups $\widetilde{\rho}_{1}$,340,0.882352941176
+k-means,350,0.685714285714
+gmm,350,0.78
+spectral clustering $\widetilde{\rho}_1$,350,0.828571428571
+kernel k-groups $\rho_{1}$,350,0.78
+kernel k-groups $\rho_{1/2}$,350,0.808571428571
+kernel k-groups $\widetilde{\rho}_{1}$,350,0.862857142857
+k-means,360,0.713888888889
+gmm,360,0.722222222222
+spectral clustering $\widetilde{\rho}_1$,360,0.830555555556
+kernel k-groups $\rho_{1}$,360,0.761111111111
+kernel k-groups $\rho_{1/2}$,360,0.783333333333
+kernel k-groups $\widetilde{\rho}_{1}$,360,0.875
+k-means,370,0.667567567568
+gmm,370,0.545945945946
+spectral clustering $\widetilde{\rho}_1$,370,0.878378378378
+kernel k-groups $\rho_{1}$,370,0.754054054054
+kernel k-groups $\rho_{1/2}$,370,0.872972972973
+kernel k-groups $\widetilde{\rho}_{1}$,370,0.897297297297
+k-means,380,0.721052631579
+gmm,380,0.721052631579
+spectral clustering $\widetilde{\rho}_1$,380,0.821052631579
+kernel k-groups $\rho_{1}$,380,0.760526315789
+kernel k-groups $\rho_{1/2}$,380,0.805263157895
+kernel k-groups $\widetilde{\rho}_{1}$,380,0.876315789474
+k-means,390,0.7
+gmm,390,0.758974358974
+spectral clustering $\widetilde{\rho}_1$,390,0.828205128205
+kernel k-groups $\rho_{1}$,390,0.774358974359
+kernel k-groups $\rho_{1/2}$,390,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,390,0.866666666667
+k-means,400,0.745
+gmm,400,0.755
+spectral clustering $\widetilde{\rho}_1$,400,0.795
+kernel k-groups $\rho_{1}$,400,0.775
+kernel k-groups $\rho_{1/2}$,400,0.7925
+kernel k-groups $\widetilde{\rho}_{1}$,400,0.8825
+k-means,10,0.5
+gmm,10,0.5
+spectral clustering $\widetilde{\rho}_1$,10,0.8
+kernel k-groups $\rho_{1}$,10,0.5
+kernel k-groups $\rho_{1/2}$,10,0.5
+kernel k-groups $\widetilde{\rho}_{1}$,10,0.6
+k-means,20,0.5
+gmm,20,0.55
+spectral clustering $\widetilde{\rho}_1$,20,0.65
+kernel k-groups $\rho_{1}$,20,0.6
+kernel k-groups $\rho_{1/2}$,20,0.5
+kernel k-groups $\widetilde{\rho}_{1}$,20,0.65
+k-means,30,0.633333333333
+gmm,30,0.566666666667
+spectral clustering $\widetilde{\rho}_1$,30,0.7
+kernel k-groups $\rho_{1}$,30,0.666666666667
+kernel k-groups $\rho_{1/2}$,30,0.666666666667
+kernel k-groups $\widetilde{\rho}_{1}$,30,0.766666666667
+k-means,40,0.65
+gmm,40,0.675
+spectral clustering $\widetilde{\rho}_1$,40,0.725
+kernel k-groups $\rho_{1}$,40,0.65
+kernel k-groups $\rho_{1/2}$,40,0.725
+kernel k-groups $\widetilde{\rho}_{1}$,40,0.825
+k-means,50,0.64
+gmm,50,0.52
+spectral clustering $\widetilde{\rho}_1$,50,0.58
+kernel k-groups $\rho_{1}$,50,0.68
+kernel k-groups $\rho_{1/2}$,50,0.7
+kernel k-groups $\widetilde{\rho}_{1}$,50,0.76
+k-means,60,0.65
+gmm,60,0.633333333333
+spectral clustering $\widetilde{\rho}_1$,60,0.75
+kernel k-groups $\rho_{1}$,60,0.733333333333
+kernel k-groups $\rho_{1/2}$,60,0.716666666667
+kernel k-groups $\widetilde{\rho}_{1}$,60,0.866666666667
+k-means,70,0.585714285714
+gmm,70,0.685714285714
+spectral clustering $\widetilde{\rho}_1$,70,0.8
+kernel k-groups $\rho_{1}$,70,0.785714285714
+kernel k-groups $\rho_{1/2}$,70,0.857142857143
+kernel k-groups $\widetilde{\rho}_{1}$,70,0.828571428571
+k-means,80,0.5875
+gmm,80,0.525
+spectral clustering $\widetilde{\rho}_1$,80,0.8125
+kernel k-groups $\rho_{1}$,80,0.6
+kernel k-groups $\rho_{1/2}$,80,0.8625
+kernel k-groups $\widetilde{\rho}_{1}$,80,0.8625
+k-means,90,0.522222222222
+gmm,90,0.522222222222
+spectral clustering $\widetilde{\rho}_1$,90,0.722222222222
+kernel k-groups $\rho_{1}$,90,0.577777777778
+kernel k-groups $\rho_{1/2}$,90,0.688888888889
+kernel k-groups $\widetilde{\rho}_{1}$,90,0.788888888889
+k-means,100,0.75
+gmm,100,0.55
+spectral clustering $\widetilde{\rho}_1$,100,0.8
+kernel k-groups $\rho_{1}$,100,0.76
+kernel k-groups $\rho_{1/2}$,100,0.76
+kernel k-groups $\widetilde{\rho}_{1}$,100,0.86
+k-means,110,0.736363636364
+gmm,110,0.745454545455
+spectral clustering $\widetilde{\rho}_1$,110,0.754545454545
+kernel k-groups $\rho_{1}$,110,0.763636363636
+kernel k-groups $\rho_{1/2}$,110,0.763636363636
+kernel k-groups $\widetilde{\rho}_{1}$,110,0.845454545455
+k-means,120,0.775
+gmm,120,0.625
+spectral clustering $\widetilde{\rho}_1$,120,0.783333333333
+kernel k-groups $\rho_{1}$,120,0.783333333333
+kernel k-groups $\rho_{1/2}$,120,0.833333333333
+kernel k-groups $\widetilde{\rho}_{1}$,120,0.9
+k-means,130,0.584615384615
+gmm,130,0.561538461538
+spectral clustering $\widetilde{\rho}_1$,130,0.723076923077
+kernel k-groups $\rho_{1}$,130,0.6
+kernel k-groups $\rho_{1/2}$,130,0.6
+kernel k-groups $\widetilde{\rho}_{1}$,130,0.830769230769
+k-means,140,0.714285714286
+gmm,140,0.664285714286
+spectral clustering $\widetilde{\rho}_1$,140,0.814285714286
+kernel k-groups $\rho_{1}$,140,0.728571428571
+kernel k-groups $\rho_{1/2}$,140,0.778571428571
+kernel k-groups $\widetilde{\rho}_{1}$,140,0.857142857143
+k-means,150,0.66
+gmm,150,0.626666666667
+spectral clustering $\widetilde{\rho}_1$,150,0.773333333333
+kernel k-groups $\rho_{1}$,150,0.753333333333
+kernel k-groups $\rho_{1/2}$,150,0.766666666667
+kernel k-groups $\widetilde{\rho}_{1}$,150,0.813333333333
+k-means,160,0.64375
+gmm,160,0.5375
+spectral clustering $\widetilde{\rho}_1$,160,0.81875
+kernel k-groups $\rho_{1}$,160,0.68125
+kernel k-groups $\rho_{1/2}$,160,0.7125
+kernel k-groups $\widetilde{\rho}_{1}$,160,0.85
+k-means,170,0.605882352941
+gmm,170,0.658823529412
+spectral clustering $\widetilde{\rho}_1$,170,0.717647058824
+kernel k-groups $\rho_{1}$,170,0.770588235294
+kernel k-groups $\rho_{1/2}$,170,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,170,0.858823529412
+k-means,180,0.716666666667
+gmm,180,0.705555555556
+spectral clustering $\widetilde{\rho}_1$,180,0.705555555556
+kernel k-groups $\rho_{1}$,180,0.755555555556
+kernel k-groups $\rho_{1/2}$,180,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,180,0.866666666667
+k-means,190,0.689473684211
+gmm,190,0.773684210526
+spectral clustering $\widetilde{\rho}_1$,190,0.805263157895
+kernel k-groups $\rho_{1}$,190,0.752631578947
+kernel k-groups $\rho_{1/2}$,190,0.752631578947
+kernel k-groups $\widetilde{\rho}_{1}$,190,0.852631578947
+k-means,200,0.6
+gmm,200,0.58
+spectral clustering $\widetilde{\rho}_1$,200,0.77
+kernel k-groups $\rho_{1}$,200,0.61
+kernel k-groups $\rho_{1/2}$,200,0.695
+kernel k-groups $\widetilde{\rho}_{1}$,200,0.9
+k-means,210,0.690476190476
+gmm,210,0.742857142857
+spectral clustering $\widetilde{\rho}_1$,210,0.77619047619
+kernel k-groups $\rho_{1}$,210,0.72380952381
+kernel k-groups $\rho_{1/2}$,210,0.804761904762
+kernel k-groups $\widetilde{\rho}_{1}$,210,0.857142857143
+k-means,220,0.718181818182
+gmm,220,0.75
+spectral clustering $\widetilde{\rho}_1$,220,0.827272727273
+kernel k-groups $\rho_{1}$,220,0.781818181818
+kernel k-groups $\rho_{1/2}$,220,0.804545454545
+kernel k-groups $\widetilde{\rho}_{1}$,220,0.872727272727
+k-means,230,0.730434782609
+gmm,230,0.6
+spectral clustering $\widetilde{\rho}_1$,230,0.817391304348
+kernel k-groups $\rho_{1}$,230,0.760869565217
+kernel k-groups $\rho_{1/2}$,230,0.778260869565
+kernel k-groups $\widetilde{\rho}_{1}$,230,0.860869565217
+k-means,240,0.704166666667
+gmm,240,0.745833333333
+spectral clustering $\widetilde{\rho}_1$,240,0.875
+kernel k-groups $\rho_{1}$,240,0.7625
+kernel k-groups $\rho_{1/2}$,240,0.766666666667
+kernel k-groups $\widetilde{\rho}_{1}$,240,0.925
+k-means,250,0.556
+gmm,250,0.684
+spectral clustering $\widetilde{\rho}_1$,250,0.864
+kernel k-groups $\rho_{1}$,250,0.752
+kernel k-groups $\rho_{1/2}$,250,0.824
+kernel k-groups $\widetilde{\rho}_{1}$,250,0.92
+k-means,260,0.696153846154
+gmm,260,0.715384615385
+spectral clustering $\widetilde{\rho}_1$,260,0.811538461538
+kernel k-groups $\rho_{1}$,260,0.707692307692
+kernel k-groups $\rho_{1/2}$,260,0.815384615385
+kernel k-groups $\widetilde{\rho}_{1}$,260,0.880769230769
+k-means,270,0.637037037037
+gmm,270,0.52962962963
+spectral clustering $\widetilde{\rho}_1$,270,0.811111111111
+kernel k-groups $\rho_{1}$,270,0.748148148148
+kernel k-groups $\rho_{1/2}$,270,0.740740740741
+kernel k-groups $\widetilde{\rho}_{1}$,270,0.866666666667
+k-means,280,0.635714285714
+gmm,280,0.728571428571
+spectral clustering $\widetilde{\rho}_1$,280,0.807142857143
+kernel k-groups $\rho_{1}$,280,0.725
+kernel k-groups $\rho_{1/2}$,280,0.75
+kernel k-groups $\widetilde{\rho}_{1}$,280,0.857142857143
+k-means,290,0.710344827586
+gmm,290,0.724137931034
+spectral clustering $\widetilde{\rho}_1$,290,0.865517241379
+kernel k-groups $\rho_{1}$,290,0.768965517241
+kernel k-groups $\rho_{1/2}$,290,0.789655172414
+kernel k-groups $\widetilde{\rho}_{1}$,290,0.886206896552
+k-means,300,0.753333333333
+gmm,300,0.743333333333
+spectral clustering $\widetilde{\rho}_1$,300,0.86
+kernel k-groups $\rho_{1}$,300,0.816666666667
+kernel k-groups $\rho_{1/2}$,300,0.836666666667
+kernel k-groups $\widetilde{\rho}_{1}$,300,0.893333333333
+k-means,310,0.687096774194
+gmm,310,0.703225806452
+spectral clustering $\widetilde{\rho}_1$,310,0.845161290323
+kernel k-groups $\rho_{1}$,310,0.745161290323
+kernel k-groups $\rho_{1/2}$,310,0.816129032258
+kernel k-groups $\widetilde{\rho}_{1}$,310,0.883870967742
+k-means,320,0.696875
+gmm,320,0.78125
+spectral clustering $\widetilde{\rho}_1$,320,0.8125
+kernel k-groups $\rho_{1}$,320,0.753125
+kernel k-groups $\rho_{1/2}$,320,0.815625
+kernel k-groups $\widetilde{\rho}_{1}$,320,0.88125
+k-means,330,0.687878787879
+gmm,330,0.763636363636
+spectral clustering $\widetilde{\rho}_1$,330,0.833333333333
+kernel k-groups $\rho_{1}$,330,0.766666666667
+kernel k-groups $\rho_{1/2}$,330,0.793939393939
+kernel k-groups $\widetilde{\rho}_{1}$,330,0.906060606061
+k-means,340,0.647058823529
+gmm,340,0.726470588235
+spectral clustering $\widetilde{\rho}_1$,340,0.788235294118
+kernel k-groups $\rho_{1}$,340,0.711764705882
+kernel k-groups $\rho_{1/2}$,340,0.802941176471
+kernel k-groups $\widetilde{\rho}_{1}$,340,0.885294117647
+k-means,350,0.711428571429
+gmm,350,0.668571428571
+spectral clustering $\widetilde{\rho}_1$,350,0.825714285714
+kernel k-groups $\rho_{1}$,350,0.765714285714
+kernel k-groups $\rho_{1/2}$,350,0.82
+kernel k-groups $\widetilde{\rho}_{1}$,350,0.842857142857
+k-means,360,0.647222222222
+gmm,360,0.766666666667
+spectral clustering $\widetilde{\rho}_1$,360,0.861111111111
+kernel k-groups $\rho_{1}$,360,0.775
+kernel k-groups $\rho_{1/2}$,360,0.786111111111
+kernel k-groups $\widetilde{\rho}_{1}$,360,0.880555555556
+k-means,370,0.710810810811
+gmm,370,0.797297297297
+spectral clustering $\widetilde{\rho}_1$,370,0.87027027027
+kernel k-groups $\rho_{1}$,370,0.77027027027
+kernel k-groups $\rho_{1/2}$,370,0.778378378378
+kernel k-groups $\widetilde{\rho}_{1}$,370,0.867567567568
+k-means,380,0.760526315789
+gmm,380,0.818421052632
+spectral clustering $\widetilde{\rho}_1$,380,0.852631578947
+kernel k-groups $\rho_{1}$,380,0.834210526316
+kernel k-groups $\rho_{1/2}$,380,0.855263157895
+kernel k-groups $\widetilde{\rho}_{1}$,380,0.910526315789
+k-means,390,0.687179487179
+gmm,390,0.812820512821
+spectral clustering $\widetilde{\rho}_1$,390,0.8
+kernel k-groups $\rho_{1}$,390,0.715384615385
+kernel k-groups $\rho_{1/2}$,390,0.764102564103
+kernel k-groups $\widetilde{\rho}_{1}$,390,0.874358974359
+k-means,400,0.72
+gmm,400,0.7625
+spectral clustering $\widetilde{\rho}_1$,400,0.89
+kernel k-groups $\rho_{1}$,400,0.805
+kernel k-groups $\rho_{1/2}$,400,0.8575
+kernel k-groups $\widetilde{\rho}_{1}$,400,0.9025
+k-means,10,0.6
+gmm,10,0.7
+spectral clustering $\widetilde{\rho}_1$,10,0.8
+kernel k-groups $\rho_{1}$,10,0.7
+kernel k-groups $\rho_{1/2}$,10,0.7
+kernel k-groups $\widetilde{\rho}_{1}$,10,0.7
+k-means,20,0.7
+gmm,20,0.55
+spectral clustering $\widetilde{\rho}_1$,20,0.65
+kernel k-groups $\rho_{1}$,20,0.55
+kernel k-groups $\rho_{1/2}$,20,0.55
+kernel k-groups $\widetilde{\rho}_{1}$,20,0.5
+k-means,30,0.5
+gmm,30,0.566666666667
+spectral clustering $\widetilde{\rho}_1$,30,0.533333333333
+kernel k-groups $\rho_{1}$,30,0.533333333333
+kernel k-groups $\rho_{1/2}$,30,0.533333333333
+kernel k-groups $\widetilde{\rho}_{1}$,30,0.533333333333
+k-means,40,0.5
+gmm,40,0.675
+spectral clustering $\widetilde{\rho}_1$,40,0.725
+kernel k-groups $\rho_{1}$,40,0.675
+kernel k-groups $\rho_{1/2}$,40,0.675
+kernel k-groups $\widetilde{\rho}_{1}$,40,0.95
+k-means,50,0.52
+gmm,50,0.62
+spectral clustering $\widetilde{\rho}_1$,50,0.68
+kernel k-groups $\rho_{1}$,50,0.54
+kernel k-groups $\rho_{1/2}$,50,0.54
+kernel k-groups $\widetilde{\rho}_{1}$,50,0.82
+k-means,60,0.666666666667
+gmm,60,0.583333333333
+spectral clustering $\widetilde{\rho}_1$,60,0.7
+kernel k-groups $\rho_{1}$,60,0.683333333333
+kernel k-groups $\rho_{1/2}$,60,0.683333333333
+kernel k-groups $\widetilde{\rho}_{1}$,60,0.883333333333
+k-means,70,0.7
+gmm,70,0.7
+spectral clustering $\widetilde{\rho}_1$,70,0.728571428571
+kernel k-groups $\rho_{1}$,70,0.728571428571
+kernel k-groups $\rho_{1/2}$,70,0.728571428571
+kernel k-groups $\widetilde{\rho}_{1}$,70,0.914285714286
+k-means,80,0.7
+gmm,80,0.65
+spectral clustering $\widetilde{\rho}_1$,80,0.8125
+kernel k-groups $\rho_{1}$,80,0.75
+kernel k-groups $\rho_{1/2}$,80,0.875
+kernel k-groups $\widetilde{\rho}_{1}$,80,0.9125
+k-means,90,0.522222222222
+gmm,90,0.655555555556
+spectral clustering $\widetilde{\rho}_1$,90,0.5
+kernel k-groups $\rho_{1}$,90,0.588888888889
+kernel k-groups $\rho_{1/2}$,90,0.622222222222
+kernel k-groups $\widetilde{\rho}_{1}$,90,0.566666666667
+k-means,100,0.59
+gmm,100,0.51
+spectral clustering $\widetilde{\rho}_1$,100,0.79
+kernel k-groups $\rho_{1}$,100,0.6
+kernel k-groups $\rho_{1/2}$,100,0.53
+kernel k-groups $\widetilde{\rho}_{1}$,100,0.86
+k-means,110,0.663636363636
+gmm,110,0.572727272727
+spectral clustering $\widetilde{\rho}_1$,110,0.872727272727
+kernel k-groups $\rho_{1}$,110,0.736363636364
+kernel k-groups $\rho_{1/2}$,110,0.781818181818
+kernel k-groups $\widetilde{\rho}_{1}$,110,0.890909090909
+k-means,120,0.758333333333
+gmm,120,0.708333333333
+spectral clustering $\widetilde{\rho}_1$,120,0.825
+kernel k-groups $\rho_{1}$,120,0.758333333333
+kernel k-groups $\rho_{1/2}$,120,0.791666666667
+kernel k-groups $\widetilde{\rho}_{1}$,120,0.908333333333
+k-means,130,0.607692307692
+gmm,130,0.638461538462
+spectral clustering $\widetilde{\rho}_1$,130,0.753846153846
+kernel k-groups $\rho_{1}$,130,0.753846153846
+kernel k-groups $\rho_{1/2}$,130,0.776923076923
+kernel k-groups $\widetilde{\rho}_{1}$,130,0.830769230769
+k-means,140,0.592857142857
+gmm,140,0.521428571429
+spectral clustering $\widetilde{\rho}_1$,140,0.807142857143
+kernel k-groups $\rho_{1}$,140,0.614285714286
+kernel k-groups $\rho_{1/2}$,140,0.65
+kernel k-groups $\widetilde{\rho}_{1}$,140,0.885714285714
+k-means,150,0.586666666667
+gmm,150,0.626666666667
+spectral clustering $\widetilde{\rho}_1$,150,0.773333333333
+kernel k-groups $\rho_{1}$,150,0.726666666667
+kernel k-groups $\rho_{1/2}$,150,0.746666666667
+kernel k-groups $\widetilde{\rho}_{1}$,150,0.846666666667
+k-means,160,0.73125
+gmm,160,0.69375
+spectral clustering $\widetilde{\rho}_1$,160,0.83125
+kernel k-groups $\rho_{1}$,160,0.7625
+kernel k-groups $\rho_{1/2}$,160,0.78125
+kernel k-groups $\widetilde{\rho}_{1}$,160,0.85
+k-means,170,0.705882352941
+gmm,170,0.664705882353
+spectral clustering $\widetilde{\rho}_1$,170,0.664705882353
+kernel k-groups $\rho_{1}$,170,0.641176470588
+kernel k-groups $\rho_{1/2}$,170,0.711764705882
+kernel k-groups $\widetilde{\rho}_{1}$,170,0.835294117647
+k-means,180,0.605555555556
+gmm,180,0.722222222222
+spectral clustering $\widetilde{\rho}_1$,180,0.738888888889
+kernel k-groups $\rho_{1}$,180,0.638888888889
+kernel k-groups $\rho_{1/2}$,180,0.638888888889
+kernel k-groups $\widetilde{\rho}_{1}$,180,0.827777777778
+k-means,190,0.784210526316
+gmm,190,0.805263157895
+spectral clustering $\widetilde{\rho}_1$,190,0.794736842105
+kernel k-groups $\rho_{1}$,190,0.842105263158
+kernel k-groups $\rho_{1/2}$,190,0.847368421053
+kernel k-groups $\widetilde{\rho}_{1}$,190,0.905263157895
+k-means,200,0.77
+gmm,200,0.57
+spectral clustering $\widetilde{\rho}_1$,200,0.835
+kernel k-groups $\rho_{1}$,200,0.79
+kernel k-groups $\rho_{1/2}$,200,0.805
+kernel k-groups $\widetilde{\rho}_{1}$,200,0.875
+k-means,210,0.52380952381
+gmm,210,0.685714285714
+spectral clustering $\widetilde{\rho}_1$,210,0.742857142857
+kernel k-groups $\rho_{1}$,210,0.557142857143
+kernel k-groups $\rho_{1/2}$,210,0.671428571429
+kernel k-groups $\widetilde{\rho}_{1}$,210,0.809523809524
+k-means,220,0.745454545455
+gmm,220,0.781818181818
+spectral clustering $\widetilde{\rho}_1$,220,0.872727272727
+kernel k-groups $\rho_{1}$,220,0.8
+kernel k-groups $\rho_{1/2}$,220,0.872727272727
+kernel k-groups $\widetilde{\rho}_{1}$,220,0.909090909091
+k-means,230,0.730434782609
+gmm,230,0.708695652174
+spectral clustering $\widetilde{\rho}_1$,230,0.839130434783
+kernel k-groups $\rho_{1}$,230,0.773913043478
+kernel k-groups $\rho_{1/2}$,230,0.821739130435
+kernel k-groups $\widetilde{\rho}_{1}$,230,0.904347826087
+k-means,240,0.695833333333
+gmm,240,0.7
+spectral clustering $\widetilde{\rho}_1$,240,0.8125
+kernel k-groups $\rho_{1}$,240,0.745833333333
+kernel k-groups $\rho_{1/2}$,240,0.783333333333
+kernel k-groups $\widetilde{\rho}_{1}$,240,0.891666666667
+k-means,250,0.66
+gmm,250,0.7
+spectral clustering $\widetilde{\rho}_1$,250,0.736
+kernel k-groups $\rho_{1}$,250,0.604
+kernel k-groups $\rho_{1/2}$,250,0.616
+kernel k-groups $\widetilde{\rho}_{1}$,250,0.856
+k-means,260,0.742307692308
+gmm,260,0.738461538462
+spectral clustering $\widetilde{\rho}_1$,260,0.85
+kernel k-groups $\rho_{1}$,260,0.776923076923
+kernel k-groups $\rho_{1/2}$,260,0.826923076923
+kernel k-groups $\widetilde{\rho}_{1}$,260,0.9
+k-means,270,0.685185185185
+gmm,270,0.762962962963
+spectral clustering $\widetilde{\rho}_1$,270,0.807407407407
+kernel k-groups $\rho_{1}$,270,0.8
+kernel k-groups $\rho_{1/2}$,270,0.862962962963
+kernel k-groups $\widetilde{\rho}_{1}$,270,0.885185185185
+k-means,280,0.746428571429
+gmm,280,0.760714285714
+spectral clustering $\widetilde{\rho}_1$,280,0.817857142857
+kernel k-groups $\rho_{1}$,280,0.767857142857
+kernel k-groups $\rho_{1/2}$,280,0.807142857143
+kernel k-groups $\widetilde{\rho}_{1}$,280,0.871428571429
+k-means,290,0.693103448276
+gmm,290,0.675862068966
+spectral clustering $\widetilde{\rho}_1$,290,0.886206896552
+kernel k-groups $\rho_{1}$,290,0.758620689655
+kernel k-groups $\rho_{1/2}$,290,0.844827586207
+kernel k-groups $\widetilde{\rho}_{1}$,290,0.913793103448
+k-means,300,0.656666666667
+gmm,300,0.693333333333
+spectral clustering $\widetilde{\rho}_1$,300,0.786666666667
+kernel k-groups $\rho_{1}$,300,0.72
+kernel k-groups $\rho_{1/2}$,300,0.776666666667
+kernel k-groups $\widetilde{\rho}_{1}$,300,0.86
+k-means,310,0.674193548387
+gmm,310,0.738709677419
+spectral clustering $\widetilde{\rho}_1$,310,0.861290322581
+kernel k-groups $\rho_{1}$,310,0.793548387097
+kernel k-groups $\rho_{1/2}$,310,0.835483870968
+kernel k-groups $\widetilde{\rho}_{1}$,310,0.912903225806
+k-means,320,0.671875
+gmm,320,0.725
+spectral clustering $\widetilde{\rho}_1$,320,0.7875
+kernel k-groups $\rho_{1}$,320,0.696875
+kernel k-groups $\rho_{1/2}$,320,0.725
+kernel k-groups $\widetilde{\rho}_{1}$,320,0.846875
+k-means,330,0.7
+gmm,330,0.712121212121
+spectral clustering $\widetilde{\rho}_1$,330,0.836363636364
+kernel k-groups $\rho_{1}$,330,0.721212121212
+kernel k-groups $\rho_{1/2}$,330,0.848484848485
+kernel k-groups $\widetilde{\rho}_{1}$,330,0.890909090909
+k-means,340,0.735294117647
+gmm,340,0.761764705882
+spectral clustering $\widetilde{\rho}_1$,340,0.847058823529
+kernel k-groups $\rho_{1}$,340,0.770588235294
+kernel k-groups $\rho_{1/2}$,340,0.8
+kernel k-groups $\widetilde{\rho}_{1}$,340,0.873529411765
+k-means,350,0.654285714286
+gmm,350,0.711428571429
+spectral clustering $\widetilde{\rho}_1$,350,0.805714285714
+kernel k-groups $\rho_{1}$,350,0.725714285714
+kernel k-groups $\rho_{1/2}$,350,0.768571428571
+kernel k-groups $\widetilde{\rho}_{1}$,350,0.871428571429
+k-means,360,0.722222222222
+gmm,360,0.769444444444
+spectral clustering $\widetilde{\rho}_1$,360,0.872222222222
+kernel k-groups $\rho_{1}$,360,0.797222222222
+kernel k-groups $\rho_{1/2}$,360,0.841666666667
+kernel k-groups $\widetilde{\rho}_{1}$,360,0.902777777778
+k-means,370,0.689189189189
+gmm,370,0.77027027027
+spectral clustering $\widetilde{\rho}_1$,370,0.840540540541
+kernel k-groups $\rho_{1}$,370,0.781081081081
+kernel k-groups $\rho_{1/2}$,370,0.810810810811
+kernel k-groups $\widetilde{\rho}_{1}$,370,0.862162162162
+k-means,380,0.707894736842
+gmm,380,0.721052631579
+spectral clustering $\widetilde{\rho}_1$,380,0.876315789474
+kernel k-groups $\rho_{1}$,380,0.773684210526
+kernel k-groups $\rho_{1/2}$,380,0.815789473684
+kernel k-groups $\widetilde{\rho}_{1}$,380,0.894736842105
+k-means,390,0.730769230769
+gmm,390,0.774358974359
+spectral clustering $\widetilde{\rho}_1$,390,0.812820512821
+kernel k-groups $\rho_{1}$,390,0.776923076923
+kernel k-groups $\rho_{1/2}$,390,0.810256410256
+kernel k-groups $\widetilde{\rho}_{1}$,390,0.887179487179
+k-means,400,0.695
+gmm,400,0.8025
+spectral clustering $\widetilde{\rho}_1$,400,0.8675
+kernel k-groups $\rho_{1}$,400,0.7975
+kernel k-groups $\rho_{1/2}$,400,0.8775
+kernel k-groups $\widetilde{\rho}_{1}$,400,0.9275

@@ -1,0 +1,3066 @@
+
+%% bare_jrnl_compsoc.tex
+%% V1.4b
+%% 2015/08/26
+%% by Michael Shell
+%% See:
+%% http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.8b or later) with an IEEE
+%% Computer Society journal paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/pkg/ieeetran
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall the IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%*************************************************************************
+
+
+% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
+% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
+% *** with production work. The IEEE's font choices and paper sizes can   ***
+% *** trigger bugs that do not appear when using other class files.       ***                          ***
+% The testflow support page is at:
+% http://www.michaelshell.org/tex/testflow/
+
+
+\documentclass[10pt,journal,compsoc]{IEEEtran}
+%
+% If IEEEtran.cls has not been installed into the LaTeX system files,
+% manually specify the path to it like:
+% \documentclass[10pt,journal,compsoc]{../sty/IEEEtran}
+
+
+
+
+
+% Some very useful LaTeX packages include:
+% (uncomment the ones you want to load)
+
+
+% *** MISC UTILITY PACKAGES ***
+%
+%\usepackage{ifpdf}
+% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
+% compilation based on whether the output is pdf or dvi.
+% usage:
+% \ifpdf
+%   % pdf code
+% \else
+%   % dvi code
+% \fi
+% The latest version of ifpdf.sty can be obtained from:
+% http://www.ctan.org/pkg/ifpdf
+% Also, note that IEEEtran.cls V1.7 and later provides a builtin
+% \ifCLASSINFOpdf conditional that works the same way.
+% When switching from latex to pdflatex and vice-versa, the compiler may
+% have to be run twice to clear warning/error messages.
+
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm,amscd,bm,bbm}
+%\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+%\usepackage{microtype}      % microtypography
+%\usepackage{mathtools}
+%\usepackage{printlen}
+%\usepackage{cite}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs}
+\usepackage[inline]{enumitem}
+\usepackage[inline]{enumitem}
+\usepackage[pdftex]{graphicx}
+\graphicspath{{./figs/}}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+%\usepackage[none]{hyphenat}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{array,booktabs}
+\usepackage{xcolor}
+\usepackage{makecell}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+%\pretolerance=10000
+%\tolerance=2000 
+%\emergencystretch=10pt
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}{Example}
+
+\DeclareMathOperator{\aff}{aff}
+\DeclareMathOperator{\st}{s.t.}
+\DeclareMathOperator{\affnot}{aff_0}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\relint}{relint}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\image}{im}
+\DeclareMathOperator{\nullspace}{null}
+\DeclareMathOperator{\area}{area}
+\DeclareMathOperator{\vspan}{span}
+\DeclareMathOperator{\id}{Id}
+\DeclareMathOperator{\cond}{cond}
+\DeclareMathOperator{\prox}{prox}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\minimize}{minimize}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Tr}{Tr}
+
+
+
+\newcommand\Energy{\mathcal{E}}
+\newcommand\EnergyH{\mathcal{E}^{H}}
+\newcommand\EnergyL{\mathcal{E}^{L}}
+\newcommand\EnergyOne{\mathcal{E}^{1D}}
+\newcommand\E{\mathbb{E}}
+\newcommand\kk{K}
+\newcommand\kkk{h}
+\newcommand\Hk{{\mathcal{H}}_{\kk}}
+\newcommand\HH{\mathcal{H}}
+\newcommand\C{{\mathcal{C}}}
+\newcommand\tC{{\widetilde{\C}}}
+\newcommand\OO{{\mathcal{O}}}
+\newcommand\Zt{Y}
+\newcommand{\Ind}[1]{\mathbbm{1}_{#1}}
+\newcommand\e{e}
+\newcommand\om{\omega}
+\newcolumntype{g}{>{\columncolor{gray!20}}l}
+
+
+
+
+
+% *** CITATION PACKAGES ***
+%
+\ifCLASSOPTIONcompsoc
+  % IEEE Computer Society needs nocompress option
+  % requires cite.sty v4.0 or later (November 2003)
+  \usepackage[nocompress]{cite}
+\else
+  % normal IEEE
+  \usepackage{cite}
+\fi
+% cite.sty was written by Donald Arseneau
+% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
+% \cite{} output to follow that of the IEEE. Loading the cite package will
+% result in citation numbers being automatically sorted and properly
+% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
+% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
+% \cite will automatically add leading space, if needed. Use cite.sty's
+% noadjust option (cite.sty V3.8 and later) if you want to turn this off
+% such as if a citation ever needs to be enclosed in parenthesis.
+% cite.sty is already installed on most LaTeX systems. Be sure and use
+% version 5.0 (2009-03-20) and later if using hyperref.sty.
+% The latest version can be obtained at:
+% http://www.ctan.org/pkg/cite
+% The documentation is contained in the cite.sty file itself.
+%
+% Note that some packages require special options to format as the Computer
+% Society requires. In particular, Computer Society  papers do not use
+% compressed citation ranges as is done in typical IEEE papers
+% (e.g., [1]-[4]). Instead, they list every citation separately in order
+% (e.g., [1], [2], [3], [4]). To get the latter we need to load the cite
+% package with the nocompress option which is supported by cite.sty v4.0
+% and later. Note also the use of a CLASSOPTION conditional provided by
+% IEEEtran.cls V1.7 and later.
+
+
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+  % \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation
+% can be obtained at: 
+% http://www.ctan.org/pkg/graphicx
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found at:
+% http://www.ctan.org/pkg/epslatex
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). The IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics.
+%
+% Note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/amsmath
+
+
+
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as the IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/pkg/algorithms
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/pkg/algorithmicx
+
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/array
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+%\ifCLASSOPTIONcompsoc
+%  \usepackage[caption=false,font=footnotesize,labelfont=sf,textfont=sf]{subfig}
+%\else
+%  \usepackage[caption=false,font=footnotesize]{subfig}
+%\fi
+% subfig.sty, written by Steven Douglas Cochran, is the modern replacement
+% for subfigure.sty, the latter of which is no longer maintained and is
+% incompatible with some LaTeX packages including fixltx2e. However,
+% subfig.sty requires and automatically loads Axel Sommerfeldt's caption.sty
+% which will override IEEEtran.cls' handling of captions and this will result
+% in non-IEEE style figure/table captions. To prevent this problem, be sure
+% and invoke subfig.sty's "caption=false" package option (available since
+% subfig.sty version 1.3, 2005/06/28) as this is will preserve IEEEtran.cls
+% handling of captions.
+% Note that the Computer Society format requires a sans serif font rather
+% than the serif font used in traditional IEEE formatting and thus the need
+% to invoke different subfig.sty package options depending on whether
+% compsoc mode has been enabled.
+%
+% The latest version and documentation of subfig.sty can be obtained at:
+% http://www.ctan.org/pkg/subfig
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+%\usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure.
+% Be aware that LaTeX2e kernels dated 2015 and later have fixltx2e.sty's
+% corrections already built into the system in which case a warning will
+% be issued if an attempt is made to load fixltx2e.sty as it is no longer
+% needed.
+% The latest version and documentation can be found at:
+% http://www.ctan.org/pkg/fixltx2e
+
+
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/pkg/stfloats
+% Do not use the stfloats baselinefloat ability as the IEEE does not allow
+% \baselineskip to stretch. Authors submitting work to the IEEE should note
+% that the IEEE rarely uses double column equations and that authors should try
+% to avoid such use. Do not be tempted to use the cuted.sty or midfloat.sty
+% packages (also by Sigitas Tolusis) as the IEEE does not format its papers in
+% such ways.
+% Do not attempt to use stfloats with fixltx2e as they are incompatible.
+% Instead, use Morten Hogholm'a dblfloatfix which combines the features
+% of both fixltx2e and stfloats:
+%
+% \usepackage{dblfloatfix}
+% The latest version can be found at:
+% http://www.ctan.org/pkg/dblfloatfix
+
+
+
+
+%\ifCLASSOPTIONcaptionsoff
+%  \usepackage[nomarkers]{endfloat}
+% \let\MYoriglatexcaption\caption
+% \renewcommand{\caption}[2][\relax]{\MYoriglatexcaption[#2]{#2}}
+%\fi
+% endfloat.sty was written by James Darrell McCauley, Jeff Goldberg and 
+% Axel Sommerfeldt. This package may be useful when used in conjunction with 
+% IEEEtran.cls'  captionsoff option. Some IEEE journals/societies require that
+% submissions have lists of figures/tables at the end of the paper and that
+% figures/tables without any captions are placed on a page by themselves at
+% the end of the document. If needed, the draftcls IEEEtran class option or
+% \CLASSINPUTbaselinestretch interface can be used to increase the line
+% spacing as well. Be sure and use the nomarkers option of endfloat to
+% prevent endfloat from "marking" where the figures would have been placed
+% in the text. The two hack lines of code above are a slight modification of
+% that suggested by in the endfloat docs (section 8.4.1) to ensure that
+% the full captions always appear in the list of figures/tables - even if
+% the user used the short optional argument of \caption[]{}.
+% IEEE papers do not typically make use of \caption[]'s optional argument,
+% so this should not be an issue. A similar trick can be used to disable
+% captions of packages such as subfig.sty that lack options to turn off
+% the subcaptions:
+% For subfig.sty:
+% \let\MYorigsubfloat\subfloat
+% \renewcommand{\subfloat}[2][\relax]{\MYorigsubfloat[]{#2}}
+% However, the above trick will not work if both optional arguments of
+% the \subfloat command are used. Furthermore, there needs to be a
+% description of each subfigure *somewhere* and endfloat does not add
+% subfigure captions to its list of figures. Thus, the best approach is to
+% avoid the use of subfigure captions (many IEEE journals avoid them anyway)
+% and instead reference/explain all the subfigures within the main caption.
+% The latest version of endfloat.sty and its documentation can obtained at:
+% http://www.ctan.org/pkg/endfloat
+%
+% The IEEEtran \ifCLASSOPTIONcaptionsoff conditional can also be used
+% later in the document, say, to conditionally put the References on a 
+% page by themselves.
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+%\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version and documentation can be obtained at:
+% http://www.ctan.org/pkg/url
+% Basically, \url{my_url_here}.
+
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% Titles are generally capitalized except for words such as a, an, and, as,
+% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
+% not capitalized unless they are the first or last word of the title.
+% Linebreaks \\ can be used within to get better formatting as desired.
+% Do not put math or special symbols in the title.
+\title{Energy Clustering}
+%
+%
+% author names and IEEE memberships
+% note positions of commas and nonbreaking spaces ( ~ ) LaTeX will not break
+% a structure at a ~ so this keeps an author's name from being broken across
+% two lines.
+% use \thanks{} to gain access to the first footnote area
+% a separate \thanks must be used for each paragraph as LaTeX2e's \thanks
+% was not built to handle multiple paragraphs
+%
+%
+%\IEEEcompsocitemizethanks is a special \thanks that produces the bulleted
+% lists the Computer Society journals use for "first footnote" author
+% affiliations. Use \IEEEcompsocthanksitem which works much like \item
+% for each affiliation group. When not in compsoc mode,
+% \IEEEcompsocitemizethanks becomes like \thanks and
+% \IEEEcompsocthanksitem becomes a line break with idention. This
+% facilitates dual compilation, although admittedly the differences in the
+% desired content of \author between the different types of papers makes a
+% one-size-fits-all approach a daunting prospect. For instance, compsoc 
+% journal papers have the author affiliations above the "Manuscript
+% received ..."  text while in non-compsoc journals this is reversed. Sigh.
+
+\author{Guilherme~Fran\c ca,~Maria Rizzo~and~Joshua~Vogelstein
+\IEEEcompsocitemizethanks{\IEEEcompsocthanksitem G. Fran\c ca is
+with the Center for Imaging Science, Johns Hopkins
+University; J. Vogelstein is with the Center for Imaging Science,
+Department of Biomedical Engineering and Institute for Computational
+Medicine, Johns Hopkins University. \protect\\
+% note need leading \protect in front of \\ to get a newline within \thanks as
+% \\ is fragile and will error, could use \hfil\break instead.
+E-mail: guifranca@jhu.edu; jovo@jhu.edu
+\IEEEcompsocthanksitem M. Rizzo is with the Department of Mathematics
+and Statistics, Bowling Green State University. \protect\\
+E-mail: mrizzo@bgsu.edu}% <-this % stops an unwanted space
+\thanks{Manuscript received March 15, 2018; revised March 15, 2018.}}
+
+% note the % following the last \IEEEmembership and also \thanks - 
+% these prevent an unwanted space from occurring between the last author name
+% and the end of the author line. i.e., if you had this:
+% 
+% \author{....lastname \thanks{...} \thanks{...} }
+%                     ^------------^------------^----Do not want these spaces!
+%
+% a space would be appended to the last name and could cause every name on that
+% line to be shifted left slightly. This is one of those "LaTeX things". For
+% instance, "\textbf{A} \textbf{B}" will typeset as "A B" not "AB". To get
+% "AB" then you have to do: "\textbf{A}\textbf{B}"
+% \thanks is no different in this regard, so shield the last } of each \thanks
+% that ends a line with a % and do not let a space in before the next \thanks.
+% Spaces after \IEEEmembership other than the last one are OK (and needed) as
+% you are supposed to have spaces between the names. For what it is worth,
+% this is a minor point as most people would not even notice if the said evil
+% space somehow managed to creep in.
+
+
+
+% The paper headers
+\markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
+{Energy Clustering}
+% The only time the second header will appear is for the odd numbered pages
+% after the title page when using the twoside option.
+% 
+% *** Note that you probably will NOT want to include the author's ***
+% *** name in the headers of peer review papers.                   ***
+% You can use \ifCLASSOPTIONpeerreview for conditional compilation here if
+% you desire.
+
+
+
+% The publisher's ID mark at the bottom of the page is less important with
+% Computer Society journal papers as those publications place the marks
+% outside of the main text columns and, therefore, unlike regular IEEE
+% journals, the available text space is not reduced by their presence.
+% If you want to put a publisher's ID mark on the page you can do it like
+% this:
+%\IEEEpubid{0000--0000/00\$00.00~\copyright~2015 IEEE}
+% or like this to get the Computer Society new two part style.
+%\IEEEpubid{\makebox[\columnwidth]{\hfill 0000--0000/00/\$00.00~\copyright~2015 IEEE}%
+%\hspace{\columnsep}\makebox[\columnwidth]{Published by the IEEE Computer Society\hfill}}
+% Remember, if you use this you must call \IEEEpubidadjcol in the second
+% column for its text to clear the IEEEpubid mark (Computer Society jorunal
+% papers don't need this extra clearance.)
+
+
+
+% use for special paper notices
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+
+
+% for Computer Society papers, we must declare the abstract and index terms
+% PRIOR to the title within the \IEEEtitleabstractindextext IEEEtran
+% command as these need to go into the title area created by \maketitle.
+% As a general rule, do not put math, special symbols or citations
+% in the abstract or keywords.
+\IEEEtitleabstractindextext{%
+\begin{abstract}
+Energy statistics was proposed by Sz\' ekely in the 80's inspired by the
+Newtonian gravitational potential from classical mechanics and it provides
+a hypothesis test for equality of distributions.
+It was further generalized from Euclidean spaces to metric spaces of
+strong negative type, and more recently, a connection with reproducing
+kernel Hilbert spaces (RKHS) was established.
+In this paper, we consider the problem of clustering data 
+from the perspective of energy statistics theory. 
+We provide a precise mathematical formulation 
+yielding a quadratically constrained
+quadratic program (QCQP) in the associated RKHS, thus establishing the
+connection with kernel methods. 
+%We show that this QCQP
+%is equivalent to kernel $k$-means optimization problem once the kernel
+%is fixed.
+%These results imply a first principles derivation of kernel $k$-means
+%from energy statistics.
+%However, energy statistics fixes a family of standard kernels.
+Moreover, we also propose a weighted version of energy statistics applied
+to clustering, making connection to graph partitioning problems.
+To find local solutions of such QCQP, we propose an iterative algorithm based
+on Hartigan's method, which in this case has the same computational cost
+as kernel $k$-means algorithm, which is on Lloyd's heuristic, but usually
+with better clustering quality.
+We provide carefully designed numerical experiments showing the superiority
+of the proposed method compared to kernel $k$-means, spectral clustering,
+standard $k$-means, and Gaussian mixture models in a variety of settings,
+specially in high dimensions. We also 
+employ the proposed method to an important
+real dataset describing protein expressions of neural synapses.
+\end{abstract}
+
+% Note that keywords are not normally used for peerreview papers.
+\begin{IEEEkeywords}
+Clustering, Energy Statistics, Kernel Methods.
+\end{IEEEkeywords}}
+
+
+% make the title area
+\maketitle
+
+
+% To allow for easy dual compilation without having to reenter the
+% abstract/keywords data, the \IEEEtitleabstractindextext text will
+% not be used in maketitle, but will appear (i.e., to be "transported")
+% here as \IEEEdisplaynontitleabstractindextext when the compsoc 
+% or transmag modes are not selected <OR> if conference mode is selected 
+% - because all conference papers position the abstract like regular
+% papers do.
+\IEEEdisplaynontitleabstractindextext
+% \IEEEdisplaynontitleabstractindextext has no effect when using
+% compsoc or transmag under a non-conference mode.
+
+
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+
+\IEEEraisesectionheading{\section{Introduction}\label{sec:introduction}}
+% Computer Society journal (but not conference!) papers do something unusual
+% with the very first section heading (almost always called "Introduction").
+% They place it ABOVE the main text! IEEEtran.cls does not automatically do
+% this for you, but you can achieve this effect with the provided
+% \IEEEraisesectionheading{} command. Note the need to keep any \label that
+% is to refer to the section immediately after \section in the above as
+% \IEEEraisesectionheading puts \section within a raised box.
+
+
+
+
+% The very first letter is a 2 line initial drop letter followed
+% by the rest of the first word in caps (small caps for compsoc).
+% 
+% form to use if the first word consists of a single letter:
+% \IEEEPARstart{A}{demo} file is ....
+% 
+% form to use if you need the single drop letter followed by
+% normal text (unknown if ever used by the IEEE):
+% \IEEEPARstart{A}{}demo file is ....
+% 
+% Some journals put the first two words in caps:
+% \IEEEPARstart{T}{his demo} file is ....
+% 
+% Here we have the typical use of a "T" for an initial drop letter
+% and "HIS" in caps to complete the first word.
+
+
+\IEEEPARstart{E}{nergy Statistics} \cite{Szkely2013}
+is based on a 
+notion of statistical potential energy between probability distributions,
+in close analogy to Newton's gravitational potential in classical mechanics.
+It provides a model-free hypothesis test for equality of 
+distributions which is achieved 
+under minimum energy. When probability distributions are different the 
+``statistical potential energy'' diverges as sample size increases, 
+while tends 
+to a nondegenerate limit distribution when probability
+distributions are equal. 
+Energy statistics has been applied to several goodness-of-fit 
+hypothesis tests, multi-sample tests of equality of distributions, 
+analysis of variance \cite{RizzoVariance}, nonlinear dependence tests through
+distance covariance and distance correlation, which generalizes the Pearson
+correlation coefficient, and hierarchical clustering \cite{RizzoClustering} 
+by extending Ward's method of minimum variance. Moreover, 
+in Euclidean spaces, an application of 
+energy statistics to clustering
+was already proposed \cite{Kgroups}. 
+We refer the reader to \cite{Szkely2013}, 
+and references therein, for an overview of energy statistics theory and 
+its applications.
+
+In its original formulation, energy statistics has a compact representation
+in terms of expectations of pairwise Euclidean distances, providing
+straightforward empirical estimates. 
+The notion of distance covariance was further generalized from Euclidean 
+spaces to metric spaces of strong negative type \cite{Lyons}. Furthermore, 
+the link between energy distance based tests and kernel 
+based tests has 
+been recently established \cite{Sejdinovic2013} 
+through an equivalence between generalized energy distances to maximum
+mean discrepancies (MMD), which are distances between embeddings of 
+distributions in reproducing kernel Hilbert spaces (RKHS).
+This equivalence immediately relates energy statistics to
+kernel methods often used in machine learning, and form the basis 
+of our approach.
+
+Clustering has such a long history in machine learning, making it
+impossible to mention all important contributions in a short space. 
+Perhaps, the most used method is $k$-means \cite{Lloyd,MacQueen,Forgy}, which
+is based on Lloyd's heuristic \cite{Lloyd} of assigning a data point to
+the cluster with closest center. The only statistical 
+information about each cluster comes from its mean, making it sensitive 
+to outliers. Nevertheless, $k$-means works very well when data is 
+linearly separable in Euclidean space. Gaussian mixture models (GMM) is 
+another very common approach, providing more flexibility than $k$-means, 
+however, it still makes strong assumptions about the distribution of 
+the data.
+
+To account for nonlinearities, kernel methods were introduced 
+\cite{Smola,Girolami}. A mercer kernel \cite{Mercer} is used to implicitly
+map data points to a RKHS, then clustering can be performed in the associated
+Hilbert space by using its inner product. However, the kernel choice remains 
+the biggest challenge since there is no principled theory to construct a kernel
+for a given dataset, and usually a kernel introduces hyperparameters that 
+need to be carefully chosen. A well-known kernel based clustering method
+is kernel $k$-means, which is precisely $k$-means 
+formulated in the feature space \cite{Girolami}. 
+Furthermore, kernel $k$-means algorithm
+\cite{Dhillon2,Dhillon} is still based on Loyd's heuristic \cite{Lloyd}
+of grouping points that are closer to a cluster center.
+We refer the reader to \cite{Filippone} for a survey of clustering
+methods.
+
+Although clustering from energy statistics, in Euclidean spaces,
+was considered in \cite{Kgroups}, 
+the precise optimization problem behind this approach
+remains obscure, as well as the connection with kernel methods.
+The main theoretical contribution of this paper is to fill this gap.
+Since the statistical potential energy is minimum when
+distributions are equal, the principle behind clustering is to maximize 
+the statistical energy,  enforcing probability distributions associated to 
+each cluster to be different from one another. We provide a precise 
+mathematical formulation to this statement, leading to a quadratically 
+constrained quadratic program (QCQP) in the associated RKHS. This immediately
+establishes the connection between energy statistics based clustering,
+or \emph{energy clustering} for short, with kernel methods. Moreover,
+our formulation holds beyond the Euclidean case, more precisely, it holds
+for general semimetric spaces of negative type.
+We also show that such QCQP is equivalent to kernel $k$-means 
+optimization problem when the kernel is fixed. However, energy statistics
+is able to fix a family of kernels. Therefore, one can see 
+kernel $k$-means as a consequence of energy statistics theory.
+The equivalence between kernel $k$-means, spectral clustering, and graph 
+partitioning problems is well-known \cite{Dhillon,Dhillon2}. We further
+demonstrate 
+how these relations arise from a weighted version of energy statistics.
+
+Our main 
+algorithmic contribution is to use Hartigan's method \cite{Hartigan} to 
+find local solutions of the above mentioned QCQP, which is NP-hard in general.
+Hartigan's method was also used in \cite{Kgroups}, but without
+any connection to kernels. More importantly, the
+advantages
+of Hartigan's over Lloyd's method was already demonstrated 
+in some simple settings
+\cite{Telgarsky,Slonin}, but apparently this method did not receive 
+the deserved attention. To the 
+best of our knowledge, Hartigan's method was not previously 
+employed together with kernel methods. 
+We provide a fully kernel based Hartigan's algorithm for clustering,
+where the kernel is fixed by energy statistics. 
+We make clear the advantages of this proposal versus 
+Lloyd's method, which kernel $k$-means algorithm 
+is based upon and will also be used 
+to solve our QCQP. We show that both algorithms  have the same
+time complexity, but Hartigan's method in kernel spaces offer several
+advantages since it is able to escape local minima of Lloyd's method. 
+Furthermore, in the examples considered in this paper, the proposed method
+also provides superior performance compared spectral clustering, which
+is more expensive and in fact solves a relaxed version of our QCQP.
+
+Our numerical results provide compelling evidence that 
+Hartigan's method applied to energy clustering 
+is more accurate and robust than kernel $k$-means algorithm.
+Furthermore, our experiments illustrate 
+the flexibility of energy clustering, 
+showing that it is able to perform accurately on data coming from 
+very different distributions, contrary to $k$-means and GMM, for instance.
+More specifically, the proposed method performs 
+closely to $k$-means and GMM on normally distributed data, however,
+it is significantly better on data that 
+is not normally distributed. 
+Its superiority in high dimensions
+is striking, being more accurate than $k$-means and GMM 
+even on Gaussian settings. 
+
+
+%
+%\begin{figure}[!t]
+%\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure}
+
+% Note that the IEEE typically puts floats only at the top, even when this
+% results in a large percentage of a column being occupied by floats.
+% However, the Computer Society has been known to put floats at the bottom.
+
+
+% An example of a double column floating figure using two subfigures.
+% (The subfig.sty package must be loaded for this to work.)
+% The subfigure \label commands are set within each subfloat command,
+% and the \label for the overall figure must come after \caption.
+% \hfil is used as a separator to get equal spacing.
+% Watch out that the combined width of all the subfigures on a 
+% line do not exceed the text width or a line break will occur.
+%
+%\begin{figure*}[!t]
+%\centering
+%\subfloat[Case I]{\includegraphics[width=2.5in]{box}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{box}%
+%\label{fig_second_case}}
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure*}
+%
+% Note that often IEEE papers with subfigures do not employ subfigure
+% captions (using the optional argument to \subfloat[]), but instead will
+% reference/describe all of them (a), (b), etc., within the main caption.
+% Be aware that for subfig.sty to generate the (a), (b), etc., subfigure
+% labels, the optional argument to \subfloat must be present. If a
+% subcaption is not desired, just leave its contents blank,
+% e.g., \subfloat[].
+
+
+% An example of a floating table. Note that, for IEEE style tables, the
+% \caption command should come BEFORE the table and, given that table
+% captions serve much like titles, are usually capitalized except for words
+% such as a, an, and, as, at, but, by, for, in, nor, of, on, or, the, to
+% and up, which are usually not capitalized unless they are the first or
+% last word of the caption. Table text will default to \footnotesize as
+% the IEEE normally uses this smaller font for tables.
+% The \label must come after \caption as always.
+%
+%\begin{table}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+% if using array.sty, it might be a good idea to tweak the value of
+% \extrarowheight as needed to properly center the text within the cells
+%\caption{An Example of a Table}
+%\label{table_example}
+%\centering
+%% Some packages, such as MDW tools, offer better commands for making tables
+%% than the plain LaTeX2e tabular which is used here.
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{table}
+
+
+% Note that the IEEE does not put floats in the very first column
+% - or typically anywhere on the first page for that matter. Also,
+% in-text middle ("here") positioning is typically not used, but it
+% is allowed and encouraged for Computer Society conferences (but
+% not Computer Society journals). Most IEEE journals/conferences use
+% top floats exclusively. 
+% Note that, LaTeX2e, unlike IEEE journals/conferences, places
+% footnotes above bottom floats. This can be corrected via the
+% \fnbelowfloat command of the stfloats package.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Background}
+\label{sec:background}
+
+In this section we introduce the main concepts from energy
+statistics and its relation to 
+RKHS which form the basis of our work.
+For more details we refer the reader
+to \cite{Szkely2013} and \cite{Sejdinovic2013}.
+
+Consider random variables in $\mathbb{R}^D$ 
+such that $X,X' \stackrel{iid}{\sim} P$ and 
+$Y,Y' \stackrel{iid}{\sim} Q$, where $P$ and $Q$ are cumulative
+distribution functions with finite first moments. 
+The quantity 
+\begin{equation}
+\label{eq:energy}
+\Energy(P, Q) \equiv 2 \E \| X - Y\| - \E \| X - X' \| - \E \| Y - Y' \|,
+\end{equation}
+called \emph{energy distance} \cite{Szkely2013}, 
+is rotationally invariant and nonnegative, $\Energy(P,Q) \ge 0$, where
+equality
+to zero holds if and only if $P = Q$.
+Above, $\| \cdot \|$ denotes the
+Euclidean norm in $\mathbb{R}^D$. 
+Energy distance
+provides a characterization of equality of distributions, and
+$\Energy^{1/2}$ is
+a metric on the space of distributions.
+
+The energy distance can be generalized as, for instance,
+\begin{equation}
+\label{eq:energy2}
+\Energy_\alpha(P, Q) \equiv 
+2 \E \| X - Y\|^{\alpha} - \E \| X - X' \|^{\alpha} - 
+\E \| Y - Y' \|^{\alpha}
+\end{equation}
+where $0<\alpha\le 2$. This quantity is also nonnegative,
+$\Energy_\alpha(P,Q) \ge 0$. Furthermore, for $0<\alpha<2$ we have that
+$\Energy_\alpha(P,Q) = 0$ if and only if $P=Q$, while for $\alpha=2$ 
+we have $\Energy_2(P,Q) = 2\| \E(X) - \E(Y) \|^2$ which shows that
+equality to zero only requires
+equality of the means, and thus $\Energy_2(P,Q)=0$ does 
+not imply equality of distributions. 
+
+The energy distance can be even further generalized.
+Let $X, Y \in \mathcal{X}$  where $\mathcal{X}$ is an arbitrary space endowed
+with a \emph{semimetric of negative type}
+$\rho: \mathcal{X}\times\mathcal{X} \to \mathbb{R}$, which is required
+to satisfy
+\begin{equation}
+\label{eq:negative_type}
+\sum_{i,j=1}^n c_i c_j \rho(X_i, X_j) \le 0,
+\end{equation}
+where $X_i \in \mathcal{X}$ and $c_i \in \mathbb{R}$ such that
+$\sum_{i=1}^n c_i = 0$. Then, $\mathcal{X}$ is called a \emph{space of
+negative type}.
+We can thus replace $\mathbb{R}^D \to \mathcal{X}$ and 
+$\| X - Y \| \to \rho(X , Y)$ in the definition \eqref{eq:energy}, obtaining
+the \emph{generalized energy distance}
+\begin{equation}
+\label{eq:energy3}
+\Energy(P, Q) \equiv 2 \E \rho(X,Y) - \E \rho(X, X') - \E \rho(Y,Y').
+\end{equation}
+For spaces of negative type there exists a Hilbert space $\mathcal{H}$ and
+a map $\varphi: \mathcal{X} \to
+\mathcal{H}$ such that
+$\rho(X, Y) = \| \varphi(X) - \varphi(Y) \|_{\mathcal{H}}^2$. This
+allows us to compute quantities related to probability distributions over
+$\mathcal{X}$ in the associated Hilbert space $\mathcal{H}$.
+Even though the semimetric 
+$\rho$ may not satisfy the triangle inequality, 
+$\rho^{1/2}$ does since it can be shown to be a proper metric. 
+Our energy clustering formulation, proposed in the next section,
+will be based on the generalized
+energy distance \eqref{eq:energy3}.
+
+There is an equivalence between energy distance, 
+commonly used in statistics,
+and distances between embeddings of distributions in 
+RKHS, commonly used in machine learning. 
+This equivalence was established
+in \cite{Sejdinovic2013}. Let us first recall the definition of
+RKHS. Let $\HH$ be a Hilbert space of real-valued functions
+over $\mathcal{X}$. A function 
+$\kk : \mathcal{X} \times \mathcal{X} \to 
+\mathbb{R}$ is a reproducing kernel of $\HH$ if it satisfies
+the following two conditions:
+\begin{enumerate}
+\item $\kkk_x \equiv \kk(\cdot, x) \in \HH$ 
+for all $x \in \mathcal{X}$.
+\item $\langle \kkk_x, f \rangle_{\HH} = f(x)$ for
+all $x\in\mathcal{X}$ and $f\in \HH$.
+\end{enumerate}
+In other words, for any $x \in \mathcal{X}$ and any function $f \in \HH$,
+there is a unique 
+$\kkk_x \in \HH$ that reproduces $f(x)$ through the inner product
+of $\HH$.
+If such a \emph{kernel} 
+function $\kk$ exists, then $\HH$ is called a RKHS. The above two 
+properties immediately imply that $\kk$ is symmetric and positive
+definite. 
+%Indeed, notice that
+%$\langle \kkk_x, \kkk_y \rangle = \kkk_y(x) = \kk(x,y)$, and by 
+%definition 
+%$\langle \kkk_x, \kkk_y \rangle^* = \langle \kkk_y, \kkk_x \rangle$, but
+%since the inner product is real we have 
+%$\langle \kkk_y, \kkk_x \rangle = \langle \kkk_x, \kkk_y \rangle$, or
+%equivalently 
+%$\kk(y,x) = \kk(x,y)$. Moreover, for any $w \in
+%\HH$ we can write $w = \sum_{i=1}^n c_i \kkk_{x_i}$ where
+%$\{ \kkk_{x_i} \}_{i=1}^n$ is a basis of $\HH$. It follows that
+%$\langle w, w \rangle_{\HH}  = \sum_{i,j=1}^n c_i c_j \kk(x_i,x_j) \ge 0$,
+%showing that the kernel is positive definite. 
+Defining the Gram matrix $G$ with
+elements $G_{ij} = \kk(x_i,x_j)$, this is equivalent to $G=G^\top$ being
+positive semidefinite, i.e. $v^\top G \, v \ge 0$ for any vector
+$v \in \mathbb{R}^n$.
+
+The Moore-Aronszajn theorem 
+\cite{Aronszajn}
+establishes the converse of the above paragraph. 
+For every symmetric
+and positive definite function $\kk: \mathcal{X}\times \mathcal{X} \to
+\mathbb{R}$, there is an associated RKHS $\Hk$ 
+with reproducing
+kernel $\kk$. The map $\varphi: x \mapsto \kkk_x \in \Hk$ is called
+the canonical \emph{feature map}. Given a kernel $\kk$,
+this theorem enables us to define an embedding of a probability measure
+$P$ into the RKHS as follows: $P \mapsto \kkk_P \in
+\Hk$ such that 
+$\int f(x) d P(x) = \langle f, \kkk_P \rangle$ for all $f \in \Hk$,
+or alternatively, $\kkk_P \equiv \int \kk( \, \cdot \,, x)  d P(x)$. 
+We can now  introduce the 
+notion of distance between two probability measures using the inner product
+of $\Hk$, which is called the maximum mean discrepancy (MMD) and
+is given by
+\begin{equation}
+\label{eq:mmd}
+\gamma_\kk(P,Q) \equiv \| \kkk_P - \kkk_Q \|_{\Hk}.
+\end{equation}
+This can also be written as \cite{Gretton2012}
+\begin{equation}\label{eq:mmd2}
+\gamma_\kk^2(P,Q) = \E \kk(X,X') + \E \kk(Y,Y') - 2 \E \kk(X, Y)
+\end{equation}
+where $X,X' \stackrel{iid}{\sim} P$ and $Y,Y'\stackrel{iid}{\sim} Q$.
+From the equality between \eqref{eq:mmd} and \eqref{eq:mmd2} we also
+have 
+%\begin{equation}\label{eq:inner_data}
+$
+\langle \kkk_P, \kkk_Q \rangle_{\Hk} = \E \, \kk(X, Y).
+$
+%\end{equation}
+%Thus, in practice, we can estimate the inner product between  
+%embedded distributions 
+%by averaging the kernel function over sampled data.
+
+The following important result shows that semimetrics of negative
+type and symmetric positive definite kernels are closely related
+\cite{Berg1984}. Let $\rho: \mathcal{X} \times \mathcal{X} \to \mathbb{R}$
+and $x_0 \in \mathcal{X}$ an arbitrary but fixed point.
+Define
+\begin{equation}
+\label{eq:kernel_semimetric}
+\kk(x,y) \equiv 
+\tfrac{1}{2} \left[  \rho(x,x_0) + \rho(y,x_0) - \rho(x,y)\right].
+\end{equation}
+Then, it can be shown that 
+$\kk$ is positive definite if and only if $\rho$ is a semimetric
+of negative type.
+We have a family of kernels, one for each choice of $x_0$. Conversely,
+if $\rho$ is a semimetric of negative type and $\kk$ is a kernel in this
+family, then 
+\begin{equation}
+\label{eq:gen_kernel}
+\begin{split}
+\rho(x,y) &= \kk(x,x) + \kk(y,y) -2\kk(x,y) \\
+&=  \| \kkk_x - \kkk_y \|^2_{\Hk}
+\end{split}
+\end{equation}
+and the canonical feature map 
+$\varphi: x \mapsto \kkk_x$ is injective \cite{Sejdinovic2013}.
+When these conditions are satisfied we say that the kernel $\kk$ 
+generates the semimetric $\rho$. 
+If two different kernels generate the same $\rho$ they are
+said to be equivalent kernels.
+
+Now we can state the equivalence between the generalized 
+energy distance \eqref{eq:energy3} and
+inner products on RKHS, which is one of the main results of
+\cite{Sejdinovic2013}. If $\rho$ is a semimetric
+of negative type and $\kk$ a kernel that generates $\rho$, then
+replacing \eqref{eq:gen_kernel} into
+\eqref{eq:energy3}, and using \eqref{eq:mmd2}, yields
+\begin{equation} \label{eq:Erho}
+\begin{split}
+\Energy(P, Q) &= 
+2 \left[ \E \, \kk(X, X') + \E \, \kk(Y, Y') - 2\E \, \kk(X, Y)\right]  \\
+&= 2 \gamma_\kk^2(P,Q) .
+\end{split}
+\end{equation}
+Due to \eqref{eq:mmd} we can compute the energy 
+distance $\mathcal{E}(P, Q)$ between two probability distributions
+using the inner 
+product of $\Hk$. 
+
+Finally, let us recall the main formulas from generalized energy statistics
+for the test statistic of equality of distributions \cite{Szkely2013}. 
+Assume we have data $\mathbb{X} = \{ x_1,\dotsc, x_n \}$ where
+$x_i \in \mathcal{X}$, and $\mathcal{X}$ is a space of negative type.
+Consider a disjoint partition $\mathbb{X} = \bigcup_{j=1}^k \C_j$, with
+$\C_i \cap \C_j = \emptyset$.
+Each expectation in the generalized energy distance
+\eqref{eq:energy3}
+can be computed 
+through the function
+\begin{equation}
+\label{eq:g_def}
+g (\C_i, \C_j) \equiv 
+\dfrac{1}{n_i n_j}
+\sum_{x \in \C_i} 
+\sum_{y \in \C_j} \rho(x, y) ,
+\end{equation}
+where $n_i = |\C_i|$ is the number of elements in partition
+$\C_i$. 
+The \emph{within energy dispersion} is defined by
+\begin{equation}
+\label{eq:within}
+W \equiv
+\sum_{j=1}^{k} \dfrac{n_j}{2} g(\C_j, \C_j),
+\end{equation}
+and the \emph{between-sample energy statistic} is defined by
+\begin{equation}
+\label{eq:between}
+S \equiv
+\sum_{1 \le  i < j \le k } \dfrac{n_i n_{j}}{2 n} \left[
+2 g(\C_i, \C_j) - 
+g(\C_i, \C_i) - 
+g(\C_j, \C_j)
+\right],
+\end{equation}
+where $n = \sum_{j=1}^k n_j$.
+Given a set of distributions
+$\{ P_j\}_{j=1}^k$, where $x \in \C_j$ if and only if $x \sim P_j$, 
+the quantity $S$ provides
+a test statistic for equality of distributions
+\cite{Szkely2013}.
+When the sample size is large enough, $n\to \infty$,
+under the null hypothesis $H_0: P_1=P_2=\dotsm=P_k$, we have that
+$S\to 0$, 
+and under
+the alternative hypothesis $H_1: P_i \ne P_j$ for at least two $i\ne j$, 
+we have that $S \to \infty$.
+Note that this test does not make any assumptions
+about the form of distribution $P_j$, thus it is said to be 
+distribution-free.
+
+One can make a physical analogy by thinking 
+that points $ x \in \C_j$ form a massive body 
+whose total mass is characterized by the distribution function $P_j$.
+The quantity $S$ is thus a potential
+energy of the from $S(P_1,\dotsc,P_k)$ which measures how different
+the distribution of these masses are,  and achieves the ground state
+$S=0$ when all bodies have the same mass distribution. The potential energy
+$S$ increases as bodies have different mass distributions.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Clustering Based on Energy Statistics}
+\label{sec:clustering_theory}
+
+This section contains the main theoretical results of this paper, where 
+we formulate an optimization problem for clustering 
+based on energy statistics in the associated RKHS.
+
+Due to the previous test statistic for equality of distributions,
+the obvious
+criterion for clustering data is to 
+maximize $S$, given by \eqref{eq:between},
+which makes 
+each cluster as different
+as possible from the other ones.
+In other words, given a set of points coming from different probability
+distributions, the test statistic $S$ should attain a maximum when 
+each point is correctly
+classified as belonging to the cluster associated to its probability
+distribution.
+The following 
+straightforward result
+shows that maximizing $S$ is, however, equivalent to minimizing
+$W$, given by \eqref{eq:within}, which has a more convenient form.
+
+\begin{lemma}
+\label{th:minimize}
+Let $\mathbb{X} = \{x_1,\dotsc,x_n\}$ where each data point
+$x_i$ lives in a space $\mathcal{X}$ endowed with a semimetric $\rho:
+\mathcal{X}\times\mathcal{X} \to \mathbb{R}$ of
+negative type. For a fixed integer $k$,
+the partition
+$\mathbb{X} = \bigcup_{j=1}^k \C^\star_j$, where 
+$\C^\star_i \cap C^\star_j = \emptyset$ for
+all $i\ne j$, maximizes the between-sample statistic $S$, defined
+in equation \eqref{eq:between}, if and only if
+\begin{equation}
+\label{eq:minimize}
+\{ \C_1^\star,\dotsc,\C_k^\star \} = \argmin_{\C_1,\dotsc,C_k  } W(
+\C_1, \dotsc, \C_k)
+\end{equation}
+where the within energy dispersion $W$ is defined by \eqref{eq:within}.
+\end{lemma}
+\begin{proof}
+From \eqref{eq:within} and \eqref{eq:between}
+we have that
+\begin{equation}
+\begin{split}
+& S + W \\
+&= \dfrac{1}{2n} \sum_{\substack{i,j=1 \\ i\ne j}}^k n_i n_j g(\C_i, \C_j)
++ \dfrac{1}{2n} \sum_{i=1}^{k} 
+\bigg[ n - 
+\sum_{j\ne i = 1}^k n_j \bigg] 
+n_i g(\C_i, \C_i) \\
+& = \dfrac{1}{2n} \sum_{i,j=1}^k n_i n_j g(\C_i, \C_j) 
+= \dfrac{1}{2n} \sum_{x \in \mathbb{X}} \sum_{y \in \mathbb{X}} \rho(x,y) 
+= \dfrac{n}{2} g(\mathbb{X}, \mathbb{X}).
+\end{split}
+\end{equation}
+Note that the right hand side of this equation 
+only depends on the pooled data, so it is a constant
+independent of the choice of partition. Therefore, maximizing
+$S$ over the choice of partition is equivalent to minimizing $W$.
+\end{proof}
+
+For a given $k$, the clustering problem amounts to
+finding the best partition of the data by minimizing $W$.
+Notice that this is a hard clustering problem as partitions
+are disjoint. In the Euclidean case, the optimization 
+problem \eqref{eq:minimize}
+was already proposed in \cite{Kgroups}.
+Thus, Lemma~\ref{th:minimize} provides a generalization to arbirary spaces
+of negative type. Moreover, it is
+important to note that this problem is equivalent to maximizing $S$
+which is the test statistic for equality of distributions. 
+More importantly, in this current
+form, the relation of problem \eqref{eq:minimize} 
+with kernels and other clustering methods is obscure.
+In the following, we show what is the explicit optimization problem behind 
+\eqref{eq:minimize} in the corresponding RKHS, 
+establishing the connection with kernel methods.
+
+Based on the relation between kernels and semimetrics of negative
+type, 
+assume that the kernel $\kk: \mathcal{X} \times \mathcal{X} \to \mathbb{R}$ 
+generates $\rho$.  Define  the Gram matrix
+\begin{equation}
+\label{eq:kernel_matrix}
+G \equiv \begin{pmatrix}
+\kk(x_1,x_1) & \kk(x_1,x_2) & \dotsm & \kk(x_1,x_n) \\
+\kk(x_2,x_1) & \kk(x_2,x_2) & \dotsm & \kk(x_2,x_n) \\
+\vdots & \vdots & \ddots  & \vdots \\
+\kk(x_n,x_1) & \kk(x_n,x_2) & \dotsm & \kk(x_n,x_n) 
+\end{pmatrix} .
+\end{equation}
+Let $Z \in \{ 0,1 \}^{n\times k}$ be the label matrix, 
+with only one nonvanishing entry per row, 
+indicating to which cluster (column)
+each point (row) belongs to. This matrix satisfies
+$Z^\top Z = D$, where the diagonal matrix 
+$D = \diag( n_1,\dotsc, n_k )$  contains
+the number of points in each cluster. We also introduce the rescaled
+matrix  $Y \equiv Z D^{-1/2}$. In component form they are given by
+\begin{equation}
+\label{eq:label_matrix}
+Z_{ij} \equiv \begin{cases}
+1 & \mbox{if $x_i \in \C_j$ } \\
+0 & \mbox{otherwise}
+\end{cases} \qquad
+\Zt_{ij} \equiv \begin{cases}
+\tfrac{1}{\sqrt{n_j}} & \mbox{if $x_i \in \C_j$ } \\
+0 & \mbox{otherwise}
+\end{cases} .
+\end{equation}
+Throughout the paper, we use the notation $M_{i\bullet}$ to denote
+the $i$th row of a matrix $M$, and $M_{\bullet j}$ denotes its $j$th column.
+Our next result shows that the optimization problem \eqref{eq:minimize}
+is NP-hard since
+it is a quadratically constrained quadratic program (QCQP) in the RKHS.
+
+\begin{proposition} 
+\label{th:qcqp2}
+The optimization problem \eqref{eq:minimize} is equivalent to
+\begin{equation}
+\label{eq:qcqp2}
+\max_{\Zt} \Tr \left( \Zt^\top G \, \Zt \right) \ \
+\mbox{s.t. $\Zt \ge 0$, $\Zt^\top \Zt = I$, 
+$\Zt \Zt^\top \e = \e$},
+\end{equation}
+where $\e = (1,1,\dots,1)^\top \in \mathbb{R}^n$ is the all-ones vector,
+and $G$ is the Gram matrix \eqref{eq:kernel_matrix}.
+\end{proposition}
+\begin{proof}
+From 
+\eqref{eq:gen_kernel},
+\eqref{eq:g_def}, and
+\eqref{eq:within}
+we have
+\begin{equation}
+\label{eq:W2}
+\begin{split}
+W
+&= \dfrac{1}{2} \sum_{j=1}^k \dfrac{1}{n_j} \sum_{x,y \in \C_j} \rho(x,y) \\
+&= \sum_{j=1}^k \sum_{x \in \C_j}  \bigg(
+\kk(x,x) - \dfrac{1}{n_j} \sum_{y \in \C_j} \kk(x,y) \bigg).
+\end{split}
+\end{equation}
+Note that the first term is global so it does not contribute to the 
+optimization problem.
+Therefore, minimizing \eqref{eq:W2} is equivalent to
+\begin{equation}
+\label{eq:max_prob}
+\max_{ \C_1,\dotsc,\C_k } 
+\sum_{j=1}^k \dfrac{1}{n_j} \sum_{x,y\in C_j} \kk(x,y) .
+\end{equation}
+But 
+\begin{equation}
+\sum_{x, y \in \C_j} \kk(x, y) =
+\sum_{p=1}^{n} \sum_{q=1}^{n} Z_{pj} Z_{qj} G_{pq} = 
+(Z^\top G \, Z)_{jj},
+\end{equation}
+where we used the definitions \eqref{eq:kernel_matrix} and
+\eqref{eq:label_matrix}. 
+Notice that $n_j^{-1} = D^{-1}_{jj}$, where $D = 
+\diag(n_1,\dotsc,n_k)$ contains the number of points in each cluster, 
+thus the objective function in 
+\eqref{eq:max_prob} is equal to $\sum_{j=1}^k D^{-1}_{jj} 
+\left( Z^\top G Z \right)_{jj} = \Tr \left( D^{-1} Z^\top G Z \right)$. 
+Now we can
+use the cyclic property
+of the trace, and by the  definition of the matrix $Z$
+in \eqref{eq:label_matrix}, we obtain the following integer
+programing problem:
+\begin{equation}\label{eq:qcqp}
+\begin{split}
+&\max_{Z} \Tr\Big( \big( Z D^{-1/2}\big)^\top G 
+\big( ZD^{-1/2} \big) 
+\Big) \\
+&\mbox{s.t. $Z_{ij} \in \{0,1\}$, $\sum_{j=1}^k Z_{ij} = 1$, 
+$\sum_{i=1}^n Z_{ij} = n_j$.}
+\end{split}
+\end{equation}
+
+Now we write this in terms of the matrix $Y = Z D^{-1/2}$.
+The objective function immediately becomes
+$\Tr\left( Y^\top G \, Y\right)$. Notice that the above constraints
+imply that $Z^T Z = D$, which in turn gives
+$D^{-1/2} Y^T Y D^{-1/2} = D$, or $Y^\top Y = I$. 
+Also, every entry of $Y$ is positive by definition,
+$Y \ge 0$. Now it only remains to show the last 
+constraint in \eqref{eq:qcqp2}, which comes from the last
+constraint in \eqref{eq:qcqp}. In matrix form this reads
+$Z^T \e = D \e$. Replacing $Z=YD^{1/2}$ we have
+$Y^\top \e = D^{1/2} \e$. Multiplying this last equation
+on the left by $Y$, and noticing
+that $Y D^{1/2} \e = Z \e = \e$, we finally obtain
+$Y Y^\top \e = \e$. Therefore,  
+problem \eqref{eq:qcqp} is equivalent
+to \eqref{eq:qcqp2} .
+\end{proof}
+
+Based on Proposition~\ref{th:qcqp2}, to group data
+$\mathbb{X} = \{ x_1,\dotsc,x_n \}$
+into  $k$ clusters we first compute the Gram matrix
+$G$ and then 
+solve the optimization problem \eqref{eq:qcqp2} for $\Zt \in
+\mathbb{R}^{n\times k}$. The $i$th row
+of $\Zt$ will contain a single nonzero element in some $j$th column,
+indicating that $x_i \in \C_j$. 
+This optimization problem is nonconvex, and also NP-hard,
+thus a direct approach 
+is computational prohibitive even for small datasets.
+However, one can find approximate solutions by relaxing some 
+of the constraints, or obtaining a relaxed SDP version of it.
+For instance, the relaxed problem
+\begin{equation}
+\label{eq:relaxed}
+\max_{Y} \Tr \left( Y^\top G \, Y \right) \qquad \mbox{s.t. $Y^\top Y = I$}
+\end{equation}
+has a well-known closed form solution $Y^\star = U R$, where the
+columns of $U \in \mathbb{R}^{n\times k}$ 
+contain the top $k$ eigenvectors of $G$ corresponding
+to the $k$ largest eigenvalues $\lambda_1\ge \lambda_2\ge\dotsc\ge\lambda_k$, 
+and
+$R \in \mathbb{R}^{k\times k}$ is an arbitrary orthogonal matrix. 
+The resulting
+optimal objective function assumes the value 
+$\max \Tr \left( {Y^\star}^\top G \, Y^\star \right)  = 
+\sum_{i=1}^k \lambda_i$. 
+Spectral clustering is based on the above approach, where
+one further normalize the rows of $Y^\star$, then cluster
+the resulting rows as data points.
+A procedure on these lines was proposed in the seminal papers
+\cite{Malik,NgJordan}.
+
+We remark that problem \eqref{eq:qcqp2} 
+is valid for data living in an \emph{arbitrary} space of negative type.
+The standard energy distance \eqref{eq:energy2}
+fixes a family of choices in Euclidean spaces given by
+\begin{equation}
+\begin{split}
+\rho_\alpha(x,y) &= \| x - y\|^\alpha,   \\
+K_\alpha(x,y) &= \tfrac{1}{2} \left( \| x \|^\alpha + \| y \|^\alpha - 
+\| x-y\|^\alpha \right) ,
+\end{split}
+\end{equation}
+for $0<\alpha\le 2$ and 
+we fix $x_0=0$ in \eqref{eq:kernel_semimetric}.
+The same would be valid for data living in a more general
+semimetric space $(\mathcal{X}, \rho)$ where $\rho$ 
+fixes the kernel.
+In practice, the clustering quality strongly depends on the choice 
+of a suitable $\rho$. 
+Nevertheless, if prior information is available to make this choice, it
+can be immediately incorporated into the 
+optimization problem \eqref{eq:qcqp2}.
+
+One may wonder how energy clustering 
+relates to the well-known kernel $k$-means problem%
+%%%
+\footnote{When we refer to kernel $k$-means \emph{problem} we mean specifically 
+the optimization problem \eqref{eq:kernel_kmeans}, which should not be 
+confused with kernel $k$-means \emph{algorithm} which 
+is just one possible recipe 
+to solve \eqref{eq:kernel_kmeans}. The distinction should also be clear
+from the context.}
+%%%%
+which is extensively used in machine learning.
+For a positive semidefinite Gram matrix $G$, as defined in
+\eqref{eq:kernel_matrix},
+there exists a map
+$\varphi: \mathcal{X} \to \HH_\kk$ such that
+$\kk(x,y) = \langle \varphi(x), \varphi(y) \rangle$. 
+The kernel $k$-means optimization
+problem
+is defined by
+\begin{equation}
+\label{eq:kernel_kmeans}
+\min_{\C_1,\dotsc,\C_k}\bigg\{ 
+J(\C_1,\dots,\C_k) \equiv  \sum_{j=1}^k
+\sum_{x \in \C_j} \| \varphi(x) - \varphi(\mu_j) \|^2
+\bigg\}
+\end{equation}
+where $\mu_j = \tfrac{1}{n_j} \sum_{x \in \C_j} x$ is the  mean of cluster
+$\C_j$ in the ambient space. Notice that the above objective function
+is strongly tied to the idea of minimizing distances between points
+and cluster centers, which is
+Lloyd's method \cite{Lloyd}.
+It is known \cite{Dhillon2,Dhillon}
+that problem \eqref{eq:kernel_kmeans} 
+can be cast into a trace maximization in the same form as 
+\eqref{eq:qcqp2}. The next result makes this explicit, showing that
+\eqref{eq:minimize} and \eqref{eq:kernel_kmeans} are actually equivalent.
+
+\begin{proposition}
+\label{th:kernel_kmeans}
+For a fixed kernel,
+the optimization problem
+\eqref{eq:minimize} based on energy statistics 
+is equivalent to the kernel $k$-means optimization problem
+\eqref{eq:kernel_kmeans}, and both are equivalent to \eqref{eq:qcqp2}.
+\end{proposition}
+\begin{proof}
+Notice that $\| \varphi(x) - \varphi(\mu_j) \|^2 = 
+\langle \varphi(x), \varphi(x) \rangle
+- 2 \langle \varphi(x), \varphi(\mu_j) \rangle +
+\langle \varphi(\mu_j), \varphi(\mu_j)\rangle$,
+therefore
+\begin{equation}
+\label{eq:J}
+J = \sum_{j=1}^k \sum_{x\in\C_j} \bigg(
+\kk(x,x) - 
+\dfrac{2}{n_j} \sum_{y\in \C_j} \kk(x,y) + \dfrac{1}{n_j^2}
+\sum_{y,z \in \C_j} \kk(y,z) \bigg).
+\end{equation}
+The first term is global so it does not contribute.
+The third term gives
+$\sum_{x\in\C_j} \tfrac{1}{n_j^2} \sum_{y,z\in\C_j} \kk(y,z) =
+\tfrac{1}{n_j}\sum_{y,z\in\C_j} \kk(y,z)$, which is the same as
+the second term. Thus, problem
+\eqref{eq:kernel_kmeans} is equivalent to
+\begin{equation}
+\max_{\C_1,\dotsc,\C_k}
+\sum_{j=1}^k \dfrac{1}{n_j} \sum_{x,y \in\C_j} \kk(x,y) 
+\end{equation}
+which is exactly the same as 
+\eqref{eq:max_prob} from the energy statistics formulation. Therefore,
+once the kernel $\kk$ is fixed, the function 
+$W$ given by \eqref{eq:within} is the same
+as $J$ in \eqref{eq:kernel_kmeans}.
+The remaining of the proof proceeds as 
+already shown in the proof of Proposition~\ref{th:qcqp2}.
+\end{proof}
+
+The above result shows that 
+kernel $k$-means optimization problem is equivalent to the clustering problem
+formulated in the energy statistics framework, when operating on the same
+kernel. This result could not have been anticipated a priori.
+It is important to note, however, that kernel $k$-means formulation
+\eqref{eq:kernel_kmeans} is completelly heuristic, while problem
+\eqref{eq:minimize2} was derived from first-principles using energy statistics
+theory, which includes the kernel construction. Therefore, one may view kernel
+$k$-means optimization problem as a consequence of energy statistics.
+
+Kernel $k$-means, spectral clustering,
+and graph partitioning problems such as ratio association, ratio cut, and
+normalized cut are all equivalent to a QCQP of the form \eqref{eq:qcqp2}
+\cite{Dhillon2,Dhillon}.
+One can thus use kernel $k$-means algorithm to solve these problems as well.
+This correspondence involves a weighted version of problem 
+\eqref{eq:qcqp2}, that
+will be demonstrated in the following from the perspective 
+of energy statistics.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A Weighted Generalization}
+\label{sec:weighted}
+
+We now generalize energy statistics to incorporate
+weights associated to each data point.
+Let $w(x)$ be a weight function associated to point $x \in \mathcal{X}$.
+Define
+\begin{align}
+\label{eq:g_def2}
+g(\C_i, \C_j) &\equiv \dfrac{1}{s_i s_j} \sum_{x\in \C_i}\sum_{y\in\C_j}
+w(x)w(y) \rho(x,y), \\
+s_i &\equiv \sum_{x\in\C_i} w(x), \qquad
+s \equiv \sum_{j=1}^k s_j.
+\end{align}
+Replace \eqref{eq:g_def2} in the formulas \eqref{eq:within} and
+\eqref{eq:between} with 
+$n_i \to s_i$ and $n \to s$.
+With these
+changes, Proposition~\ref{th:minimize} remains the unaltered, so the
+clustering problem becomes
+\begin{equation}
+\label{eq:minimize2}
+\min_{\C_1, \dotsc, \C_k} 
+\bigg\{
+W(\C_1,\dotsc,\C_k) \equiv \sum_{j=1}^k \dfrac{s_j}{2} g(\C_j,\C_j)
+\bigg\}
+\end{equation}
+where now $g$ is given by \eqref{eq:g_def2}. 
+Define the following:
+\begin{align}
+%\begin{split}
+Y_{ij} &\equiv \begin{cases}
+\tfrac{1}{\sqrt{s_j}} & \mbox{if $x_i \in \C_j$} \\
+0 & \mbox{otherwise}
+\end{cases},  &
+\mathcal{W} &\equiv \diag(w_1,\dotsc,w_n), \nonumber \\
+H &\equiv \mathcal{W}^{1/2} Y, &
+ \om &\equiv \mathcal{W} \e,
+\label{eq:weighted_matrices}
+%\end{split}
+\end{align}
+where $w_i = w(x_i)$ and $\e \in \mathbb{R}^n$ is the all-ones
+vector. The analogous of
+Proposition~\ref{th:qcqp2} is as follows.
+
+\begin{proposition}
+\label{th:qcqp3}
+The weighted energy clustering given by
+problem \eqref{eq:minimize2} is equivalent to
+\begin{equation}
+\label{eq:qcqp3}
+\begin{split}
+&\max_H \Tr \left\{ H^\top (\mathcal{W}^{1/2} G \mathcal{W}^{1/2}) H  \right\}\\
+&\mbox{s.t. $H \ge 0$, $H^\top H = I$, $H H^\top \om = \om$,}
+\end{split}
+\end{equation}
+where $G$ is the Gram matrix \eqref{eq:kernel_matrix}, 
+$\om = (w_1,\dotsc,w_n)^T$ contains the weights of each point, and
+$\mathcal{W} = \diag(\omega)$.
+\end{proposition}
+\begin{proof}
+Replacing \eqref{eq:gen_kernel} and eliminating the global terms which 
+do not contribute, the optimization problem \eqref{eq:minimize2}
+becomes 
+\begin{equation}
+\max_{\C_1,\dotsc,\C_k} \sum_{j=1}^k \dfrac{1}{s_j}
+\sum_{x\in\C_j}\sum_{y\in\C_j} w(x)w(y) \kk(x,y) . 
+\end{equation}
+This 
+objective function can be written as
+\begin{equation}
+\begin{split}
+& \hspace{-2em} \sum_{j=1}^k \dfrac{1}{s_j} 
+\sum_{p=1}^n \sum_{q=1}^n 
+w_p w_q Z_{pj} Z_{qj} G_{pq}  \\
+&= 
+\sum_{j=1}^k 
+\sum_{p=1}^n \sum_{q=1}^n 
+\dfrac{Z^\top_{jp}\sqrt{w_p}}{\sqrt{s_j}} w_p^{1/2} G_{pq} w_q^{1/2} 
+\dfrac{\sqrt{w_q} Z_{qj}}{\sqrt{s_j}} \\
+&= 
+\sum_{j=1}^k \left(H^\top \mathcal{W}^{1/2} G \mathcal{W}^{1/2} H\right)_{jj}
+\\
+&= \Tr\left( H^\top \mathcal{W}^{1/2} G \mathcal{W}^{1/2} H  \right).
+\end{split}
+\end{equation}
+To obtain the constraints, note that $H_{ij} \ge 0$ by definition, and
+\begin{equation}
+\begin{split}
+(H^\top H)_{ij} &= \sum_{\ell=1}^n 
+Y_{\ell i} \mathcal{W}_{\ell \ell} Y_{\ell j } \\
+&= 
+\dfrac{1}{\sqrt{s_i}\sqrt{s_j}} \sum_{\ell=1}^n w_\ell Z_{\ell i} Z_{\ell j}
+\\
+&= \dfrac{\delta_{ij}}{s_i} \sum_{\ell=1}^n w_\ell Z_{\ell i} 
+\\
+&= \delta_{ij},
+\end{split}
+\end{equation}
+where $\delta_{ij}=1$ if $i=j$ and $\delta_{ij}=0$ if $i\ne j$ is the
+Kronecker delta. Therefore, $H^\top H = I$. 
+This is a constraint on the rows of $H$.
+To obtain a condition on its columns,
+observe that
+\begin{equation}
+\begin{split}
+\left(H^\top H\right)_{pq} &= \sqrt{w_p w_q}\sum_{j=1}^k \dfrac{Z_{pj}
+Z_{qj}}{s_j} \\
+& = \begin{cases}
+\dfrac{\sqrt{w_p w_q}}{s_i} & \mbox{if both $x_p,x_q \in \C_i$} \\
+0 & \mbox{otherwise}.
+\end{cases}
+\end{split}
+\end{equation}
+Therefore, $(H^\top H \mathcal{W}^{1/2})_{pq} = \sqrt{w_p} \, w_q s_i^{-1}$
+if both points $x_p$ and $x_q$ belong to the same cluster, which
+we denote by $\C_i$ for some $i\in\{1,\dotsc,k\}$, and 
+$(H^\top H \mathcal{W}^{1/2})_{pq} = 0 $ otherwise. Thus, the $p$th
+line of this matrix is nonzero only on entries corresponding to points
+that are in the same cluster as $x_p$. If we sum over the columns of this
+line we obtain $\sqrt{w_p} s_i^{-1} \sum_{q=1}^n w_q Z_{qi} = \sqrt{w_p}$,
+or equivalently $H H^\top \mathcal{W}^{1/2} \e = \mathcal{W}^{1/2} \e$,
+which gives the constraint $H H^\top \om = \om$.
+\end{proof}
+
+
+\subsection{Connection with Graph Partitioning}
+
+The relation between kernel $k$-means and graph partitioning problems
+is known \cite{Dhillon2,Dhillon}. For conciseness, we repeat a similar 
+analysis due to the relation of these problems to
+energy statistics and RKHS, which  provides a different perspective.
+
+Consider a graph $\mathcal{G} = (\mathcal{V}, \mathcal{E}, \mathcal{A})$
+where $\mathcal{V}$ is the set of vertices, $\mathcal{E}$ the set of edges,
+and $\mathcal{A}$ is an affinity matrix of the graph, 
+which measures the 
+similarities between pairs of nodes. Thus, $\mathcal{A}_{ij} \ne 0$
+if $(i,j) \in \mathcal{E}$, and $\mathcal{A}_{ij} = 0$ otherwise.
+We also associate weights to every vertex, 
+$w_i = w(i)$ for $i \in \mathcal{V}$, and let $s_j = \sum_{ i \in \C_j} w_i$,
+where $\C_j \subseteq \mathcal{V}$ is one partition of $\mathcal{V}$.
+Let
+\begin{equation}
+\textnormal{links}(\C_\ell, \C_m) \equiv 
+\sum_{i\in \C_\ell, j\in \C_m } A_{ij} .
+\end{equation}
+We want to partition the set of vertices $\mathcal{V}$ into $k$ disjoint
+subsets, $\mathcal{V} = \bigcup_{j=1}^k \C_j $. 
+The generalized ratio association problem is given by
+\begin{equation}
+\label{eq:assoc}
+\max_{\C_i,\dots,\C_k} \sum_{j=1}^k \dfrac{\textnormal{links}(\C_j,\C_j)}{s_j}
+\end{equation}
+and maximizes the within cluster association.
+The generalized ratio cut problem
+\begin{equation}
+\label{eq:cut}
+\min_{\C_i,\dots,\C_k} \sum_{j=1}^k
+\dfrac{\textnormal{links}(\C_j,\mathcal{V} \backslash \C_j)}{s_j}
+\end{equation}
+minimizes the cut between clusters. These two problems are equivalent,
+in analogous way as minimizing \eqref{eq:within} is equivalent to
+maximizing \eqref{eq:between} as shown in Proposition~\ref{th:minimize}.
+Here this is due to the equality
+$\textnormal{links}(\C_j,\mathcal{V} \backslash \C_j)=
+\textnormal{links}(\C_j,\mathcal{V}) - \textnormal{links}(\C_j,\C_j)$.
+Several graph partitioning methods 
+\cite{Kernighan,Malik,Chan,Yu}
+can be seen as a particular case of \eqref{eq:assoc} or \eqref{eq:cut}.
+
+Consider the ratio association problem \eqref{eq:assoc}, 
+whose objective function can be written as
+\begin{equation}
+\begin{split}
+\sum_{j=1}^k \dfrac{1}{s_j} \sum_{p \in \C_j} \sum_{q \in \C_j}
+\mathcal{A}_{pq} &= \sum_{j=1}^k \sum_{p=1}^n \sum_{q=1}^n 
+\dfrac{Z^\top_{jp}}{\sqrt{s_j}} \, \mathcal{A}_{pq} \, 
+\dfrac{Z_{qj}}{\sqrt{s_j}} \\
+&= \Tr\left( Y^\top \mathcal{A} Y \right) ,
+\end{split}
+\end{equation}
+with $Z$ defined in \eqref{eq:label_matrix} and $Y$ in
+\eqref{eq:weighted_matrices}. Therefore, the ratio association problem
+can be written in the form \eqref{eq:qcqp3}, i.e.
+\begin{equation}
+\begin{split}
+&\max_H \Tr\left( H^\top \mathcal{W}^{-1/2} \mathcal{A} \mathcal{W}^{-1/2} H 
+\right) \\ &\mbox{s.t. $H\ge 0$, $H^\top H = I$, $H H^\top
+\om=\om$}.
+\end{split}
+\end{equation}
+This is exactly the same problem as weighted energy 
+clustering with 
+$G = \mathcal{W}^{-1} \mathcal{A} \mathcal{W}^{-1}$. Assuming this
+matrix is positive semidefinite, this generates a semimetric
+\eqref{eq:gen_kernel} for graphs given by
+\begin{equation}
+\label{eq:metric_graphs}
+\rho(i,j) = 
+\dfrac{\mathcal{A}_{ii}}{w_i^{2}}
++\dfrac{\mathcal{A}_{jj}}{w_j^{2}}
+-\dfrac{2 \mathcal{A}_{ij}}{w_i w_j}
+\end{equation}
+for vertices $i,j \in \mathcal{V}$. If
+we assume the graph has no self-loops we must replace
+$\mathcal{A}_{ii} = 0$ above. 
+Above, the weight of node $i\in \mathcal{V}$ can be, for instance,
+its degree, $w_i = w(i) = d(i)$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Two-Class Problem in One Dimension}
+\label{sec:twoclass}
+
+Before stating a general algorithm to solve the optimization problem
+\eqref{eq:qcqp2}
+we first consider the simplest possible case which
+is one-dimensional data and a two-class problem. This will be useful to test
+energy clustering on a simple setting.
+
+Fixing
+$\rho(x,y) = |x - y|$ according to the standard energy distance, we can 
+actually compute the function
+\eqref{eq:g_def} in $\OO(n \log n)$ and minimize
+$W$ directly.
+This is done by noting that
+\begin{equation}
+\begin{aligned}
+|x - y|  &= (x-y)\Ind{x \ge y} -
+(x-y) \Ind{x < y}  \\
+&= 
+x \left( \Ind{x \ge y} - \Ind{x < y} \right)  + 
+y \left( \Ind{y > x} - \Ind{y \le x} \right)  
+\end{aligned}
+\end{equation}
+where we have the indicator function defined by 
+$\Ind{A}=1$ if $A$ is true, and $\Ind{A}=0$ otherwise. 
+Let $\C$ be a partition with
+$n$ elements. Using the above distance we have
+\begin{equation}
+\label{eq:g_ind}
+g\left(\C,\C\right) = \dfrac{1}{n^2} \sum_{x \in \C} 
+\sum_{y \in \C} 
+x \left(
+\Ind{x \ge y} + \Ind{y > x} - 
+\Ind{x \ge y}-\Ind{x < y} \right) .
+\end{equation}
+The sum over $y$ can be eliminated since each term in
+the parenthesis is simply counting the number of elements in $\C$ that satisfy
+the condition of the indicator function. Assuming
+that we first order the data in $\C$, obtaining
+$\tC = [ x_j \in \C: x_1 \le x_2 \le \dotsm \le x_{n}]$, we
+get 
+\begin{equation}
+\label{eq:g1d}
+g\big(\tC, \tC \big) = 
+\dfrac{2}{n^2} \sum_{\ell=1}^n (2\ell - 1 - n) x_\ell .
+\end{equation}
+Note that the cost of computing 
+$g\big( \tC, \tC \big)$
+is $\OO(n)$ and the cost of
+sorting the data
+is at the most $\OO(n\log n)$.
+Assuming that each partition is ordered,  
+$\mathbb{X} = \bigcup_{j=1}^k \tC_j$,
+the within energy dispersion
+can be written explicitly as
+\begin{equation}
+\label{eq:w1d}
+W\big( \tC_1,\dotsc,\tC_k \big) = 
+\sum_{j=1}^k \sum_{\ell=1}^{n_j} \dfrac{2\ell - 1 - n_j}{n_j} \, x_\ell.
+\end{equation}
+
+For a two-class problem we can use the formula
+\eqref{eq:w1d} to cluster the data
+through a simple algorithm 
+as follows. We first order
+the entire dataset, $\mathbb{X} \to \widetilde{\mathbb{X}}$. Then 
+we compute \eqref{eq:w1d} for each possible split of $\widetilde{\mathbb{X}}$
+and pick the point which gives the minimum value of $W$.
+This procedure is described in Algorithm~\ref{algo1d} and called
+$\mathcal{E}^{1D}$-clustering.
+Note that this algorithm is deterministic,
+however,
+it only works for one-dimensional data with Euclidean distance. The total
+complexity of $\mathcal{E}^{1D}$-clustering is $\OO(n\log n + n^2) = \OO(n^2)$.
+
+\begin{algorithm}
+\begin{algorithmic}[1]
+\INPUT $\mathbb{X}$
+\OUTPUT $Z$
+\STATE sort $\mathbb{X}$, obtaining 
+$\widetilde{\mathbb{X}}= [ x_1,\dotsc,x_n ]$
+    \FOR{$j\in [ 1,\dotsc,n ]$}
+        \STATE $\tC_{1,j} \leftarrow [x_i: i=1,\dotsc,j]$
+        \STATE $\tC_{2,j} \leftarrow [x_i : i=j+1,\dotsc,n]$
+        \STATE  
+            $W^{(j)} \leftarrow W \big( \tC_{1,j},\tC_{2,j}\big)$ 
+            (see \eqref{eq:w1d})
+    \ENDFOR
+    \STATE $j^\star \leftarrow \argmin_j W^{(j)}$ 
+    \STATE for $j=1,\dotsc,n$ 
+        assign $Z_{j\bullet} \leftarrow \begin{cases} (1,0) & \mbox{if $j \le
+    j^\star$} \\ (0,1) & \mbox{otherwise}\end{cases}$ 
+\end{algorithmic}
+\caption{
+\label{algo1d}
+$\mathcal{E}^{1D}$-clustering algorithm to
+find local solutions to the optimization 
+problem \eqref{eq:minimize} 
+for a two-class problem in one dimension. 
+}
+\end{algorithm}
+
+Assuming the true label matrix $Z$ is available, a direct
+measure of how different the estimated matrix $\hat{Z}$ 
+is from $Z$, up to label
+permutations, is given by
+\begin{equation}
+\label{eq:accuracy}
+\textnormal{accuracy}(\hat{Z}) \equiv \max_\sigma
+\dfrac{1}{n}\sum_{i=1}^n\sum_{j=1}^k \hat{Z}_{i \sigma(j)} Z_{ij}
+\end{equation}
+where $\sigma$ is a permutation
+of the $k$ cluster groups. 
+The accuracy is always between $[0,1]$, where
+$1$ corresponds to all points correctly clustered, and 
+$0$ to all points wrongly clustered.
+For a balanced two-class problem the value $1/2$ correspond
+to chance.
+
+We now consider two simple experiments where we sample $n$ points
+from a two-class mixture.
+We plot the average accuracy \eqref{eq:accuracy} versus $n$, 
+with error bars indicating standard error.
+The data is clustered using $\mathcal{E}^{1D}$-clustering algorithm,
+GMM and $k$-means. 
+For GMM and $k$-means we use the implementations
+from the well-known \emph{scikit-learn} library in 
+Python \cite{scikit-learn}, where $k$-means is initialized through
+$k$-means++ procedure \cite{Vassilvitskii}, and GMM is initialized
+with the output of $k$-means. We run both algorithms
+$5$ times with different initializations and pick the answer with best 
+objective function value.
+Notice that $\mathcal{E}^{1D}$-clustering does not require random
+initialization so we only run it once.
+For each $n$ we use use $100$ Monte Carlo runs.
+In  Fig.~\ref{fig:1d}a 
+we have the results for data sampled from the Gaussian mixture
+\begin{equation}
+\label{eq:two_normal}
+\begin{split}
+x &\stackrel{iid}{\sim} 
+\tfrac{1}{2}\mathcal{N}\big(\mu_1,\sigma_1^2\big) 
++\tfrac{1}{2}\mathcal{N}\big(\mu_2,\sigma_2^2\big),  \\
+\mu_1 &= 1.5, \quad
+\sigma_1=0.3, \quad
+\mu_2 = 0,  \quad
+\sigma_2 = 1.5.
+\end{split}
+\end{equation}
+In this case the optimal accuracy 
+obtained from Bayes classification error
+is $ \approx 0.88$, indicated by the dashed line in the plot.
+The three methods
+perform closely, with a slight advantage of GMM, as expected since
+it is a consistent model to the data, and 
+$\mathcal{E}^{1D}$-clustering performs slightly better
+than $k$-means. 
+In Fig.~\ref{fig:1d}c we show a density estimation from clustering
+$1000$ points from this mixture using the three algorithms.
+Notice that all of them are able to distinguish the two classes.
+On the other hand, in Fig.~\ref{fig:1d}b
+we consider a mixture of lognormal distributions,
+\begin{equation}
+\begin{split}
+\label{eq:two_lognormal}
+x &\stackrel{iid}{\sim} 
+\tfrac{1}{2} \exp\left\{\mathcal{N}\big( \mu_1,\sigma_1^2\big)\right\} 
++\tfrac{1}{2} \exp\left\{\mathcal{N}\big( \mu_2,\sigma_2^2\big)\right\}, 
+\\
+\mu_1 &= 1.5,  \quad
+\sigma_1=0.3,  \quad
+\mu_2 = 0, \quad
+\sigma_2 = 1.5.
+\end{split}
+\end{equation}
+The optimal Bayes accuracy is again $\approx 0.88$.
+We can now see that $\mathcal{E}^{1D}$-clustering
+is still  very accurate, while
+GMM and $k$-means basically cluster at chance.
+Density estimation after clustering $1000$ points this
+mixture using the three algorithms 
+are
+is shown in Fig.~\ref{fig:1d}d. Note that only $\mathcal{E}^{1D}$-clustering
+was able to distinguish the two classes. $k$-means and GMM put most of the
+points in a single cluster, and points on the tail of the second component
+of \eqref{eq:two_lognormal} in the other cluster.
+The experiments of Fig.~\ref{fig:1d} illustrate
+how energy clustering is more flexible compared to $k$-means and GMM.
+
+\begin{figure}
+\begin{minipage}{0.49\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{1D_normal.pdf}\\
+~~~~~\includegraphics[width=.9\textwidth]{normal_density.pdf}
+\end{center}
+\end{minipage}
+\begin{minipage}{0.49\linewidth}
+\begin{center}
+\includegraphics[width=\textwidth]{1D_lognormal.pdf}\\
+~~~~~\includegraphics[width=.9\textwidth]{lognormal_density.pdf}
+\end{center}
+\end{minipage}
+\put(-140,5){\scriptsize{(a)}}
+\put(-140,-78){\scriptsize{(c)}}
+\put(-10,5){\scriptsize{(b)}}
+\put(-10,-78){\scriptsize{(d)}}
+\caption{
+\label{fig:1d}
+$\mathcal{E}^{1D}$-clustering versus $k$-means and GMM.
+(a,b) We plot the mean accuracy
+\eqref{eq:accuracy} over $100$ Monte Carlo trials, 
+versus the number of sampled points. 
+Error bars are standard error. The dashed line indicates 
+Bayes accuracy ($\approx 0.88$ in both cases). (a) Clustering results for data normally distributed as in 
+\eqref{eq:two_normal}.
+(b) Data lognormally distributed as in \eqref{eq:two_lognormal}.
+(c) Density estimation of each component in the mixture \eqref{eq:two_normal} 
+after clustering $1000$ sampled points using the three algorithms, compared
+to the ground truth. 
+(d) The same but for lognormal data \eqref{eq:two_lognormal}.
+}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Iterative Algorithms}
+\label{sec:algo}
+
+In this section we introduce an iterative algorithm to find a local
+maximizer of the optimization problem \eqref{eq:qcqp2}. Due to 
+Proposition~\ref{th:kernel_kmeans} we can also find an approximate
+solution by the well-known kernel $k$-means algorithm based
+on Lloyd's heuristic \cite{Dhillon2,Dhillon}, which 
+for convenience will also be restated in the present context.
+
+Consider the optimization problem 
+\eqref{eq:max_prob} 
+written as
+\begin{equation}
+\label{eq:maxQ}
+\max_{\{ \C_1,\dotsc,\C_k \}} 
+\bigg\{ Q = \sum_{j=1}^k \dfrac{Q_j}{n_j}  \bigg\},
+\qquad Q_j \equiv \sum_{x,y\in\C_j} \kk(x,y),
+\end{equation}
+where $Q_j$ represents an internal energy cost of cluster $\C_j$, and
+$Q$ is the total energy cost where each $Q_j$ 
+is weighted by the inverse
+of the number of points in $\C_j$. For a data point $x_i$ we denote
+its own energy cost
+with the entire cluster $\C_\ell$ by
+\begin{equation}
+\label{eq:costxij}
+Q_\ell(x_i) \equiv \sum_{y\in\C_\ell} \kk(x_i, y) = 
+G_{i \bullet} \cdot Z_{\bullet \ell},
+\end{equation}
+where we recall that $G_{i\bullet}$ ($G_{\bullet i}$) denotes
+the $i$th row (column) of matrix $G$.
+
+
+\subsection{Lloyd's Method for Energy Clustering}
+
+To optimize kernel $k$-means objective function
+\eqref{eq:J} we remove the global term and define the function
+\begin{equation}
+\label{eq:Jell}
+J^{(\ell)}(x_i) \equiv 
+\dfrac{1}{n_\ell^2} Q_\ell
+-\dfrac{2}{n_\ell} Q_\ell(x_i) .
+\end{equation}
+We are thus solving 
+\begin{equation}
+\min_{Z} 
+\sum_{i=1}^n 
+\sum_{\ell=1}^k Z_{i\ell} J^{(\ell)}(x_i).
+\end{equation}
+One possible strategy is to
+assign  $x_i$ to cluster $\C_{j^\star}$ according
+to 
+\begin{equation}
+j^\star = \argmin_{\ell=1,\dotsc,k} J^{(\ell)}(x_i) .
+\end{equation}
+This is done for every data point $x_i$ and repeated until
+convergence, i.e. until no new assignments are made.
+The entire procedure is described in Algorithm~\ref{kmeans_algo}, which
+we name $\mathcal{E}^L$-clustering to emphasize
+that we are optimizing the within energy function $W$ 
+based on Lloyd's method \cite{Lloyd}.
+It can be shown that this algorithm converges provided $G$ is positive
+semidefinite. 
+
+$\mathcal{E}^{L}$-clustering is precisely
+kernel $k$-means algorithm \cite{Dhillon2,Dhillon} 
+but written more concisely and with the kernel induced by energy statistics. 
+Indeed, recalling that
+$\kk(x,y)=\langle \varphi(x), \varphi(y) \rangle$ where $\varphi: \mathcal{X}
+\to \mathcal{H}_\kk$ is the feature map, we have from \eqref{eq:Jell} that
+\begin{equation}
+\begin{split}
+J^{(\ell)}(x_i) 
+&= 
+\langle \varphi(\mu_\ell), \varphi(\mu_\ell) \rangle
+-2 \langle \varphi(x_i), \varphi(\mu_\ell) \rangle 
+\\
+&= 
+\| \varphi(x_i) - \varphi(\mu_\ell) \|^2 - \| \varphi(x_i) \|^2,
+\end{split}
+\end{equation}
+where $\mu_\ell = \tfrac{1}{n_\ell} \sum_{x\in \C_\ell}x$ 
+is the mean of cluster $\C_\ell$. 
+Therefore, $\min_\ell J^{(\ell)}(x_i) = 
+\min_\ell \| \varphi(x_i) - \varphi(\mu_\ell)\|^2$, i.e. we are assigning
+$x_i$ to the cluster with closest center (in feature space),
+which is the familiar Lloyd's
+heuristic approach that kernel $k$-means is based upon.
+
+To check the complexity of $\mathcal{E}^L$-clustering, 
+notice that to compute the second term of $J^{(\ell)}(x_i)$
+in \eqref{eq:Jell} requires
+$\OO(n_\ell)$ operations, and although the first term requires
+$\OO(n_\ell^2)$ it only needs to be computed once outside loop through
+data points (step 1 of Algorithm~\ref{kmeans_algo}).
+Therefore, the time complexity of $\mathcal{E}^L$-clustering 
+is
+$\OO(n k \max_\ell n_\ell) = \OO(k n^2)$. For a sparse
+Gram matrix $G$ having
+$n'$ nonzero elements this complexity can be further reduced
+to $\OO(k n')$. 
+
+\begin{algorithm}
+\begin{algorithmic}[1]
+    \INPUT $k$, $G$, $Z \leftarrow Z_0$
+    \OUTPUT $Z$ 
+  \STATE $q \leftarrow (Q_1, \dotsc, Q_k)^\top$ 
+            (see \eqref{eq:maxQ})
+  \STATE $n \leftarrow (n_1,\dotsc,n_k)^\top$ 
+  \REPEAT
+    \FOR{ $i=1,\dotsc,n$}
+        \STATE let $j$ be such that $x_i \in \C_j$
+        \STATE $j^\star \leftarrow \argmin_{\ell=1,\dotsc,k} J^{(\ell)}(x_i)$
+            (see \eqref{eq:Jell})
+        \IF{ $j^\star \ne j$} 
+            \STATE $Z_{ij} \leftarrow 0$ 
+            \STATE $Z_{ij^\star} \leftarrow 1$
+            \STATE $n_j \leftarrow n_j - 1$ 
+            \STATE $n_{j^\star} \leftarrow n_{j^\star} + 1$
+            \STATE $q_j \leftarrow q_j - 2Q_j(x_i)$ 
+            \STATE $q_{j^\star} \leftarrow q_{j^\star} + 2Q_{j^\star}(x_i)$
+    %    \ELSE
+    %        \STATE Do nothing;
+        \ENDIF
+    \ENDFOR
+  \UNTIL{convergence}
+\end{algorithmic}
+\caption{\label{kmeans_algo}
+$\mathcal{E}^{L}$-clustering is Lloyd's method for energy clustering, which
+is precisely
+kernel $k$-means algorithm, with the kernel induced by energy statistics. 
+This procedure
+finds
+local solutions to the optimization problem \eqref{eq:qcqp2}.
+}
+\end{algorithm}
+
+
+\subsection{Hartigan's Method for Energy Clustering}
+
+We now consider Hartigan's method \cite{Hartigan} 
+applied to the optimization problem in the form \eqref{eq:maxQ}, which gives
+a local solution to the QCQP defined in \eqref{eq:qcqp2}. 
+The method is based in computing the maximum change
+in the total cost function $Q$ when moving each data point to
+another cluster. More specifically, 
+suppose point $x_i$
+is currently assigned to  cluster $\C_j$ yielding
+a total cost function denoted by $Q^{(j)}$.
+Moving $x_i$ to cluster $\C_\ell$ yields another total cost function
+denoted by $Q^{(\ell)}$. We are interested in computing the maximum 
+change
+$\Delta Q^{j\to \ell} (x_i) \equiv Q^{(\ell)} - Q^{(j)}$, for $\ell\ne j$. 
+From \eqref{eq:maxQ}, by explicitly writing the costs related to these 
+two cluster we obtain
+\begin{equation}
+\Delta Q^{j\to \ell} (x_i) = \dfrac{Q_\ell^{+}}{n_\ell+1} + 
+\dfrac{Q_j^-}{n_j-1} - \dfrac{Q_j}{n_j} - \dfrac{Q_\ell}{n_\ell}
+\end{equation}
+where $Q^{+}_\ell$ denote the cost of the new $\ell$th cluster
+with the point $x_i$ added to it, and $Q^-_j$ is the cost of new 
+$j$th cluster with $x_i$ removed from it. Noting that 
+$Q_\ell^{+} = Q_\ell + 2 Q_\ell(x_i) + G_{ii}$ and
+$Q_j^{-} = Q_j - 2 Q_j(x_i) + G_{ii}$, we get the formula
+\begin{multline}
+\label{eq:changeQ}
+\Delta Q^{j \to \ell}(x_i)  = 
+\dfrac{1}{n_j - 1}\left[ \dfrac{Q_j}{n_j} - 2 Q_j(x_i) + G_{ii} \right] \\
+- \dfrac{1}{n_\ell + 1}\left[ \dfrac{Q_\ell}{n_\ell} - 2 Q_\ell(x_i) 
+- G_{ii} \right].
+\end{multline}
+Therefore, if $\Delta Q^{j\to \ell}(x_i) > 0$ we get closer to a 
+maximum of \eqref{eq:maxQ} by
+moving $x_i$ to $\C_\ell$, otherwise we keep $x_i$ in $\C_j$. 
+
+We thus propose the following algorithm.
+We start with an initial configuration for the label matrix $Z$, 
+then for each
+point $x_i$ 
+we compute the cost of moving it to another cluster $\C_\ell$, i.e.
+$\Delta Q^{j\to \ell}(x_i)$ for 
+$\ell=1,\dots,k$ with $\ell \ne j$, where $j$ denotes the index of its current
+partition, $x \in \C_j$. Hence, we choose
+\begin{equation}
+j^\star = \argmax_{\ell=1,\dotsc,k \, | \, \ell\ne j} 
+\Delta^{j \to \ell}(x_i).
+\end{equation}
+If $\Delta Q^{j \to j^\star}(x_i) > 0$ 
+we move $x_i$ to cluster $\C_{j^\star}$, otherwise 
+we keep $x_i$ in its original cluster $\C_j$. 
+This process is repeated
+until no points are assigned to new clusters. 
+The entire procedure is explicitly described in Algorithm~\ref{algo}, which we
+denote $\mathcal{E}^H$-clustering to emphasize that it is based on
+Hartigan's method.
+This method automatically ensures that the objective function is
+monotonically increasing at each iteration, and consequently the algorithm
+converges in a finite number of steps.
+
+\begin{algorithm}
+\begin{algorithmic}[1]
+    \INPUT $k$, $G$, $Z \leftarrow Z_0$
+    \OUTPUT $Z$
+  \STATE $q \leftarrow (Q_1, \dotsc, Q_k)^\top$ 
+            (see \eqref{eq:maxQ})
+  \STATE $n \leftarrow (n_1,\dotsc,n_k)^\top$ 
+  \REPEAT
+    \FOR{ $i=1,\dotsc,n$}
+        \STATE let $j$ be such that $x_i \in \C_j$
+        \STATE $j^\star \leftarrow \argmax_{\ell=1,\dotsc,k \, | \, \ell\ne j} 
+                \Delta Q^{j\to \ell}(x_i)$
+            (see \eqref{eq:changeQ}) \label{stepmove}
+        \IF{ $\Delta Q^{j \to j^\star}(x_i) > 0$ }
+            \STATE $Z_{ij} \leftarrow 0$
+            \STATE $Z_{ij^\star} \leftarrow 1$
+            \STATE $n_j \leftarrow n_j - 1$ 
+            \STATE $n_{j^\star} \leftarrow n_{j^\star} + 1$
+            \STATE $q_j \leftarrow q_j - 2Q_j(x_i) + G_{ii}$
+            \STATE 
+            $q_{j^\star} \leftarrow q_{j^\star} + 2Q_{j^\star}(x_i)+ G_{ii}$
+    %    \ELSE
+    %        \STATE Do nothing;
+        \ENDIF
+    \ENDFOR
+  \UNTIL{convergence}
+\end{algorithmic}
+\caption{\label{algo}
+$\mathcal{E}^H$-clustering is Hartigan's method for energy clustering.
+This algorithm finds local solutions to  
+the optimization problem \eqref{eq:qcqp2}.
+The steps $6$, $12$ and $13$ are different
+than $\mathcal{E}^L$-clustering
+described in Algorithm~\ref{kmeans_algo}. 
+}
+\end{algorithm}
+
+
+The complexity analysis of $\mathcal{E}^H$-clustering is the following.
+Computing the Gram matrix $G$ requires $\OO( D n^2)$ operations, where 
+$D$ is the dimension of each data point and $n$ is the data size. However,
+both algorithms $\mathcal{E}^L$- and $\mathcal{E}^H$-clustering 
+assume that $G$ is given. There are more efficient
+methods to compute $G$, specially if it is sparse, but we will not consider
+this further and just assume that $G$ is given.
+The computation of each cluster cost
+$Q_j$ has complexity $\OO(n_j^2)$, and overall to compute $q$
+we have $\OO(n_1^2+\dots + n_k^2) = \OO(k \max_j n_j^2)$. 
+These operations only need to be performed a single time. For
+each point $x_i$ we need to compute $Q_j(x_i)$ once, which is
+$\OO(n_j)$, and we need to compute $Q_\ell(x_i)$ for each $\ell\ne j$. 
+The cost of computing 
+$Q_\ell(x_i)$
+is $\OO(n_\ell)$, thus the cost of step~$6$ in
+Algorithm~\ref{algo} is $\OO(k \max_\ell n_\ell)$ for $\ell=1,\dotsc,k$.
+For the 
+entire dataset this gives a time complexity
+of $\OO(n k  \max_\ell n_\ell) =\OO(k n^2)$. Note that this is the same cost as
+in $\mathcal{E}^L$-clustering, or kernel $k$-means algorithm. 
+Again, if $G$ is sparse
+this can be reduced to $\OO(k n')$ where $n'$ is the number of nonzero
+entries of $G$.
+
+In the following we mention some important known 
+results about Hartigan's method.
+
+\begin{theorem}[Telgarsky-Vattani \cite{Telgarsky}]
+Hartigan's method has the cost function strictly decreasing in each
+iteration. Moreover, if $n > k$ then 
+\begin{enumerate}
+\item \label{noempty} the resulting partition has no empty clusters, and
+\item \label{diffmean} the resulting partition has distinct means.
+\end{enumerate}
+\end{theorem}
+
+Neither of these two conditions are guaranteed to be 
+satisfied  by Lloyd's method,
+and consequently by $\mathcal{E}^L$-clustering 
+algorithm.
+The next result indicates that Hartigan's method can potentially 
+escape local optima of Lloyd's method.
+
+\begin{theorem}[Telgarsky-Vattani \cite{Telgarsky}]
+The set of local optima of Hartigan's method is a (possibly strict) subset
+of local optima of Lloyd's method.
+\end{theorem}
+
+The above theorem implies that $\mathcal{E}^L$-clustering  cannot
+improve on a local optima of $\mathcal{E}^H$-clustering. On the other hand,
+$\mathcal{E}^H$ might improve on a local optima of 
+$\mathcal{E}^L$. Lloyd's method forms Voronoi partitions,
+while Hartigan's method groups data
+in regions formed by the intersection of spheres called circlonoi cells.
+It can be shown that the circlonoi cells are contained within
+a smaller volume of a Voronoi cell, and this excess volume grows
+exponentially with the dimension of $\mathcal{X}$ 
+\cite[Theorems 2.4 and 3.1]{Telgarsky}. 
+Points in this excess volume
+force Hartigan's method to iterate, contrary
+to Lloyd's method. Therefore, Hartigan's 
+can escape local
+optima of Lloyd's. 
+Moreover, this improvement should be more prominent as
+dimension increases. Also, the improvement grows as the number of clusters
+$k$ increases.
+The empirical results of \cite{Telgarsky} show that 
+an implementation of Hartigan's method has comparable execution time 
+to an implementation of
+Lloyd's method,
+but no explicit complexity was provided. We show that both
+$\mathcal{E}^L$- and $\mathcal{E}^H$-clustering
+have the same time complexity. To the best of our knowledge, Hartigan's
+method was not previously considered together with kernels, as we 
+are proposing
+in $\mathcal{E}^{H}$-clustering algorithm.
+
+In \cite{Slonin}, Hartigan's method was applied to $k$-means problem
+with any Bregman divergence. It was shown that the number of Hartigan's
+local optima is upper bounded by $\mathcal{O}(1/k)$ 
+\cite[Proposition 5.1]{Slonin}. 
+In addition, it was provided examples where
+\emph{any} initial partition correspond to a local optima of Lloyd's 
+method, while  the number of local optima in Hartigan's method is small and 
+correspond to true partitions of the data. Empirically, the number of
+Hartigan's local optima was considerably smaller than the number of Lloyd's
+local optima.
+
+The above results indicate that Hartigan's method
+provides several advantages over Lloyd's method, a fact that will also
+be supported by our numerical experiments in the next section where 
+$\mathcal{E}^H$  outperforms
+of $\mathcal{E}^L$ (kernel $k$-means) in several settings,
+specially in high dimensions.
+
+
+
+\section{Numerical Experiments}
+\label{sec:numerics}
+
+The main goal of this section is threefold. First, we want to compare
+$\mathcal{E}^H$-clustering in Euclidean space to 
+$k$-means and GMM. Second, we want
+to compare $\mathcal{E}^H$-clustering, based on Hartigan's method, to
+$\mathcal{E}^L$-clustering or kernel $k$-means, based on Lloyd's method,
+and also to 
+spectral clustering, when they all operate on the same kernel.
+Third, we want to illustrate the flexibility
+provided by energy clustering, which is able to cluster accurately in 
+different settings while keeping the same kernel.
+
+The following experimental setup holds unless specified
+otherwise. 
+We consider
+$\mathcal{E}^H$-clustering, $\mathcal{E}^L$-clustering 
+and spectral clustering with the following metrics and corresponding
+generating kernels:
+\begin{align}
+\rho_{\alpha}(x,y) &= \| x-y \|^{\alpha}, 
+%\kk_{\alpha}(x,y) = \tfrac{1}{2} \left( \| x \|^{\alpha} + \| y \|^{\alpha} 
+%- \| x-y \|^{\alpha} \right), 
+\label{eq:rho_alpha} \\
+%
+\widetilde{\rho}_{\sigma}(x,y) &= 2 - 2 e^{-\tfrac{\|x-y\|}{2 \sigma}},  
+%\widetilde{\kk}_{\sigma}(x,y) = e^{-\tfrac{\|x-y\|}{2\sigma}}, 
+\label{eq:rho_tilde}\\
+%
+\widehat{\rho}_{\sigma}(x,y) &= 2 - 2 e^{-\tfrac{\|x-y\|^2}{2 \sigma^2}}. 
+%\widehat{\kk}_{\sigma}(x,y) = e^{-\tfrac{\|x-y\|^2}{2\sigma^2}}  
+\label{eq:rho_hat}
+\end{align}
+The relation between kernel and semimetric is given by 
+formula \eqref{eq:kernel_semimetric} where we fix $x_0=0$.
+The standard $\rho_1$, from the original energy distance \eqref{eq:energy}, 
+will always be present in the experiments 
+as a reference, being the implied choice unless explicitly mentioned.
+For $k$-means, GMM and spectral clustering we use the robust 
+implementations of \emph{scikit-learn} library \cite{scikit-learn}, where  
+$k$-means is initialized with 
+$k$-means++ \cite{Vassilvitskii}, 
+and GMM with the output of $k$-means, making it more robust and preventing
+it from breaking in high dimensions. 
+Spectral clustering implementation is based on \cite{Malik}. 
+We implemented $\mathcal{E}^L$-clustering as described
+in Algorithm~\ref{kmeans_algo}, and $\mathcal{E}^H$-clustering
+as described in Algorithm~\ref{algo}. Both
+will also be initialized with $k$-means++.
+We run the algorithms $5$ times with different initializations, picking
+the result with best objective function value. 
+We evaluate clustering quality by
+the accuracy \eqref{eq:accuracy} 
+based on the true labels. For each setting we show 
+the average accuracy over $100$ Monte
+Carlo trials, with error bars indicating standard error.
+
+We briefly mention that we compared $\mathcal{E}^H$-clustering,
+as described in Algorithm~\ref{algo}, to
+$\mathcal{E}^{1D}$-clustering, described in Algorithm~\ref{algo1d}, 
+for several univariate distributions.
+Both perform very closely.
+However, we omit these results since we will analyse more interesting 
+scenarios in high dimensions.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=.8\linewidth]{pairsplot1.pdf}\\[-1em]
+\includegraphics[width=.8\linewidth]{pairsplot2.pdf}
+\put(-210,5){\scriptsize{(b)}}
+\put(-210,210){\scriptsize{(a)}}
+\end{center}
+\caption{
+\label{fig:pairsplot}
+Pair plots for the first $5$ dimensions. (a) Data normally distributed
+as in \eqref{eq:gauss1}. (b) Data normally distributed as in 
+\eqref{eq:gauss2}. We sample $200$ points for both cases.
+We can see that there is a considerable overlap between the clusters.
+}
+\end{figure} 
+
+From the results of \cite{Telgarsky}, summarized in the end of the previous
+section, we expect the improvement of Hartigan's 
+over Lloyd's method to be more accentuated in high dimensions.
+Thus, we analyze
+how the algorithms degrade as the number of dimensions increase while
+keeping the number of points in each cluster fixed.
+Consider data from the Gaussian mixture
+\begin{equation}
+\label{eq:gauss1}
+\begin{split}
+x  &\stackrel{iid}{\sim} 
+\tfrac{1}{2} \mathcal{N}(\mu_1,\Sigma_1) +
+\tfrac{1}{2} \mathcal{N}(\mu_2,\Sigma_2), \quad
+\Sigma_1=\Sigma_2 = I_D, \\
+\mu_1 &= (\underbrace{0,\dotsc,0}_{\times D})^\top, \qquad
+\mu_2 = 0.7 (\underbrace{1,\dots,1}_{\times 10},
+\underbrace{0,\dots,0}_{\times (D-10)})^\top.
+\end{split}
+\end{equation}
+To get some intuition about how separated data points from each class
+are, we show scatter plots between the first $5$ dimensions in 
+Fig.~\ref{fig:pairsplot}a.
+Note that the Bayes error
+is fixed as $D$ increases, yielding an optimal 
+accuracy of $\approx 0.86$.
+We sample $200$ points on each trial.
+The results are shown in Fig.~\ref{fig:gauss}a. We can see that
+$\mathcal{E}^H$ and spectral clustering have practically
+the same performance, which is 
+higher than $\mathcal{E}^L$-clustering (kernel
+$k$-means). Moreover, $\mathcal{E}^H$ outperforms 
+$k$-means and GMM, where the improvement is noticeable specially in 
+high dimensions.
+Note that in this setting $k$-means and GMM are consistent models to the data,
+however, energy clustering degrades much less as dimension increases.
+
+\begin{figure}
+\begin{minipage}{0.49\linewidth}
+\includegraphics[width=1\textwidth]{normal_highdim_mean.pdf}
+\end{minipage}
+\begin{minipage}{0.49\linewidth}
+\includegraphics[width=1\textwidth]{normal_highdim_cov.pdf}
+\end{minipage}
+\put(-245,-35){\scriptsize{(a)}}
+\put(-120,-35){\scriptsize{(b)}}
+\caption{
+\label{fig:gauss}
+Comparison of $\mathcal{E}^H$-clustering, $\mathcal{E}^L$-clustering (kernel
+$k$-means), spectral clustering, $k$-means and GMM in
+high dimensional Gaussian settings. We plot the mean accuracy versus
+the number of dimensions, with error bars indicating standard 
+error from $100$ Monte
+Carlo runs.
+(a) Data normally distributed as in \eqref{eq:gauss1}, with Bayes
+accuracy $\approx 0.86$, over the range $D \in [10,200]$. 
+(b) Data normally distributed
+as in \eqref{eq:gauss2}, with Bayes accuracy $\approx 0.95$,
+over the range $D \in [10, 700]$.
+}
+\end{figure} 
+
+Still for a two-class Gaussian mixture, 
+we now allow the diagonal entries of one of the covariances to
+have different values by choosing
+\begin{equation}
+\label{eq:gauss2}
+\begin{split}
+x & \stackrel{iid}{\sim} 
+\tfrac{1}{2}\mathcal{N}(\mu_1,\Sigma_1)+
+\tfrac{1}{2}\mathcal{N}(\mu_2,\Sigma_2),  \\
+\mu_1 &= (\underbrace{0,\dotsc,0}_{\times D})^\top, \qquad
+\mu_2 = (\underbrace{1,\dots,1}_{\times 10}, 
+\underbrace{0,\dots,0}_{\times (D-10)})^\top, \\
+\Sigma_1 &= I_D, \qquad
+\Sigma_2 = \left( \begin{array}{c|c}
+\widetilde{\Sigma}_{10} & 0 \\ \hline 
+0 & I_{D-10} \end{array}\right), \\
+\widetilde{\Sigma}_{10} &= \diag(1.367,  3.175,  3.247,  4.403,  
+1.249, 1.969, \\
+& \qquad \qquad 4.035,   4.237,  2.813,  3.637).
+\end{split}
+\end{equation}
+We simply chose a fixed set of $10$ numbers uniformly at random on 
+the interval $[1,5]$ for
+the diagonal of $\widetilde{\Sigma}_{10}$, and any other choice would give 
+analogous results. 
+We show pair plots of this data in Fig.~\ref{fig:pairsplot}b.
+We sample a total of $200$ points from \eqref{eq:gauss2}
+on each trial.
+The Bayes error is kept fixed when increasing $D$ yielding
+an optimal accuracy $\approx 0.95$.
+In Fig.~\ref{fig:gauss}b we see that GMM performs better in low dimensions, 
+but it quickly degenerates as $D$ increases. 
+The same is true for $k$-means and $\mathcal{E}^L$-clustering.
+However, $\mathcal{E}^H$ and spectral clustering remains much
+more stable in high dimensions.
+Notice that a naive implementation of GMM should not be able to 
+estimate the covariances when $D \gtrsim 100$, however, scikit-learn library
+uses $k$-means output as initialization, therefore the
+output of GMM in this implementation is at least as good as $k$-means and
+the algorithm is more robust in high dimensions.
+
+Consider sampling data from the following Gaussian mixture in 
+$\mathbb{R}^{20}$:
+\begin{equation}
+\label{eq:20gauss}
+\begin{split}
+x &\stackrel{iid}{\sim} \tfrac{1}{2} \mathcal{N}(\mu_1,\Sigma_1)+
+\tfrac{1}{2} \mathcal{N}(\mu_2,\Sigma_2) , \quad
+2\Sigma_1 = \Sigma_2 = I_{20} \\
+\mu_1 &= (\underbrace{0,\dotsc,0}_{\times 20})^\top , \quad
+\mu_2 = \tfrac{1}{2} 
+(\underbrace{1,\dotsc,1}_{5},\underbrace{0,\dotsc,0}_{15})^\top. 
+\end{split}
+\end{equation}
+The optimal accuracy based on Bayes
+classification error is $\approx 0.90$. 
+We increase the sample size $n \in [10,400]$ and show the accuracy versus
+$n$ for the different kernels 
+\eqref{eq:rho_alpha} and \eqref{eq:rho_tilde}
+within $\mathcal{E}^H$-clustering
+algorithm, which are compared to $k$-means and GMM. The results are
+in Fig.~\ref{fig:consist}a.
+Note that for small $n$ all methods
+are superior than GMM, which slowly catches up and tend to optimal Bayes,
+as expected since it is a consistent model to the data. 
+Note also that $\mathcal{E}^H$-clustering
+with kernel $\widetilde{\kk}_{1}$ is as accurate as GMM for 
+large number of points, however,
+it is superior for small number of points. Still for
+the same setting, in Fig.~\ref{fig:consist}b we
+show the difference in accuracy provided by $\mathcal{E}^H$ minus
+$\mathcal{E}^L$ and $\mathcal{E}^H$ minus spectral clustering, when using the
+kernel $\widetilde{\kk}_{1}$.
+Note that $\mathcal{E}^H$ was
+always superior than kernel $k$-means and spectral clustering,  
+otherwise there would be points negative values on the $y$-axis.
+
+\begin{figure}
+\begin{minipage}{0.49\linewidth}
+\includegraphics[width=1\textwidth]{normal_kernels.pdf}
+\includegraphics[width=1\textwidth]{normal_kernels_difference.pdf}
+\end{minipage}
+\begin{minipage}{0.49\linewidth}
+\includegraphics[width=1\textwidth]{lognormal_kernels.pdf}
+\includegraphics[width=1\textwidth]{lognormal_kernels_difference.pdf}
+\end{minipage}
+\put(-240,8){\scriptsize{(a)}}
+\put(-240,-75){\scriptsize{(b)}}
+\put(-110,8){\scriptsize{(c)}}
+\put(-110,-75){\scriptsize{(d)}}
+\caption{
+\label{fig:consist}
+$\mathcal{E}^H$-clustering with metrics \eqref{eq:rho_alpha} and 
+\eqref{eq:rho_tilde} versus
+$k$-means and GMM. In both settings Bayes accuracy
+is $\approx 0.9$. We show average accuracy (error bars are standard error)
+versus number of points for $100$ Monte Carlo trials.
+(a,b) Gaussian mixture \eqref{eq:20gauss}. 
+(c,d) Lognormal mixture \eqref{eq:20loggauss}.
+The plots in (c) and (d) consider the difference in accuracy
+between $\mathcal{E}^H$ versus $\mathcal{E}^L$ (kernel $k$-means) and
+spectral clustering, with metric $\widetilde{\rho}_1$.
+}
+\end{figure}
+
+Consider the same experiment but now with a
+lognormal mixture, 
+\begin{equation}
+\label{eq:20loggauss}
+\begin{split}
+x &\stackrel{iid}{\sim} \tfrac{1}{2} 
+e^{\mathcal{N}(\mu_1,\Sigma_1)}+
+\tfrac{1}{2} e^{\mathcal{N}(\mu_2,\Sigma_2)} , \quad
+2\Sigma_1 = \Sigma_2 = I_{20}, \\
+\mu_1 &= (\underbrace{0,\dotsc,0}_{\times 20})^\top ,\quad
+\mu_2 = \tfrac{1}{2} 
+(\underbrace{1,\dotsc,1}_{5},\underbrace{0,\dotsc,0}_{15})^\top.
+\end{split}
+\end{equation}
+The results are in Fig.~\ref{fig:consist}c.
+Energy clustering still performs accurately, with any of the utilized
+kernels, providing better results than $k$-means and GMM on
+this non-normal data. The kernel $\widetilde{\kk}_1$ still provides 
+the best results for small number of points, 
+but its performance is eventually achieved by
+$\kk_{1/2}$, indicating that $\alpha \approx 1/2$ in the standard
+energy distance should be more appropriate for skewed distributions.
+In Fig.~\ref{fig:consist}d we show the difference between 
+$\mathcal{E}^H$-clustering to kernel $k$-means and spectral clustering,
+with the kernel $\widetilde{\kk}_1$. Again,
+the accuracy provided by $\mathcal{E}^H$ is higher than the other methods,
+although not much higher than spectral clustering in this example.
+The two experiments of Fig.~\ref{fig:consist}
+illustrate how energy clustering is more flexible,
+performing well in different settings
+with the same kernel, contrary to $k$-means and GMM.
+
+\begin{figure}
+\begin{minipage}{0.24\linewidth}
+\includegraphics[width=1\textwidth]{2cigars.pdf}\\\scriptsize{(a)}
+\end{minipage}
+\begin{minipage}{0.24\linewidth}
+\includegraphics[width=1\textwidth]{2circles.pdf}\\\scriptsize{ (b)}
+\end{minipage}
+\begin{minipage}{0.24\linewidth}
+\includegraphics[width=1\textwidth]{3circles.pdf}\\\scriptsize{(c)  }
+\end{minipage}
+\begin{minipage}{0.23\linewidth}
+\vspace{-.5em}
+\includegraphics[width=1\textwidth]{mnist.pdf}\\[-.6em]\scriptsize{(d)  }
+\end{minipage}
+\caption{\label{fig:other}
+(a) Parallel cigars. (b) Two  
+concentric circles with noise. (c) Three
+concentric circles with noise. (d) MNIST handwritten digits.
+Clustering results are in Table~\ref{table:other}
+and Table~\ref{table:mnist}.
+}
+\end{figure}
+
+In Fig.~\ref{fig:other}a--c we have 
+complex two dimensional datasets. The two parallel cigars in (a)
+have $200$ points each. The concentric circles
+in (b) and (c) have $400$ points for each class.
+We apply $\mathcal{E}^H$-clustering  with the 
+kernels \eqref{eq:rho_alpha}, \eqref{eq:rho_tilde} and \eqref{eq:rho_hat}. 
+We also consider the best kernel choice for each example for spectral
+clustering. 
+Moreover, we consider
+$k$-means and GMM. We perform $10$ Monte Carlo runs for each example.
+The results are in Table~\ref{table:other}.
+For (a) we initialize
+all algorithms with $k$-means++, and for (b) and (c) we initialize at
+random.
+$\mathcal{E}^H$ has superior performance
+in every example, and in particular better than the
+spectral clustering.
+In (a) 
+the standard kernel from energy statistics in Euclidean
+space, $\kk_1$ and $\kk_{1/2}$, are
+able to provide accurate results, however, for the
+examples in (b) and (c) the kernel choice is more sensitive, where
+$\widehat{\kk}_1$ and $\widehat{\kk}_2$ provide a significant improvement.
+
+\begin{table*}
+\caption{\label{table:other}
+Clustering data from Fig.~\ref{fig:other}a--c.
+}
+\begin{center}
+\footnotesize{
+\begin{tabular}{@{}r  l l  l l  l l@{}}
+\toprule[1pt]
+ & & \emph{Fig.~\ref{fig:other}a}
+ & & \emph{Fig.~\ref{fig:other}b}
+ & & \emph{Fig.~\ref{fig:other}c} \\
+\midrule[0.5pt]
+\multirow{4}{*}{\emph{$\mathcal{E}^H$-clustering~~~~}}
+& $\rho_{1}$ & $0.705\pm 0.065$
+& $\rho_{1}$ & $0.521\pm 0.005$
+& $\rho_{1}$ & $0.393\pm 0.020$ \\
+& $\rho_{1/2}$ & $0.952\pm 0.048$
+& $\rho_{1/2}$ & $0.522\pm 0.004$
+& $\rho_{1/2}$ & $0.486\pm 0.040$ \\
+& $\widetilde{\rho}_{2}$ & $\bm{0.9987\pm 0.0008}$
+& $\widetilde{\rho}_{1}$ & $0.778\pm 0.075$
+& $\widetilde{\rho}_{2}$ & $0.666\pm 0.007$ \\
+& $\widehat{\rho}_{2}$  & $0.956\pm 0.020$
+& $\widehat{\rho}_{1}$  & $\bm{1.0\pm 0.0}$
+& $\widehat{\rho}_{2}$ & $\bm{0.676\pm 0.002}$ \\
+\midrule[0.5pt]
+\emph{spectral-clustering~~~~}
+& $\widetilde{\rho}_{2}$ & $0.557\pm 0.014$ 
+& $\widehat{\rho}_{1}$ & $0.732\pm 0.002$ 
+& $\widehat{\rho}_{2}$ & $0.364\pm 0.004$  \\
+\emph{$k$-means}~~~~ 
+& \xmark & $0.550\pm 0.011$
+& \xmark & $0.522\pm 0.004$
+& \xmark & $0.368\pm 0.005$ \\
+\emph{GMM}~~~~
+& \xmark & $0.903\pm 0.064$
+& \xmark & $0.595\pm 0.011$
+& \xmark & $0.465\pm 0.030$ \\
+\bottomrule[1pt]
+\end{tabular}
+}
+\end{center}
+\end{table*}
+
+\begin{table*}
+\caption{\label{table:mnist}
+Clustering MNIST data from Fig.~\ref{fig:other}d.
+}
+\begin{center}
+\footnotesize{
+\begin{tabular}{@{}r@{}l@{}@{}l@{}@{}l@{}@{}l@{}l@{}}
+\toprule[1pt]
+\emph{Class Subset}~~~~ & & 
+%$~\{0,1,2\}$ &
+$~\{0,1,\dotsc,4\}~$ &
+$~\{0,1,\dotsc,6\}~$ &
+$~\{0,1,\dotsc,8\}~$ &
+$~\{0,1,\dotsc,9\}~$ \\
+\emph{parameter}~~~~ & {$\sigma$}
+%& $~10.34~$
+& $~10.41~$
+& $~10.41~$
+& $~10.37~$
+& $~10.19~$ \\
+\midrule[0.5pt]
+\multirow{3}{*}{\emph{$\mathcal{E}^H$-clustering~~~~}}
+& $\rho_{1}$\hspace{1em} 
+%&$~0.937\pm 0.006~$
+&$~0.873\pm 0.025~$
+&$~0.731\pm 0.016~$
+&$~0.687\pm 0.016~$
+&$~0.581\pm 0.011~$
+\\
+& $\rho_{1/2}$ 
+%&$~0.939\pm 0.006~$
+&$~0.874\pm 0.027~$
+&$~0.722\pm 0.017~$
+&$~0.647\pm 0.017~$
+&$~\bm{0.600\pm 0.009}~$
+\\
+& $\widetilde{\rho}_{\sigma}$ 
+%&$~0.939\pm 0.006~$
+&$~0.847\pm 0.031~$
+&$~0.695\pm 0.023~$
+&$~0.657\pm 0.014~$
+&$~0.584\pm 0.013~$
+\\
+& $\widehat{\rho}_{\sigma}$ 
+%&$~0.933\pm 0.005~$
+&$~\bm{0.891\pm 0.009}~$
+&$~\bm{0.759\pm 0.011}~$
+&$~\bm{0.704\pm 0.011}~$
+&$~\bm{0.591\pm 0.012}~$
+\\
+\midrule[.5pt]
+\emph{spectral-clustering~~~~} 
+& $\widehat{\rho}_{\sigma}$ 
+%&$~0.823\pm 0.015~$
+&$~0.769\pm 0.012~$
+&$~0.678\pm 0.014~$
+&$~0.649\pm 0.018~$
+&$~0.565\pm 0.009~$
+\\
+\emph{$k$-means}~~~~ & \xmark
+%&$~0.927\pm 0.004~$
+&$~0.878\pm 0.010~$
+&$~0.744\pm 0.008~$
+&$~0.695\pm 0.012~$
+&$~0.557\pm 0.012~$
+\\
+\emph{GMM}~~~~ & \xmark
+%&$~\bm{0.952\pm 0.005}~$
+&$~0.839\pm 0.015~$
+&$~0.694\pm 0.010~$
+&$~0.621\pm 0.009~$
+&$~0.540\pm 0.009~$
+\\
+\bottomrule[1pt]
+\end{tabular}
+}
+\end{center}
+\end{table*}
+
+Next, we consider 
+the infamous MNIST handwritten digits
+as illustrated in Fig.~\ref{fig:other}d.
+Each data point is an $8$-bit gray scale
+image forming a $784$-dimensional vector 
+corresponding to the digits $\{0,1,\dotsc,9 \}$.
+We compute the parameter
+\begin{equation}
+\label{eq:sigma}
+\sigma^2 = \dfrac{1}{n^2} \sum_{i,j=1}^n \| x_i - x_j \|^2 ,
+\end{equation}
+from a separate
+training set, to be used in the kernels \eqref{eq:rho_tilde} and 
+\eqref{eq:rho_hat}.
+We consider subsets of $\{0,1,\dotsc,9 \}$, 
+sampling $100$ points 
+for each class. 
+The results are shown in Table~\ref{table:mnist}, where kernels
+and parameters are indicated.
+$\mathcal{E}^H$-clustering performs slightly better than $k$-means
+and GMM, however the difference is not considerable.
+Unsupervised clustering on MNIST without any feature extraction
+is not trivial. For instance,
+the same experiment was performed in \cite{Sapiro} where a low-rank
+transformation is learned then subsequently used in subspace clustering,
+providing very accurate results. It would be interesting to 
+explore analogous methods
+for learning a better representation of the data and subsequently apply
+$\mathcal{E}^H$-clustering.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Real Data Experiment}
+
+\begin{table*}
+\caption{\label{table:synapse}
+Features of the synapse dataset according to \cite{Collman2015}.
+}
+\begin{center}
+\begin{tabular}{lllllllllll}
+\toprule[1pt]
+$x_{1}$ &
+$x_{2}$ &
+$x_{3}$ &
+$x_{4}$ &
+$x_{5}$ &
+$x_{6}$ &
+$x_{7}$ &
+$x_{8}$ &
+$x_{9}$ &
+$x_{10}$ &
+$x_{11}$ \\
+\midrule[.5pt]
+bIIItubulin&DAPI-2nd&DAPI-3rd&GABA&GAD2&VGAT&gephyrin&NR1&VGluT1&synapsin&PSDr
+\\
+\bottomrule[1pt]
+\end{tabular}
+\end{center}
+\end{table*}
+
+\begin{figure*}
+\includegraphics[width=0.18\textwidth]{eigen_gap.pdf}
+\includegraphics[width=0.2\textwidth]{heat_means_k6_energy.pdf}
+\includegraphics[width=0.2\textwidth]{synapse_cluster_2d_k6_energy.pdf}
+\includegraphics[width=0.2\textwidth]{heat_means_k6_gauss.pdf}
+\includegraphics[width=0.2\textwidth]{synapse_cluster_2d_k6_gauss.pdf}
+\put(-510,-5){\scriptsize{(a)}}
+\put(-415,-5){\scriptsize{(b)}}
+\put(-310,-5){\scriptsize{(c)}}
+\put(-205,-5){\scriptsize{(d)}}
+\put(-100,-5){\scriptsize{(e)}}
+\caption{\label{fig:synapse}
+Clustering synapse dataset.
+(a) Eigenvalues of random walk Laplacian. We choose
+$k=6$ since its the first time we see a peak. We use energy clustering
+with the two metrics $\rho_1$ and $\widehat{\rho}_2$.
+(b) Heat map of the cluster means versus features
+using energy clustering with standard
+metric $\rho_1$ from energy statistics.
+(c) Clustered points projected into the two principal components,
+using $\rho_1$.
+(d) Heat map of the cluster means versus features
+using energy clustering with Gaussian metric 
+$\widehat{\rho}_2$.
+(e) Clustered points projected into the two principal components,
+using $\widehat{\rho}_2$.
+}
+\end{figure*}
+
+We now consider a dataset  that
+describes protein expression of neural synapses --- chemical 
+connections between neurons --- which is
+crucial for understanding the diversity of synapses. This is
+part of a large NIH funded consortium within the BRAIN initiative.
+The details about this detaset, including experimental methods, are
+fully described in \cite{Collman2015}.
+Here we have $1025$ data points
+with $11$ features, as described in Table~\ref{table:synapse}.
+Each point
+corresponds to a $(x,y,z)$ location in the brain. We normalize this
+dataset before applying $\mathcal{E}^H$-clustering.
+
+We use the two
+metrics $\rho_1$ and $\widehat{\rho}_2$; see \eqref{eq:rho_alpha} and
+\eqref{eq:rho_hat}.
+We compute the difference between eigenvalues of the random walk Laplacian
+obtained from the kernel matrix $G$ constructed from these metrics;
+see \eqref{eq:kernel_matrix} and \eqref{eq:kernel_semimetric}.
+The choice of $k$ corresponds to the first time we see a meaningful
+peak in the plot, which occurs at $k=6$ as illustrated in 
+Fig.~\ref{fig:synapse}a.
+This procedure to find $k$ is common in the literature \cite{vonLuxburg2007}.
+
+Having found $k,$ we now cluster the data.
+First we use the metric $\rho_1$, which
+is the standard Euclidean choice in energy statistics.
+In Fig.~\ref{fig:synapse}b and Fig.~\ref{fig:synapse}c we show a heat
+map of the cluster means versus features and the clustered data points
+projected into the 2 principal components, respectively.
+The plots of Fig.~\ref{fig:synapse}d and Fig.~\ref{fig:synapse}e show the same
+experiment but using the metric $\widehat{\rho}_2$ corresponding
+to a Gaussian kernel.
+
+We remark that we also used the gap statistic \cite{Tibshirani2001} based
+on $k$-means to determine the number of clusters as a comparison.
+The results slightly suggest $k=6$, but it does not pass the gap
+statistic test. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion}
+\label{sec:conclusion}
+
+We proposed clustering from the perspective of generalized energy
+statistics, valid for arbitrary spaces of negative type.
+Our mathematical formulation of energy clustering 
+reduces to a QCQP in the associated RKHS, as demonstrated in 
+Proposition~\ref{th:qcqp2}.
+We showed that the optimization problem
+is equivalent
+to kernel $k$-means, once the kernel is fixed; see
+Proposition~\ref{th:kernel_kmeans}. Energy statistics, however, fixes
+a family of standard kernels in Euclidean space, and
+more general kernels 
+on spaces of negative type can also be obtained.
+We also considered a weighted version of energy statistics, whose 
+clustering formulation establishes connections with 
+graph partitioning.
+We proposed the iterative $\mathcal{E}^H$-clustering algorithm based on 
+Hartigan's method, which was compared to kernel $k$-means algorithm
+based on Lloyd's heuristic.
+Both have the same time complexity, however, numerical and theoretical
+results provide compelling evidence that $\mathcal{E}^H$-clustering
+is more robust with a superior performance, specially in high
+dimensions. 
+Furthermore, energy clustering, with standard kernels from energy
+statistics, outperformed $k$-means and GMM
+on several settings, illustrating the flexibility
+of the proposed method which is model-free. In many
+settings, the iterative
+$\mathcal{E}^H$-clustering also surpassed spectral clustering, which
+is solves a relaxation of the original QCQP, and in other settings performed
+closely but never worse. Note that spectral clustering is more expensive
+than our iterative method, going up to $\mathcal{O}(n^3)$, and finding
+eigenvectors of very large matrices is problematic.
+
+A limitation of the proposed methods for energy clustering is that it cannot
+handle accurately highly unbalanced clusters. As an illustration,
+consider the following Gaussian mixture:
+\begin{equation}
+\label{eq:gauss3}
+\begin{split}
+x &\stackrel{iid} \sim  
+\dfrac{n_1}{2N} \mathcal{N}(\mu_1,\Sigma_1)+
+\dfrac{n_1}{2N} \mathcal{N}(\mu_1,\Sigma_1), \\
+\mu_1 &= (0,0,0,0)^\top , \quad
+\mu_2 = 1.5\times (1,1,0,0)^\top, \\
+\Sigma_1 &= I_4, \quad
+\Sigma_2 = \left( 
+\begin{array}{c|c} 
+\tfrac{1}{2} I_2 & 0  \\ \hline
+0 & I_2 
+\end{array}\right), \\
+n_1 &= N - m, \quad  n_2 = N + m, \quad N=300.
+\end{split}
+\end{equation}
+We then increase $m \in [0,240]$ making
+the clusters progressively more unbalanced.
+We plot the average accuracy over
+$100$ Monte Carlo runs for each $m$, with error bars indicating 
+standard error. 
+The results are shown in Fig.~\ref{fig:unbalanced}.
+For highly unbalanced clusters, we see that GMM performs better than
+the other methods, which have basically similar performance.
+Based on this experiment, an interesting problem would be to
+extend $\mathcal{E}^H$-clustering algorithm to account for 
+highly unbalanced clusters.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{normal_unbalanced.pdf}
+\caption{
+\label{fig:unbalanced}
+Comparison of energy clustering algorithms to $k$-means and GMM on
+unbalanced clusters. The data is normally 
+distributed as \eqref{eq:gauss3}, where
+we vary $m \in [0, 240]$, and in each case we do $100$ Monte Carlo runs
+showing the average accuracy with standard error.
+}
+\end{figure}
+
+Moreover, it would be interesting to formally 
+demonstrate cases where energy clustering is a 
+consistent in the large $n$ limit. 
+A soft version of energy clustering is also an
+interesting extension.
+Finally, kernel methods can benefit from sparsity and
+fixed-rank approximations of the Gram matrix, and there is plenty
+of room to make $\mathcal{E}^H$-clustering algorithm more scalable.
+
+
+% @gui: better, but still important to have another paragraph between those connecting it to the existing literature.  compare this work with 3-4 other works explicitly stating the difference.
+
+
+
+
+
+
+
+
+% if have a single appendix:
+%\appendix[Proof of the Zonklar Equations]
+% or
+%\appendix  % for no appendix heading
+% do not use \section anymore after \appendix, only \section*
+% is possibly needed
+
+% use appendices with more than one appendix
+% then use \section to start each appendix
+% you must declare a \section before using any
+% \subsection or using \label (\appendices by itself
+% starts a section numbered zero.)
+%
+
+
+%\appendices
+%\section{Proof of the First Zonklar Equation}
+%Appendix one text goes here.
+
+% you can choose not to have a title for an appendix
+% if you want by leaving the argument blank
+%\section{}
+%Appendix two text goes here.
+
+
+% use section* for acknowledgment
+\ifCLASSOPTIONcompsoc
+  % The Computer Society usually uses the plural form
+  \section*{Acknowledgments}
+\else
+  % regular IEEE prefers the singular form
+  \section*{Acknowledgment}
+\fi
+
+We would like to thank Carey Priebe for discussions.
+We would like to acknowledge the support of the Transformative
+Research Award (NIH \#R01NS092474) and  the Defense Advanced Research Projects
+Agency’s (DARPA) SIMPLEX program through SPAWAR contract N66001-15-C-4041.
+
+
+
+% Can use something like this to put references on a page
+% by themselves when using endfloat and the captionsoff option.
+\ifCLASSOPTIONcaptionsoff
+  \newpage
+\fi
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://mirror.ctan.org/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+%\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+%\bibliography{IEEEabrv,../bib/paper}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+
+
+\bibliographystyle{unsrt}
+%\bibliographystyle{abbrvnat}
+\bibliography{biblio.bib}
+
+
+% biography section
+% 
+% If you have an EPS/PDF photo (graphicx package needed) extra braces are
+% needed around the contents of the optional argument to biography to prevent
+% the LaTeX parser from getting confused when it sees the complicated
+% \includegraphics command within an optional argument. (You could create
+% your own custom macro containing the \includegraphics command to make things
+% simpler here.)
+%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
+% or if you just want to reserve a space for a photo:
+
+\begin{IEEEbiography}{Guilherme Fran\c ca}
+Biography text here.
+\end{IEEEbiography}
+
+% if you will not have a photo at all:
+\begin{IEEEbiographynophoto}{Maria Rizzo}
+Biography text here.
+\end{IEEEbiographynophoto}
+
+% insert where needed to balance the two columns on the last page with
+% biographies
+%\newpage
+
+\begin{IEEEbiographynophoto}{Joshua Vogelstein}
+Biography text here.
+\end{IEEEbiographynophoto}
+
+% You can push biographies down or up by placing
+% a \vfill before or after them. The appropriate
+% use of \vfill depends on what kind of text is
+% on the last page and whether or not the columns
+% are being equalized.
+
+%\vfill
+
+% Can be used to pull up biographies so that the bottom of the last one
+% is flush with the other column.
+%\enlargethispage{-5in}
+
+
+
+% that's all folks
+\end{document}
+
+

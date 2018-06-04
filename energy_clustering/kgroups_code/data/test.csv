@@ -1,0 +1,251 @@
+method,points,accuracy
+k-means,0,0.853333333333
+gmm,0,0.833333333333
+spectral clustering,0,0.85
+kernel k-means,0,0.853333333333
+kernel k-groups,0,0.853333333333
+k-means,10,0.86
+gmm,10,0.87
+spectral clustering,10,0.823333333333
+kernel k-means,10,0.863333333333
+kernel k-groups,10,0.863333333333
+k-means,20,0.893333333333
+gmm,20,0.913333333333
+spectral clustering,20,0.863333333333
+kernel k-means,20,0.893333333333
+kernel k-groups,20,0.893333333333
+k-means,30,0.91
+gmm,30,0.903333333333
+spectral clustering,30,0.883333333333
+kernel k-means,30,0.91
+kernel k-groups,30,0.91
+k-means,40,0.9
+gmm,40,0.876666666667
+spectral clustering,40,0.856666666667
+kernel k-means,40,0.896666666667
+kernel k-groups,40,0.9
+k-means,50,0.893333333333
+gmm,50,0.883333333333
+spectral clustering,50,0.84
+kernel k-means,50,0.91
+kernel k-groups,50,0.903333333333
+k-means,60,0.91
+gmm,60,0.906666666667
+spectral clustering,60,0.906666666667
+kernel k-means,60,0.916666666667
+kernel k-groups,60,0.916666666667
+k-means,70,0.896666666667
+gmm,70,0.896666666667
+spectral clustering,70,0.886666666667
+kernel k-means,70,0.896666666667
+kernel k-groups,70,0.896666666667
+k-means,80,0.9
+gmm,80,0.91
+spectral clustering,80,0.9
+kernel k-means,80,0.896666666667
+kernel k-groups,80,0.9
+k-means,90,0.916666666667
+gmm,90,0.89
+spectral clustering,90,0.88
+kernel k-means,90,0.876666666667
+kernel k-groups,90,0.913333333333
+k-means,100,0.876666666667
+gmm,100,0.903333333333
+spectral clustering,100,0.843333333333
+kernel k-means,100,0.88
+kernel k-groups,100,0.863333333333
+k-means,110,0.91
+gmm,110,0.883333333333
+spectral clustering,110,0.903333333333
+kernel k-means,110,0.903333333333
+kernel k-groups,110,0.913333333333
+k-means,120,0.893333333333
+gmm,120,0.89
+spectral clustering,120,0.89
+kernel k-means,120,0.896666666667
+kernel k-groups,120,0.893333333333
+k-means,130,0.91
+gmm,130,0.91
+spectral clustering,130,0.903333333333
+kernel k-means,130,0.876666666667
+kernel k-groups,130,0.866666666667
+k-means,140,0.913333333333
+gmm,140,0.91
+spectral clustering,140,0.916666666667
+kernel k-means,140,0.896666666667
+kernel k-groups,140,0.896666666667
+k-means,150,0.84
+gmm,150,0.873333333333
+spectral clustering,150,0.686666666667
+kernel k-means,150,0.71
+kernel k-groups,150,0.71
+k-means,160,0.856666666667
+gmm,160,0.89
+spectral clustering,160,0.74
+kernel k-means,160,0.853333333333
+kernel k-groups,160,0.853333333333
+k-means,170,0.893333333333
+gmm,170,0.82
+spectral clustering,170,0.79
+kernel k-means,170,0.733333333333
+kernel k-groups,170,0.773333333333
+k-means,180,0.893333333333
+gmm,180,0.916666666667
+spectral clustering,180,0.883333333333
+kernel k-means,180,0.87
+kernel k-groups,180,0.84
+k-means,190,0.843333333333
+gmm,190,0.86
+spectral clustering,190,0.533333333333
+kernel k-means,190,0.633333333333
+kernel k-groups,190,0.653333333333
+k-means,200,0.9
+gmm,200,0.94
+spectral clustering,200,0.54
+kernel k-means,200,0.636666666667
+kernel k-groups,200,0.533333333333
+k-means,210,0.78
+gmm,210,0.903333333333
+spectral clustering,210,0.623333333333
+kernel k-means,210,0.843333333333
+kernel k-groups,210,0.8
+k-means,220,0.76
+gmm,220,0.956666666667
+spectral clustering,220,0.603333333333
+kernel k-means,220,0.72
+kernel k-groups,220,0.75
+k-means,230,0.853333333333
+gmm,230,0.94
+spectral clustering,230,0.653333333333
+kernel k-means,230,0.573333333333
+kernel k-groups,230,0.66
+k-means,240,0.586666666667
+gmm,240,0.953333333333
+spectral clustering,240,0.53
+kernel k-means,240,0.533333333333
+kernel k-groups,240,0.553333333333
+k-means,0,0.893333333333
+gmm,0,0.863333333333
+spectral clustering,0,0.853333333333
+kernel k-means,0,0.893333333333
+kernel k-groups,0,0.893333333333
+k-means,10,0.896666666667
+gmm,10,0.896666666667
+spectral clustering,10,0.896666666667
+kernel k-means,10,0.906666666667
+kernel k-groups,10,0.906666666667
+k-means,20,0.91
+gmm,20,0.903333333333
+spectral clustering,20,0.876666666667
+kernel k-means,20,0.913333333333
+kernel k-groups,20,0.913333333333
+k-means,30,0.903333333333
+gmm,30,0.903333333333
+spectral clustering,30,0.913333333333
+kernel k-means,30,0.903333333333
+kernel k-groups,30,0.903333333333
+k-means,40,0.873333333333
+gmm,40,0.883333333333
+spectral clustering,40,0.853333333333
+kernel k-means,40,0.876666666667
+kernel k-groups,40,0.883333333333
+k-means,50,0.893333333333
+gmm,50,0.88
+spectral clustering,50,0.866666666667
+kernel k-means,50,0.893333333333
+kernel k-groups,50,0.893333333333
+k-means,60,0.883333333333
+gmm,60,0.86
+spectral clustering,60,0.856666666667
+kernel k-means,60,0.883333333333
+kernel k-groups,60,0.883333333333
+k-means,70,0.93
+gmm,70,0.926666666667
+spectral clustering,70,0.903333333333
+kernel k-means,70,0.93
+kernel k-groups,70,0.926666666667
+k-means,80,0.883333333333
+gmm,80,0.886666666667
+spectral clustering,80,0.88
+kernel k-means,80,0.893333333333
+kernel k-groups,80,0.896666666667
+k-means,90,0.913333333333
+gmm,90,0.916666666667
+spectral clustering,90,0.89
+kernel k-means,90,0.91
+kernel k-groups,90,0.91
+k-means,100,0.91
+gmm,100,0.906666666667
+spectral clustering,100,0.903333333333
+kernel k-means,100,0.91
+kernel k-groups,100,0.91
+k-means,110,0.916666666667
+gmm,110,0.923333333333
+spectral clustering,110,0.883333333333
+kernel k-means,110,0.92
+kernel k-groups,110,0.92
+k-means,120,0.876666666667
+gmm,120,0.906666666667
+spectral clustering,120,0.89
+kernel k-means,120,0.873333333333
+kernel k-groups,120,0.873333333333
+k-means,130,0.933333333333
+gmm,130,0.936666666667
+spectral clustering,130,0.92
+kernel k-means,130,0.93
+kernel k-groups,130,0.93
+k-means,140,0.87
+gmm,140,0.903333333333
+spectral clustering,140,0.883333333333
+kernel k-means,140,0.87
+kernel k-groups,140,0.866666666667
+k-means,150,0.94
+gmm,150,0.946666666667
+spectral clustering,150,0.94
+kernel k-means,150,0.94
+kernel k-groups,150,0.943333333333
+k-means,160,0.903333333333
+gmm,160,0.926666666667
+spectral clustering,160,0.713333333333
+kernel k-means,160,0.773333333333
+kernel k-groups,160,0.75
+k-means,170,0.913333333333
+gmm,170,0.943333333333
+spectral clustering,170,0.933333333333
+kernel k-means,170,0.81
+kernel k-groups,170,0.85
+k-means,180,0.923333333333
+gmm,180,0.946666666667
+spectral clustering,180,0.91
+kernel k-means,180,0.826666666667
+kernel k-groups,180,0.923333333333
+k-means,190,0.9
+gmm,190,0.93
+spectral clustering,190,0.613333333333
+kernel k-means,190,0.9
+kernel k-groups,190,0.883333333333
+k-means,200,0.883333333333
+gmm,200,0.916666666667
+spectral clustering,200,0.586666666667
+kernel k-means,200,0.563333333333
+kernel k-groups,200,0.59
+k-means,210,0.676666666667
+gmm,210,0.926666666667
+spectral clustering,210,0.64
+kernel k-means,210,0.706666666667
+kernel k-groups,210,0.683333333333
+k-means,220,0.64
+gmm,220,0.843333333333
+spectral clustering,220,0.593333333333
+kernel k-means,220,0.58
+kernel k-groups,220,0.633333333333
+k-means,230,0.58
+gmm,230,0.953333333333
+spectral clustering,230,0.52
+kernel k-means,230,0.546666666667
+kernel k-groups,230,0.54
+k-means,240,0.576666666667
+gmm,240,0.503333333333
+spectral clustering,240,0.526666666667
+kernel k-means,240,0.523333333333
+kernel k-groups,240,0.533333333333

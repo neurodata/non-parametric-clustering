@@ -1,0 +1,66 @@
+* R1
+
+We highly appreciate the referee's careful reading of the manuscript 
+and comments.
+
+We remark that this paper is the first to relate energy statistics, 
+clustering and kernel methods, therefore we believe there is a theoretical 
+significance.
+
+The goal of the experiments was never to compete with standard clustering
+methods, where a careful tuning of parameters and choice of kernels is
+important. Rather, the experiments has the goal of comparing Hartigan's 
+method versus Lloyd's method when applied to our QCQP problem, and also
+to illustrate the flexibility of energy clustering.
+We don't see much relevance in the fact that a scikit-learn implementation of 
+spectral clustering, with a careful kernel choice, has a high performance 
+in a particular example (we could for instance, introduce a local version
+of energy clustering through more sophisticated methods, and we are confident
+that this would be better than standard spectral clustering implementations).
+
+
+* R2
+
+We greatly appreciate the referee's analysis of our paper and comments.
+
+We agree that we should emphasize better the two mentioned contributions.
+However, the previous related works cited in the paper, only connects energy
+statistics to clustering in a particular case (Euclidean) and there are no
+connections to kernels at all, therefore, we believe our paper closes
+an important gap and provides a more consistent derivation of clustering 
+from energy statistics, in more general settings, and at the same time 
+relates this approach to kernel methods.
+
+To the best of our knowledge, Hartigan's method was never applied to
+a general kernel method before. We believe this is the advantage of our
+approach, where after one chooses a semi-metric, or equivalently, a positive 
+definite kernel, one can just run the algorithm proposed in the paper.
+
+We agree that the real data experiment needs a comparison and more detailed
+discussion.
+
+
+* R3
+
+We highly appreciate the referee's careful reading of our manuscript 
+and comments.
+
+We kindly disagree with the statement "the contribution of the paper is quite
+marginal given the previous work using energy statistics theory for clustering
+purpose (e.g, Li (2015) for Euclidean case)". Our paper is the first to 
+relate energy statistics, clustering, and kernel methods. Going from Euclidean 
+to a general semi-metric with connections with RKHS is not straightforward.
+For instance, in going from k-means to kernel k-means there is quite a big
+gap and much research involved. The same is true for energy statistics.
+It was proposed in the 80's, but only in 2013 connections to kernels were
+established, and this was not previously explored in clustering.
+
+We agree that it is desirable to establish the results of Theorems 4 and 5
+under general kernels. We believe this is an interesting topic for future
+work since it is not straightforward.
+
+The point of Figure 1 is to illustrate that energy clustering attains high 
+accuracy, under the same choice of parameters, in different settings. 
+Thus, we still believe the comparison in Figure 1 is fair, regardless
+if GMM is not the right model to the data.
+

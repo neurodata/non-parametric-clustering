@@ -6,6 +6,11 @@ G.~J. Sz{\'e}kely and M.~L. Rizzo.
 \newblock {\em Journal of Statistical Planning and Inference}, 143:1249--1272,
   2013.
 
+\bibitem{Szkely2017}
+G.~J. Sz{\'e}kely and M.~L. Rizzo.
+\newblock {The Energy of Data}.
+\newblock {\em Annu. Rev. Stat. Appl.}, 207:447--479, 2017.
+
 \bibitem{RizzoVariance}
 M.~L. Rizzo and G.~J. Sz{\'e}kely.
 \newblock {DISCO Analysis: A Nonparametric Extension of Analysis of Variance}.
@@ -18,9 +23,9 @@ G.~J. Sz{\'e}kely and M.~L. Rizzo.
 \newblock {\em Journal of Classification}, 22(2):151--183, 2005.
 
 \bibitem{Kgroups}
-S.~Li.
-\newblock {$k$-Groups: A Generalization of $k$-Means by Energy Distance}.
-\newblock PhD Thesis, Bowling Green State University, 2015.
+S.~Li and M.~Rizzo.
+\newblock {$k$-Groups: A Generalization of $k$-Means Clustering}.
+\newblock arXiv:1711.04359 [stat.ME], 2017.
 
 \bibitem{Lyons}
 R.~Lyons.
@@ -86,7 +91,12 @@ M.~Filippone, F.~Camastra, F.~Masulli, and S.~Rovetta.
 \newblock {A Survey of Kernel and Spectral Methods for Clustering}.
 \newblock {\em Pattern Recognition}, 41:176--190, 2008.
 
-\bibitem{Hartigan}
+\bibitem{Hartigan1975}
+J.~A. Hartigan.
+\newblock {\em {Clustering Algorithms}}.
+\newblock John Wiley \& Sons, Inc., New York, NY, USA, 1975.
+
+\bibitem{Hartigan1979}
 J.~A. Hartigan and M.~A. Wong.
 \newblock {Algorithm AS 136: A $k$-Means Clustering Algorithm}.
 \newblock {\em Journal of the Royal Statistical Society. Series C (Applied
@@ -166,26 +176,14 @@ D.~Arthur and S.~Vassilvitskii.
   Discrete Algorithms}, pages 1027--1035, Philadelphia, PA, USA, 2007. Society
   for Industrial and Applied Mathematics.
 
-\bibitem{Sapiro}
-Q.~Qui and G.~Sapiro.
-\newblock {Learning Transformations for Clustering and Classification}.
-\newblock {\em Journal of Machine Learning Research}, 16:187--225, 2015.
+\bibitem{Dua2017}
+D.~Dheeru and E.~K. Taniskidou.
+\newblock {UCI} machine learning repository, 2017.
 
-\bibitem{Collman2015}
-F.~Collman, J.~Buchanan, K.~D. Phend, K.~D. Micheva, R.~J. Weinberg, and S.~J.
-  Smith.
-\newblock "mapping synapses by conjugate light-electron array tomography".
-\newblock {\em The Journal of Neuroscience}, 34(14):5792--5807, 2015.
-
-\bibitem{vonLuxburg2007}
-U.~von Luxburg.
-\newblock "a tutorial on spectral clustering".
-\newblock {\em Statistics and Computing}, 17(4):395--416, 2007.
-
-\bibitem{Tibshirani2001}
-R.~Tibshirani, G.~Walther, and T.~Hastie.
-\newblock "estimating the number of clusters in a data set via the gap
-  statistic".
-\newblock {\em J. Royal Statistical Society B}, 63(2):411--423, 2001.
+\bibitem{Guvenir1998}
+H.~A. G{\"u}venir, G.~Demir{\"o}za, and N.~Ilterb.
+\newblock Learning differential diagnosis of erythemato-squamous diseases using
+  voting feature intervals.
+\newblock {\em Artificial Intelligence in Medicine}, 13(3):147--165, 1998.
 
 \end{thebibliography}

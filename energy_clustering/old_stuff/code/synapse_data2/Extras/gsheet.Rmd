@@ -1,0 +1,111 @@
+---
+title: ""
+date: '`r Sys.Date()`'
+output:
+  html_document:
+    fig_caption: yes
+    fig_height: 5
+    fig_width: 5
+    highlight: pygments
+    number_sections: yes
+    theme: cerulean
+    toc: yes
+    toc_depth: 2
+---
+```{r knitOPTS, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE, dev = "png")
+```
+
+```{r render, eval=FALSE, echo=FALSE}
+require(rmarkdown)
+#rmarkdown::render("collman14v2_meda_plots.Rmd")
+#system("open collman14v2_meda_plots.html")
+```
+
+```{r setup,include=FALSE,results='asis',message=FALSE,warning=FALSE, echo = FALSE}
+# Library calls here.
+require(rmarkdown)
+require(knitr)
+require(rhdf5)
+require(foreach)
+require(googlesheets)
+suppressMessages(require(meda))
+```
+
+## Make plots
+
+
+```{r, eval = FALSE}
+gs_auth(new_user = TRUE)
+gs_ls()
+
+tmp <- gs_title("MNSite3Synaptograms.csv")
+#dat <- as.data.frame(gs_read_csv(ss = tmp, ws = 1, skip = 1))
+dat <- as.data.table(gs_read_csv(ss = tmp, ws = 1, skip = 1))
+
+dat$cx <- 
+  (dat$maxX - dat$minX)/2 + dat$minX
+
+dat$cy <- 
+  (dat$maxY - dat$minY)/2 + dat$minY
+
+dat$cz <- 
+  (dat$maxZ - dat$minZ)/2 + dat$minZ
+
+dat$atx <- round((dat$cx * 3) / 96)
+dat$aty <- round((dat$cy * 3) / 96)
+dat$atz <- round(dat$cz)
+
+dat$nmx <- (dat$cx / 3)
+dat$nmy <- (dat$cy / 3)
+dat$nmz <- dat$cz/50
+
+dx <- 438
+dy <- 460
+dz <- 49
+
+ind <- 
+  (dat$atx - 5) >= 0  &
+  (dat$aty - 5) >= 0  &
+  (dat$atz - 5) >= 0  &
+  (dat$atx + 6) <= dx &
+  (dat$aty + 6) <= dy &
+  (dat$atz + 6) <= dz
+
+dat$buff <- as.numeric(ind)
+
+dat$gaba <- dat$GABA
+newDat <- dat[buff == 1, .(atx,aty,atz, id, gaba, shaft, TdTom, NotSynapse)]
+
+write.csv(newDat, file = "GoogleDocData.csv", row.names = FALSE)
+write.csv(newDat[, .(atx,aty,atx,id)], file = "GoogleDocData_loc.csv", row.names = FALSE)
+
+inIDS <- as.numeric(read.csv("rorb_avg_at_orderLocations.csv")[[1]])
+IDS123 <- as.numeric(read.csv("rorb_avg_at_IDS123.csv")[[1]])
+
+
+#L <- foreach(i = inIDS, .combine = 'rbind') %do% {
+L <- foreach(i = IDS123, .combine = 'rbind') %do% {
+  dat[id == i,]
+}
+
+glut <- L$glut
+glutIDS <- data.table(id = inIDS, glut = as.numeric(glut))
+write.csv(glutIDS, file = "rorb_glut.csv", row.names = FALSE)
+
+
+gaba <- L$gaba
+gabaIDS <- data.table(id = inIDS, gaba = as.numeric(gaba))
+write.csv(gabaIDS, file = "rorb_gaba.csv", row.names = FALSE)
+
+
+shaft <- L$shaft
+shaftIDS <- data.table(id = inIDS, shaft = as.numeric(shaft))
+write.csv(shaftIDS, file = "rorb_shaft.csv", row.names = FALSE)
+
+TdTom <- L$TdTom
+TdIDS <- data.table(id = inIDS, TdTom = as.numeric(TdTom))
+write.csv(TdIDS, file = "rorb_TdTom.csv", row.names = FALSE)
+
+write.csv(L, file = "rorb_id123subset.csv", row.names = FALSE)
+```
