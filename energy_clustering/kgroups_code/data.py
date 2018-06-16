@@ -165,13 +165,14 @@ def plot(X, z, fname='plot.pdf'):
     fig = plt.figure()
     ax = fig.add_subplot(111)
 
-    colors = iter(['b', 'r', 'g'])
+    #colors = iter(['#1b9e77', '#d95f02', '#7570b3'])
+    colors = iter(['#e41a1c', '#377eb8', '#4daf4a'])
     
     for k in z_unique:
         idx = np.where(z==k)
         x = X_new[idx][:,0]
         y = X_new[idx][:,1]
-        ax.plot(x, y, 'bo', markersize=4, alpha=.7, color=next(colors))
+        ax.plot(x, y, 'bo', markersize=4, alpha=.5, color=next(colors))
     
     ax.set_xticks([])
     ax.set_yticks([])
@@ -311,6 +312,63 @@ def from_sets_to_labels(A):
 ###############################################################################
 if __name__ == '__main__':
 
+    # some components of first gaussian experiment
+    n = 200
+    n1, n2 = np.random.multinomial(n, [0.5, 0.5])
+    m1 = np.zeros(2)
+    s1 = s2 = np.eye(2)
+    m2 = np.array([0.7, 0.7])
+    X, z = multivariate_normal([m1, m2], [s1, s2], [n1, n2])
+    plot(X, z, fname='./figs/gauss_means_scatter.pdf')
+    
+    # some components of second gaussian experiment
+    n = 200
+    n1, n2 = np.random.multinomial(n, [0.5, 0.5])
+    m1 = np.zeros(2)
+    m2 = np.array([1, 1])
+    s1 = np.eye(2)
+    s2 = np.array([[2.813, 0], [0, 3.637]])
+    X, z = multivariate_normal([m1, m2], [s1, s2], [n1, n2])
+    plot(X, z, fname='./figs/gauss_cov_scatter.pdf')
+    
+    # some components of third gaussian/loggaussian experiment
+    n = 200
+    n1, n2 = np.random.multinomial(n, [0.5, 0.5])
+    m1 = np.zeros(2)
+    m2 = 0.5*np.array([1, 1])
+    s1 = 0.5*np.eye(2)
+    s2 = np.eye(2)
+    X, z = multivariate_normal([m1, m2], [s1, s2], [n1, n2])
+    plot(X, z, fname='./figs/gauss_diff_metrics.pdf')
+    X, z = multivariate_lognormal([m1, m2], [s1, s2], [n1, n2])
+    plot(X, z, fname='./figs/loggauss_diff_metrics.pdf')
+
+    # some components of unbalanced experiment
+    n = 300
+    m = 200
+    n1, n2 = np.random.multinomial(n, [(n-m)/(2*n), (n+m)/(2*n)])
+    m1 = np.zeros(2)
+    m2 = 1.5*np.array([1, 1])
+    s1 = np.eye(2)
+    s2 = 0.5*np.eye(2)
+    X, z = multivariate_normal([m1, m2], [s1, s2], [n1, n2])
+    plot(X, z, fname='./figs/unbalanced_scatter.pdf')
+
+    # cigars
+    n = 800
+    n1, n2 = np.random.multinomial(n, [0.5, 0.5])
+    m1 = np.zeros(2)
+    m2 = np.array([6.5,0])
+    s1 = s2 = np.array([[1,0],[0,20]])
+    X, z = multivariate_normal([m1, m2], [s1, s2], [n1, n2])
+    plot(X, z, fname='./figs/2cigars.pdf')
+
+    # 2 circles
+    n = 800
+    n1, n2 = np.random.multinomial(n, [0.5, 0.5])
+    X, z = circles([1, 3], [0.2, 0.2], [n1, n2])
+    plot(X, z, fname='./figs/2circles.pdf')
+    
     #X, z = univariate_normal([0, 5], [1, 2], [80000,80000])
     #X, z = univariate_lognormal([0, -1.5], [0.3, 1.5], [80000, 80000])
     #X, z = univariate_normal([0, 5], [1,1], [80000,80000])
@@ -325,33 +383,3 @@ if __name__ == '__main__':
     #histogram_gauss_loggauss(fname='hist_lognormal.pdf', xlim=[0,8],
     #                ylim=[0,0.85])
 
-    """
-    # cigars
-    m1 = np.zeros(2)
-    m2 = np.array([6.5,0])
-    s1 = s2 = np.array([[1,0],[0,20]])
-    X, z = multivariate_normal([m1, m2], [s1, s2], [200, 200])
-    plot(X, z, fname='./2cigars.pdf')
-    
-    # ball and cigar
-    m1 = np.zeros(2)
-    m2 = np.array([3,0])
-    s1 = np.array([[.3,0],[0,.3]])
-    s2 = np.array([[1,0],[0,20]])
-    X, z = multivariate_normal([m1, m2], [s1, s2], [200, 200])
-    plot(X, z, fname='./ball_cigar.pdf')
-    """
-    
-    # 2 circles
-    X, z = circles([1, 3], [0.2, 0.2], [400, 400])
-    plot(X, z, fname='./2circles.pdf')
-
-    # 3 circles
-    X, z = circles([1, 3, 5], [0.2, 0.2, 0.2], [400, 400, 400])
-    plot(X, z, fname='./3circles.pdf')
-
-    """
-    # spirals
-    X, z = spirals([1,-1], [[0.2,0.0], [-0.2,-0.0]], [400,400], noise=0.2)
-    plot(X, z, fname='./2spiral.pdf')
-    """

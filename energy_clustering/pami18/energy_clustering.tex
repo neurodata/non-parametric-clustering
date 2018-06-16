@@ -1072,7 +1072,7 @@ The entire procedure is described in Algorithm~\ref{kmeans_algo}.
 It can be shown that this algorithm converges when $G$ is positive
 semidefinite. 
 
-\begin{algorithm}
+\begin{algorithm}[t]
 \begin{algorithmic}[1]
     \INPUT $k$, $G$, $\mathcal{W}$, $Z \leftarrow Z_0$
     \OUTPUT $Z$ 
@@ -1137,6 +1137,44 @@ to $\OO(k \tilde{n})$.
 
 \subsection{Kernel k-Groups Algorithm}
 
+\begin{algorithm}[t]
+\begin{algorithmic}[1]
+    \INPUT $k$, $G$, $\W$, $Z \leftarrow Z_0$
+    \OUTPUT $Z$
+  \STATE $q \leftarrow (Q_1, \dotsc, Q_k)^\top$ 
+            \hfill (see \eqref{eq:maxQ})
+  \STATE $s \leftarrow (s_1,\dotsc,s_k)^\top$ 
+  \REPEAT
+    \FOR{ $i=1,\dotsc,n$}
+        \STATE let $j$ be such that $x_i \in \C_j$
+        \STATE $j^\star \leftarrow \argmax_{\ell=1,\dotsc,k \, | \, \ell\ne j} 
+                \Delta Q^{j\to \ell}(x_i)$
+            \hfill (see \eqref{eq:changeQ}) \label{stepmove}
+        \IF{ $\Delta Q^{j \to j^\star}(x_i) > 0$ }
+            \STATE $Z_{ij} \leftarrow 0$
+            \STATE $Z_{ij^\star} \leftarrow 1$
+            \STATE $s_j \leftarrow s_j - \mathcal{W}_{ii}$ 
+            \STATE $s_{j^\star} \leftarrow s_{j^\star} + \mathcal{W}_{ii}$
+            \STATE $q_j \leftarrow q_j - 2Q_j(x_i) + (\W G \W)_{ii}$
+                \hfill (see \eqref{eq:costxij})
+            \STATE 
+            $q_{j^\star} \leftarrow q_{j^\star} + 2Q_{j^\star}(x_i)+ 
+                (\W G\W)_{ii}$
+                \hfill (see \eqref{eq:costxij})
+    %    \ELSE
+    %        \STATE Do nothing;
+        \ENDIF
+    \ENDFOR
+  \UNTIL{convergence}
+\end{algorithmic}
+\caption{\label{algo}
+Kernel k-groups algorithm, based on Hartigan's method, to find
+local solutions to problem \eqref{eq:qcqp3}.
+%Steps $6$, $12$ and $13$ are different
+%compared to Algorithm~\ref{kmeans_algo}. 
+}
+\end{algorithm}
+
 We now consider Hartigan's method \cite{Hartigan1975,Hartigan1979} 
 applied to the optimization problem in the form \eqref{eq:maxQ}, which gives
 a local solution to \eqref{eq:qcqp3}. 
@@ -1192,43 +1230,6 @@ with first variations proposed in \cite{Kgroups}, which only considers
 the Euclidean case, and also an extension
 of Hartigan's method to kernel spaces.
 
-\begin{algorithm}
-\begin{algorithmic}[1]
-    \INPUT $k$, $G$, $\W$, $Z \leftarrow Z_0$
-    \OUTPUT $Z$
-  \STATE $q \leftarrow (Q_1, \dotsc, Q_k)^\top$ 
-            \hfill (see \eqref{eq:maxQ})
-  \STATE $s \leftarrow (s_1,\dotsc,s_k)^\top$ 
-  \REPEAT
-    \FOR{ $i=1,\dotsc,n$}
-        \STATE let $j$ be such that $x_i \in \C_j$
-        \STATE $j^\star \leftarrow \argmax_{\ell=1,\dotsc,k \, | \, \ell\ne j} 
-                \Delta Q^{j\to \ell}(x_i)$
-            \hfill (see \eqref{eq:changeQ}) \label{stepmove}
-        \IF{ $\Delta Q^{j \to j^\star}(x_i) > 0$ }
-            \STATE $Z_{ij} \leftarrow 0$
-            \STATE $Z_{ij^\star} \leftarrow 1$
-            \STATE $s_j \leftarrow s_j - \mathcal{W}_{ii}$ 
-            \STATE $s_{j^\star} \leftarrow s_{j^\star} + \mathcal{W}_{ii}$
-            \STATE $q_j \leftarrow q_j - 2Q_j(x_i) + (\W G \W)_{ii}$
-                \hfill (see \eqref{eq:costxij})
-            \STATE 
-            $q_{j^\star} \leftarrow q_{j^\star} + 2Q_{j^\star}(x_i)+ 
-                (\W G\W)_{ii}$
-                \hfill (see \eqref{eq:costxij})
-    %    \ELSE
-    %        \STATE Do nothing;
-        \ENDIF
-    \ENDFOR
-  \UNTIL{convergence}
-\end{algorithmic}
-\caption{\label{algo}
-Kernel k-groups algorithm, based on Hartigan's method, to find
-local solutions to problem \eqref{eq:qcqp3}.
-%Steps $6$, $12$ and $13$ are different
-%compared to Algorithm~\ref{kmeans_algo}. 
-}
-\end{algorithm}
 
 Note that Algorithm~\ref{algo} automatically ensures that the 
 objective function is
@@ -1406,78 +1407,68 @@ Carlo trials, with error bars indicating the standard error.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Synthetic Experiments}
 
-%In the first two experiments 
-%we use $\mathcal{E}^H$-clustering with the standard metric from energy
-%statistics, i.e. \eqref{eq:rho_alpha} with \mbox{$\alpha=1$}. 
-%We consider univariate
-%normal and lognormal mixtures according to
-%\begin{align}
-%x &\stackrel{iid}{\sim} \tfrac{1}{2}
-%\mathcal{N}(\mu_1,\sigma_1^2) + 
-%\tfrac{1}{2} \mathcal{N}(\mu_2,\sigma_2^2) ,\label{eq:uni_normal} \\
-%x & \stackrel{iid}{\sim} \tfrac{1}{2}
-%\exp\left\{ \mathcal{N}(\mu_1,\sigma_1^2) \right\} + 
-%\tfrac{1}{2} \exp \left\{ \mathcal{N}(\mu_2,\sigma_2^2)\right\} ,
-%\label{eq:uni_lognormal} \\
-%\mu_1 &= 1.5, \ \sigma_1=0.3, \ \mu_2=0, \ \sigma_2=1.5.
-%\label{eq:uni_params}
-%\end{align}
-%We increase the sample size $n$ and show the clustering accuracy 
-%\eqref{eq:accuracy}
-%versus $n$ in Fig.~\ref{fig:1D}. 
-%In both cases the optimal accuracy 
-%obtained from Bayes classification error
-%is $ \approx 0.88$, indicated by the dashed line.
-%Note that $\mathcal{E}^H$-clustering 
-%performs better than k-means for normally distributed data, 
-%and worse than GMM,
-%as expected. 
-%However, for lognormal distributions k-means and GMM are only slightly
-%better than chance while $\mathcal{E}^H$-clustering is still 
-%accurate. The reason is that k-means and GMM models are inconsistent
-%with this lognormal data. Energy statistics on the other hand
-%is model-free. We also show 
-%a density estimation after clustering $1000$ points from these
-%mixtures.
-%Note that only $\mathcal{E}^{H}$-clustering
-%was able to distinguish between the two classes, while 
-%k-means and GMM put most of the
-%points in a single cluster and points on the tail of the second component
-%of \eqref{eq:uni_lognormal} in the other cluster.
-%
-%
-%\begin{figure}
-%\begin{minipage}{0.49\linewidth}
-%\begin{center}
-%\includegraphics[width=\textwidth]{1D_normal.pdf}\\
-%~~~~~\includegraphics[width=.9\textwidth]{normal_density.pdf}
-%\end{center}
-%\end{minipage}
-%\begin{minipage}{0.49\linewidth}
-%\begin{center}
-%\includegraphics[width=\textwidth]{1D_lognormal.pdf}\\
-%~~~~~\includegraphics[width=.9\textwidth]{lognormal_density.pdf}
-%\end{center}
-%\end{minipage}
-%%\put(-140,5){\scriptsize{(a)}}
-%%\put(-140,-78){\scriptsize{(c)}}
-%%\put(-10,5){\scriptsize{(b)}}
-%%\put(-10,-78){\scriptsize{(d)}}
-%\caption{
-%\label{fig:1D}
-%\emph{Top Left:} Clustering data from \eqref{eq:uni_normal}.
-%\emph{Top Right:} Clustering data from \eqref{eq:uni_lognormal}.
-%The dashed lines show the optimal Bayes accuracy, which in both cases 
-%are $\approx 0.88$.
-%\emph{Bottom Left:} 
-%Density estimation of each component in the mixture \eqref{eq:uni_normal} 
-%after clustering $1000$ sampled points.
-%\emph{Bottom Right:} 
-% The same but for lognormal data \eqref{eq:uni_lognormal}.
-%}
-%\end{figure}
 
-First, we analyze
+\begin{figure*}
+\centering
+\begin{minipage}{.4\textwidth}
+\includegraphics[width=1\textwidth]{gauss_1d.pdf}\\[-2em]
+(a)
+\end{minipage}
+\begin{minipage}{.4\textwidth}
+\includegraphics[width=1\textwidth]{loggauss_1d.pdf} \\[-2em]
+(b)
+\end{minipage}\\[1em]
+\begin{minipage}{.37\textwidth}
+\includegraphics[width=1\textwidth]{normal_density.pdf}\\[-2em]
+(c)
+\end{minipage}\hspace{2em}
+\begin{minipage}{.37\textwidth}
+\includegraphics[width=1\textwidth]{lognormal_density.pdf}\\[-2em]
+(d)
+\end{minipage}
+\caption{
+\label{fig:1dexperiment}
+Clustering one-dimensional data for a two-class problem.
+(a) $x \stackrel{iid}{\sim} \tfrac{1}{2} \mathcal{N}(0, 1.5) +
+\tfrac{1}{2}\mathcal{N}(1.5,0.3)$. (b) $x \stackrel{iid}{\sim}
+\tfrac{1}{2}e^{\mathcal{N}(0, 1.5)} + \tfrac{1}{2} e^{\mathcal{N}(1.5, 0.3)}$.
+In both cases we plot the accuracy versus the total number of points.
+(c) Kernel density estimation for a single trial with 2000 sampled
+points from the
+distribution in the case (a). (d) Kernel density estimation in a single
+trial with 
+2000 points sampled from the distribution in the case (b).
+}
+\end{figure*}
+
+
+We first consider one-dimensional data for a two-class problem. We compare
+kernel k-groups with k-means and GMM, as illustrated in 
+Fig.~\ref{fig:1dexperiment}. We have two mixtures of normal and 
+lognormal distributions. Notice that in the kernel density estimation plots
+for lognormal distribution, only kernel k-groups was able to distinguish
+between the two classes. The accuracy results for both density estimation
+cases are in Table~\ref{tb:dens}. We remark that kernel k-groups in
+this one-dimensional example performed the same as the deterministic
+Algorithm~\ref{algo1d} introduced in the Appendix.
+
+\begin{table}[h]
+\centering
+\caption{
+\label{tb:dens} Accuracy results for the density
+estimation of Fig.~\ref{fig:1dexperiment}d--e.
+}
+\begin{tabular}{@{}l|ll@{}}
+       Method        & normal & lognormal \\ \midrule[.5pt]
+        kmeans       & 0.773  & 0.502     \\
+         GMM         & 0.881  & 0.513     \\
+   kernel k-groups   & 0.802  & 0.847  
+\end{tabular}
+\end{table}
+
+
+
+Next, we analyze
 how the algorithms degrade as the number of dimensions increase.
 Consider data from the Gaussian mixture
 \begin{equation}
@@ -1494,25 +1485,84 @@ x  &\stackrel{iid}{\sim}
 \end{equation}
 The Bayes error is fixed as $D$ increases giving an optimal accuracy
 of $\approx 0.86$.
-We sample $200$ points on each trial.
-The results are shown in Fig.~\ref{fig:gauss1}.
+We sample $200$ points on each trial. A scatter plot of the last two
+dimensions that contains signal in $\mu_2$ is shown in
+Fig.~\ref{fig:scatter}a.
+The clustering results are shown in Fig.~\ref{fig:plots}a.
 We see that 
 kernel k-groups and spectral clustering have close
 performance, being superior to kernel k-means, k-means, and GMM.
 The improvement is noticeable in 
 higher dimensions.
 
-\begin{figure}
+\begin{figure*}
 \centering
-\includegraphics[scale=0.5]{gauss1.pdf}
+\includegraphics[width=0.19\textwidth]{gauss_means_scatter.pdf}
+\includegraphics[width=0.19\textwidth]{gauss_cov_scatter.pdf}
+\includegraphics[width=0.19\textwidth]{gauss_diff_metrics.pdf}
+\includegraphics[width=0.19\textwidth]{loggauss_diff_metrics.pdf}
+\includegraphics[width=0.19\textwidth]{unbalanced_scatter.pdf}
+\put(-500,-8){(a)}
+\put(-398,-8){(b)}
+\put(-298,-8){(c)}
+\put(-195,-8){(d)}
+\put(-95,-8){(e)}
 \caption{
-\label{fig:gauss1}
+\label{fig:scatter}
+Scatter plot of the last two dimensions where $\mu_2$ has signal.
+Each plot has 200 points total.
+(a) Data distributed as in \eqref{eq:gauss1}.
+(b) Data distributed as in \eqref{eq:gauss2}.
+(c) Data distributed as in \eqref{eq:20gauss}.
+(d) Parameters as in \eqref{eq:20gauss} but for lognormal mixture.
+(e) Data from \eqref{eq:gauss3} with $N = 300$ and $m=200$.
+}
+\end{figure*}
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.33\textwidth]{gauss1.pdf}
+\includegraphics[width=0.33\textwidth]{gauss2.pdf}
+\includegraphics[width=0.33\textwidth]{gauss_n.pdf}
+\includegraphics[width=0.33\textwidth]{loggauss_n.pdf}
+\includegraphics[width=0.315\textwidth]{gauss_unbal.pdf}
+\put(-400,130){(a)}
+\put(-230,130){(b)}
+\put(-50,130){(c)}
+\put(-320,-8){(d)}
+\put(-140,-8){(e)}
+\caption{
+\label{fig:plots}
+Clustering results associated to the data illustrated in 
+Fig.~\ref{fig:scatter}. For each experiment we
+perform 100 Monte Carlo runs. Error bars indicate standard error.
+(a)
 High dimensional Gaussian mixture according to \eqref{eq:gauss1}.
-We sample $200$ points total on each trial. The dashed line is
+The dashed line is
 Bayes accuracy $\approx 0.86$. We use the metric $\rho_1$ in
 \eqref{eq:rho_alpha}, which is standard in energy statistics.
+(b)
+High dimensional Gaussian mixture according to \eqref{eq:gauss2}.
+Bayes accuracy $\approx 0.95$. We use $\rho_1$ in \eqref{eq:rho_alpha}.
+(c)
+Gaussian mixture with parameters \eqref{eq:20gauss}. We increase
+the number of sampled points in each trial. We use different
+metrics; see \eqref{eq:rho_alpha}--\eqref{eq:rho_hat}. 
+Here, kernel k-groups is more accurate than spectral clustering.
+(d)
+Same experiment as in Fig.~\ref{fig:plots}c but with a 
+lognormal mixture with parameters \eqref{eq:20gauss}.
+Again, kernel k-groups is more accurate than alternatives.
+The plot suggests that neither of these methods are
+consistent on this example since Bayes accuracy is $\approx 0.90$.
+(e)
+Comparison between clustering methods
+on unbalanced clusters. The data is normally 
+distributed as \eqref{eq:gauss3} where
+we vary $m \in [0, 240]$. We use the standard metric $\rho_1$ (see
+\eqref{eq:rho_alpha}) from energy statistics.
 }
-\end{figure}
+\end{figure*}
 
 Still for a two-class Gaussian mixture as in \eqref{eq:gauss1}, we now choose
 different numbers for the  diagonal covariance $\Sigma_2$.
@@ -1531,24 +1581,12 @@ with signal in the first $10$ dimensions, and
 \end{equation}
 We simply chose $10$ numbers uniformly at random on the interval
 $[1,5]$ and other choice would give analogous results.
-Bayes  accuracy is fixed at $\approx 0.95$.
-From Fig.~\ref{fig:gauss2} we see that 
+Bayes  accuracy is fixed at $\approx 0.95$. In Fig~\ref{fig:scatter}b
+we show a scatter plot of the 9th and 10th dimension.
+From Fig.~\ref{fig:plots}b we see that 
 all the methods are similarly accurate in low dimensions, but they quickly
 degenerate as the number of dimensions increase, except 
 kernel k-groups which is much more stable.
-
-\begin{figure}
-\centering
-\includegraphics[scale=0.5]{gauss2.pdf}
-\caption{
-\label{fig:gauss2}
-High dimensional Gaussian mixture according to \eqref{eq:gauss2}.
-We sample $200$ points total on each trial. The dashed line is
-Bayes accuracy $\approx 0.95$. We use $\rho_1$ in \eqref{eq:rho_alpha}
-which standard metric in energy statistics.
-}
-\end{figure}
-
 
 Now, consider
 $x \stackrel{iid}{\sim} \tfrac{1}{2} \mathcal{N}(\mu_1,\Sigma_1)+
@@ -1563,26 +1601,15 @@ with
 (\underbrace{1,\dotsc,1}_{5},\underbrace{0,\dotsc,0}_{15})^\top.
 \end{split}
 \end{equation}
-Bayes accuracy is $\approx 0.90$. 
+Bayes accuracy is $\approx 0.90$.  A scatter plot of the 4th and 5th
+dimensions is shown in Fig.~\ref{fig:scatter}c.
 We increase the sample size $n \in [10, 400]$ and show
-the accuracy versus $n$ in Fig.~\ref{fig:gauss_n}. We compare
+the accuracy versus $n$ in Fig.~\ref{fig:plots}c. We compare
 kernel k-groups, with different metrics,
 to k-means and GMM. We also use
 the best metric in this example for spectral clustering.
 We notice a superior performance of kernel k-groups 
 compared to the other methods.
-
-\begin{figure}
-\centering
-\includegraphics[scale=0.5]{gauss_n.pdf}
-\caption{
-\label{fig:gauss_n}
-Gaussian mixture with parameters \eqref{eq:20gauss}. We increase
-the number of sampled points in each trial. We use different
-metrics; see \eqref{eq:rho_alpha}--\eqref{eq:rho_hat}. 
-Here, kernel k-groups is more accurate than spectral clustering.
-}
-\end{figure}
 
 To consider non-normal data, we sample from the lognormal mixture 
 $x \stackrel{iid}{\sim} \tfrac{1}{2} 
@@ -1590,30 +1617,20 @@ e^{\mathcal{N}(\mu_1,\Sigma_1)}+
 \tfrac{1}{2} e^{\mathcal{N}(\mu_2,\Sigma_2)}$ with the same
 parameters as in \eqref{eq:20gauss}. 
 The optimal Bayes accuracy is still $\approx 0.9$.
-The results are shown in Fig.~\ref{fig:loggauss_n}.
+A scatter plot is in Fig.~\ref{fig:scatter}d and the
+results are shown in Fig.~\ref{fig:plots}d.
 We use exactly the same metrics as in the normal
-mixture of Fig.~\ref{fig:gauss_n} to illustrate that the 
+mixture of Fig.~\ref{fig:plots}c to illustrate that the 
 proposed method still performs accurately.
-
-\begin{figure}
-\centering
-\includegraphics[scale=0.5]{loggauss_n.pdf}
-\caption{
-\label{fig:loggauss_n}
-Same experiment as in Fig.~\ref{fig:gauss_n} but with a 
-lognormal mixture with parameters \eqref{eq:20gauss}.
-Again, kernel k-groups is more accurate than alternatives.
-The figure suggests that neither of these methods are
-consistent on this example since Bayes accuracy is $\approx 0.90$.
-}
-\end{figure}
 
 Finally, we show a limitation of kernel k-groups, which is shared
 between 
 all the other methods except for GMM.
 For highly unbalanced clusters, k-means, spectral
 clustering, kernel k-means and kernel k-groups all degenerate
-more quickly than GMM. This is illustrated in Figure~\ref{fig:gauss_unbal}
+more quickly than GMM. A scatter plot of the first two dimensions
+is shown in Fig.~\ref{fig:scatter}e and the clustering results are
+in Fig.~\ref{fig:plots}e,
 where we generate data according to
 \begin{equation}
 \label{eq:gauss3}
@@ -1639,18 +1656,54 @@ the other methods, which have basically similar performance.
 Based on this experiment, an interesting problem would be to
 extend kernel k-groups to account for unbalanced clusters.
 
+In Fig.~\ref{fig:2dscatter} we show examples of two-dimensional
+datasets whose clustering results are shown in Table~\ref{tb:cigar_circle}.
+For kernel k-means and kernel k-groups we initialize at random.
+We see that both methods perform closely, with higher accuracy
+than the other ones.
+
 \begin{figure}
-\centering
-\includegraphics[scale=0.5]{gauss_unbal.pdf}
+\includegraphics[width=.24\textwidth]{2cigars.pdf}
+\includegraphics[width=.24\textwidth]{2circles.pdf}
+\put(-240,-8){(a)}
+\put(-110,-8){(b)}
 \caption{
-\label{fig:gauss_unbal}
-Comparison between clustering methods
-on unbalanced clusters. The data is normally 
-distributed as \eqref{eq:gauss3} where
-we vary $m \in [0, 240]$. We use the standard metric $\rho_1$ (see
-\eqref{eq:rho_alpha}) from energy statistics.
-}
+\label{fig:2dscatter}
+(a) Data distributed as 
+$x \stackrel{iid}{\sim}
+\tfrac{1}{2}\mathcal{N}(\mu_1,\Sigma_1)+
+\tfrac{1}{2}\mathcal{N}(\mu_1,\Sigma_1)$, 
+$\mu_1= (0,0)^\top$, 
+$\mu_2 = (6.5, 0)^\top$ and 
+$\Sigma_1 = \Sigma_2 = \diag(1, 20)$. We sample $800$ points.
+(b) Concentric circles with radius $r_1 = 1$ and $r_2 = 3$, with 
+noise $0.2 \cdot \mathcal{N}(0, I_2)$. We sample 
+800 points with probability $1/2$ for each class.
+} 
 \end{figure}
+
+\begin{table}
+\caption{
+\label{tb:cigar_circle}
+Clustering the data from Fig.~\ref{fig:2dscatter}.
+For spcetral clustering, kernel k-means and kernel k-groups we use
+the metric $\widetilde{\rho}_2$ (see \eqref{eq:rho_tilde}) for the data
+in Fig.~\ref{fig:2dscatter}a, while $\widehat{\rho}_1$ (see \eqref{eq:rho_hat})
+for the data in Fig.~\ref{fig:2dscatter}b. We have 800
+points on each trial and 30 Monte Carlo runs for both datasets.
+}
+\centering
+\begin{tabular}{@{}l|ll|ll@{}}
+                   & \multicolumn{2}{c|}{Fig.~\ref{fig:2dscatter}a}  &
+                     \multicolumn{2}{c}{Fig.~\ref{fig:2dscatter}b}  \\
+       Method      & Accuracy & SEM     & Accuracy & SEM \\ \midrule[.5pt]
+        kmeans       & 0.5330 & 0.0048  & 0.5210   & 0.0027 \\
+         GMM         & 0.9292 & 0.0295  & 0.5330   & 0.0039 \\
+ spectral clustering & 0.5775 & 0.0096  & 0.7253   & 0.0028 \\
+    kernel k-means   & 0.9999 & 0.0002  & 0.9999   & $4.16\, 10^{-5}$ \\
+   kernel k-groups   & 0.9987 & 0.0003  & 0.9999   & $4.16\, 10^{-5}$  
+\end{tabular}
+\end{table}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1730,7 +1783,7 @@ improvement of $\textnormal{accuracy}=0.9637$ and $\textnormal{aRand}=0.9396$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Discussion}
+\section{Conclusion}
 \label{sec:conclusion}
 
 We proposed a formulation to clustering based on a weighted
@@ -1743,13 +1796,13 @@ We showed that the optimization problem
 is equivalent
 to kernel k-means, once the kernel is fixed, and also
 to several graph partitioning problems.
-Energy statistics, however, fixes
-a family of standard kernels in Euclidean space, and
-more general kernels 
-on spaces of negative type can also be obtained.
+%Energy statistics, however, fixes
+%a family of standard kernels in Euclidean space, and
+%more general kernels 
+%on spaces of negative type can also be obtained.
 
 We extended Hartigan's method to kernel spaces and proposed
-Algorithm~\ref{algo}, which we call kernel k-groups.
+Algorithm~\ref{algo}, which we called kernel k-groups.
 This method was compared to kernel k-means and spectral clustering, besides
 k-means and GMM. Our numerical results show a superior performance of the
 proposed method, specially in high dimensions.
@@ -1758,8 +1811,8 @@ We stress that kernel k-groups has the same complexity of kernel k-means.
 Kernel k-groups suffers a limitation shared by kernel k-means and spectral
 clustering which involves highly unbalanced
 clusters. An interesting problem  that we leave open 
-would is to extend the method to such 
-situations, as well as a soft version.
+is to extend the method to such 
+situations.
 Finally, kernel methods can benefit from sparsity and
 fixed-rank approximations of the Gram matrix, and there is plenty
 of room to make kernel k-groups more scalable.
@@ -1777,7 +1830,7 @@ of room to make kernel k-groups more scalable.
 % if have a single appendix:
 %\appendix[Proof of the Zonklar Equations]
 % or
-%\appendix  % for no appendix heading
+\appendix  % for no appendix heading
 % do not use \section anymore after \appendix, only \section*
 % is possibly needed
 
@@ -1797,6 +1850,119 @@ of room to make kernel k-groups more scalable.
 % if you want by leaving the argument blank
 %\section{}
 %Appendix two text goes here.
+
+\section*{Two-Class Problem in One Dimension}
+\label{sec:twoclass}
+
+Here we consider the simplest possible case which
+is one-dimensional data and a two-class problem. We propose
+an algorithm that does not depend on initialization. We used this simple
+scheme to compare with kernel k-groups given
+in algorithm \ref{algo}. Both algorithms have the same clustering
+performance in the one-dimensional examples that we tested.
+
+Let us fix 
+$\rho(x,y) = |x - y|$ according to the standard energy distance. We also
+fix the weights $w(x) = 1$ for every data point $x$. We can
+thus 
+compute the function
+\eqref{eq:g_def} in $\OO(n \log n)$ and minimize
+$W$ directly.
+This is done by noting that
+\begin{equation}
+\begin{aligned}
+|x - y|  &= (x-y)\Ind{x \ge y} -
+(x-y) \Ind{x < y}  \\
+&= 
+x \left( \Ind{x \ge y} - \Ind{x < y} \right)  + 
+y \left( \Ind{y > x} - \Ind{y \le x} \right)  
+\end{aligned}
+\end{equation}
+where we have the indicator function defined by
+$\Ind{A}=1$ if $A$ is true, and $\Ind{A}=0$ otherwise.
+Let $\C$ be a partition with
+$n$ elements. Using the above distance we have
+\begin{equation}
+\label{eq:g_ind}
+ g\left(\C,\C\right) =  \dfrac{1}{n^2}  
+\sum_{x \in \C} 
+\sum_{y \in \C} 
+x \left(
+\Ind{x \ge y} + \Ind{y > x} - 
+\Ind{x \ge y}-\Ind{x < y} \right) .
+\end{equation}
+The sum over $y$ can be eliminated since each term in
+the parenthesis is simply counting the number of elements in $\C$ that satisfy
+the condition of the indicator function. Assuming
+that we first order the data in $\C$, obtaining
+$\tC = [ x_j \in \C: x_1 \le x_2 \le \dotsm \le x_{n}]$, we
+get
+\begin{equation}
+\label{eq:g1d}
+g\big(\tC, \tC \big) = 
+\dfrac{2}{n^2} \sum_{\ell=1}^n (2\ell - 1 - n) x_\ell .
+\end{equation}
+Note that the cost of computing
+$g\big( \tC, \tC \big)$
+is $\OO(n)$ and the cost of
+sorting the data
+is at the most $\OO(n\log n)$.
+Assuming that each partition is ordered,
+$\mathbb{X} = \bigcup_{j=1}^k \tC_j$,
+the within energy dispersion
+can be written explicitly as
+\begin{equation}
+\label{eq:w1d}
+W\big( \tC_1,\dotsc,\tC_k \big) = 
+\sum_{j=1}^k \sum_{\ell=1}^{n_j} \dfrac{2\ell - 1 - n_j}{n_j} \, x_\ell.
+\end{equation}
+
+For a two-class problem we can use the formula
+\eqref{eq:w1d} to cluster the data
+through a simple algorithm
+as follows. We first order
+the entire dataset, $\mathbb{X} \to \widetilde{\mathbb{X}}$. Then
+we compute \eqref{eq:w1d} for each possible split of $\widetilde{\mathbb{X}}$
+and pick the point which gives the minimum value of $W$.
+This procedure is described in Algorithm~\ref{algo1d}.
+Note that this algorithm is deterministic,
+however,
+it only works for one-dimensional data with Euclidean distance. Its total
+complexity is $\OO(n\log n + n^2) = \OO(n^2)$.
+
+
+\begin{algorithm}[h]
+\vspace{.5em}
+\begin{algorithmic}[1]
+\INPUT data $\mathbb{X}$
+\OUTPUT label matrix $Z$
+\STATE sort $\mathbb{X}$ obtaining
+$\widetilde{\mathbb{X}}= [ x_1,\dotsc,x_n ]$
+    \FOR{$j\in [ 1,\dotsc,n ]$}
+        \STATE $\tC_{1,j} \leftarrow [x_i: i=1,\dotsc,j]$
+        \STATE $\tC_{2,j} \leftarrow [x_i : i=j+1,\dotsc,n]$
+        \STATE
+            $W^{(j)} \leftarrow W \big( \tC_{1,j},\tC_{2,j}\big)$
+            \hfill (see \eqref{eq:w1d})
+    \ENDFOR
+    \STATE $j^\star \leftarrow \argmin_j W^{(j)}$
+	\FOR{$j \in [1,\dotsc,n]$}
+		\IF{ $j\le j^\star$ }
+    		\STATE $Z_{j\bullet} \leftarrow (1,0) $
+        \ELSE
+			\STATE $Z_{j\bullet} \leftarrow (0,1)$
+		\ENDIF
+	\ENDFOR
+\end{algorithmic}
+\caption{
+\label{algo1d}
+Clustering algorithm to
+find local solutions to the optimization
+problem \eqref{eq:minimize}
+for a two-class problem in one dimension. 
+}
+\end{algorithm}
+
 
 
 % use section* for acknowledgment
