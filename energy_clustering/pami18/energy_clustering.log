@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.3.16)  15 JUN 2018 21:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.3.16)  22 JUN 2018 18:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -506,121 +506,121 @@ LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <11.04124> not available
 LaTeX Font Info:    Font shape `OT1/phv/bx/sc' in size <11.04124> not available
 
 (Font)              Font shape `OT1/phv/b/sc' tried instead on input line 156.
-LaTeX Font Info:    Calculating math sizes for size <7.02625> on input line 272
+LaTeX Font Info:    Calculating math sizes for size <7.02625> on input line 270
 .
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <9.53561> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 274.
-LaTeX Font Info:    Calculating math sizes for size <9.53561> on input line 328
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 272.
+LaTeX Font Info:    Calculating math sizes for size <9.53561> on input line 326
 .
  [2] [3] [4] [5] [6]
 <./figs/gauss_1d.pdf, id=39, pagebox=cropbox, 435.18489pt x 317.71548pt>
 File: ./figs/gauss_1d.pdf Graphic file (type pdf)
 <use ./figs/gauss_1d.pdf>
-Package pdftex.def Info: ./figs/gauss_1d.pdf  used on input line 1414. on input
- line 1414.
+Package pdftex.def Info: ./figs/gauss_1d.pdf  used on input line 1412. on input
+ line 1412.
 Package pdftex.def Info: Requested size: 207.17084pt x 151.25092pt on input lin
-e 1414.
+e 1412.
 <./figs/loggauss_1d.pdf, id=40, pagebox=cropbox, 435.18489pt x 317.71548pt>
 File: ./figs/loggauss_1d.pdf Graphic file (type pdf)
 <use ./figs/loggauss_1d.pdf>
-Package pdftex.def Info: ./figs/loggauss_1d.pdf  used on input line 1418. on in
-put line 1418.
+Package pdftex.def Info: ./figs/loggauss_1d.pdf  used on input line 1416. on in
+put line 1416.
 Package pdftex.def Info: Requested size: 207.17084pt x 151.25092pt on input lin
-e 1418.
+e 1416.
 <./figs/normal_density.pdf, id=41, pagebox=cropbox, 400.85817pt x 323.1394pt>
 File: ./figs/normal_density.pdf Graphic file (type pdf)
 <use ./figs/normal_density.pdf>
-Package pdftex.def Info: ./figs/normal_density.pdf  used on input line 1422. on
- input line 1422.
+Package pdftex.def Info: ./figs/normal_density.pdf  used on input line 1420. on
+ input line 1420.
 Package pdftex.def Info: Requested size: 191.6334pt x 154.48387pt on input line
- 1422.
+ 1420.
 <./figs/lognormal_density.pdf, id=42, pagebox=cropbox, 404.85815pt x 323.1394pt
 >
 File: ./figs/lognormal_density.pdf Graphic file (type pdf)
 <use ./figs/lognormal_density.pdf>
-Package pdftex.def Info: ./figs/lognormal_density.pdf  used on input line 1426.
- on input line 1426.
+Package pdftex.def Info: ./figs/lognormal_density.pdf  used on input line 1424.
+ on input line 1424.
 Package pdftex.def Info: Requested size: 191.6334pt x 152.95535pt on input line
- 1426.
+ 1424.
 <./figs/gauss_means_scatter.pdf, id=43, pagebox=cropbox, 346.89601pt x 346.8960
 1pt>
 File: ./figs/gauss_means_scatter.pdf Graphic file (type pdf)
 <use ./figs/gauss_means_scatter.pdf>
-Package pdftex.def Info: ./figs/gauss_means_scatter.pdf  used on input line 150
-0. on input line 1500.
+Package pdftex.def Info: ./figs/gauss_means_scatter.pdf  used on input line 149
+8. on input line 1498.
 Package pdftex.def Info: Requested size: 98.4089pt x 98.40587pt on input line 1
-500.
+498.
 <./figs/gauss_cov_scatter.pdf, id=44, pagebox=cropbox, 346.89601pt x 346.89601p
 t>
 File: ./figs/gauss_cov_scatter.pdf Graphic file (type pdf)
 <use ./figs/gauss_cov_scatter.pdf>
-Package pdftex.def Info: ./figs/gauss_cov_scatter.pdf  used on input line 1501.
- on input line 1501.
+Package pdftex.def Info: ./figs/gauss_cov_scatter.pdf  used on input line 1499.
+ on input line 1499.
 Package pdftex.def Info: Requested size: 98.4089pt x 98.40587pt on input line 1
-501.
+499.
 <./figs/gauss_diff_metrics.pdf, id=45, pagebox=cropbox, 346.89601pt x 346.89601
 pt>
 File: ./figs/gauss_diff_metrics.pdf Graphic file (type pdf)
 <use ./figs/gauss_diff_metrics.pdf>
-Package pdftex.def Info: ./figs/gauss_diff_metrics.pdf  used on input line 1502
-. on input line 1502.
+Package pdftex.def Info: ./figs/gauss_diff_metrics.pdf  used on input line 1500
+. on input line 1500.
 Package pdftex.def Info: Requested size: 98.4089pt x 98.40587pt on input line 1
-502.
+500.
 <./figs/loggauss_diff_metrics.pdf, id=46, pagebox=cropbox, 346.89601pt x 346.89
 601pt>
 File: ./figs/loggauss_diff_metrics.pdf Graphic file (type pdf)
 <use ./figs/loggauss_diff_metrics.pdf>
 Package pdftex.def Info: ./figs/loggauss_diff_metrics.pdf  used on input line 1
-503. on input line 1503.
+501. on input line 1501.
 Package pdftex.def Info: Requested size: 98.4089pt x 98.40587pt on input line 1
-503.
+501.
 <./figs/unbalanced_scatter.pdf, id=47, pagebox=cropbox, 346.89601pt x 346.89601
 pt>
 File: ./figs/unbalanced_scatter.pdf Graphic file (type pdf)
 <use ./figs/unbalanced_scatter.pdf>
-Package pdftex.def Info: ./figs/unbalanced_scatter.pdf  used on input line 1504
-. on input line 1504.
+Package pdftex.def Info: ./figs/unbalanced_scatter.pdf  used on input line 1502
+. on input line 1502.
 Package pdftex.def Info: Requested size: 98.4089pt x 98.40587pt on input line 1
-504.
+502.
 <./figs/gauss1.pdf, id=48, pagebox=cropbox, 435.18489pt x 317.71548pt>
 File: ./figs/gauss1.pdf Graphic file (type pdf)
 <use ./figs/gauss1.pdf>
-Package pdftex.def Info: ./figs/gauss1.pdf  used on input line 1524. on input l
-ine 1524.
+Package pdftex.def Info: ./figs/gauss1.pdf  used on input line 1522. on input l
+ine 1522.
 Package pdftex.def Info: Requested size: 170.9195pt x 124.78601pt on input line
- 1524.
+ 1522.
 <./figs/gauss2.pdf, id=49, pagebox=cropbox, 427.18489pt x 317.71548pt>
 File: ./figs/gauss2.pdf Graphic file (type pdf)
 <use ./figs/gauss2.pdf>
-Package pdftex.def Info: ./figs/gauss2.pdf  used on input line 1525. on input l
-ine 1525.
+Package pdftex.def Info: ./figs/gauss2.pdf  used on input line 1523. on input l
+ine 1523.
 Package pdftex.def Info: Requested size: 170.9195pt x 127.12271pt on input line
- 1525.
+ 1523.
 <./figs/gauss_n.pdf, id=50, pagebox=cropbox, 435.18489pt x 317.71548pt>
 File: ./figs/gauss_n.pdf Graphic file (type pdf)
 <use ./figs/gauss_n.pdf>
-Package pdftex.def Info: ./figs/gauss_n.pdf  used on input line 1526. on input 
-line 1526.
+Package pdftex.def Info: ./figs/gauss_n.pdf  used on input line 1524. on input 
+line 1524.
 Package pdftex.def Info: Requested size: 170.9195pt x 124.78601pt on input line
- 1526.
+ 1524.
 <./figs/loggauss_n.pdf, id=51, pagebox=cropbox, 435.18489pt x 317.71548pt>
 File: ./figs/loggauss_n.pdf Graphic file (type pdf)
 <use ./figs/loggauss_n.pdf>
-Package pdftex.def Info: ./figs/loggauss_n.pdf  used on input line 1527. on inp
-ut line 1527.
+Package pdftex.def Info: ./figs/loggauss_n.pdf  used on input line 1525. on inp
+ut line 1525.
 Package pdftex.def Info: Requested size: 170.9195pt x 124.78601pt on input line
- 1527.
+ 1525.
 <./figs/gauss_unbal.pdf, id=52, pagebox=cropbox, 415.18489pt x 317.71548pt>
 File: ./figs/gauss_unbal.pdf Graphic file (type pdf)
 <use ./figs/gauss_unbal.pdf>
-Package pdftex.def Info: ./figs/gauss_unbal.pdf  used on input line 1528. on in
-put line 1528.
+Package pdftex.def Info: ./figs/gauss_unbal.pdf  used on input line 1526. on in
+put line 1526.
 Package pdftex.def Info: Requested size: 163.15079pt x 124.84903pt on input lin
-e 1528.
+e 1526.
  [7]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -660,17 +660,17 @@ ultiple pdfs with page group included in a single page
 <./figs/2cigars.pdf, id=144, pagebox=cropbox, 346.89601pt x 346.89601pt>
 File: ./figs/2cigars.pdf Graphic file (type pdf)
 <use ./figs/2cigars.pdf>
-Package pdftex.def Info: ./figs/2cigars.pdf  used on input line 1666. on input 
-line 1666.
+Package pdftex.def Info: ./figs/2cigars.pdf  used on input line 1664. on input 
+line 1664.
 Package pdftex.def Info: Requested size: 124.30724pt x 124.3055pt on input line
- 1666.
+ 1664.
 <./figs/2circles.pdf, id=145, pagebox=cropbox, 346.89601pt x 346.89601pt>
 File: ./figs/2circles.pdf Graphic file (type pdf)
 <use ./figs/2circles.pdf>
-Package pdftex.def Info: ./figs/2circles.pdf  used on input line 1667. on input
- line 1667.
+Package pdftex.def Info: ./figs/2circles.pdf  used on input line 1665. on input
+ line 1665.
 Package pdftex.def Info: Requested size: 124.30724pt x 124.3055pt on input line
- 1667.
+ 1665.
  [9 <./figs/gauss1.pdf> <./figs/gauss2.pdf
 
 pdfTeX warning: pdflatex (file ./figs/gauss2.pdf): PDF inclusion: multiple pdfs
@@ -696,7 +696,7 @@ s with page group included in a single page
 pdfTeX warning: pdflatex (file ./figs/2circles.pdf): PDF inclusion: multiple pd
 fs with page group included in a single page
 >]
-LaTeX Font Info:    Try loading font information for U+bbm on input line 1874.
+LaTeX Font Info:    Try loading font information for U+bbm on input line 1872.
  (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
 )
@@ -712,7 +712,7 @@ Missing character: There is no ™ in font pplr7t!
 Here is how much of TeX's memory you used:
  5632 strings out of 492990
  83001 string characters out of 6135005
- 168888 words of memory out of 5000000
+ 168889 words of memory out of 5000000
  9011 multiletter control sequences out of 15000+600000
  64810 words of font info for 164 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
@@ -743,7 +743,7 @@ fb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/urw/times/utmri8a.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/urw/zapfding/uzdr.pfb>
-Output written on energy_clustering.pdf (12 pages, 755092 bytes).
+Output written on energy_clustering.pdf (12 pages, 755013 bytes).
 PDF statistics:
  365 PDF objects out of 1000 (max. 8388607)
  223 compressed objects within 3 object streams

@@ -115,7 +115,7 @@ we propose an extension of Hartigan's method to kernel spaces.
 Our method has the same computational cost
 as kernel k-means algorithm, which is based on Lloyd's heuristic, but 
 our numerical results show an improved performance,
-specially in high dimensions.
+especially in high dimensions.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -225,7 +225,7 @@ kernel methods often used in machine learning, and form the basis
 of our approach in this paper.
 
 Clustering is an important unsupervised learning problem and 
-has such a long history in statistics and machine learning, making it
+has a long history in statistics and machine learning, making it
 impossible to mention all important contributions in a short space. 
 Perhaps, the most used method is k-means \cite{Lloyd,MacQueen,Forgy}, which
 is based on Lloyd's heuristic \cite{Lloyd} of iteratively computing
@@ -234,12 +234,12 @@ the cluster with closest center. The only statistical
 information about each cluster comes from its mean, making the method sensitive 
 to outliers. Nevertheless, k-means works very well when data is 
 linearly separable in Euclidean space. Gaussian mixture models (GMM) is 
-another very common approach, providing more flexibility than k-means, 
+another very common approach, providing more flexibility than k-means; 
 however, it still makes strong assumptions about the distribution of 
 the data.
 
 To account for nonlinearities, kernel methods were introduced 
-\cite{Smola,Girolami}. A mercer kernel \cite{Mercer} is used to implicitly
+\cite{Smola,Girolami}. A Mercer kernel \cite{Mercer} is used to implicitly
 map data points to a RKHS, then clustering can be performed in the associated
 Hilbert space by using its inner product. However, the kernel choice remains 
 the biggest challenge since there is no principled theory to construct a kernel
@@ -252,12 +252,10 @@ Furthermore, kernel k-means algorithm
 We refer the reader to \cite{Filippone} for a survey of clustering
 methods.
 
-The predominant approach to clustering %, in Euclidean or kernel spaces,
-is based on Lloyd's method.
-However, there is an old heuristic
-due to Hartigan \cite{Hartigan1975,Hartigan1979}, which apparently did
-not receive the deserved attention, 
-and goes as follows: for each data point, simply assign it to a cluster
+Besides Lloyd's approach to clustering %, in Euclidean or kernel spaces,
+there is an old heuristic
+due to Hartigan \cite{Hartigan1975,Hartigan1979} that
+goes as follows: for each data point, simply assign it to a cluster
 in an optimal way such that a loss function is minimized.
 While Lloyd's method only iterates if some cluster contains a point
 that is closer to the mean of another cluster, Hartigan's method may iterate
@@ -266,7 +264,7 @@ of the means resulting from the reassignments. In this sense, Hartigan's
 method may potentially escape local minima of Lloyd's method.
 In the Euclidean case, this was shown to be the case \cite{Telgarsky}.
 Moreover, the advantages of Hartigan's over Lloyd's method was verified
-empirically \cite{Telgarsky,Slonin}, however, 
+empirically \cite{Telgarsky,Slonin}. However, 
 although it was observed to be as fast as Lloyd's method, no complexity
 analysis was provided. 
 
@@ -298,7 +296,7 @@ We show that kernel k-groups
 has the same complexity as kernel k-means algorithm, however,
 our numerical results provide compelling evidence that 
 kernel k-groups 
-is more accurate and robust, specially in high dimensions. 
+is more accurate and robust, especially in high dimensions. 
 
 Using the standard kernel defined by energy
 statistics, our experiments illustrate 
@@ -306,13 +304,13 @@ that kernel k-groups
 is able to perform accurately on data coming from 
 very different distributions, contrary to k-means and GMM, for instance.
 More specifically, our method performs 
-closely to k-means and GMM on normally distributed data, however,
+closely to k-means and GMM on normally distributed data, while
 it is significantly better on data that 
 is not normally distributed. 
 Its superiority in high dimensions
 is striking, being more accurate than k-means and GMM 
-even on Gaussian settings. We also illustrate the advantages of
-kernel k-groups on a real dataset. 
+even in Gaussian settings. We also illustrate the advantages of
+kernel k-groups on real data. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
