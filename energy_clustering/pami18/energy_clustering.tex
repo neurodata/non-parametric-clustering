@@ -1347,8 +1347,7 @@ Second, we want to compare kernel k-groups with kernel k-means
 and spectral clustering when these methods
 operate on the same kernel.
 
-The following experimental setup holds unless specified
-otherwise. 
+%The following experimental setup holds unless specified otherwise. 
 We consider
 the metrics
 \begin{align}
@@ -1368,7 +1367,7 @@ the metrics
 which define the 
 corresponding kernels through 
 \eqref{eq:kernel_semimetric}, where we always fix $x_0=0$.
-%The standard metric from energy statistics is $\rho_1$ and 
+We use $\rho_\alpha$ by default, unless otherwise specified.
 %will always be present in the experiments as a reference.
 We consider the weights associated to data points to be $w(x) = 1$ for
 all $x$, so that $\W = I$ in 
@@ -1443,12 +1442,13 @@ trial with
 
 We first consider one-dimensional data for a two-class problem. We compare
 kernel k-groups with k-means and GMM, as illustrated in 
-Fig.~\ref{fig:1dexperiment}. We have two mixtures of normal and 
-lognormal distributions. Notice that in the kernel density estimation plots
+Fig.~\ref{fig:1dexperiment}. The left panels show a mixture of Gaussians, and the right panels show a mixture of log Gaussians (see caption for details).
+% have two mixtures of normal and lognormal distributions. 
+Notice that in the kernel density estimation plots
 for lognormal distribution, only kernel k-groups was able to distinguish
 between the two classes. The accuracy results for both density estimation
 cases are in Table~\ref{tb:dens}. We remark that kernel k-groups in
-this one-dimensional example performed the same as the deterministic
+this one-dimensional example performed the same as the exact deterministic
 Algorithm~\ref{algo1d} introduced in the Appendix.
 
 \begin{table}[h]
@@ -1460,8 +1460,8 @@ estimation of Fig.~\ref{fig:1dexperiment}d--e.
 \begin{tabular}{@{}l|ll@{}}
        Method        & normal & lognormal \\ \midrule[.5pt]
         kmeans       & 0.773  & 0.502     \\
-         GMM         & 0.881  & 0.513     \\
-   kernel k-groups   & 0.802  & 0.847  
+         GMM         & \textbf{0.881}  & 0.513     \\
+   kernel k-groups   & 0.802  & \textbf{0.847}  
 \end{tabular}
 \end{table}
 
@@ -1696,11 +1696,11 @@ points on each trial and 30 Monte Carlo runs for both datasets.
                    & \multicolumn{2}{c|}{Fig.~\ref{fig:2dscatter}a}  &
                      \multicolumn{2}{c}{Fig.~\ref{fig:2dscatter}b}  \\
        Method      & Accuracy & SEM     & Accuracy & SEM \\ \midrule[.5pt]
-        kmeans       & 0.5330 & 0.0048  & 0.5210   & 0.0027 \\
-         GMM         & 0.9292 & 0.0295  & 0.5330   & 0.0039 \\
- spectral clustering & 0.5775 & 0.0096  & 0.7253   & 0.0028 \\
-    kernel k-means   & 0.9999 & 0.0002  & 0.9999   & $4.16\, 10^{-5}$ \\
-   kernel k-groups   & 0.9987 & 0.0003  & 0.9999   & $4.16\, 10^{-5}$  
+        kmeans       & 0.533 & 0.005  & 0.521   & 0.003 \\
+         GMM         & 0.929 & 0.029  & 0.533   & 0.004 \\
+ spectral clustering & 0.577 & 0.010  & 0.725   & 0.003 \\
+    kernel k-means   & \textbf{1.000} & 0.000  & \textbf{1.000}   & 0.000 \\
+   kernel k-groups   & \textbf{1.000} & 0.000  & \textbf{1.000}  & 0.000  
 \end{tabular}
 \end{table}
 
@@ -1772,11 +1772,11 @@ improvement of $\textnormal{accuracy}=0.9637$ and $\textnormal{aRand}=0.9396$.
 \centering
 \begin{tabular}{@{}l|ll@{}}
        Method      & Accuracy & aRand \\ \midrule[.5pt]
-        kmeans       & 0.7131 & 0.6897 \\
-         GMM         & 0.8770 & 0.8403 \\
- spectral clustering & 0.9536 & 0.9125 \\
-    kernel k-means   & 0.7514 & 0.8510 \\
-   kernel k-groups   & \textbf{0.9617} & \textbf{0.9356}
+        kmeans       & 0.713 & 0.690 \\
+         GMM         & 0.877 & 0.840 \\
+ spectral clustering & 0.954 & 0.912 \\
+    kernel k-means   & 0.751 & 0.851 \\
+   kernel k-groups   & \textbf{0.962} & \textbf{0.936}
 \end{tabular}
 \end{table}
 
