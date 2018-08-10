@@ -72,9 +72,9 @@
 
 \begin{document}
 
-\title{Kernel k-Groups and Hartigan's Method}
+\title{Kernel k-Groups via Hartigan's Method}
 
-\author{Guilherme~Fran\c ca,~Maria Rizzo~and~Joshua~Vogelstein
+\author{Guilherme~Fran\c ca,~Maria Rizzo~and~Joshua T.~Vogelstein
 \IEEEcompsocitemizethanks{\IEEEcompsocthanksitem G. Fran\c ca 
 and J. Vogelstein are with the Center for Imaging Science, Johns Hopkins
 University; J. Vogelstein is also with 
@@ -89,8 +89,8 @@ E-mail: mrizzo@bgsu.edu}% <-this % stops an unwanted space
 \thanks{Manuscript received March 15, 2018; revised March 15, 2018.}}
 
 % The paper headers
-\markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
-{Energy Clustering}
+\markboth{Energy Clustering}{}
+%{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
 
 
 \IEEEtitleabstractindextext{%
@@ -197,7 +197,7 @@ distributions which is achieved under minimum energy.
 Energy statistics has been applied to several goodness-of-fit 
 hypothesis tests, multi-sample tests of equality of distributions, 
 analysis of variance \cite{RizzoVariance}, nonlinear dependence tests through
-distance covariance and distance correlation, which generalizes the Pearson
+distance covariance and distance correlation~\cite{Szekely2007-mm}, which generalizes the Pearson
 correlation coefficient, and hierarchical clustering 
 by extending Ward's method of minimum variance
 \cite{RizzoClustering}; 
@@ -217,9 +217,10 @@ spaces to metric spaces of negative type \cite{Lyons}. Furthermore,
 the link between energy distance based tests and kernel 
 based tests has 
 been recently established \cite{Sejdinovic2013} 
-through an equivalence between generalized energy distances and maximum
+through an asymptotic equivalence between generalized energy distances and maximum
 mean discrepancies (MMD), which are distances between embeddings of 
 distributions in reproducing kernel Hilbert spaces (RKHS).
+Even more recently, generalized energy distances and kernel methods have been demonstrated to be exactly equivalent, for all finite samples~\cite{Shen2018-st}.
 This equivalence immediately relates energy statistics to
 kernel methods often used in machine learning, and form the basis 
 of our approach in this paper.
@@ -277,7 +278,7 @@ remains obscure, as well as the connection with other methods
 in machine learning.
 The main theoretical contribution of this paper is to fill these gaps, 
 which 
-we do so in more generality. For instance, our approach is not limited
+we do   more generality. For instance, our approach is not limited
 to the Euclidean case but holds for general arbitrary spaces
 of negative type. 
 For generality, we also
@@ -821,7 +822,7 @@ gives $H H^\top \om = \om$, finishing the proof.
 
 The optimization problem \eqref{eq:qcqp3} is nonconvex, besides
 being NP-hard, thus a direct approach 
-is computational prohibitive even for small datasets.
+is computationally prohibitive even for small datasets.
 However, one can find approximate solutions by relaxing some 
 of the constraints. For instance, consider the relaxed problem
 \begin{equation}
