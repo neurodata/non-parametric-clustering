@@ -25,6 +25,7 @@ df = pd.concat(pd.read_csv(f) for f in fnames)
 methods = ['k-means', 'gmm', 'spectral clustering', 'kernel k-means', 
            'kernel k-groups']
 markers = iter(['^', 'v', 'p', 's', 'o'])
+colors = iter(["#54278f", "#5F8793", "#99B4C6", "#318dde", "#F41711"])
 
 dimensions = np.unique(df['dimension'].values)
 
@@ -36,10 +37,12 @@ for method in methods:
         df2 = df[(df['method']==method) & (df['dimension']==d)]
         r.append([d, df2['accuracy'].mean(), df2['accuracy'].sem()])
     r = np.array(r)
-    ax.plot(r[:,0], [0.95]*len(r[:,0]), '--', linewidth=1, color='k', alpha=0.5)
+    ax.plot(r[:,0], [0.95]*len(r[:,0]), '--', linewidth=1, color='k')
     mk = next(markers)
-    ax.errorbar(r[:,0], r[:,1], yerr=r[:,2], marker=mk, elinewidth=1,
-                label=method)
+    cl = next(colors)
+    #ax.errorbar(r[:,0], r[:,1], yerr=r[:,2], marker=mk, elinewidth=1,
+    #            label=method)
+    ax.errorbar(r[:,0], r[:,1], marker=mk, color=cl, label=method)
 ax.set_xlabel(r'$D$')
 ax.set_ylabel(r'accuracy')
 ax.set_xlim([10,700])

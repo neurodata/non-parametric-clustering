@@ -80,8 +80,8 @@ lines.linewidth   : 2     # line width in points
 lines.linestyle   : -       # solid line
 #lines.color       : C0      # has no affect on plot(); see axes.prop_cycle
 #lines.marker      : None    # the default marker
-lines.markeredgewidth  : 1.0     # the line width around the marker symbol
-lines.markersize  : 9            # markersize, in points
+lines.markeredgewidth  : 0.7     # the line width around the marker symbol
+lines.markersize  : 7            # markersize, in points
 lines.dash_joinstyle : miter        # miter|round|bevel
 lines.dash_capstyle : butt          # butt|round|projecting
 lines.solid_joinstyle : miter       # miter|round|bevel
@@ -94,7 +94,7 @@ lines.dashdot_pattern : 4.8, 1.2, 0.8, 1.2
 lines.dotted_pattern : 1.1, 1.1
 lines.scale_dashes : True
 
-markers.fillstyle: right # full|left|right|bottom|top|none
+markers.fillstyle: none # full|left|right|bottom|top|none
 #markers.fillstyle: full # full|left|right|bottom|top|none
 
 ### PATCHES
@@ -301,7 +301,7 @@ axes.linewidth      : 1    # edge linewidth
 #axes.grid           : False   # display grid or not
 #axes.titlesize      : large   # fontsize of the axes title
 #axes.titlepad       : 6.0     # pad between axes and title in points
-#axes.labelsize      : medium  # fontsize of the x any y labels
+axes.labelsize      : large # fontsize of the x any y labels
 #axes.labelpad       : 4.0     # space between label and axis
 #axes.labelweight    : normal  # weight of the x and y labels
 #axes.labelcolor     : black
@@ -416,13 +416,13 @@ legend.frameon       : True # if True, draw the legend on a background patch
 legend.framealpha    : 0.5      # legend patch transparency
 #legend.facecolor     : inherit  # inherit from axes.facecolor; or color spec
 #legend.edgecolor     : 0.8      # background patch boundary color
-#legend.fancybox      : True     # if True, use a rounded box for the
+legend.fancybox      : False # if True, use a rounded box for the
                                  # legend background, else a rectangle
 #legend.shadow        : True # if True, give background a shadow effect
 #legend.numpoints     : 1        # the number of marker points in the legend line
 #legend.scatterpoints : 1        # number of scatter points
 #legend.markerscale   : 1.0      # the relative size of legend markers vs. original
-#legend.fontsize      : small
+legend.fontsize      : small
 # Dimensions as fraction of fontsize:
 #legend.borderpad     : 0.4      # border whitespace
 #legend.labelspacing  : 0.5      # the vertical space between the legend entries

@@ -28,6 +28,10 @@ methods = ['k-means', 'gmm',
             r'kernel k-groups $\rho_{1/2}$',
             r'kernel k-groups $\widetilde{\rho}_{1}$']
 markers = iter(['^', 'v', 'p', 'o', 'o', 'o'])
+#colors = iter(["#54278f", "#5F8793", "#99B4C6", "#318dde", "#F41711"])
+colors = iter(["#54278f", "#5F8793", "#99B4C6", 
+               "#F41711", "#F41711", "#F41711"])
+lines = iter(["-", "-", "-", "-", "--", ":"])
 
 points = np.unique(df['points'].values)
 
@@ -42,7 +46,11 @@ for method in methods:
     #ax.plot(r[:,0], [0.9]*len(r[:,0]), '--', linewidth=1, color='k',
     #        alpha=0.5)
     mk = next(markers)
-    ax.errorbar(r[:,0], r[:,1], yerr=r[:,2], marker=mk, elinewidth=1,
+    cl = next(colors)
+    ln = next(lines)
+    #ax.errorbar(r[:,0], r[:,1], yerr=r[:,2], marker=mk, elinewidth=1,
+    #            label=method)
+    ax.errorbar(r[:,0], r[:,1], marker=mk, linestyle=ln, color=cl, 
                 label=method)
 ax.set_xlabel(r'$n$')
 ax.set_ylabel(r'accuracy')

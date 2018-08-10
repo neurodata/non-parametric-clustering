@@ -24,6 +24,7 @@ df = pd.concat(pd.read_csv(f) for f in fnames)
 methods = ['k-means', 'gmm', 'spectral clustering', 'kernel k-means', 
            'kernel k-groups']
 markers = iter(['^', 'v', 'p', 's', 'o'])
+colors = iter(["#54278f", "#5F8793", "#99B4C6", "#318dde", "#F41711"])
 
 points = np.unique(df['points'].values)
 
@@ -36,8 +37,10 @@ for method in methods:
         r.append([p, df2['accuracy'].mean(), df2['accuracy'].sem()])
     r = np.array(r)
     mk = next(markers)
-    ax.errorbar(r[:,0], r[:,1], yerr=r[:,2], marker=mk, elinewidth=1,
-                label=method)
+    cl = next(colors)
+    #ax.errorbar(r[:,0], r[:,1], yerr=r[:,2], marker=mk, elinewidth=1,
+    #            label=method)
+    ax.plot(r[:,0], r[:,1], marker=mk, color=cl, label=method)
 ax.set_xlabel(r'$\#$ unbalanced points')
 ax.set_ylabel(r'accuracy')
 ax.set_xlim([0,240])

@@ -16,6 +16,11 @@ M.~L. Rizzo and G.~J. Sz{\'e}kely.
 \newblock {DISCO Analysis: A Nonparametric Extension of Analysis of Variance}.
 \newblock {\em The Annals of Applied Statistics}, 4(2):1034--1055, 2010.
 
+\bibitem{Szekely2007-mm}
+G.~J. Sz{\'e}kely, M.~L. Rizzo, and N.~K. Bakirov.
+\newblock Measuring and testing dependence by correlation of distances.
+\newblock {\em Ann. Stat.}, 35(6):2769--2794, 2007.
+
 \bibitem{RizzoClustering}
 G.~J. Sz{\'e}kely and M.~L. Rizzo.
 \newblock {Hierarchical Clustering via Joint Between-Within Distances:
@@ -37,6 +42,12 @@ D.~Sejdinovic, B.~Sriperumbudur, A.~Gretton, and K.~Fukumizu.
 \newblock {Equivalence of Distance-Based and RKHS-Based Statistic in Hypothesis
   Testing}.
 \newblock {\em The Annals of Statistics}, 41(5):2263--2291, 2013.
+
+\bibitem{Shen2018-st}
+C.~Shen and J.~T. Vogelstein.
+\newblock The exact equivalence of distance and kernel methods for hypothesis
+  testing.
+\newblock arXiv:1806.05514 [stat.ML], 2018.
 
 \bibitem{Lloyd}
 S.~P. Lloyd.

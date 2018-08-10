@@ -1430,7 +1430,8 @@ Clustering one-dimensional data for a two-class problem.
 (a) $x \stackrel{iid}{\sim} \tfrac{1}{2} \mathcal{N}(0, 1.5) +
 \tfrac{1}{2}\mathcal{N}(1.5,0.3)$. (b) $x \stackrel{iid}{\sim}
 \tfrac{1}{2}e^{\mathcal{N}(0, 1.5)} + \tfrac{1}{2} e^{\mathcal{N}(1.5, 0.3)}$.
-In both cases we plot the accuracy versus the total number of points.
+In both cases we plot the average accuracy versus the total number of points.
+We ommit error bars since they are too small.
 (c) Kernel density estimation for a single trial with 2000 sampled
 points from the
 distribution in the case (a). (d) Kernel density estimation in a single
@@ -1534,7 +1535,8 @@ Each plot has 200 points total.
 \label{fig:plots}
 Clustering results associated to the data illustrated in 
 Fig.~\ref{fig:scatter}. For each experiment we
-perform 100 Monte Carlo runs. Error bars indicate standard error.
+perform 100 Monte Carlo runs and show the average accuracy. 
+We ommit error bars since they are too small to be visible.
 (a)
 High dimensional Gaussian mixture according to \eqref{eq:gauss1}.
 The dashed line is
@@ -1662,10 +1664,13 @@ We see that both methods perform closely, with higher accuracy
 than the other ones.
 
 \begin{figure}
-\includegraphics[width=.24\textwidth]{2cigars.pdf}
-\includegraphics[width=.24\textwidth]{2circles.pdf}
-\put(-240,-8){(a)}
-\put(-110,-8){(b)}
+\centering
+\begin{minipage}{0.2\textwidth}
+\includegraphics[width=1\textwidth]{2cigars.pdf}\\[-.2em](a)
+\end{minipage}\hspace{2em}
+\begin{minipage}{0.2\textwidth}
+\includegraphics[width=1\textwidth]{2circles.pdf}\\[-.2em](b)
+\end{minipage}
 \caption{
 \label{fig:2dscatter}
 (a) Data distributed as 
@@ -2028,8 +2033,22 @@ Agency’s (DARPA) SIMPLEX program through SPAWAR contract N66001-15-C-4041.
 %\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 % or if you just want to reserve a space for a photo:
 
-\begin{IEEEbiography}{Guilherme Fran\c ca}
-Biography text here.
+\begin{IEEEbiography}[{\includegraphics[width=1in,clip,keepaspectratio]{gui2.png}}]{Guilherme Fran\c ca} 
+has a BSc in physics, and received both his MSc and 
+PhD in Theoretical Physics from the Institute of 
+Theoretical Physics IFT-UNESP/ICTP-SAIFR (2012). He was a Postdoctoral Fellow
+with the High Energy Theory group in the Physics Department 
+at Cornell University (2013--2015), working on topics of mathematical physics
+and non-perturbative methods in quantum field theory 
+and statistical mechanics.
+He was a Postdoctoral Fellow in
+the Computer Science Department at Boston College (2015), working in
+optimization theory.
+Since 2016 he is a Postdoctoral Fellow at Johns Hopkins University, currently
+with the Mathematical Institute for Data Science (MINDS). 
+His current research interests are in theoretical methods in the broad
+area of machine learning 
+and optimization.
 \end{IEEEbiography}
 
 % if you will not have a photo at all:
@@ -2041,11 +2060,11 @@ Biography text here.
 % biographies
 %\newpage
 
-\begin{IEEEbiographynophoto}{Joshua T.~Vogelstein}
+\begin{IEEEbiography}[{\includegraphics[width=1in,clip,keepaspectratio]{jovo.png}}]{Joshua~T.~Vogelstein}
 I received a B.S degree from the Department of Biomedical Engineering (BME) at Washington University in St. Louis, MO in 2002, a M.S. degree from the Department of Applied Mathematics and Statistics (AMS) at Johns Hopkins University (JHU) in Baltimore, MD in 2009, and a Ph.D. degree from the Department of Neuroscience at JHU in 2009. I was a Postdoctoral Fellow in AMS@JHU from 2009 until 2011, at which time I was appointed an Assistant Research Scientist, and became a member of the Institute for Data Intensive Science and Engineering. I spent 2 years at Information Initiative at Duke University, before coming home to my current appointment as Assistant Professor in BME@JHU, and core faculty in both the Institute for Computational Medicine and the Center for Imaging Science, as well as a member of the Kavli Neuroscience Discovery Institute. I married my kindergarten sweetheart in the summer of 2014. 
 
 My primary research interest is to extend and fuse statistical machine learning and big data science to address the most important brain science and mental health questions of our time, particularly  connectomics. Our group’s research has been featured in a number of prominent scientific and engineering journals and conferences including Nature, Nature Methods, Science, Cell, PNAS, Science Translational Medicine, JMLR, PAMI, Annals of Applied Statistics,  NIPS, and SIAM Journal of Matrix Analysis and Applications. In 2011, I co-founded the Open Connectome Project which expanded in 2015 to be NeuroData, whose mission is to enable terascale neuroscience for everyone. All our work is conducted according to the highest standards of open science.
-\end{IEEEbiographynophoto}
+\end{IEEEbiography}
 
 % You can push biographies down or up by placing
 % a \vfill before or after them. The appropriate

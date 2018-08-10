@@ -23,6 +23,7 @@ df = pd.concat(pd.read_csv(f) for f in fnames)
 
 methods = ['k-means', 'gmm', 'kernel k-groups']
 markers = iter(['^', 'v', 'o'])
+colors = iter(["#54278f", "#5F8793", "#F41711"])
 
 num_points = np.unique(df['num_points'].values)
 
@@ -36,8 +37,10 @@ for method in methods:
     r = np.array(r)
     ax.plot(r[:,0], [0.88]*len(r[:,0]), '--', linewidth=1, color='k', alpha=0.5)
     mk = next(markers)
-    ax.errorbar(r[:,0], r[:,1], yerr=r[:,2], marker=mk, elinewidth=1,
-                label=method)
+    cl = next(colors)
+    #ax.errorbar(r[:,0], r[:,1], yerr=r[:,2], marker=mk, elinewidth=1,
+    #            label=method)
+    ax.plot(r[:,0], r[:,1], marker=mk, label=method, color=cl)
 ax.set_xlabel(r'$n$')
 ax.set_ylabel(r'accuracy')
 ax.set_xlim([10,800])
