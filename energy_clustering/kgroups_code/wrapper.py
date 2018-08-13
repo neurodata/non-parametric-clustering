@@ -69,14 +69,17 @@ def kmeans(k, X, run_times=5):
     km = KMeans(k, n_init=run_times)
     km.fit(X)
     zh = km.labels_
-    return zh
+    mu = km.cluster_centers_
+    return zh, mu
 
 def gmm(k, X, run_times=5):
     gm = GMM(k, n_init=run_times, init_params='kmeans')
     #gm = GMM(k)
     gm.fit(X)
     zh = gm.predict(X)
-    return zh
+    mu = gm.means_
+    cov = gm.covariances_
+    return zh, mu, cov
 
 def spectral_clustering(k, X, G, W=None, run_times=5):
     if type(W) == type(None):

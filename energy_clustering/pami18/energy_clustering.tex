@@ -75,18 +75,22 @@
 \title{Kernel k-Groups via Hartigan's Method}
 
 \author{Guilherme~Fran\c ca,~Maria Rizzo~and~Joshua T.~Vogelstein
-\IEEEcompsocitemizethanks{\IEEEcompsocthanksitem G. Fran\c ca 
-and J. Vogelstein are with the Center for Imaging Science, Johns Hopkins
-University; J. Vogelstein is also with 
+\IEEEcompsocitemizethanks{
+\IEEEcompsocthanksitem G. Fran\c ca
+is with the Mathematical Institute for Data Science (MINDS), Johns Hopkins
+University.\protect \\
+E-mail: guifranca@jhu.edu
+\IEEEcompsocthanksitem J. Vogelstein is 
+with the Center for Imaging Science, 
 the Department of Biomedical Engineering and Institute for Computational
 Medicine, Johns Hopkins University. \protect\\
 % note need leading \protect in front of \\ to get a newline within \thanks as
 % \\ is fragile and will error, could use \hfil\break instead.
-E-mail: guifranca@jhu.edu; jovo@jhu.edu
+E-mail: jovo@jhu.edu
 \IEEEcompsocthanksitem M. Rizzo is with the Department of Mathematics
 and Statistics, Bowling Green State University. \protect\\
 E-mail: mrizzo@bgsu.edu}% <-this % stops an unwanted space
-\thanks{Manuscript received March 15, 2018; revised March 15, 2018.}}
+\thanks{Manuscript received August 14, 2018; revised August 14, 2018.}}
 
 % The paper headers
 \markboth{Energy Clustering}{}
@@ -197,7 +201,8 @@ distributions which is achieved under minimum energy.
 Energy statistics has been applied to several goodness-of-fit 
 hypothesis tests, multi-sample tests of equality of distributions, 
 analysis of variance \cite{RizzoVariance}, nonlinear dependence tests through
-distance covariance and distance correlation~\cite{Szekely2007-mm}, which generalizes the Pearson
+distance covariance and distance correlation~\cite{Szekely2007-mm}, 
+which generalizes the Pearson
 correlation coefficient, and hierarchical clustering 
 by extending Ward's method of minimum variance
 \cite{RizzoClustering}; 
@@ -205,7 +210,7 @@ see \cite{Szkely2013,Szkely2017} for an overview of energy
 statistics and its applications.
 Moreover, in Euclidean spaces, an application of 
 energy statistics to clustering
-was recently proposed \cite{Kgroups}, and the method was named 
+was recently proposed \cite{Kgroups} and the method was named 
 \emph{k-groups}. 
 
 In its original formulation, energy statistics has a compact representation
@@ -222,7 +227,7 @@ mean discrepancies (MMD), which are distances between embeddings of
 distributions in reproducing kernel Hilbert spaces (RKHS).
 Even more recently, generalized energy distances and kernel methods have been demonstrated to be exactly equivalent, for all finite samples~\cite{Shen2018-st}.
 This equivalence immediately relates energy statistics to
-kernel methods often used in machine learning, and form the basis 
+kernel methods often used in machine learning and form the basis 
 of our approach in this paper.
 
 Clustering is an important unsupervised learning problem and 
@@ -278,10 +283,10 @@ remains obscure, as well as the connection with other methods
 in machine learning.
 The main theoretical contribution of this paper is to fill these gaps, 
 which 
-we do   more generality. For instance, our approach is not limited
+we do in  more generality. For instance, our approach is not limited
 to the Euclidean case but holds for general arbitrary spaces
 of negative type. 
-For generality, we also
+Moreover, we also
 consider a weighted version of energy statistics.
 Our approach reveals connections
 between energy statistics based clustering and existing methods
@@ -1399,44 +1404,81 @@ and $\pi$ is a permutation of $\{1,2,\dotsc,k\}$.
 Thus, the accuracy corresponds to the fraction
 of correctly classified data points, and it is always between $[0,1]$.
 For each setting, we show the average accuracy over $100$ Monte
-Carlo trials, with error bars indicating the standard error.
+Carlo trials (we ommit the error bars since they are too small to be
+visible in our experiments).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Synthetic Experiments}
 
 
+%\begin{figure*}
+%\centering
+%\begin{minipage}{.4\textwidth}
+%\includegraphics[width=1\textwidth]{gauss_1d.pdf}\\[-2em]
+%(a)
+%\end{minipage}
+%\begin{minipage}{.4\textwidth}
+%\includegraphics[width=1\textwidth]{loggauss_1d.pdf} \\[-2em]
+%(b)
+%\end{minipage}\\[1em]
+%\begin{minipage}{.37\textwidth}
+%\includegraphics[width=1\textwidth]{normal_density.pdf}\\[-2em]
+%(c)
+%\end{minipage}\hspace{2em}
+%\begin{minipage}{.37\textwidth}
+%\includegraphics[width=1\textwidth]{lognormal_density.pdf}\\[-2em]
+%(d)
+%\end{minipage}
+%\caption{
+%\label{fig:1dexperiment}
+%Clustering one-dimensional data for a two-class problem.
+%(a) $x \stackrel{iid}{\sim} \tfrac{1}{2} \mathcal{N}(0, 1.5) +
+%\tfrac{1}{2}\mathcal{N}(1.5,0.3)$. (b) $x \stackrel{iid}{\sim}
+%\tfrac{1}{2}e^{\mathcal{N}(0, 1.5)} + \tfrac{1}{2} e^{\mathcal{N}(1.5, 0.3)}$.
+%In both cases we plot the average accuracy versus the total number of points.
+%We ommit error bars since they are too small.
+%(c) Kernel density estimation for a single trial with 2000 sampled
+%points from the
+%distribution in the case (a). (d) Kernel density estimation in a single
+%trial with 
+%2000 points sampled from the distribution in the case (b).
+%}
+%\end{figure*}
+
 \begin{figure*}
 \centering
 \begin{minipage}{.4\textwidth}
-\includegraphics[width=1\textwidth]{gauss_1d.pdf}\\[-2em]
-(a)
+\includegraphics[width=1\textwidth]{gauss_1d.pdf}\\[-2em](a)
 \end{minipage}
 \begin{minipage}{.4\textwidth}
-\includegraphics[width=1\textwidth]{loggauss_1d.pdf} \\[-2em]
-(b)
+\includegraphics[width=1\textwidth]{loggauss_1d.pdf} \\[-2em](b)
 \end{minipage}\\[1em]
 \begin{minipage}{.37\textwidth}
-\includegraphics[width=1\textwidth]{normal_density.pdf}\\[-2em]
-(c)
+\includegraphics[width=1\textwidth]{normal_density2.pdf}\\[-2em](c)
 \end{minipage}\hspace{2em}
 \begin{minipage}{.37\textwidth}
-\includegraphics[width=1\textwidth]{lognormal_density.pdf}\\[-2em]
-(d)
+\includegraphics[width=1\textwidth]{lognormal_density2.pdf}\\[-2em](d)
 \end{minipage}
 \caption{
 \label{fig:1dexperiment}
 Clustering one-dimensional data for a two-class problem.
-(a) $x \stackrel{iid}{\sim} \tfrac{1}{2} \mathcal{N}(0, 1.5) +
-\tfrac{1}{2}\mathcal{N}(1.5,0.3)$. (b) $x \stackrel{iid}{\sim}
-\tfrac{1}{2}e^{\mathcal{N}(0, 1.5)} + \tfrac{1}{2} e^{\mathcal{N}(1.5, 0.3)}$.
-In both cases we plot the average accuracy versus the total number of points.
-We ommit error bars since they are too small.
-(c) Kernel density estimation for a single trial with 2000 sampled
-points from the
-distribution in the case (a). (d) Kernel density estimation in a single
-trial with 
-2000 points sampled from the distribution in the case (b).
+(a) Data normally distributed as
+$x \stackrel{iid}{\sim} (1/2) \mathcal{N}(0, 1.5) +
+(1/2) \mathcal{N}(1.5,0.3)$. (b) Data following lognormal distributions
+as $x \stackrel{iid}{\sim}
+(1/2)e^{\mathcal{N}(0, 1.5)} + (1/2) e^{\mathcal{N}(1.5, 0.3)}$.
+In both cases we plot the average accuracy versus the total number of points
+(error bars are too small to be visible).
+(c) For the same distribution as in item (a), we sample 2000
+points, cluster them with the three methods, then perform a kernel density 
+estimation for kernel k-groups, since this is a model-free method,
+while for k-means and GMM we show the estimated Gaussian for each
+class.
+The clustering accuracy for each method is in Table~\ref{tb:dens}.
+(d) Exactly the same experiment but for the distribution in item (b). 
+Note that only kernel k-groups is able to distinguish between the two classes
+in this example.
 }
 \end{figure*}
 
@@ -1460,12 +1502,11 @@ estimation of Fig.~\ref{fig:1dexperiment}d--e.
 }
 \begin{tabular}{@{}l|ll@{}}
        Method        & normal & lognormal \\ \midrule[.5pt]
-        kmeans       & 0.773  & 0.502     \\
-         GMM         & \textbf{0.881}  & 0.513     \\
-   kernel k-groups   & 0.802  & \textbf{0.847}  
+        kmeans       & 0.778  & 0.520     \\
+         GMM         & \textbf{0.887}  & 0.542     \\
+   kernel k-groups   & 0.807  & \textbf{0.846}  
 \end{tabular}
 \end{table}
-
 
 
 Next, we analyze
@@ -1613,9 +1654,9 @@ We notice a superior performance of kernel k-groups
 compared to the other methods.
 
 To consider non-normal data, we sample from the lognormal mixture 
-$x \stackrel{iid}{\sim} \tfrac{1}{2} 
-e^{\mathcal{N}(\mu_1,\Sigma_1)}+
-\tfrac{1}{2} e^{\mathcal{N}(\mu_2,\Sigma_2)}$ with the same
+$x \stackrel{iid}{\sim}  
+(1/2) e^{\mathcal{N}(\mu_1,\Sigma_1)}+
+(1/2) e^{\mathcal{N}(\mu_2,\Sigma_2)}$ with the same
 parameters as in \eqref{eq:20gauss}. 
 The optimal Bayes accuracy is still $\approx 0.9$.
 A scatter plot is in Fig.~\ref{fig:scatter}d and the
@@ -1666,17 +1707,17 @@ than the other ones.
 \begin{figure}
 \centering
 \begin{minipage}{0.2\textwidth}
-\includegraphics[width=1\textwidth]{2cigars.pdf}\\[-.2em](a)
+(a)~\includegraphics[width=.8\textwidth,trim=0 .8cm 0 0]{2cigars.pdf}%\\[-.2em](a)
 \end{minipage}\hspace{2em}
 \begin{minipage}{0.2\textwidth}
-\includegraphics[width=1\textwidth]{2circles.pdf}\\[-.2em](b)
+(b)~\includegraphics[width=.8\textwidth,trim=0 .8cm 0 0]{2circles.pdf}%\\[-.2em](b)
 \end{minipage}
 \caption{
 \label{fig:2dscatter}
 (a) Data distributed as 
 $x \stackrel{iid}{\sim}
-\tfrac{1}{2}\mathcal{N}(\mu_1,\Sigma_1)+
-\tfrac{1}{2}\mathcal{N}(\mu_1,\Sigma_1)$, 
+(1/2)\mathcal{N}(\mu_1,\Sigma_1)+
+(1/2)\mathcal{N}(\mu_1,\Sigma_1)$, 
 $\mu_1= (0,0)^\top$, 
 $\mu_2 = (6.5, 0)^\top$ and 
 $\Sigma_1 = \Sigma_2 = \diag(1, 20)$. We sample $800$ points.
@@ -1686,11 +1727,11 @@ noise $0.2 \cdot \mathcal{N}(0, I_2)$. We sample
 } 
 \end{figure}
 
-\begin{table}
+\begin{table}[t]
 \caption{
 \label{tb:cigar_circle}
 Clustering the data from Fig.~\ref{fig:2dscatter}.
-For spcetral clustering, kernel k-means and kernel k-groups we use
+For spectral clustering, kernel k-means and kernel k-groups we use
 the metric $\widetilde{\rho}_2$ (see \eqref{eq:rho_tilde}) for the data
 in Fig.~\ref{fig:2dscatter}a, while $\widehat{\rho}_1$ (see \eqref{eq:rho_hat})
 for the data in Fig.~\ref{fig:2dscatter}b. We have 800
@@ -1709,30 +1750,7 @@ points on each trial and 30 Monte Carlo runs for both datasets.
 \end{tabular}
 \end{table}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Real Data Experiment}
-
-We consider the dermatology dataset \cite{Dua2017,Guvenir1998}
-which has 366 data points, each with 34 attributes where 33 are
-linear valued and one is categorical. There are 8 data points with
-missing entries in the ``age'' column. We complete the missing entries
-with the mean of the entire column, and then we normalize the entire
-dataset to zero mean and unit variance. There are  a total of $6$ classes,
-and this is a challenging clustering problem. We refer the reader
-to \cite{Dua2017,Guvenir1998} for a complete description of the dataset, 
-and also to \cite{RizzoClustering} where this dataset was previously
-analyzed. In Table~\ref{tb:dermatology} we show the results of kernel
-k-groups using the metric \eqref{eq:rho_alpha} with $\alpha=1/2$.
-We show the number of points assigned to each class while indicating
-the actual class that points belong to. In Table~\ref{tb:dermatology_accuracy}
-we show this experiment using several clustering methods, and we also
-compare with the results from \cite{RizzoClustering} and \cite{Kgroups}
-on this same data. Our results provide an improvement in comparison
-to all the other methods and also the analysis
-of \cite{RizzoClustering}.
-
-\begin{table}
+\begin{table}[t]
 \caption{
 \label{tb:dermatology}
 Clustering the dermatology 
@@ -1760,7 +1778,7 @@ total & 112 & 52 & 72 & 59 & 51 & 20 &  366 %\\ \bottomrule[1pt]
 \end{tabular}
 \end{table}
 
-\begin{table}
+\begin{table}[t]
 \caption{
 \label{tb:dermatology_accuracy}
 For the dataset \cite{Dua2017,Guvenir1998} (see also
@@ -1787,6 +1805,31 @@ improvement of $\textnormal{accuracy}=0.9637$ and $\textnormal{aRand}=0.9396$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Real Data Experiment}
+
+We consider the dermatology dataset \cite{Dua2017,Guvenir1998}
+which has 366 data points, each with 34 attributes where 33 are
+linear valued and one is categorical. There are 8 data points with
+missing entries in the ``age'' column. We complete the missing entries
+with the mean of the entire column, and then we normalize the entire
+dataset to zero mean and unit variance. There are  a total of $6$ classes,
+and this is a challenging clustering problem. We refer the reader
+to \cite{Dua2017,Guvenir1998} for a complete description of the dataset, 
+and also to \cite{RizzoClustering} where this dataset was previously
+analyzed. In Table~\ref{tb:dermatology} we show the results of kernel
+k-groups using the metric \eqref{eq:rho_alpha} with $\alpha=1/2$.
+We show the number of points assigned to each class while indicating
+the actual class that points belong to. In Table~\ref{tb:dermatology_accuracy}
+we show this experiment using several clustering methods, and we also
+compare with the results from \cite{RizzoClustering} and \cite{Kgroups}
+on this same data. Our results provide an improvement in comparison
+to all the other methods and also the analysis
+of \cite{RizzoClustering}.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 \label{sec:conclusion}
 
@@ -1810,7 +1853,10 @@ Algorithm~\ref{algo}, which we called kernel k-groups.
 This method was compared to kernel k-means and spectral clustering, besides
 k-means and GMM. Our numerical results show a superior performance of the
 proposed method, specially in high dimensions.
-We stress that kernel k-groups has the same complexity of kernel k-means.
+We stress that kernel k-groups has the same complexity of kernel
+k-means\footnote{
+An implementation of unweighted $k$-groups is publicly available in the
+energy package for R \cite{energy}.}.
 
 Kernel k-groups suffers a limitation shared by kernel k-means and spectral
 clustering which involves highly unbalanced
@@ -2034,7 +2080,7 @@ Agency’s (DARPA) SIMPLEX program through SPAWAR contract N66001-15-C-4041.
 % or if you just want to reserve a space for a photo:
 
 \begin{IEEEbiography}[{\includegraphics[width=1in,clip,keepaspectratio]{gui2.png}}]{Guilherme Fran\c ca} 
-has a BSc in physics, and received both his MSc and 
+has a BS degree in physics and received both his MS and 
 PhD in Theoretical Physics from the Institute of 
 Theoretical Physics IFT-UNESP/ICTP-SAIFR (2012). He was a Postdoctoral Fellow
 with the High Energy Theory group in the Physics Department 
@@ -2042,32 +2088,29 @@ at Cornell University (2013--2015), working on topics of mathematical physics
 and non-perturbative methods in quantum field theory 
 and statistical mechanics.
 He was a Postdoctoral Fellow in
-the Computer Science Department at Boston College (2015), working in
-optimization theory.
+the Computer Science Department at Boston College (2015), working
+in optimization methods.
 Since 2016 he is a Postdoctoral Fellow at Johns Hopkins University, currently
 with the Mathematical Institute for Data Science (MINDS). 
-His current research interests are in theoretical methods in 
-machine learning 
-and optimization.
+His current research interests involve  
+machine learning and optimization.
 \end{IEEEbiography}
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,clip,keepaspectratio,height=1.25in]{rizzo.jpg}}]{Maria Rizzo}
-I hold a BS and MA degree in Mathematics from the University of Toledo, a MS in
-Applied Statistics
-from BGSU, and a PhD from BGSU in 2002. After four years as Assistant Professor
-at Ohio University
-Department of Mathematics, I returned to BGSU in 2006, where I am currently
-Professor of Statistics in
-the Department of Mathematics and Statistics. Primary research interests are
-centered on energy statistics,
-distance correlation and its applications, computational statistics, and
-related topics. In addition
-to teaching statistics, data science, and actuarial science, I enjoy writing
-textbooks about
-statistical computing and using R software, a forthcoming research monograph on
-energy statistics
-(joint with G. Szekely) and have other book writing projects under contract as
-well.
+\begin{IEEEbiography}[{\includegraphics[width=1in,clip,keepaspectratio,height=1.30in]{rizzo.jpg}}]{Maria Rizzo}
+holds a BS and MA degree in Mathematics from the University of Toledo, a MS in
+Applied Statistics from BGSU, and a PhD from BGSU in 2002. After four years as
+Assistant Professor at Ohio University Department of Mathematics, she 
+returned to BGSU in 2006, where she is currently Professor of Statistics 
+in the Department of
+Mathematics and Statistics. Her primary research interests are 
+centered on energy
+statistics, distance correlation and its applications, computational
+statistics, and related topics. In addition to teaching statistics, data
+science, and actuarial science, she enjoys writing textbooks about statistical
+computing and using R software. She has a forthcoming research 
+monograph on energy
+statistics (joint with G. Szekely) and also other book writing projects under
+contract as well.
 \end{IEEEbiography}
 
 
@@ -2076,9 +2119,33 @@ well.
 %\newpage
 
 \begin{IEEEbiography}[{\includegraphics[width=1in,clip,keepaspectratio]{jovo.png}}]{Joshua~T.~Vogelstein}
-I received a B.S degree from the Department of Biomedical Engineering (BME) at Washington University in St. Louis, MO in 2002, a M.S. degree from the Department of Applied Mathematics and Statistics (AMS) at Johns Hopkins University (JHU) in Baltimore, MD in 2009, and a Ph.D. degree from the Department of Neuroscience at JHU in 2009. I was a Postdoctoral Fellow in AMS@JHU from 2009 until 2011, at which time I was appointed an Assistant Research Scientist, and became a member of the Institute for Data Intensive Science and Engineering. I spent 2 years at Information Initiative at Duke University, before coming home to my current appointment as Assistant Professor in BME@JHU, and core faculty in both the Institute for Computational Medicine and the Center for Imaging Science, as well as a member of the Kavli Neuroscience Discovery Institute. I married my kindergarten sweetheart in the summer of 2014. 
+received a BS degree from the Department of Biomedical Engineering (BME) at
+Washington University in St. Louis, MO in 2002, a MS degree from the
+Department of Applied Mathematics and Statistics (AMS) at Johns Hopkins
+University (JHU) in Baltimore, MD in 2009, and a PhD degree from the
+Department of Neuroscience at JHU in 2009. He was a Postdoctoral Fellow in
+AMS/JHU from 2009 until 2011, at which time he was appointed an Assistant
+Research Scientist, and became a member of the Institute for Data Intensive
+Science and Engineering. He spent 2 years at Information Initiative at Duke
+University, before coming home to his current appointment as 
+Assistant Professor
+in BME/JHU, and core faculty in both the Institute for Computational Medicine
+and the Center for Imaging Science, as well as a member of the Kavli
+Neuroscience Discovery Institute. He married his kindergarten sweetheart in the
+summer of 2014. 
 
-My primary research interest is to extend and fuse statistical machine learning and big data science to address the most important brain science and mental health questions of our time, particularly  connectomics. Our group’s research has been featured in a number of prominent scientific and engineering journals and conferences including Nature, Nature Methods, Science, Cell, PNAS, Science Translational Medicine, JMLR, PAMI, Annals of Applied Statistics,  NIPS, and SIAM Journal of Matrix Analysis and Applications. In 2011, I co-founded the Open Connectome Project which expanded in 2015 to be NeuroData, whose mission is to enable terascale neuroscience for everyone. All our work is conducted according to the highest standards of open science.
+His primary research interest is to extend and fuse statistical 
+machine learning
+and big data science to address the most important brain science and mental
+health questions of our time, particularly  connectomics. 
+His group’s research
+has been featured in a number of prominent scientific and engineering journals
+and conferences including Nature, Nature Methods, Science, Cell, PNAS, Science
+Translational Medicine, JMLR, PAMI, Annals of Applied Statistics,  NIPS, and
+SIAM Journal of Matrix Analysis and Applications. In 2011, he co-founded the
+Open Connectome Project which expanded in 2015 to be NeuroData, whose mission
+is to enable terascale neuroscience for everyone. All his works are conducted
+according to the highest standards of open science.
 \end{IEEEbiography}
 
 % You can push biographies down or up by placing

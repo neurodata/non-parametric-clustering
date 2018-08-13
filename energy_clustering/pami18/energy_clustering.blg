@@ -3,36 +3,36 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: energy_clustering.aux
 The style file: unsrt.bst
 Database file #1: biblio.bib.bib
-You've used 34 entries,
+You've used 35 entries,
             1791 wiz_defined-function locations,
-            696 strings with 9267 characters,
-and the built_in function-call counts, 9079 in all, are:
-= -- 895
-> -- 330
+            700 strings with 9431 characters,
+and the built_in function-call counts, 9196 in all, are:
+= -- 906
+> -- 338
 < -- 11
-+ -- 124
-- -- 90
-* -- 636
-:= -- 1367
-add.period$ -- 108
-call.type$ -- 34
-change.case$ -- 32
++ -- 127
+- -- 92
+* -- 639
+:= -- 1392
+add.period$ -- 111
+call.type$ -- 35
+change.case$ -- 33
 chr.to.int$ -- 0
-cite$ -- 34
-duplicate$ -- 382
-empty$ -- 877
-format.name$ -- 90
-if$ -- 2051
+cite$ -- 35
+duplicate$ -- 386
+empty$ -- 885
+format.name$ -- 92
+if$ -- 2075
 int.to.chr$ -- 0
-int.to.str$ -- 34
+int.to.str$ -- 35
 missing$ -- 33
-newline$ -- 172
-num.names$ -- 34
+newline$ -- 177
+num.names$ -- 35
 pop$ -- 69
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 202
+skip$ -- 204
 stack$ -- 0
 substring$ -- 836
 swap$ -- 107
@@ -41,6 +41,6 @@ text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 97
-width$ -- 36
-write$ -- 386
+while$ -- 98
+width$ -- 37
+write$ -- 396

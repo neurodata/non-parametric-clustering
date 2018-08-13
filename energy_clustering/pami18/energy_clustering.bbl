@@ -197,4 +197,11 @@ H.~A. G{\"u}venir, G.~Demir{\"o}za, and N.~Ilterb.
   voting feature intervals.
 \newblock {\em Artificial Intelligence in Medicine}, 13(3):147--165, 1998.
 
+\bibitem{energy}
+M.~Rizzo and G.~Szekely.
+\newblock {energy: E-Statistics: Multivariate Inference via the Energy of
+  Data}.
+\newblock R package version 1.7-5; https://CRAN.R-project.org/package=energy,
+  2018.
+
 \end{thebibliography}

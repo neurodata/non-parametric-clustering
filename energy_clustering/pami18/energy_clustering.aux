@@ -110,30 +110,31 @@
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces   Accuracy results for the density estimation of Fig.\nobreakspace  {}1\hbox {}d--e. }}{7}}
 \newlabel{tb:dens}{{1}{7}}
 \newlabel{eq:gauss1}{{56}{7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces   Clustering one-dimensional data for a two-class problem. (a) $x \mathrel {\mathop {\sim }\limits ^{iid}} \genfrac  {}{}{}1{1}{2} \mathcal  {N}(0, 1.5) + \genfrac  {}{}{}1{1}{2}\mathcal  {N}(1.5,0.3)$. (b) $x \mathrel {\mathop {\sim }\limits ^{iid}} \genfrac  {}{}{}1{1}{2}e^{\mathcal  {N}(0, 1.5)} + \genfrac  {}{}{}1{1}{2} e^{\mathcal  {N}(1.5, 0.3)}$. In both cases we plot the average accuracy versus the total number of points. We ommit error bars since they are too small. (c) Kernel density estimation for a single trial with 2000 sampled points from the distribution in the case (a). (d) Kernel density estimation in a single trial with 2000 points sampled from the distribution in the case (b). }}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces   Clustering one-dimensional data for a two-class problem. (a) Data normally distributed as $x \mathrel {\mathop {\sim }\limits ^{iid}} (1/2) \mathcal  {N}(0, 1.5) + (1/2) \mathcal  {N}(1.5,0.3)$. (b) Data following lognormal distributions as $x \mathrel {\mathop {\sim }\limits ^{iid}} (1/2)e^{\mathcal  {N}(0, 1.5)} + (1/2) e^{\mathcal  {N}(1.5, 0.3)}$. In both cases we plot the average accuracy versus the total number of points (error bars are too small to be visible). (c) For the same distribution as in item (a), we sample 2000 points, cluster them with the three methods, then perform a kernel density estimation for kernel k-groups, since this is a model-free method, while for k-means and GMM we show the estimated Gaussian for each class. The clustering accuracy for each method is in Table\nobreakspace  {}1\hbox {}. (d) Exactly the same experiment but for the distribution in item (b). Note that only kernel k-groups is able to distinguish between the two classes in this example. }}{8}}
 \newlabel{fig:1dexperiment}{{1}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces   Scatter plot of the last two dimensions where $\mu _2$ has signal. Each plot has 200 points total. (a) Data distributed as in \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 56\hbox {}\unskip \@@italiccorr )}}. (b) Data distributed as in \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 57\hbox {}\unskip \@@italiccorr )}}. (c) Data distributed as in \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 58\hbox {}\unskip \@@italiccorr )}}. (d) Parameters as in \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 58\hbox {}\unskip \@@italiccorr )}} but for lognormal mixture. (e) Data from \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 59\hbox {}\unskip \@@italiccorr )}} with $N = 300$ and $m=200$. }}{8}}
-\newlabel{fig:scatter}{{2}{8}}
 \newlabel{eq:gauss2}{{57}{8}}
 \newlabel{eq:20gauss}{{58}{8}}
+\newlabel{eq:gauss3}{{59}{8}}
+\citation{Dua2017,Guvenir1998}
+\citation{RizzoClustering}
+\citation{Dua2017,Guvenir1998}
+\citation{RizzoClustering}
+\citation{Kgroups}
 \citation{Dua2017,Guvenir1998}
 \citation{Dua2017,Guvenir1998}
 \citation{RizzoClustering}
 \citation{RizzoClustering}
 \citation{Kgroups}
 \citation{RizzoClustering}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces   Scatter plot of the last two dimensions where $\mu _2$ has signal. Each plot has 200 points total. (a) Data distributed as in \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 56\hbox {}\unskip \@@italiccorr )}}. (b) Data distributed as in \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 57\hbox {}\unskip \@@italiccorr )}}. (c) Data distributed as in \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 58\hbox {}\unskip \@@italiccorr )}}. (d) Parameters as in \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 58\hbox {}\unskip \@@italiccorr )}} but for lognormal mixture. (e) Data from \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 59\hbox {}\unskip \@@italiccorr )}} with $N = 300$ and $m=200$. }}{9}}
+\newlabel{fig:scatter}{{2}{9}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces   Clustering results associated to the data illustrated in Fig.\nobreakspace  {}2\hbox {}. For each experiment we perform 100 Monte Carlo runs and show the average accuracy. We ommit error bars since they are too small to be visible. (a) High dimensional Gaussian mixture according to \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 56\hbox {}\unskip \@@italiccorr )}}. The dashed line is Bayes accuracy $\approx 0.86$. We use the metric $\rho _1$ in \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 52\hbox {}\unskip \@@italiccorr )}}, which is standard in energy statistics. (b) High dimensional Gaussian mixture according to \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 57\hbox {}\unskip \@@italiccorr )}}. Bayes accuracy $\approx 0.95$. We use $\rho _1$ in \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 52\hbox {}\unskip \@@italiccorr )}}. (c) Gaussian mixture with parameters \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 58\hbox {}\unskip \@@italiccorr )}}. We increase the number of sampled points in each trial. We use different metrics; see \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 52\hbox {}\unskip \@@italiccorr )}}--\textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 54\hbox {}\unskip \@@italiccorr )}}. Here, kernel k-groups is more accurate than spectral clustering. (d) Same experiment as in Fig.\nobreakspace  {}3\hbox {}c but with a lognormal mixture with parameters \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 58\hbox {}\unskip \@@italiccorr )}}. Again, kernel k-groups is more accurate than alternatives. The plot suggests that neither of these methods are consistent on this example since Bayes accuracy is $\approx 0.90$. (e) Comparison between clustering methods on unbalanced clusters. The data is normally distributed as \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 59\hbox {}\unskip \@@italiccorr )}} where we vary $m \in [0, 240]$. We use the standard metric $\rho _1$ (see \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 52\hbox {}\unskip \@@italiccorr )}}) from energy statistics. }}{9}}
 \newlabel{fig:plots}{{3}{9}}
-\newlabel{eq:gauss3}{{59}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces   (a) Data distributed as $x \mathrel {\mathop {\sim }\limits ^{iid}} \genfrac  {}{}{}1{1}{2}\mathcal  {N}(\mu _1,\Sigma _1)+ \genfrac  {}{}{}1{1}{2}\mathcal  {N}(\mu _1,\Sigma _1)$, $\mu _1= (0,0)^\top $, $\mu _2 = (6.5, 0)^\top $ and $\Sigma _1 = \Sigma _2 = \diag  (1, 20)$. We sample $800$ points. (b) Concentric circles with radius $r_1 = 1$ and $r_2 = 3$, with noise $0.2 \cdot \mathcal  {N}(0, I_2)$. We sample 800 points with probability $1/2$ for each class. }}{9}}
-\newlabel{fig:2dscatter}{{4}{9}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Real Data Experiment}{9}}
-\citation{Dua2017,Guvenir1998}
-\citation{RizzoClustering}
-\citation{Dua2017,Guvenir1998}
-\citation{RizzoClustering}
-\citation{Kgroups}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces   Clustering the data from Fig.\nobreakspace  {}4\hbox {}. For spcetral clustering, kernel k-means and kernel k-groups we use the metric $\setbox \z@ \hbox {\frozen@everymath \@emptytoks \mathsurround \z@ $\textstyle \rho $}\mathaccent "0365{\rho }_2$ (see \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 53\hbox {}\unskip \@@italiccorr )}}) for the data in Fig.\nobreakspace  {}4\hbox {}a, while $\setbox \z@ \hbox {\frozen@everymath \@emptytoks \mathsurround \z@ $\textstyle \rho $}\mathaccent "0362{\rho }_1$ (see \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 54\hbox {}\unskip \@@italiccorr )}}) for the data in Fig.\nobreakspace  {}4\hbox {}b. We have 800 points on each trial and 30 Monte Carlo runs for both datasets. }}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces   (a) Data distributed as $x \mathrel {\mathop {\sim }\limits ^{iid}} (1/2)\mathcal  {N}(\mu _1,\Sigma _1)+ (1/2)\mathcal  {N}(\mu _1,\Sigma _1)$, $\mu _1= (0,0)^\top $, $\mu _2 = (6.5, 0)^\top $ and $\Sigma _1 = \Sigma _2 = \diag  (1, 20)$. We sample $800$ points. (b) Concentric circles with radius $r_1 = 1$ and $r_2 = 3$, with noise $0.2 \cdot \mathcal  {N}(0, I_2)$. We sample 800 points with probability $1/2$ for each class. }}{9}}
+\newlabel{fig:2dscatter}{{4}{9}}
+\citation{energy}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces   Clustering the data from Fig.\nobreakspace  {}4\hbox {}. For spectral clustering, kernel k-means and kernel k-groups we use the metric $\setbox \z@ \hbox {\frozen@everymath \@emptytoks \mathsurround \z@ $\textstyle \rho $}\mathaccent "0365{\rho }_2$ (see \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 53\hbox {}\unskip \@@italiccorr )}}) for the data in Fig.\nobreakspace  {}4\hbox {}a, while $\setbox \z@ \hbox {\frozen@everymath \@emptytoks \mathsurround \z@ $\textstyle \rho $}\mathaccent "0362{\rho }_1$ (see \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 54\hbox {}\unskip \@@italiccorr )}}) for the data in Fig.\nobreakspace  {}4\hbox {}b. We have 800 points on each trial and 30 Monte Carlo runs for both datasets. }}{10}}
 \newlabel{tb:cigar_circle}{{2}{10}}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces   Clustering the dermatology dataset of \cite  {Dua2017,Guvenir1998} with kernel k-groups using the metric $\rho _{1/2}$ (see \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 52\hbox {}\unskip \@@italiccorr )}}) from energy statistics. The table below should be compared with Table\nobreakspace  {}2 of \cite  {RizzoClustering}, for which our results are slightly more accurate. See also Table\nobreakspace  {}4\hbox {} below for clustering metrics. The classes in the vertical indicates the ground truth and the classes in the horizontal correspond to the classification obtained by kernel k-groups. We show the estimated number of points for each class. }}{10}}
 \newlabel{tb:dermatology}{{3}{10}}
@@ -145,7 +146,6 @@
 \newlabel{sec:twoclass}{{A}{10}}
 \newlabel{eq:g_ind}{{61}{10}}
 \newlabel{eq:g1d}{{62}{10}}
-\newlabel{eq:w1d}{{63}{10}}
 \bibstyle{unsrt}
 \bibdata{biblio.bib}
 \bibcite{Szkely2013}{1}
@@ -180,11 +180,13 @@
 \bibcite{Yu}{30}
 \bibcite{scikit-learn}{31}
 \bibcite{Vassilvitskii}{32}
-\bibcite{Dua2017}{33}
-\bibcite{Guvenir1998}{34}
+\newlabel{eq:w1d}{{63}{11}}
 \newlabel{algo1d}{{3}{11}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces   Clustering algorithm to find local solutions to the optimization problem \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 17\hbox {}\unskip \@@italiccorr )}} for a two-class problem in one dimension. }}{11}}
 \@writefile{toc}{\contentsline {section}{References}{11}}
+\bibcite{Dua2017}{33}
+\bibcite{Guvenir1998}{34}
+\bibcite{energy}{35}
 \@writefile{toc}{\contentsline {section}{Biographies}{12}}
 \@writefile{toc}{\contentsline {subsection}{Guilherme Fran\c ca}{12}}
 \@writefile{toc}{\contentsline {subsection}{Maria Rizzo}{12}}

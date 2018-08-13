@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.3.16)  12 AUG 2018 23:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.3.16)  13 AUG 2018 16:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**energy_clustering.tex
+**energy_clustering
 (./energy_clustering.tex
 LaTeX2e <2017-04-15>
 Babel <3.12> and hyphenation patterns for 84 language(s) loaded.
@@ -480,162 +480,174 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 128.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 132.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <8.03> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 128.
-LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 12
-8.
-LaTeX Font Info:    Try loading font information for U+msa on input line 128.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 132.
+LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 13
+2.
+LaTeX Font Info:    Try loading font information for U+msa on input line 132.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 128.
+LaTeX Font Info:    Try loading font information for U+msb on input line 132.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 128.
+LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 132.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <11.04124> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 156.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 160.
 LaTeX Font Info:    Font shape `OT1/phv/bx/sc' in size <11.04124> not available
 
-(Font)              Font shape `OT1/phv/b/sc' tried instead on input line 156.
+(Font)              Font shape `OT1/phv/b/sc' tried instead on input line 160.
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <9.53561> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 273.
-LaTeX Font Info:    Calculating math sizes for size <9.53561> on input line 327
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 278.
+LaTeX Font Info:    Calculating math sizes for size <9.53561> on input line 332
 .
  [2] [3] [4] [5] [6]
 <./figs/gauss_1d.pdf, id=39, pagebox=cropbox, 438.04721pt x 320.5778pt>
 File: ./figs/gauss_1d.pdf Graphic file (type pdf)
 <use ./figs/gauss_1d.pdf>
-Package pdftex.def Info: ./figs/gauss_1d.pdf  used on input line 1412. on input
- line 1412.
+Package pdftex.def Info: ./figs/gauss_1d.pdf  used on input line 1452. on input
+ line 1452.
 Package pdftex.def Info: Requested size: 207.17084pt x 151.61566pt on input lin
-e 1412.
+e 1452.
 <./figs/loggauss_1d.pdf, id=40, pagebox=cropbox, 438.04721pt x 320.5778pt>
 File: ./figs/loggauss_1d.pdf Graphic file (type pdf)
 <use ./figs/loggauss_1d.pdf>
-Package pdftex.def Info: ./figs/loggauss_1d.pdf  used on input line 1416. on in
-put line 1416.
+Package pdftex.def Info: ./figs/loggauss_1d.pdf  used on input line 1455. on in
+put line 1455.
 Package pdftex.def Info: Requested size: 207.17084pt x 151.61566pt on input lin
-e 1416.
-<./figs/normal_density.pdf, id=41, pagebox=cropbox, 422.0472pt x 326.00172pt>
-File: ./figs/normal_density.pdf Graphic file (type pdf)
-<use ./figs/normal_density.pdf>
-Package pdftex.def Info: ./figs/normal_density.pdf  used on input line 1420. on
- input line 1420.
-Package pdftex.def Info: Requested size: 191.6334pt x 148.02757pt on input line
- 1420.
-<./figs/lognormal_density.pdf, id=42, pagebox=cropbox, 426.04721pt x 326.00172p
-t>
-File: ./figs/lognormal_density.pdf Graphic file (type pdf)
-<use ./figs/lognormal_density.pdf>
-Package pdftex.def Info: ./figs/lognormal_density.pdf  used on input line 1424.
- on input line 1424.
+e 1455.
+<./figs/normal_density2.pdf, id=41, pagebox=cropbox, 422.0472pt x 320.5778pt>
+File: ./figs/normal_density2.pdf Graphic file (type pdf)
+<use ./figs/normal_density2.pdf>
+Package pdftex.def Info: ./figs/normal_density2.pdf  used on input line 1458. o
+n input line 1458.
+Package pdftex.def Info: Requested size: 191.6334pt x 145.56473pt on input line
+ 1458.
+<./figs/lognormal_density2.pdf, id=42, pagebox=cropbox, 426.04721pt x 326.00172
+pt>
+File: ./figs/lognormal_density2.pdf Graphic file (type pdf)
+<use ./figs/lognormal_density2.pdf>
+Package pdftex.def Info: ./figs/lognormal_density2.pdf  used on input line 1461
+. on input line 1461.
 Package pdftex.def Info: Requested size: 191.6334pt x 146.63474pt on input line
- 1424.
+ 1461.
 <./figs/gauss_means_scatter.pdf, id=43, pagebox=cropbox, 346.89601pt x 346.8960
 1pt>
 File: ./figs/gauss_means_scatter.pdf Graphic file (type pdf)
 <use ./figs/gauss_means_scatter.pdf>
-Package pdftex.def Info: ./figs/gauss_means_scatter.pdf  used on input line 150
-0. on input line 1500.
+Package pdftex.def Info: ./figs/gauss_means_scatter.pdf  used on input line 154
+1. on input line 1541.
 Package pdftex.def Info: Requested size: 98.4089pt x 98.40587pt on input line 1
-500.
+541.
 <./figs/gauss_cov_scatter.pdf, id=44, pagebox=cropbox, 346.89601pt x 346.89601p
 t>
 File: ./figs/gauss_cov_scatter.pdf Graphic file (type pdf)
 <use ./figs/gauss_cov_scatter.pdf>
-Package pdftex.def Info: ./figs/gauss_cov_scatter.pdf  used on input line 1501.
- on input line 1501.
+Package pdftex.def Info: ./figs/gauss_cov_scatter.pdf  used on input line 1542.
+ on input line 1542.
 Package pdftex.def Info: Requested size: 98.4089pt x 98.40587pt on input line 1
-501.
+542.
 <./figs/gauss_diff_metrics.pdf, id=45, pagebox=cropbox, 346.89601pt x 346.89601
 pt>
 File: ./figs/gauss_diff_metrics.pdf Graphic file (type pdf)
 <use ./figs/gauss_diff_metrics.pdf>
-Package pdftex.def Info: ./figs/gauss_diff_metrics.pdf  used on input line 1502
-. on input line 1502.
+Package pdftex.def Info: ./figs/gauss_diff_metrics.pdf  used on input line 1543
+. on input line 1543.
 Package pdftex.def Info: Requested size: 98.4089pt x 98.40587pt on input line 1
-502.
+543.
 <./figs/loggauss_diff_metrics.pdf, id=46, pagebox=cropbox, 346.89601pt x 346.89
 601pt>
 File: ./figs/loggauss_diff_metrics.pdf Graphic file (type pdf)
 <use ./figs/loggauss_diff_metrics.pdf>
 Package pdftex.def Info: ./figs/loggauss_diff_metrics.pdf  used on input line 1
-503. on input line 1503.
+544. on input line 1544.
 Package pdftex.def Info: Requested size: 98.4089pt x 98.40587pt on input line 1
-503.
+544.
 <./figs/unbalanced_scatter.pdf, id=47, pagebox=cropbox, 346.89601pt x 346.89601
 pt>
 File: ./figs/unbalanced_scatter.pdf Graphic file (type pdf)
 <use ./figs/unbalanced_scatter.pdf>
-Package pdftex.def Info: ./figs/unbalanced_scatter.pdf  used on input line 1504
-. on input line 1504.
+Package pdftex.def Info: ./figs/unbalanced_scatter.pdf  used on input line 1545
+. on input line 1545.
 Package pdftex.def Info: Requested size: 98.4089pt x 98.40587pt on input line 1
-504.
-<./figs/gauss1.pdf, id=48, pagebox=cropbox, 438.04721pt x 320.5778pt>
+545.
+ [7]
+<./figs/gauss1.pdf, id=52, pagebox=cropbox, 438.04721pt x 320.5778pt>
 File: ./figs/gauss1.pdf Graphic file (type pdf)
 <use ./figs/gauss1.pdf>
-Package pdftex.def Info: ./figs/gauss1.pdf  used on input line 1524. on input l
-ine 1524.
+Package pdftex.def Info: ./figs/gauss1.pdf  used on input line 1565. on input l
+ine 1565.
 Package pdftex.def Info: Requested size: 170.9195pt x 125.08842pt on input line
- 1524.
-<./figs/gauss2.pdf, id=49, pagebox=cropbox, 430.04721pt x 320.5778pt>
+ 1565.
+<./figs/gauss2.pdf, id=53, pagebox=cropbox, 430.04721pt x 320.5778pt>
 File: ./figs/gauss2.pdf Graphic file (type pdf)
 <use ./figs/gauss2.pdf>
-Package pdftex.def Info: ./figs/gauss2.pdf  used on input line 1525. on input l
-ine 1525.
+Package pdftex.def Info: ./figs/gauss2.pdf  used on input line 1566. on input l
+ine 1566.
 Package pdftex.def Info: Requested size: 170.9195pt x 127.41194pt on input line
- 1525.
-<./figs/gauss_n.pdf, id=50, pagebox=cropbox, 438.04721pt x 320.5778pt>
+ 1566.
+<./figs/gauss_n.pdf, id=54, pagebox=cropbox, 438.04721pt x 320.5778pt>
 File: ./figs/gauss_n.pdf Graphic file (type pdf)
 <use ./figs/gauss_n.pdf>
-Package pdftex.def Info: ./figs/gauss_n.pdf  used on input line 1526. on input 
-line 1526.
+Package pdftex.def Info: ./figs/gauss_n.pdf  used on input line 1567. on input 
+line 1567.
 Package pdftex.def Info: Requested size: 170.9195pt x 125.08842pt on input line
- 1526.
-<./figs/loggauss_n.pdf, id=51, pagebox=cropbox, 438.04721pt x 320.5778pt>
+ 1567.
+<./figs/loggauss_n.pdf, id=55, pagebox=cropbox, 438.04721pt x 320.5778pt>
 File: ./figs/loggauss_n.pdf Graphic file (type pdf)
 <use ./figs/loggauss_n.pdf>
-Package pdftex.def Info: ./figs/loggauss_n.pdf  used on input line 1527. on inp
-ut line 1527.
+Package pdftex.def Info: ./figs/loggauss_n.pdf  used on input line 1568. on inp
+ut line 1568.
 Package pdftex.def Info: Requested size: 170.9195pt x 125.08842pt on input line
- 1527.
-<./figs/gauss_unbal.pdf, id=52, pagebox=cropbox, 426.04721pt x 320.5778pt>
+ 1568.
+<./figs/gauss_unbal.pdf, id=56, pagebox=cropbox, 426.04721pt x 320.5778pt>
 File: ./figs/gauss_unbal.pdf Graphic file (type pdf)
 <use ./figs/gauss_unbal.pdf>
-Package pdftex.def Info: ./figs/gauss_unbal.pdf  used on input line 1528. on in
-put line 1528.
+Package pdftex.def Info: ./figs/gauss_unbal.pdf  used on input line 1569. on in
+put line 1569.
 Package pdftex.def Info: Requested size: 163.15079pt x 122.76491pt on input lin
-e 1528.
- [7] [8 <./figs/gauss_1d.pdf> <./figs/loggauss_1d.pdf
+e 1569.
+ [8 <./figs/gauss_1d.pdf> <./figs/loggauss_1d.pdf
 
 pdfTeX warning: pdflatex (file ./figs/loggauss_1d.pdf): PDF inclusion: multiple
  pdfs with page group included in a single page
-> <./figs/normal_density.pdf
+> <./figs/normal_density2.pdf
 
-pdfTeX warning: pdflatex (file ./figs/normal_density.pdf): PDF inclusion: multi
-ple pdfs with page group included in a single page
-> <./figs/lognormal_density.pdf
+pdfTeX warning: pdflatex (file ./figs/normal_density2.pdf): PDF inclusion: mult
+iple pdfs with page group included in a single page
+> <./figs/lognormal_density2.pdf
 
-pdfTeX warning: pdflatex (file ./figs/lognormal_density.pdf): PDF inclusion: mu
-ltiple pdfs with page group included in a single page
-> <./figs/gauss_means_scatter.pdf
-
-pdfTeX warning: pdflatex (file ./figs/gauss_means_scatter.pdf): PDF inclusion: 
-multiple pdfs with page group included in a single page
-> <./figs/gauss_cov_scatter.pdf
+pdfTeX warning: pdflatex (file ./figs/lognormal_density2.pdf): PDF inclusion: m
+ultiple pdfs with page group included in a single page
+>]
+<./figs/2cigars.pdf, id=123, pagebox=cropbox, 346.89601pt x 346.89601pt>
+File: ./figs/2cigars.pdf Graphic file (type pdf)
+<use ./figs/2cigars.pdf>
+Package pdftex.def Info: ./figs/2cigars.pdf  used on input line 1710. on input 
+line 1710.
+Package pdftex.def Info: Requested size: 82.86864pt x 77.42769pt on input line 
+1710.
+<./figs/2circles.pdf, id=124, pagebox=cropbox, 346.89601pt x 346.89601pt>
+File: ./figs/2circles.pdf Graphic file (type pdf)
+<use ./figs/2circles.pdf>
+Package pdftex.def Info: ./figs/2circles.pdf  used on input line 1713. on input
+ line 1713.
+Package pdftex.def Info: Requested size: 82.86864pt x 77.42769pt on input line 
+1713.
+ [9 <./figs/gauss_means_scatter.pdf> <./figs/gauss_cov_scatter.pdf
 
 pdfTeX warning: pdflatex (file ./figs/gauss_cov_scatter.pdf): PDF inclusion: mu
 ltiple pdfs with page group included in a single page
@@ -651,22 +663,11 @@ pdfTeX warning: pdflatex (file ./figs/loggauss_diff_metrics.pdf): PDF inclusion
 
 pdfTeX warning: pdflatex (file ./figs/unbalanced_scatter.pdf): PDF inclusion: m
 ultiple pdfs with page group included in a single page
->]
-<./figs/2cigars.pdf, id=138, pagebox=cropbox, 346.89601pt x 346.89601pt>
-File: ./figs/2cigars.pdf Graphic file (type pdf)
-<use ./figs/2cigars.pdf>
-Package pdftex.def Info: ./figs/2cigars.pdf  used on input line 1669. on input 
-line 1669.
-Package pdftex.def Info: Requested size: 103.58542pt x 103.58263pt on input lin
-e 1669.
-<./figs/2circles.pdf, id=139, pagebox=cropbox, 346.89601pt x 346.89601pt>
-File: ./figs/2circles.pdf Graphic file (type pdf)
-<use ./figs/2circles.pdf>
-Package pdftex.def Info: ./figs/2circles.pdf  used on input line 1672. on input
- line 1672.
-Package pdftex.def Info: Requested size: 103.58542pt x 103.58263pt on input lin
-e 1672.
- [9 <./figs/gauss1.pdf> <./figs/gauss2.pdf
+> <./figs/gauss1.pdf
+
+pdfTeX warning: pdflatex (file ./figs/gauss1.pdf): PDF inclusion: multiple pdfs
+ with page group included in a single page
+> <./figs/gauss2.pdf
 
 pdfTeX warning: pdflatex (file ./figs/gauss2.pdf): PDF inclusion: multiple pdfs
  with page group included in a single page
@@ -691,7 +692,7 @@ s with page group included in a single page
 pdfTeX warning: pdflatex (file ./figs/2circles.pdf): PDF inclusion: multiple pd
 fs with page group included in a single page
 >]
-LaTeX Font Info:    Try loading font information for U+bbm on input line 1878.
+LaTeX Font Info:    Try loading font information for U+bbm on input line 1924.
  (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
 ) [10]
@@ -699,88 +700,86 @@ Missing character: There is no â in font pplr7t!
 Missing character: There is no € in font pplr7t!
 Missing character: There is no ™ in font pplr7t!
 
-(./energy_clustering.bbl) [11]
+(./energy_clustering.bbl [11])
 <./figs/gui2.png, id=249, 299.1175pt x 346.29375pt>
 File: ./figs/gui2.png Graphic file (type png)
 <use ./figs/gui2.png>
-Package pdftex.def Info: ./figs/gui2.png  used on input line 2036. on input lin
-e 2036.
+Package pdftex.def Info: ./figs/gui2.png  used on input line 2082. on input lin
+e 2082.
 Package pdftex.def Info: Requested size: 72.26999pt x 83.667pt on input line 20
-36.
+82.
 File: ./figs/gui2.png Graphic file (type png)
 <use ./figs/gui2.png>
-Package pdftex.def Info: ./figs/gui2.png  used on input line 2036. on input lin
-e 2036.
+Package pdftex.def Info: ./figs/gui2.png  used on input line 2082. on input lin
+e 2082.
 Package pdftex.def Info: Requested size: 72.26999pt x 83.667pt on input line 20
-36.
+82.
 <./figs/rizzo.jpg, id=253, 204.0423pt x 306.1839pt>
 File: ./figs/rizzo.jpg Graphic file (type jpg)
 <use ./figs/rizzo.jpg>
-Package pdftex.def Info: ./figs/rizzo.jpg  used on input line 2054. on input li
-ne 2054.
-Package pdftex.def Info: Requested size: 60.20128pt x 90.33748pt on input line 
-2054.
+Package pdftex.def Info: ./figs/rizzo.jpg  used on input line 2099. on input li
+ne 2099.
+Package pdftex.def Info: Requested size: 62.60797pt x 93.94891pt on input line 
+2099.
 File: ./figs/rizzo.jpg Graphic file (type jpg)
 <use ./figs/rizzo.jpg>
-Package pdftex.def Info: ./figs/rizzo.jpg  used on input line 2054. on input li
-ne 2054.
-Package pdftex.def Info: Requested size: 60.20128pt x 90.33748pt on input line 
-2054.
+Package pdftex.def Info: ./figs/rizzo.jpg  used on input line 2099. on input li
+ne 2099.
+Package pdftex.def Info: Requested size: 62.60797pt x 93.94891pt on input line 
+2099.
 <./figs/jovo.png, id=256, 200.75pt x 200.75pt>
 File: ./figs/jovo.png Graphic file (type png)
 <use ./figs/jovo.png>
-Package pdftex.def Info: ./figs/jovo.png  used on input line 2078. on input lin
-e 2078.
+Package pdftex.def Info: ./figs/jovo.png  used on input line 2121. on input lin
+e 2121.
 Package pdftex.def Info: Requested size: 72.26999pt x 72.26993pt on input line 
-2078.
+2121.
 File: ./figs/jovo.png Graphic file (type png)
 <use ./figs/jovo.png>
-Package pdftex.def Info: ./figs/jovo.png  used on input line 2078. on input lin
-e 2078.
+Package pdftex.def Info: ./figs/jovo.png  used on input line 2121. on input lin
+e 2121.
 Package pdftex.def Info: Requested size: 72.26999pt x 72.26993pt on input line 
-2078.
+2121.
 Missing character: There is no â in font phvr7t!
 Missing character: There is no € in font phvr7t!
 Missing character: There is no ™ in font phvr7t!
- [12
-
- <./figs/gui2.png> <./figs/rizzo.jpg> <./figs/jovo.png>] (./energy_clustering.a
-ux) ) 
+ [12 <./figs/gui2.png> <./figs/rizzo.jpg> <./figs/jovo.png>] (./energy_clusteri
+ng.aux) ) 
 Here is how much of TeX's memory you used:
- 5618 strings out of 492990
- 82700 string characters out of 6135005
- 170732 words of memory out of 5000000
- 8993 multiletter control sequences out of 15000+600000
+ 5619 strings out of 492990
+ 82718 string characters out of 6135005
+ 166285 words of memory out of 5000000
+ 8994 multiletter control sequences out of 15000+600000
  61114 words of font info for 153 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 41i,25n,37p,2298b,528s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/gui/.texlive2017/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk>
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/symbols/msbm7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helve
-tic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/urw/palatino/uplri8a.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
-times/utmri8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/zapfding/uzdr.
-pfb>
-Output written on energy_clustering.pdf (12 pages, 1209522 bytes).
+ 41i,25n,37p,2294b,528s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/gui/.texlive2017/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.60
+0pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/symbols/msbm7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/h
+elvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr
+8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+urw/times/utmri8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/zapfding/u
+zdr.pfb>
+Output written on energy_clustering.pdf (12 pages, 1205626 bytes).
 PDF statistics:
  347 PDF objects out of 1000 (max. 8388607)
  227 compressed objects within 3 object streams
