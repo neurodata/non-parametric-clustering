@@ -1,25 +1,24 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.3.16)  14 AUG 2018 11:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.8)  26 SEP 2019 17:06
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
-**energy_clustering.tex
-(./energy_clustering.tex
-LaTeX2e <2017-04-15>
-Babel <3.12> and hyphenation patterns for 84 language(s) loaded.
-(./IEEEtran.cls
+**"/Users/jovo/Google Drive/Research/Projects/non-parametric-clustering/energy_clustering/pami18/energy_clustering.tex"
+(/Users/jovo/Google Drive/Research/Projects/non-parametric-clustering/energy_clustering/pami18/energy_clustering.tex
+LaTeX2e <2018-12-01>
+(/Users/jovo/Google Drive/Research/Projects/non-parametric-clustering/energy_clustering/pami18/IEEEtran.cls
 Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
 -- See the "IEEEtran_HOWTO" manual for usage information.
 -- http://www.michaelshell.org/tex/ieeetran/
 \@IEEEtrantmpdimenA=\dimen102
 \@IEEEtrantmpdimenB=\dimen103
 \@IEEEtrantmpdimenC=\dimen104
-\@IEEEtrantmpcountA=\count79
-\@IEEEtrantmpcountB=\count80
-\@IEEEtrantmpcountC=\count81
+\@IEEEtrantmpcountA=\count80
+\@IEEEtrantmpcountB=\count81
+\@IEEEtrantmpcountC=\count82
 \@IEEEtrantmptoksA=\toks14
 LaTeX Font Info:    Try loading font information for OT1+ppl on input line 503.
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ppl.fd
+(/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
 -- Using IEEE Computer Society mode.
@@ -34,54 +33,42 @@ LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <5.01874> not available
 (Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <5.01874> not available
 (Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <7.02625> not available
 (Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <7.02625> not available
 (Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <8.03> not available
 (Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <8.03> not available
 (Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <9.03374> not available
 (Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <9.03374> not available
 (Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <9.53561> not available
 (Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <9.53561> not available
 (Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <11.04124> not available
 (Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <11.04124> not available
-
 (Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <12.045> not available
 (Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <12.045> not available
 (Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <17.06374> not available
 (Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <17.06374> not available
-
 (Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <20.075> not available
 (Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <20.075> not available
 (Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <24.09> not available
 (Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <24.09> not available
 (Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
-
 \IEEEquantizedlength=\dimen109
 \IEEEquantizedlengthdiff=\dimen110
 \IEEEquantizedtextheightdiff=\dimen111
@@ -94,77 +81,73 @@ LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <24.09> not available
 \IEEEiednormlabelsep=\dimen118
 \IEEEiedmathlabelsep=\dimen119
 \IEEEiedtopsep=\skip41
-\c@section=\count82
-\c@subsection=\count83
-\c@subsubsection=\count84
-\c@paragraph=\count85
-\c@IEEEsubequation=\count86
+\c@section=\count83
+\c@subsection=\count84
+\c@subsubsection=\count85
+\c@paragraph=\count86
+\c@IEEEsubequation=\count87
 \abovecaptionskip=\skip42
 \belowcaptionskip=\skip43
-\c@figure=\count87
-\c@table=\count88
-\@IEEEeqnnumcols=\count89
-\@IEEEeqncolcnt=\count90
-\@IEEEsubeqnnumrollback=\count91
+\c@figure=\count88
+\c@table=\count89
+\@IEEEeqnnumcols=\count90
+\@IEEEeqncolcnt=\count91
+\@IEEEsubeqnnumrollback=\count92
 \@IEEEquantizeheightA=\dimen120
 \@IEEEquantizeheightB=\dimen121
 \@IEEEquantizeheightC=\dimen122
 \@IEEEquantizeprevdepth=\dimen123
-\@IEEEquantizemultiple=\count92
-\@IEEEquantizeboxA=\box26
+\@IEEEquantizemultiple=\count93
+\@IEEEquantizeboxA=\box27
 \@IEEEtmpitemindent=\dimen124
 \IEEEPARstartletwidth=\dimen125
-\c@IEEEbiography=\count93
-\@IEEEtranrubishbin=\box27
-) (/usr/share/texlive/texmf-dist/tex/latex/cite/cite.sty
+\c@IEEEbiography=\count94
+\@IEEEtranrubishbin=\box28
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/cite/cite.sty
 LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 332.
 Package: cite 2015/02/27  v 5.5
-)
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2016/11/05 v2.16a AMS math features
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2018/12/01 v2.17b AMS math features
 \@mathmargin=\skip44
 
 For additional information on amsmath, use the `?' option.
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks15
 \ex@=\dimen126
-))
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+)) (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen127
-)
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count94
-LaTeX Info: Redefining \frac on input line 213.
-\uproot@=\count95
-\leftroot@=\count96
-LaTeX Info: Redefining \overline on input line 375.
-\classnum@=\count97
-\DOTSCASE@=\count98
-LaTeX Info: Redefining \ldots on input line 472.
-LaTeX Info: Redefining \dots on input line 475.
-LaTeX Info: Redefining \cdots on input line 596.
-\Mathstrutbox@=\box28
-\strutbox@=\box29
+\inf@bad=\count95
+LaTeX Info: Redefining \frac on input line 223.
+\uproot@=\count96
+\leftroot@=\count97
+LaTeX Info: Redefining \overline on input line 385.
+\classnum@=\count98
+\DOTSCASE@=\count99
+LaTeX Info: Redefining \ldots on input line 482.
+LaTeX Info: Redefining \dots on input line 485.
+LaTeX Info: Redefining \cdots on input line 606.
+\Mathstrutbox@=\box29
+\strutbox@=\box30
 \big@size=\dimen128
-LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
-\macc@depth=\count99
-\c@MaxMatrixCols=\count100
+LaTeX Font Info:    Redeclaring font encoding OML on input line 729.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 730.
+\macc@depth=\count100
+\c@MaxMatrixCols=\count101
 \dotsspace@=\muskip10
-\c@parentequation=\count101
-\dspbrk@lvl=\count102
+\c@parentequation=\count102
+\dspbrk@lvl=\count103
 \tag@help=\toks16
-\row@=\count103
-\column@=\count104
-\maxfields@=\count105
+\row@=\count104
+\column@=\count105
+\maxfields@=\count106
 \andhelp@=\toks17
 \eqnshift@=\dimen129
 \alignsep@=\dimen130
@@ -176,21 +159,18 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 \multlinegap=\skip45
 \multlinetaggap=\skip46
 \mathdisplay@stack=\toks19
-LaTeX Info: Redefining \[ on input line 2817.
-LaTeX Info: Redefining \] on input line 2818.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+LaTeX Info: Redefining \[ on input line 2844.
+LaTeX Info: Redefining \] on input line 2845.
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))
-(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
-Package: amsthm 2015/03/04 v2.20.2
+)) (/usr/local/texlive/2019/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2017/10/31 v2.20.4
 \thm@style=\toks20
 \thm@bodyfont=\toks21
 \thm@headfont=\toks22
@@ -200,57 +180,50 @@ Package: amsthm 2015/03/04 v2.20.2
 \thm@postskip=\skip48
 \thm@headsep=\skip49
 \dth@everypar=\toks25
-)
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amscd.sty
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amscd.sty
 Package: amscd 2017/04/14 v2.1 AMS Commutative Diagrams
 \athelp@=\toks26
 \minaw@=\dimen135
 \bigaw@=\dimen136
 \minCDarrowwidth=\dimen137
-)
-(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/bm.sty
 Package: bm 2017/01/16 v1.2c Bold Symbol Support (DPC/FMi)
 \symboldoperators=\mathgroup6
 \symboldletters=\mathgroup7
 \symboldsymbols=\mathgroup8
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 141.
 LaTeX Info: Redefining \bm on input line 207.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/bbm.sty
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/bbm-macros/bbm.sty
 Package: bbm 1999/03/15 V 1.2 provides fonts for set symbols - TH
 LaTeX Font Info:    Overwriting math alphabet `\mathbbm' in version `bold'
 (Font)                  U/bbm/m/n --> U/bbm/bx/n on input line 33.
 LaTeX Font Info:    Overwriting math alphabet `\mathbbmss' in version `bold'
 (Font)                  U/bbmss/m/n --> U/bbmss/bx/n on input line 35.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
-Package: mathtools 2017/05/24 v1.19 mathematical typesetting tools
-
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2018/01/08 v1.21 mathematical typesetting tools
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks27
-)
-(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
-Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count106
-\calc@Bcount=\count107
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count107
+\calc@Bcount=\count108
 \calc@Adimen=\dimen138
 \calc@Bdimen=\dimen139
 \calc@Askip=\skip50
 \calc@Bskip=\skip51
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count108
+\calc@Ccount=\count109
 \calc@Cskip=\skip52
-)
-(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/mathtools/mhsetup.sty
 Package: mhsetup 2017/03/31 v1.3 programming setup (MH)
 )
 LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
-\g_MT_multlinerow_int=\count109
+\g_MT_multlinerow_int=\count110
 \l_MT_multwidth_dim=\dimen140
 \origjot=\skip53
 \l_MT_shortvdotswithinadjustabove_dim=\dimen141
@@ -259,83 +232,70 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \l_MT_below_intertext_sep=\dimen144
 \l_MT_above_shortintertext_sep=\dimen145
 \l_MT_below_shortintertext_sep=\dimen146
-)
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
-
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
-
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
-
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2017/06/24 v1.0g Graphics/color driver for pdftex
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen147
 \Gin@req@width=\dimen148
-)
-(./algorithmic.sty
+) (/Users/jovo/Google Drive/Research/Projects/non-parametric-clustering/energy_clustering/pami18/algorithmic.sty
 Package: algorithmic 
 
 Document Style `algorithmic' - environment
-(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+(/usr/local/texlive/2019/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\c@ALC@line=\count110
-\c@ALC@rem=\count111
+\c@ALC@line=\count111
+\c@ALC@rem=\count112
 \ALC@tlm=\skip54
-)
-(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
-Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
-nment
-
-(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count112
+\c@float@type=\count113
 \float@exts=\toks28
-\float@box=\box30
+\float@box=\box31
 \@float@everytoks=\toks29
-\@floatcapt=\box31
+\@floatcapt=\box32
 )
 \@float@every@algorithm=\toks30
-\c@algorithm=\count113
-)
-(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
-Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
+\c@algorithm=\count114
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2019/01/01 v2.4 Span multiple rows of a table
 \multirow@colwidth=\skip55
-\multirow@cntb=\count114
+\multirow@cntb=\count115
 \multirow@dima=\skip56
 \bigstrutjot=\dimen149
-)
-(/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
-Package: colortbl 2012/02/13 v1.0a Color table columns (DPC)
-
-(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
-Package: array 2016/10/06 v2.4d Tabular extension package (FMi)
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2018/12/12 v1.0d Color table columns (DPC)
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/array.sty
+Package: array 2018/12/30 v2.4k Tabular extension package (FMi)
 \col@sep=\dimen150
+\ar@mcellbox=\box33
 \extrarowheight=\dimen151
 \NC@list=\toks31
 \extratabsurround=\skip57
 \backup@length=\skip58
-)
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+\ar@cellbox=\box34
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
-
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 147.
 )
 \everycr=\toks32
 \minrowclearance=\skip59
-)
-(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2016/04/27 v1.618033 publication quality tables
 \heavyrulewidth=\dimen152
 \lightrulewidth=\dimen153
@@ -347,18 +307,16 @@ Package: booktabs 2016/04/27 v1.618033 publication quality tables
 \cmidrulesep=\dimen159
 \cmidrulekern=\dimen160
 \defaultaddspace=\dimen161
-\@cmidla=\count115
-\@cmidlb=\count116
+\@cmidla=\count116
+\@cmidlb=\count117
 \@aboverulesep=\dimen162
 \@belowrulesep=\dimen163
-\@thisruleclass=\count117
-\@lastruleclass=\count118
+\@thisruleclass=\count118
+\@lastruleclass=\count119
 \@thisrulewidth=\dimen164
-)
-(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
-
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
@@ -372,29 +330,24 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/makecell/makecell.sty
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/makecell/makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \rotheadsize=\dimen165
-\c@nlinenum=\count119
+\c@nlinenum=\count120
 \TeXr@lab=\toks33
-)
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/pifont.sty
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/pifont.sty
 Package: pifont 2005/04/12 PSNFSS-v9.2a Pi font support (SPQR) 
 LaTeX Font Info:    Try loading font information for U+pzd on input line 63.
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/upzd.fd
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/upzd.fd
 File: upzd.fd 2001/06/04 font definitions for U/pzd.
 )
 LaTeX Font Info:    Try loading font information for U+psy on input line 64.
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/upsy.fd
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/upsy.fd
 File: upsy.fd 2001/06/04 font definitions for U/psy.
 ))
-\c@theorem=\count120
-\c@example=\count121
-
-(./energy_clustering.aux)
+\c@theorem=\count121
+\c@example=\count122
+ (/Users/jovo/Google Drive/Research/Projects/non-parametric-clustering/energy_clustering/pami18/energy_clustering.aux)
 \openout1 = `energy_clustering.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 73.
@@ -411,375 +364,250 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 73.
 LaTeX Font Info:    ... okay on input line 73.
 
 -- Lines per column: 61 (exact).
-(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count122
+\scratchcounter=\count123
 \scratchdimen=\dimen166
-\scratchbox=\box32
-\nofMPsegments=\count123
-\nofMParguments=\count124
+\scratchbox=\box35
+\nofMPsegments=\count124
+\nofMParguments=\count125
 \everyMPshowfont=\toks34
-\MPscratchCnt=\count125
+\MPscratchCnt=\count126
 \MPscratchDim=\dimen167
-\MPnumerator=\count126
-\makeMPintoPDFobject=\count127
+\MPnumerator=\count127
+\makeMPintoPDFobject=\count128
 \everyMPtoPDFconversion=\toks35
-) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/grfext.sty
 Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
 Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
-)))
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+))) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
-)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-)))
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+)))) (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO)
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
 )
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 )
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
-38.
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 438.
 Package grfext Info: Graphics extension search list:
-(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
-
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 LaTeX Font Info:    Try loading font information for OT1+phv on input line 132.
-
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <8.03> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 132.
-LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 13
-2.
+LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 132.
 LaTeX Font Info:    Try loading font information for U+msa on input line 132.
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 132.
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 132.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <11.04124> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 160.
 LaTeX Font Info:    Font shape `OT1/phv/bx/sc' in size <11.04124> not available
-
 (Font)              Font shape `OT1/phv/b/sc' tried instead on input line 160.
- [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+ [1{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <9.53561> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 278.
-LaTeX Font Info:    Calculating math sizes for size <9.53561> on input line 332
-.
+LaTeX Font Info:    Calculating math sizes for size <9.53561> on input line 332.
  [2] [3] [4] [5] [6]
-<./figs/gauss_1d.pdf, id=39, pagebox=cropbox, 438.04721pt x 320.5778pt>
+<./figs/gauss_1d.pdf, id=39, 438.04721pt x 320.5778pt>
 File: ./figs/gauss_1d.pdf Graphic file (type pdf)
 <use ./figs/gauss_1d.pdf>
-Package pdftex.def Info: ./figs/gauss_1d.pdf  used on input line 1452. on input
- line 1452.
-Package pdftex.def Info: Requested size: 207.17084pt x 151.61566pt on input lin
-e 1452.
-<./figs/loggauss_1d.pdf, id=40, pagebox=cropbox, 438.04721pt x 320.5778pt>
+Package pdftex.def Info: ./figs/gauss_1d.pdf  used on input line 1452.
+(pdftex.def)             Requested size: 207.17084pt x 151.61566pt.
+<./figs/loggauss_1d.pdf, id=40, 438.04721pt x 320.5778pt>
 File: ./figs/loggauss_1d.pdf Graphic file (type pdf)
 <use ./figs/loggauss_1d.pdf>
-Package pdftex.def Info: ./figs/loggauss_1d.pdf  used on input line 1455. on in
-put line 1455.
-Package pdftex.def Info: Requested size: 207.17084pt x 151.61566pt on input lin
-e 1455.
-<./figs/normal_density2.pdf, id=41, pagebox=cropbox, 422.0472pt x 320.5778pt>
+Package pdftex.def Info: ./figs/loggauss_1d.pdf  used on input line 1455.
+(pdftex.def)             Requested size: 207.17084pt x 151.61566pt.
+<./figs/normal_density2.pdf, id=41, 422.0472pt x 320.5778pt>
 File: ./figs/normal_density2.pdf Graphic file (type pdf)
 <use ./figs/normal_density2.pdf>
-Package pdftex.def Info: ./figs/normal_density2.pdf  used on input line 1458. o
-n input line 1458.
-Package pdftex.def Info: Requested size: 191.6334pt x 145.56473pt on input line
- 1458.
-<./figs/lognormal_density2.pdf, id=42, pagebox=cropbox, 426.04721pt x 326.00172
-pt>
+Package pdftex.def Info: ./figs/normal_density2.pdf  used on input line 1458.
+(pdftex.def)             Requested size: 191.6334pt x 145.56473pt.
+<./figs/lognormal_density2.pdf, id=42, 426.04721pt x 326.00172pt>
 File: ./figs/lognormal_density2.pdf Graphic file (type pdf)
 <use ./figs/lognormal_density2.pdf>
-Package pdftex.def Info: ./figs/lognormal_density2.pdf  used on input line 1461
-. on input line 1461.
-Package pdftex.def Info: Requested size: 191.6334pt x 146.63474pt on input line
- 1461.
-<./figs/gauss_means_scatter.pdf, id=43, pagebox=cropbox, 346.89601pt x 346.8960
-1pt>
+Package pdftex.def Info: ./figs/lognormal_density2.pdf  used on input line 1461.
+(pdftex.def)             Requested size: 191.6334pt x 146.63474pt.
+<./figs/gauss_means_scatter.pdf, id=43, 346.89601pt x 346.89601pt>
 File: ./figs/gauss_means_scatter.pdf Graphic file (type pdf)
 <use ./figs/gauss_means_scatter.pdf>
-Package pdftex.def Info: ./figs/gauss_means_scatter.pdf  used on input line 154
-1. on input line 1541.
-Package pdftex.def Info: Requested size: 98.4089pt x 98.40587pt on input line 1
-541.
-<./figs/gauss_cov_scatter.pdf, id=44, pagebox=cropbox, 346.89601pt x 346.89601p
-t>
+Package pdftex.def Info: ./figs/gauss_means_scatter.pdf  used on input line 1542.
+(pdftex.def)             Requested size: 98.4089pt x 98.40587pt.
+<./figs/gauss_cov_scatter.pdf, id=44, 346.89601pt x 346.89601pt>
 File: ./figs/gauss_cov_scatter.pdf Graphic file (type pdf)
 <use ./figs/gauss_cov_scatter.pdf>
-Package pdftex.def Info: ./figs/gauss_cov_scatter.pdf  used on input line 1542.
- on input line 1542.
-Package pdftex.def Info: Requested size: 98.4089pt x 98.40587pt on input line 1
-542.
-<./figs/gauss_diff_metrics.pdf, id=45, pagebox=cropbox, 346.89601pt x 346.89601
-pt>
+Package pdftex.def Info: ./figs/gauss_cov_scatter.pdf  used on input line 1543.
+(pdftex.def)             Requested size: 98.4089pt x 98.40587pt.
+<./figs/gauss_diff_metrics.pdf, id=45, 346.89601pt x 346.89601pt>
 File: ./figs/gauss_diff_metrics.pdf Graphic file (type pdf)
 <use ./figs/gauss_diff_metrics.pdf>
-Package pdftex.def Info: ./figs/gauss_diff_metrics.pdf  used on input line 1543
-. on input line 1543.
-Package pdftex.def Info: Requested size: 98.4089pt x 98.40587pt on input line 1
-543.
-<./figs/loggauss_diff_metrics.pdf, id=46, pagebox=cropbox, 346.89601pt x 346.89
-601pt>
+Package pdftex.def Info: ./figs/gauss_diff_metrics.pdf  used on input line 1544.
+(pdftex.def)             Requested size: 98.4089pt x 98.40587pt.
+<./figs/loggauss_diff_metrics.pdf, id=46, 346.89601pt x 346.89601pt>
 File: ./figs/loggauss_diff_metrics.pdf Graphic file (type pdf)
 <use ./figs/loggauss_diff_metrics.pdf>
-Package pdftex.def Info: ./figs/loggauss_diff_metrics.pdf  used on input line 1
-544. on input line 1544.
-Package pdftex.def Info: Requested size: 98.4089pt x 98.40587pt on input line 1
-544.
-<./figs/unbalanced_scatter.pdf, id=47, pagebox=cropbox, 346.89601pt x 346.89601
-pt>
+Package pdftex.def Info: ./figs/loggauss_diff_metrics.pdf  used on input line 1545.
+(pdftex.def)             Requested size: 98.4089pt x 98.40587pt.
+<./figs/unbalanced_scatter.pdf, id=47, 346.89601pt x 346.89601pt>
 File: ./figs/unbalanced_scatter.pdf Graphic file (type pdf)
 <use ./figs/unbalanced_scatter.pdf>
-Package pdftex.def Info: ./figs/unbalanced_scatter.pdf  used on input line 1545
-. on input line 1545.
-Package pdftex.def Info: Requested size: 98.4089pt x 98.40587pt on input line 1
-545.
+Package pdftex.def Info: ./figs/unbalanced_scatter.pdf  used on input line 1546.
+(pdftex.def)             Requested size: 98.4089pt x 98.40587pt.
  [7]
-<./figs/gauss1.pdf, id=52, pagebox=cropbox, 438.04721pt x 320.5778pt>
+<./figs/gauss1.pdf, id=52, 438.04721pt x 320.5778pt>
 File: ./figs/gauss1.pdf Graphic file (type pdf)
 <use ./figs/gauss1.pdf>
-Package pdftex.def Info: ./figs/gauss1.pdf  used on input line 1565. on input l
-ine 1565.
-Package pdftex.def Info: Requested size: 170.9195pt x 125.08842pt on input line
- 1565.
-<./figs/gauss2.pdf, id=53, pagebox=cropbox, 430.04721pt x 320.5778pt>
+Package pdftex.def Info: ./figs/gauss1.pdf  used on input line 1567.
+(pdftex.def)             Requested size: 170.9195pt x 125.08842pt.
+<./figs/gauss2.pdf, id=53, 430.04721pt x 320.5778pt>
 File: ./figs/gauss2.pdf Graphic file (type pdf)
 <use ./figs/gauss2.pdf>
-Package pdftex.def Info: ./figs/gauss2.pdf  used on input line 1566. on input l
-ine 1566.
-Package pdftex.def Info: Requested size: 170.9195pt x 127.41194pt on input line
- 1566.
-<./figs/gauss_n.pdf, id=54, pagebox=cropbox, 438.04721pt x 320.5778pt>
+Package pdftex.def Info: ./figs/gauss2.pdf  used on input line 1568.
+(pdftex.def)             Requested size: 170.9195pt x 127.41194pt.
+<./figs/gauss_n.pdf, id=54, 438.04721pt x 320.5778pt>
 File: ./figs/gauss_n.pdf Graphic file (type pdf)
 <use ./figs/gauss_n.pdf>
-Package pdftex.def Info: ./figs/gauss_n.pdf  used on input line 1567. on input 
-line 1567.
-Package pdftex.def Info: Requested size: 170.9195pt x 125.08842pt on input line
- 1567.
-<./figs/loggauss_n.pdf, id=55, pagebox=cropbox, 438.04721pt x 320.5778pt>
+Package pdftex.def Info: ./figs/gauss_n.pdf  used on input line 1569.
+(pdftex.def)             Requested size: 170.9195pt x 125.08842pt.
+<./figs/loggauss_n.pdf, id=55, 438.04721pt x 320.5778pt>
 File: ./figs/loggauss_n.pdf Graphic file (type pdf)
 <use ./figs/loggauss_n.pdf>
-Package pdftex.def Info: ./figs/loggauss_n.pdf  used on input line 1568. on inp
-ut line 1568.
-Package pdftex.def Info: Requested size: 170.9195pt x 125.08842pt on input line
- 1568.
-<./figs/gauss_unbal.pdf, id=56, pagebox=cropbox, 426.04721pt x 320.5778pt>
+Package pdftex.def Info: ./figs/loggauss_n.pdf  used on input line 1570.
+(pdftex.def)             Requested size: 170.9195pt x 125.08842pt.
+<./figs/gauss_unbal.pdf, id=56, 426.04721pt x 320.5778pt>
 File: ./figs/gauss_unbal.pdf Graphic file (type pdf)
 <use ./figs/gauss_unbal.pdf>
-Package pdftex.def Info: ./figs/gauss_unbal.pdf  used on input line 1569. on in
-put line 1569.
-Package pdftex.def Info: Requested size: 163.15079pt x 122.76491pt on input lin
-e 1569.
+Package pdftex.def Info: ./figs/gauss_unbal.pdf  used on input line 1571.
+(pdftex.def)             Requested size: 163.15079pt x 122.76491pt.
  [8 <./figs/gauss_1d.pdf> <./figs/loggauss_1d.pdf
 
-pdfTeX warning: pdflatex (file ./figs/loggauss_1d.pdf): PDF inclusion: multiple
- pdfs with page group included in a single page
+pdfTeX warning: pdflatex (file ./figs/loggauss_1d.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./figs/normal_density2.pdf
 
-pdfTeX warning: pdflatex (file ./figs/normal_density2.pdf): PDF inclusion: mult
-iple pdfs with page group included in a single page
+pdfTeX warning: pdflatex (file ./figs/normal_density2.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./figs/lognormal_density2.pdf
 
-pdfTeX warning: pdflatex (file ./figs/lognormal_density2.pdf): PDF inclusion: m
-ultiple pdfs with page group included in a single page
+pdfTeX warning: pdflatex (file ./figs/lognormal_density2.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
-<./figs/2cigars.pdf, id=123, pagebox=cropbox, 346.89601pt x 346.89601pt>
+<./figs/2cigars.pdf, id=123, 346.89601pt x 346.89601pt>
 File: ./figs/2cigars.pdf Graphic file (type pdf)
 <use ./figs/2cigars.pdf>
-Package pdftex.def Info: ./figs/2cigars.pdf  used on input line 1710. on input 
-line 1710.
-Package pdftex.def Info: Requested size: 82.86864pt x 77.42769pt on input line 
-1710.
-<./figs/2circles.pdf, id=124, pagebox=cropbox, 346.89601pt x 346.89601pt>
+Package pdftex.def Info: ./figs/2cigars.pdf  used on input line 1712.
+(pdftex.def)             Requested size: 82.86864pt x 77.42769pt.
+<./figs/2circles.pdf, id=124, 346.89601pt x 346.89601pt>
 File: ./figs/2circles.pdf Graphic file (type pdf)
 <use ./figs/2circles.pdf>
-Package pdftex.def Info: ./figs/2circles.pdf  used on input line 1713. on input
- line 1713.
-Package pdftex.def Info: Requested size: 82.86864pt x 77.42769pt on input line 
-1713.
+Package pdftex.def Info: ./figs/2circles.pdf  used on input line 1715.
+(pdftex.def)             Requested size: 82.86864pt x 77.42769pt.
  [9 <./figs/gauss_means_scatter.pdf> <./figs/gauss_cov_scatter.pdf
 
-pdfTeX warning: pdflatex (file ./figs/gauss_cov_scatter.pdf): PDF inclusion: mu
-ltiple pdfs with page group included in a single page
+pdfTeX warning: pdflatex (file ./figs/gauss_cov_scatter.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./figs/gauss_diff_metrics.pdf
 
-pdfTeX warning: pdflatex (file ./figs/gauss_diff_metrics.pdf): PDF inclusion: m
-ultiple pdfs with page group included in a single page
+pdfTeX warning: pdflatex (file ./figs/gauss_diff_metrics.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./figs/loggauss_diff_metrics.pdf
 
-pdfTeX warning: pdflatex (file ./figs/loggauss_diff_metrics.pdf): PDF inclusion
-: multiple pdfs with page group included in a single page
+pdfTeX warning: pdflatex (file ./figs/loggauss_diff_metrics.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./figs/unbalanced_scatter.pdf
 
-pdfTeX warning: pdflatex (file ./figs/unbalanced_scatter.pdf): PDF inclusion: m
-ultiple pdfs with page group included in a single page
+pdfTeX warning: pdflatex (file ./figs/unbalanced_scatter.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./figs/gauss1.pdf
 
-pdfTeX warning: pdflatex (file ./figs/gauss1.pdf): PDF inclusion: multiple pdfs
- with page group included in a single page
+pdfTeX warning: pdflatex (file ./figs/gauss1.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./figs/gauss2.pdf
 
-pdfTeX warning: pdflatex (file ./figs/gauss2.pdf): PDF inclusion: multiple pdfs
- with page group included in a single page
+pdfTeX warning: pdflatex (file ./figs/gauss2.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./figs/gauss_n.pdf
 
-pdfTeX warning: pdflatex (file ./figs/gauss_n.pdf): PDF inclusion: multiple pdf
-s with page group included in a single page
+pdfTeX warning: pdflatex (file ./figs/gauss_n.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./figs/loggauss_n.pdf
 
-pdfTeX warning: pdflatex (file ./figs/loggauss_n.pdf): PDF inclusion: multiple 
-pdfs with page group included in a single page
+pdfTeX warning: pdflatex (file ./figs/loggauss_n.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./figs/gauss_unbal.pdf
 
-pdfTeX warning: pdflatex (file ./figs/gauss_unbal.pdf): PDF inclusion: multiple
- pdfs with page group included in a single page
+pdfTeX warning: pdflatex (file ./figs/gauss_unbal.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./figs/2cigars.pdf
 
-pdfTeX warning: pdflatex (file ./figs/2cigars.pdf): PDF inclusion: multiple pdf
-s with page group included in a single page
+pdfTeX warning: pdflatex (file ./figs/2cigars.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > <./figs/2circles.pdf
 
-pdfTeX warning: pdflatex (file ./figs/2circles.pdf): PDF inclusion: multiple pd
-fs with page group included in a single page
+pdfTeX warning: pdflatex (file ./figs/2circles.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
-LaTeX Font Info:    Try loading font information for U+bbm on input line 1924.
- (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
+LaTeX Font Info:    Try loading font information for U+bbm on input line 1926.
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [10]
-Missing character: There is no â in font pplr7t!
-Missing character: There is no € in font pplr7t!
-Missing character: There is no ™ in font pplr7t!
-
-(./energy_clustering.bbl [11])
+) [10] (/Users/jovo/Google Drive/Research/Projects/non-parametric-clustering/energy_clustering/pami18/energy_clustering.bbl [11])
 <./figs/gui2.png, id=249, 299.1175pt x 346.29375pt>
 File: ./figs/gui2.png Graphic file (type png)
 <use ./figs/gui2.png>
-Package pdftex.def Info: ./figs/gui2.png  used on input line 2082. on input lin
-e 2082.
-Package pdftex.def Info: Requested size: 72.26999pt x 83.667pt on input line 20
-82.
+Package pdftex.def Info: ./figs/gui2.png  used on input line 2086.
+(pdftex.def)             Requested size: 72.26999pt x 83.667pt.
 File: ./figs/gui2.png Graphic file (type png)
 <use ./figs/gui2.png>
-Package pdftex.def Info: ./figs/gui2.png  used on input line 2082. on input lin
-e 2082.
-Package pdftex.def Info: Requested size: 72.26999pt x 83.667pt on input line 20
-82.
+Package pdftex.def Info: ./figs/gui2.png  used on input line 2086.
+(pdftex.def)             Requested size: 72.26999pt x 83.667pt.
 <./figs/rizzo.jpg, id=253, 204.0423pt x 306.1839pt>
 File: ./figs/rizzo.jpg Graphic file (type jpg)
 <use ./figs/rizzo.jpg>
-Package pdftex.def Info: ./figs/rizzo.jpg  used on input line 2099. on input li
-ne 2099.
-Package pdftex.def Info: Requested size: 62.60797pt x 93.94891pt on input line 
-2099.
+Package pdftex.def Info: ./figs/rizzo.jpg  used on input line 2103.
+(pdftex.def)             Requested size: 62.60797pt x 93.94891pt.
 File: ./figs/rizzo.jpg Graphic file (type jpg)
 <use ./figs/rizzo.jpg>
-Package pdftex.def Info: ./figs/rizzo.jpg  used on input line 2099. on input li
-ne 2099.
-Package pdftex.def Info: Requested size: 62.60797pt x 93.94891pt on input line 
-2099.
+Package pdftex.def Info: ./figs/rizzo.jpg  used on input line 2103.
+(pdftex.def)             Requested size: 62.60797pt x 93.94891pt.
 <./figs/jovo.png, id=256, 200.75pt x 200.75pt>
 File: ./figs/jovo.png Graphic file (type png)
 <use ./figs/jovo.png>
-Package pdftex.def Info: ./figs/jovo.png  used on input line 2121. on input lin
-e 2121.
-Package pdftex.def Info: Requested size: 72.26999pt x 72.26993pt on input line 
-2121.
+Package pdftex.def Info: ./figs/jovo.png  used on input line 2125.
+(pdftex.def)             Requested size: 72.26999pt x 72.26993pt.
 File: ./figs/jovo.png Graphic file (type png)
 <use ./figs/jovo.png>
-Package pdftex.def Info: ./figs/jovo.png  used on input line 2121. on input lin
-e 2121.
-Package pdftex.def Info: Requested size: 72.26999pt x 72.26993pt on input line 
-2121.
-Missing character: There is no â in font phvr7t!
-Missing character: There is no € in font phvr7t!
-Missing character: There is no ™ in font phvr7t!
- [12 <./figs/gui2.png> <./figs/rizzo.jpg> <./figs/jovo.png>] (./energy_clusteri
-ng.aux) ) 
+Package pdftex.def Info: ./figs/jovo.png  used on input line 2125.
+(pdftex.def)             Requested size: 72.26999pt x 72.26993pt.
+ [12 <./figs/gui2.png> <./figs/rizzo.jpg> <./figs/jovo.png>] (/Users/jovo/Google Drive/Research/Projects/non-parametric-clustering/energy_clustering/pami18/energy_clustering.aux) ) 
 Here is how much of TeX's memory you used:
- 5619 strings out of 492990
- 82718 string characters out of 6135005
- 166279 words of memory out of 5000000
- 8994 multiletter control sequences out of 15000+600000
+ 5618 strings out of 492616
+ 84766 string characters out of 6129482
+ 172403 words of memory out of 5000000
+ 9354 multiletter control sequences out of 15000+600000
  61114 words of font info for 153 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 41i,25n,37p,2298b,528s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/gui/.texlive2017/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.60
-0pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/symbols/msbm7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/h
-elvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr
-8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-urw/times/utmri8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/zapfding/u
-zdr.pfb>
-Output written on energy_clustering.pdf (12 pages, 1205240 bytes).
+ 41i,25n,37p,2418b,528s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </Users/jovo/Library/texlive/2019/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk>{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmri8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
+Output written on "/Users/jovo/Google Drive/Research/Projects/non-parametric-clustering/energy_clustering/pami18/energy_clustering.pdf" (12 pages, 1205373 bytes).
 PDF statistics:
  347 PDF objects out of 1000 (max. 8388607)
  227 compressed objects within 3 object streams
